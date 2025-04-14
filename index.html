@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MinteriaOS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script>
+        tailwind.config={darkMode:'class',theme:{extend:{colors:{background:'#000',foreground:'#fff',primary:'#FFA95C',button:'#1E1E1E',buttonHover:'#333',muted:'#888'},fontFamily:{sans:['Inter','sans-serif']}}}};
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body{font-family:'Inter',sans-serif;position:relative;overflow:hidden}span.hidden{opacity:0;display:inline-block;white-space:pre}.button-container{opacity:0}.icon-button svg{width:48px;height:48px;display:block;transition:transform 0.3s ease,opacity 0.3s ease}.icon-button:hover svg{transform:scale(1.1);opacity:0.9}.music-controls{display:flex;justify-content:center;gap:16px;margin-top:24px}.music-controls button{background-color:#1E1E1E;border:none;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background-color 0.3s ease,transform 0.3s ease}.music-controls button:hover{background-color:#333;transform:scale(1.1)}.music-controls button svg{width:24px;height:24px;fill:white}.progress-container{width:100%;margin-top:16px;display:flex;align-items:center;gap:8px}.progress-bar{flex-grow:1;height:4px;background-color:#444;position:relative;cursor:pointer}.progress-bar .progress{height:100%;background-color:white;width:0%}.time{font-size:14px;color:#888}.snowflake{position:absolute;top:-10px;width:4px;height:4px;background-color:white;border-radius:50%;user-select:none;pointer-events:none}
+    </style>
+</head>
+<body class="flex min-h-screen items-center justify-center bg-background text-foreground p-4">
+    <div id="snowflakes"></div>
+    <main class="text-center space-y-8 max-w-3xl w-full px-4">
+        <img src="12.png" alt="Изображение" class="mx-auto w-32 h-32">
+        <h1 class="text-4xl font-bold sm:text-5xl md:text-6xl"><span class="text-primary">MinteriaOS</span></h1>
+        <p id="bio" class="text-lg sm:text-xl text-muted">MinteriaOS: Хакинг, безопасность, мощные инструменты.</p>
+        <div id="button-container" class="button-container flex flex-wrap justify-center gap-6 mt-8">
+            <a href="https://t.me/extratm_bot" target="_blank" class="icon-button">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24ZM16.0715 21.8015C13.6673 22.8512 11.1971 23.9298 8.93825 25.174C7.75877 26.0376 9.32638 26.6485 10.7971 27.2215C11.0309 27.3126 11.2622 27.4027 11.4797 27.4927C11.6607 27.5484 11.8447 27.607 12.0312 27.6664C13.6669 28.1875 15.4907 28.7686 17.0787 27.8945C19.6873 26.396 22.149 24.6636 24.6089 22.9325C25.4148 22.3653 26.2205 21.7983 27.0311 21.2397C27.0691 21.2154 27.1119 21.1876 27.1588 21.1573C27.8493 20.7096 29.4024 19.7029 28.8279 21.0901C27.4695 22.5757 26.0144 23.8907 24.5515 25.213C23.5655 26.1041 22.5759 26.9985 21.6099 27.9505C20.7686 28.6341 19.8949 30.0088 20.837 30.9661C23.0069 32.4851 25.2107 33.9673 27.4132 35.4487C28.1299 35.9307 28.8466 36.4127 29.5618 36.8959C30.774 37.8637 32.6685 37.0808 32.935 35.5685C33.0535 34.8728 33.1725 34.1772 33.2915 33.4815C33.9491 29.6368 34.6069 25.7907 35.188 21.9335C35.267 21.3284 35.3565 20.7234 35.4461 20.1181C35.6632 18.651 35.8806 17.1821 35.9485 15.7071C35.7735 14.2351 33.9887 14.5588 32.9955 14.8898C27.8903 16.8324 22.8361 18.919 17.8019 21.0424C17.2316 21.295 16.6535 21.5474 16.0715 21.8015Z" fill="white"/>
+                </svg>
+            </a>
+            <a href="https://t.me/+hKf8G1j_FcBhMjNi" target="_blank" class="icon-button">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24ZM16.0715 21.8015C13.6673 22.8512 11.1971 23.9298 8.93825 25.174C7.75877 26.0376 9.32638 26.6485 10.7971 27.2215C11.0309 27.3126 11.2622 27.4027 11.4797 27.4927C11.6607 27.5484 11.8447 27.607 12.0312 27.6664C13.6669 28.1875 15.4907 28.7686 17.0787 27.8945C19.6873 26.396 22.149 24.6636 24.6089 22.9325C25.4148 22.3653 26.2205 21.7983 27.0311 21.2397C27.0691 21.2154 27.1119 21.1876 27.1588 21.1573C27.8493 20.7096 29.4024 19.7029 28.8279 21.0901C27.4695 22.5757 26.0144 23.8907 24.5515 25.213C23.5655 26.1041 22.5759 26.9985 21.6099 27.9505C20.7686 28.6341 19.8949 30.0088 20.837 30.9661C23.0069 32.4851 25.2107 33.9673 27.4132 35.4487C28.1299 35.9307 28.8466 36.4127 29.5618 36.8959C30.774 37.8637 32.6685 37.0808 32.935 35.5685C33.0535 34.8728 33.1725 34.1772 33.2915 33.4815C33.9491 29.6368 34.6069 25.7907 35.188 21.9335C35.267 21.3284 35.3565 20.7234 35.4461 20.1181C35.6632 18.651 35.8806 17.1821 35.9485 15.7071C35.7735 14.2351 33.9887 14.5588 32.9955 14.8898C27.8903 16.8324 22.8361 18.919 17.8019 21.0424C17.2316 21.295 16.6535 21.5474 16.0715 21.8015Z" fill="white"/>
+                </svg>
+            </a>
+        </div>
+        <div class="music-controls">
+            <button id="prevButton" title="Назад">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 6v12h2V6H6zm10 0v12l-8-6 8-6z"/>
+                </svg>
+            </button>
+            <button id="pauseButton" title="Пауза">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 6h2v12H8V6zm6 0h2v12h-2V6z"/>
+                </svg>
+            </button>
+            <button id="nextButton" title="Вперед">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 6v12h2V6H6zm10 0v12l-8-6 8-6z" transform="scale(-1, 1) translate(-24, 0)"/>
+                </svg>
+            </button>
+        </div>
+        <div class="progress-container">
+            <span id="currentTime" class="time">0:00</span>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <span id="duration" class="time">0:00</span>
+        </div>
+    </main>
+    <audio id="audioPlayer"></audio>
+    <script>
+        const bioText="MinteriaOS: Хакинг, безопасность, мощные инструменты.",bioElement=document.getElementById("bio"),buttonContainer=document.getElementById("button-container");bioElement.innerHTML="",bioText.split("").forEach((e=>{const t=document.createElement("span");t.textContent=e,t.classList.add("hidden"),bioElement.appendChild(t)})),gsap.to("#bio span.hidden",{opacity:1,duration:1.5,stagger:.05,ease:"power2.out",onComplete:()=>{gsap.to(buttonContainer,{opacity:1,duration:1,ease:"power2.out"})}});const audioPlayer=document.getElementById("audioPlayer"),progressBar=document.getElementById("progressBar"),progress=document.getElementById("progress"),currentTimeElement=document.getElementById("currentTime"),durationElement=document.getElementById("duration"),songs=Array.from({length:15},((e,t)=>`${t+1}.mp3`));let currentSongIndex=0;function formatTime(e){const t=Math.floor(e/60),n=Math.floor(e%60);return`${t}:${n<10?"0":""}${n}`}function getRandomSongIndex() { return Math.floor(Math.random() * songs.length); }function playNextSong(){currentSongIndex=getRandomSongIndex(),audioPlayer.src=songs[currentSongIndex],audioPlayer.play().catch((()=>{window.addEventListener("click",startMusicOnInteraction),window.addEventListener("keydown",startMusicOnInteraction)}))}function playPreviousSong(){currentSongIndex=getRandomSongIndex(),audioPlayer.src=songs[currentSongIndex],audioPlayer.play()}function togglePause(){audioPlayer.paused?audioPlayer.play():audioPlayer.pause()}function startMusicOnInteraction(){audioPlayer.play(),window.removeEventListener("click",startMusicOnInteraction),window.removeEventListener("keydown",startMusicOnInteraction)}function updateProgress(){const e=(audioPlayer.currentTime/audioPlayer.duration)*100;progress.style.width=`${e}%`,currentTimeElement.textContent=formatTime(audioPlayer.currentTime)}function setDuration(){durationElement.textContent=formatTime(audioPlayer.duration)}function seek(e){const t=e.offsetX,n=progressBar.clientWidth,a=(t/n)*audioPlayer.duration;audioPlayer.currentTime=a}audioPlayer.addEventListener("ended",playNextSong),audioPlayer.addEventListener("timeupdate",updateProgress),audioPlayer.addEventListener("loadedmetadata",setDuration),progressBar.addEventListener("click",seek),document.getElementById("prevButton").addEventListener("click",playPreviousSong),document.getElementById("pauseButton").addEventListener("click",togglePause),document.getElementById("nextButton").addEventListener("click",playNextSong),playNextSong();const snowflakesContainer=document.getElementById("snowflakes");function createSnowflake(){const e=document.createElement("div");e.classList.add("snowflake"),e.style.left=`${100*Math.random()}vw`,e.style.opacity=Math.random(),snowflakesContainer.appendChild(e),gsap.to(e,{y:window.innerHeight+10,duration:5*Math.random()+5,ease:"linear",onComplete:()=>{e.remove()}}),gsap.to(e,{x:100*Math.random()-50,duration:5*Math.random()+5,repeat:-1,yoyo:!0,ease:"sine.inOut"})}setInterval(createSnowflake,500);
+    </script>
+</body>
+</html>
