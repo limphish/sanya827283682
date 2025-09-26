@@ -59,15 +59,15 @@
       width: 100%; height: 100%;
       background-size: cover;
       background-position: center;
-      filter: brightness(0.4);
+      filter: brightness(0.35);
       z-index: -1;
     }
 
-    .hero::before { background-image: url('https://images.unsplash.com/photo-1551022370-0ab294fb0f43?auto=format&fit=crop&w=1400&q=80'); }
-    .about::before { background-image: url('https://images.unsplash.com/photo-1520962918287-7448c2878f65?auto=format&fit=crop&w=1400&q=80'); }
-    .guarantee::before { background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1400&q=80'); }
-    .reviews::before { background-image: url('https://images.unsplash.com/photo-1535909339361-9b1a4f46e44b?auto=format&fit=crop&w=1400&q=80'); }
-    .contact::before { background-image: url('https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=1400&q=80'); }
+    .hero::before { background-image: url('https://images.unsplash.com/photo-1585912280617-0a29a9abf348?auto=format&fit=crop&w=1400&q=80'); }
+    .about::before { background-image: url('https://images.unsplash.com/photo-1529630237227-3a547c8a8cde?auto=format&fit=crop&w=1400&q=80'); }
+    .guarantee::before { background-image: url('https://images.unsplash.com/photo-1599458252566-9f83a25d816f?auto=format&fit=crop&w=1400&q=80'); }
+    .reviews::before { background-image: url('https://images.unsplash.com/photo-1604909053645-23d4b6f52aca?auto=format&fit=crop&w=1400&q=80'); }
+    .contact::before { background-image: url('https://images.unsplash.com/photo-1520962918287-7448c2878f65?auto=format&fit=crop&w=1400&q=80'); }
 
     h2, h3 {
       font-family: 'Playfair Display', serif;
@@ -78,15 +78,15 @@
     }
 
     p {
-      max-width: 900px;
+      max-width: 950px;
       margin: 0 auto 25px;
       font-size: 18px;
-      line-height: 1.8;
+      line-height: 1.9;
       animation: fadeIn 2s ease;
     }
 
     .btn {
-      margin-top: 20px;
+      margin-top: 25px;
       display: inline-block;
       padding: 15px 40px;
       font-size: 18px;
@@ -115,13 +115,29 @@
     }
     .review:hover { transform: translateY(-5px); }
 
+    .doc-img {
+      margin: 20px auto;
+      max-width: 350px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255,0,0,0.6);
+    }
+
     footer {
       background: #1a0000;
       text-align: center;
-      padding: 25px;
-      font-size: 14px;
-      color: #ccc;
-      box-shadow: 0 -2px 10px rgba(255,0,0,0.3);
+      padding: 40px 20px;
+      font-size: 15px;
+      color: #ddd;
+      position: relative;
+    }
+    footer::before {
+      content: "⚜";
+      font-size: 40px;
+      color: #ff1a1a;
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
     }
     footer span { color: #ff1a1a; font-weight: bold; }
 
@@ -148,46 +164,54 @@
 
   <section class="section hero">
     <h2>Scarlet Night – Искусство Наслаждения</h2>
-    <p>Добро пожаловать в агентство, где элегантность сочетается с роскошью, а каждое мгновение становится незабываемым. 
-       Мы предлагаем сопровождение премиум-класса для ценителей настоящего стиля и утончённых удовольствий.</p>
+    <p>Мы создаем атмосферу роскоши, доверия и абсолютной конфиденциальности. Scarlet Night – это агентство для избранных, тех, кто ценит высший класс и умеет наслаждаться жизнью. Каждый момент с нами превращается в произведение искусства.</p>
     <a href="https://t.me/your_bot" class="btn">Сделать заказ</a>
   </section>
 
   <section class="section about">
     <h3>О Нас</h3>
-    <p>Scarlet Night — это символ качества, конфиденциальности и совершенства. Наши девушки — это не просто красота, 
-    а утончённость, интеллект и харизма. Мы предоставляем сервис, который удовлетворяет самые изысканные запросы.  
-    Вечер в ресторане, деловая поездка, частная вечеринка или романтический уикенд — вы всегда будете в компании, 
-    достойной короля.</p>
+    <p>Наше агентство – это символ исключительности. Мы работаем с клиентами, которые понимают ценность эстетики, утонченности и высоких стандартов.  
+    Девушки Scarlet Night – это не только красота, но и воспитание, интеллект, стиль и харизма.  
+    С нами вы сможете блистать в обществе, наслаждаться приватными моментами и быть уверенными, что каждая деталь продумана заранее.  
+    От первых минут общения до самой последней встречи – всё строится на доверии, уважении и абсолютном комфорте.</p>
   </section>
 
   <section class="section guarantee" id="guarantee">
     <h3>Наши Гарантии</h3>
-    <p>✔ Полная конфиденциальность и защита личных данных.<br>
-       ✔ Девушки проходят тщательный отбор и медицинскую проверку.<br>
-       ✔ Организация доступна 24/7, всегда на связи.<br>
-       ✔ Индивидуальный подход к каждому клиенту.<br>
-       ✔ Официальная регистрация и юридическая безопасность сделок.</p>
+    <p>Мы дорожим вашей безопасностью и репутацией. Scarlet Night предоставляет официальные гарантии качества и конфиденциальности:</p>
+    <p>
+      ✔ Строгая защита личных данных клиентов.<br>
+      ✔ Каждая девушка проходит медицинский контроль и собеседование.<br>
+      ✔ Договоренности фиксируются и соблюдаются на 100%.<br>
+      ✔ В случае необходимости предоставляются документы о легальности нашей деятельности.<br>
+      ✔ Работаем только с проверенными водителями и партнёрами.<br>
+      ✔ Служба поддержки доступна круглосуточно.<br>
+    </p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Sample_certificate.svg/800px-Sample_certificate.svg.png" class="doc-img" alt="Документ">
   </section>
 
   <section class="section reviews" id="reviews">
     <h3>Отзывы клиентов</h3>
     <div class="reviews-grid">
-      <div class="review"><p>"Невероятное обслуживание. Всё discreet, на высшем уровне. Чувствовал себя особенным."</p><strong>— Алексей, Москва</strong></div>
-      <div class="review"><p>"Идеальная организация, девушки красивые и интеллигентные. Настоящий люкс."</p><strong>— Дмитрий, СПб</strong></div>
-      <div class="review"><p>"Сервис превзошёл ожидания. Scarlet Night знают, как удивить."</p><strong>— Михаил, Сочи</strong></div>
-      <div class="review"><p>"Всё было идеально: встреча, вечер, атмосфера. Чувствовал полное доверие."</p><strong>— Игорь, Дубай</strong></div>
+      <div class="review"><p>"Scarlet Night – это другой уровень. Всё на высшем уровне, девушки просто богини."</p><strong>— Алексей, Москва</strong></div>
+      <div class="review"><p>"Никаких компромиссов: сервис, внимание к деталям, и главное — полная конфиденциальность."</p><strong>— Дмитрий, СПб</strong></div>
+      <div class="review"><p>"Я объехал полмира, но такого уровня я не встречал нигде. Scarlet Night – номер один."</p><strong>— Михаил, Сочи</strong></div>
+      <div class="review"><p>"Необычайно приятный опыт. Девушка не просто красивая, но и умная собеседница."</p><strong>— Игорь, Дубай</strong></div>
     </div>
+    <a href="https://t.me/your_bot" class="btn">Посмотреть все отзывы</a>
   </section>
 
   <section class="section contact" id="contact">
     <h3>Связь с агентством</h3>
-    <p>Наш менеджер всегда на связи. Напишите нам в <a href="https://t.me/your_bot" style="color:#ff1a1a;">Telegram</a>, и в течение 5 минут вы получите ответ. 
-       Мы ценим ваше время и гарантируем максимально быстрый отклик.</p>
+    <p>Мы всегда на связи. Ваш комфорт и уверенность – наш главный приоритет.  
+    Свяжитесь с менеджером в любое время суток, чтобы получить консультацию, обсудить детали и оформить заказ.  
+    Ваша заявка будет обработана мгновенно, и мы гарантируем конфиденциальность на каждом этапе общения.  
+    Независимо от того, где вы находитесь – мы организуем сопровождение в любом городе и за границей.</p>
+    <a href="https://t.me/your_bot" class="btn">Связаться с агентством</a>
   </section>
 
   <footer>
-    ✔ Проверено организацией России • <span>Scarlet Night © 2025</span>
+    <p>⚜ Официальное подтверждение качества • <span>Scarlet Night © 2025</span> • Проверено организацией России</p>
   </footer>
 
 </body>
