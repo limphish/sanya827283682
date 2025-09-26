@@ -11,55 +11,55 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Lora', serif;
-      background: linear-gradient(135deg, #4b0015, #1a0000); /* Deep red to dark gradient */
+      background: linear-gradient(135deg, #5a001a, #1a0000); /* Richer red gradient */
       color: #f9e4d4; /* Soft ivory */
       overflow-x: hidden;
       scroll-behavior: smooth;
       position: relative;
     }
 
-    /* Dynamic background overlay */
+    /* Animated background overlay with shimmer */
     .bg-overlay {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       background: url('https://www.transparenttextures.com/patterns/velvet.png') repeat;
-      opacity: 0.12;
+      opacity: 0.1;
       z-index: -2;
-      animation: bgShift 30s infinite linear;
+      animation: shimmer 25s infinite linear;
     }
 
     header {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
-      background: linear-gradient(to bottom, rgba(60,0,20,0.95), rgba(60,0,20,0.85));
+      background: linear-gradient(to bottom, rgba(70,0,20,0.95), rgba(70,0,20,0.85));
       display: flex; justify-content: space-between; align-items: center;
       padding: 25px 80px;
       z-index: 1000;
-      box-shadow: 0 4px 25px rgba(255,100,100,0.5);
+      box-shadow: 0 4px 25px rgba(255,120,120,0.5);
       transition: all 0.3s ease;
     }
 
     header.scrolled {
-      background: rgba(60,0,20,0.98);
+      background: rgba(70,0,20,0.98);
       padding: 15px 80px;
     }
 
     header h1 {
       font-family: 'Cormorant Garamond', serif;
-      color: #ff8080; /* Softer red */
-      font-size: 44px;
+      color: #ff8c8c; /* Softer red */
+      font-size: 46px;
       letter-spacing: 5px;
-      text-shadow: 0 0 20px rgba(255,100,100,0.7);
+      text-shadow: 0 0 20px rgba(255,120,120,0.7);
       position: relative;
     }
     header h1::after {
       content: '✨';
       position: absolute;
       top: -10px; right: -20px;
-      font-size: 20px;
-      color: #ffd700; /* Gold sparkle */
+      font-size: 22px;
+      color: #ffd700; /* Champagne gold */
     }
 
     nav a {
@@ -76,11 +76,11 @@
       position: absolute;
       bottom: -5px; left: 0;
       width: 100%; height: 2px;
-      background: #ff8080;
+      background: #ff8c8c;
       transform: scaleX(0);
       transition: transform 0.3s ease;
     }
-    nav a:hover { color: #ff8080; }
+    nav a:hover { color: #ff8c8c; }
     nav a:hover::after { transform: scaleX(1); }
 
     .section {
@@ -102,7 +102,7 @@
       width: 100%; height: 100%;
       background-size: cover;
       background-position: center;
-      filter: brightness(0.45) contrast(1.4) opacity(0.85);
+      filter: brightness(0.4) contrast(1.4) opacity(0.85);
       z-index: -1;
       transform: translateZ(-1px) scale(1.1); /* Parallax effect */
       transition: transform 0.7s ease;
@@ -123,28 +123,28 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       object-fit: cover;
-      filter: brightness(0.35) opacity(0.8);
+      filter: brightness(0.3) opacity(0.85);
       z-index: -2;
     }
 
     /* Lens flare effect for hero */
     .lens-flare {
       position: absolute;
-      top: 20%; left: 10%;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(255,100,100,0.3), transparent);
-      opacity: 0.5;
+      top: 15%; left: 15%;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(255,120,120,0.35), transparent);
+      opacity: 0.6;
       z-index: -1;
-      animation: flarePulse 4s infinite ease-in-out;
+      animation: flarePulse 4.5s infinite ease-in-out;
     }
 
     h2, h3 {
       font-family: 'Cormorant Garamond', serif;
-      color: #ff8080;
-      font-size: 62px;
+      color: #ff8c8c;
+      font-size: 64px;
       margin-bottom: 40px;
       letter-spacing: 2.5px;
-      text-shadow: 0 3px 18px rgba(255,100,100,0.7);
+      text-shadow: 0 3px 20px rgba(255,120,120,0.7);
       animation: fadeInUp 2s ease;
     }
 
@@ -163,11 +163,11 @@
       padding: 20px 60px;
       font-size: 19px;
       border-radius: 50px;
-      background: linear-gradient(45deg, #ff8080, #cc3333);
+      background: linear-gradient(45deg, #ff8c8c, #cc3333);
       color: #fff;
       text-decoration: none;
       font-weight: 700;
-      box-shadow: 0 6px 35px rgba(255,100,100,0.8);
+      box-shadow: 0 6px 35px rgba(255,120,120,0.8);
       transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
@@ -184,7 +184,7 @@
     }
     .btn:hover {
       transform: translateY(-5px) scale(1.07);
-      box-shadow: 0 12px 50px rgba(255,100,100,0.9);
+      box-shadow: 0 12px 50px rgba(255,120,120,0.9);
       text-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
     .btn:hover::before { left: 100%; }
@@ -193,75 +193,78 @@
     .floating-cta {
       position: fixed;
       bottom: 40px; right: 40px;
-      background: linear-gradient(45deg, #ff8080, #cc3333);
+      background: linear-gradient(45deg, #ff8c8c, #cc3333);
       color: #fff;
       padding: 15px 35px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 700;
-      box-shadow: 0 5px 25px rgba(255,100,100,0.8);
+      box-shadow: 0 5px 25px rgba(255,120,120,0.8);
       z-index: 1000;
       animation: pulseCTA 2s infinite ease-in-out;
     }
     .floating-cta:hover {
       transform: scale(1.12);
-      box-shadow: 0 10px 40px rgba(255,100,100,0.9);
+      box-shadow: 0 10px 40px rgba(255,120,120,0.9);
     }
 
-    .reviews-grid {
+    /* Guarantee and Review Blocks */
+    .guarantee-grid, .reviews-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 35px;
       max-width: 1200px;
       margin: 0 auto;
     }
-    .review {
-      background: linear-gradient(to bottom, rgba(60,0,20,0.85), rgba(60,0,20,0.65));
+    .guarantee-item, .review {
+      background: linear-gradient(to bottom, rgba(70,0,20,0.85), rgba(70,0,20,0.65));
       padding: 30px;
       border-radius: 15px;
-      border: 1px solid rgba(255,100,100,0.3);
-      box-shadow: 0 5px 25px rgba(255,100,100,0.4);
+      border: 1px solid rgba(255,120,120,0.3);
+      box-shadow: 0 5px 25px rgba(255,120,120,0.4);
       transition: all 0.4s ease;
       position: relative;
       animation: fadeInUp 2s ease;
     }
-    .review::before {
-      content: '\f10d';
+    .guarantee-item::before, .review::before {
+      content: '\f058'; /* Checkmark for guarantee, quote for reviews */
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
       position: absolute;
       top: 15px; left: 20px;
-      color: rgba(255,100,100,0.3);
+      color: rgba(255,120,120,0.3);
       font-size: 40px;
     }
-    .review:hover {
+    .review::before { content: '\f10d'; }
+    .guarantee-item:hover, .review:hover {
       transform: translateY(-12px);
-      box-shadow: 0 12px 40px rgba(255,100,100,0.6);
+      box-shadow: 0 12px 40px rgba(255,120,120,0.6);
     }
-    .review p { margin-bottom: 15px; }
+    .guarantee-item p, .review p { margin-bottom: 15px; }
     .review .stars {
-      color: #ffd700; /* Gold stars */
+      color: #ffd700; /* Champagne gold stars */
       margin-bottom: 12px;
       font-size: 20px;
     }
-    .review strong { color: #ff8080; font-style: italic; }
+    .review strong { color: #ff8c8c; font-style: italic; }
 
     .doc-img {
       margin: 40px auto;
       max-width: 400px;
       border-radius: 15px;
-      border: 2px solid #ff8080;
-      box-shadow: 0 10px 35px rgba(255,100,100,0.6);
+      border: 2px solid #ff8c8c;
+      box-shadow: 0 10px 35px rgba(255,120,120,0.6);
       transition: transform 0.3s ease;
     }
     .doc-img:hover { transform: scale(1.06); }
 
-    .guarantee p:last-of-type {
-      font-size: 19px;
-      line-height: 2.3;
-      text-align: left;
-      max-width: 800px;
-      margin: 0 auto;
+    /* Gold divider between sections */
+    .divider {
+      width: 100px;
+      height: 2px;
+      background: #ffd700;
+      margin: 40px auto;
+      box-shadow: 0 0 10px rgba(255,215,0,0.5);
     }
 
     /* Particle effect for hero section */
@@ -274,7 +277,7 @@
     }
     .particles span {
       position: absolute;
-      background: rgba(255,100,100,0.6);
+      background: rgba(255,120,120,0.6);
       border-radius: 50%;
       animation: float 18s infinite linear;
     }
@@ -285,25 +288,26 @@
     .particles span:nth-child(5) { width: 20px; height: 20px; top: 25%; left: 85%; animation-duration: 23s; }
 
     footer {
-      background: linear-gradient(to top, #2c0e1a, #4b0015);
+      background: linear-gradient(to top, #2c0e1a, #5a001a);
       text-align: center;
       padding: 60px 20px;
       font-size: 17px;
       color: #f9e4d4;
       position: relative;
       border-top: 2px solid #ffd700; /* Gold accent */
+      animation: gradientFade 5s infinite ease-in-out;
     }
     footer::before {
       content: "⚜";
       font-size: 50px;
-      color: #ff8080;
+      color: #ff8c8c;
       position: absolute;
       top: -25px;
       left: 50%;
       transform: translateX(-50%);
-      text-shadow: 0 0 20px rgba(255,100,100,0.7);
+      text-shadow: 0 0 20px rgba(255,120,120,0.7);
     }
-    footer span { color: #ff8080; font-weight: bold; }
+    footer span { color: #ff8c8c; font-weight: bold; }
 
     /* Animations */
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -312,29 +316,33 @@
       0% { transform: translateY(0); }
       100% { transform: translateY(-100vh); }
     }
-    @keyframes bgShift {
+    @keyframes shimmer {
       0% { background-position: 0 0; }
-      100% { background-position: 200% 200%; }
+      100% { background-position: 300% 300%; }
     }
     @keyframes flarePulse {
-      0%, 100% { opacity: 0.5; transform: scale(1); }
-      50% { opacity: 0.8; transform: scale(1.2); }
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.3); }
     }
     @keyframes pulseCTA {
-      0%, 100% { box-shadow: 0 5px 25px rgba(255,100,100,0.8); }
-      50% { box-shadow: 0 5px 40px rgba(255,100,100,1); }
+      0%, 100% { box-shadow: 0 5px 25px rgba(255,120,120,0.8); }
+      50% { box-shadow: 0 5px 40px rgba(255,120,120,1); }
+    }
+    @keyframes gradientFade {
+      0%, 100% { background: linear-gradient(to top, #2c0e1a, #5a001a); }
+      50% { background: linear-gradient(to top, #2c0e1a, #6a0020); }
     }
 
     @media (max-width: 768px) {
       header { padding: 15px 20px; }
-      header h1 { font-size: 34px; }
+      header h1 { font-size: 36px; }
       nav a { margin-left: 15px; font-size: 15px; }
       .section { padding: 130px 20px 80px; }
-      h2, h3 { font-size: 46px; }
+      h2, h3 { font-size: 48px; }
       p { font-size: 17px; }
       .btn { padding: 15px 40px; font-size: 17px; }
-      .reviews-grid { grid-template-columns: 1fr; }
-      .particles span, .hero-video, .lens-flare { display: none; } /* Hide particles and video on mobile */
+      .guarantee-grid, .reviews-grid { grid-template-columns: 1fr; }
+      .particles span, .hero-video, .lens-flare { display: none; }
       .floating-cta { bottom: 20px; right: 20px; padding: 12px 25px; font-size: 15px; }
     }
   </style>
@@ -365,24 +373,30 @@
     <a href="https://t.me/your_bot" class="btn">Сделать заказ</a>
   </section>
 
+  <div class="divider"></div>
+
   <section class="section about">
     <h3>О Нас</h3>
     <p>Scarlet Night – воплощение утонченности и эксклюзивности. Мы создаем незабываемые моменты для тех, кто ценит эстетику, стиль и высочайшие стандарты. Наши девушки – это гармония красоты, интеллекта, харизмы и грации. С нами вы почувствуете себя особенным, наслаждаясь безупречным сервисом, где каждая деталь продумана до мелочей.</p>
   </section>
 
+  <div class="divider"></div>
+
   <section class="section guarantee" id="guarantee">
     <h3>Наши Гарантии</h3>
     <p>Мы дорожим вашей безопасностью и репутацией. Scarlet Night предоставляет официальные гарантии качества и конфиденциальности:</p>
-    <p>
-      ✔ Абсолютная защита личных данных клиентов.<br>
-      ✔ Медицинский контроль и строгий отбор девушек.<br>
-      ✔ Полное соблюдение всех договоренностей.<br>
-      ✔ Официальные документы о легальности деятельности.<br>
-      ✔ Надежные партнеры и водители.<br>
-      ✔ Круглосуточная поддержка 24/7.<br>
-    </p>
+    <div class="guarantee-grid">
+      <div class="guarantee-item"><p>Абсолютная защита личных данных клиентов.</p></div>
+      <div class="guarantee-item"><p>Медицинский контроль и строгий отбор девушек.</p></div>
+      <div class="guarantee-item"><p>Полное соблюдение всех договоренностей.</p></div>
+      <div class="guarantee-item"><p>Официальные документы о легальности деятельности.</p></div>
+      <div class="guarantee-item"><p>Надежные партнеры и водители.</p></div>
+      <div class="guarantee-item"><p>Круглосуточная поддержка 24/7.</p></div>
+    </div>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Sample_certificate.svg/800px-Sample_certificate.svg.png" class="doc-img" alt="Документ">
   </section>
+
+  <div class="divider"></div>
 
   <section class="section reviews" id="reviews">
     <h3>Отзывы Клиентов</h3>
@@ -396,6 +410,8 @@
     </div>
     <a href="https://t.me/your_bot" class="btn">Посмотреть все отзывы</a>
   </section>
+
+  <div class="divider"></div>
 
   <section class="section contact" id="contact">
     <h3>Связь с Агентством</h3>
