@@ -4,52 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scarlet Night – Эскорт Агентство</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Cinzel:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap');
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
-      background: #0d0d0d;
+      background: #000;
       color: #fff;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     header {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
-      background: rgba(26,0,0,0.95);
+      background: linear-gradient(to bottom, rgba(26,0,0,0.98), rgba(26,0,0,0.85));
       display: flex; justify-content: space-between; align-items: center;
-      padding: 20px 60px;
+      padding: 25px 80px;
       z-index: 1000;
-      box-shadow: 0 0 15px rgba(255,0,0,0.4);
+      box-shadow: 0 4px 20px rgba(255,0,0,0.3);
+      transition: background 0.3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(26,0,0,0.98);
+      padding: 15px 80px;
     }
 
     header h1 {
-      font-family: 'Playfair Display', serif;
-      color: #ff1a1a;
-      font-size: 28px;
-      letter-spacing: 2px;
+      font-family: 'Cinzel', serif;
+      color: #ff0000;
+      font-size: 36px;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px rgba(255,0,0,0.5);
     }
 
     nav a {
-      margin-left: 25px;
+      margin-left: 30px;
       text-decoration: none;
-      color: #fff;
+      color: #ddd;
       font-weight: 500;
+      font-size: 16px;
+      position: relative;
       transition: color 0.3s ease;
     }
-    nav a:hover { color: #ff1a1a; }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px; left: 0;
+      width: 100%; height: 2px;
+      background: #ff0000;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    nav a:hover { color: #ff0000; }
+    nav a:hover::after { transform: scaleX(1); }
 
     .section {
       min-height: 100vh;
-      padding: 120px 60px 80px;
+      padding: 140px 80px 100px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       text-align: center;
       position: relative;
+      overflow: hidden;
     }
 
     .section::before {
@@ -59,100 +81,165 @@
       width: 100%; height: 100%;
       background-size: cover;
       background-position: center;
-      filter: brightness(0.35);
+      filter: brightness(0.3) contrast(1.1);
       z-index: -1;
+      transition: transform 0.5s ease;
     }
 
-    .hero::before { background-image: url('https://images.unsplash.com/photo-1585912280617-0a29a9abf348?auto=format&fit=crop&w=1400&q=80'); }
-    .about::before { background-image: url('https://images.unsplash.com/photo-1529630237227-3a547c8a8cde?auto=format&fit=crop&w=1400&q=80'); }
-    .guarantee::before { background-image: url('https://images.unsplash.com/photo-1599458252566-9f83a25d816f?auto=format&fit=crop&w=1400&q=80'); }
-    .reviews::before { background-image: url('https://images.unsplash.com/photo-1604909053645-23d4b6f52aca?auto=format&fit=crop&w=1400&q=80'); }
-    .contact::before { background-image: url('https://images.unsplash.com/photo-1520962918287-7448c2878f65?auto=format&fit=crop&w=1400&q=80'); }
+    .section:hover::before {
+      transform: scale(1.05);
+    }
+
+    .hero::before { background-image: url('https://images.unsplash.com/photo-1585912280617-0a29a9abf348?auto=format&fit=crop&w=1920&q=80'); }
+    .about::before { background-image: url('https://images.unsplash.com/photo-1529630237227-3a547c8a8cde?auto=format&fit=crop&w=1920&q=80'); }
+    .guarantee::before { background-image: url('https://images.unsplash.com/photo-1599458252566-9f83a25d816f?auto=format&fit=crop&w=1920&q=80'); }
+    .reviews::before { background-image: url('https://images.unsplash.com/photo-1604909053645-23d4b6f52aca?auto=format&fit=crop&w=1920&q=80'); }
+    .contact::before { background-image: url('https://images.unsplash.com/photo-1520962918287-7448c2878f65?auto=format&fit=crop&w=1920&q=80'); }
 
     h2, h3 {
       font-family: 'Playfair Display', serif;
-      color: #ff1a1a;
-      font-size: 42px;
-      margin-bottom: 25px;
-      animation: fadeInUp 1.2s ease;
+      color: #ff0000;
+      font-size: 52px;
+      margin-bottom: 30px;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 10px rgba(255,0,0,0.4);
+      animation: fadeInUp 1.5s ease;
     }
 
     p {
-      max-width: 950px;
-      margin: 0 auto 25px;
-      font-size: 18px;
-      line-height: 1.9;
-      animation: fadeIn 2s ease;
+      max-width: 1000px;
+      margin: 0 auto 30px;
+      font-size: 19px;
+      line-height: 1.8;
+      font-weight: 300;
+      animation: fadeIn 2.5s ease;
     }
 
     .btn {
-      margin-top: 25px;
+      margin-top: 30px;
       display: inline-block;
-      padding: 15px 40px;
+      padding: 18px 50px;
       font-size: 18px;
-      border-radius: 30px;
-      background: #ff1a1a;
+      border-radius: 50px;
+      background: linear-gradient(45deg, #ff0000, #cc0000);
       color: #fff;
       text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 20px rgba(255,0,0,0.6);
-      transition: 0.3s;
-      animation: pulse 2s infinite;
+      font-weight: 700;
+      box-shadow: 0 5px 25px rgba(255,0,0,0.5);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .btn:hover { background: #e60000; transform: scale(1.05); }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    .btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 40px rgba(255,0,0,0.7);
+    }
+    .btn:hover::before { left: 100%; }
 
     .reviews-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .review {
-      background: rgba(26,0,0,0.7);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255,0,0,0.3);
-      transition: transform 0.3s ease;
+      background: linear-gradient(to bottom, rgba(26,0,0,0.8), rgba(26,0,0,0.6));
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(255,0,0,0.2);
+      transition: all 0.3s ease;
+      position: relative;
     }
-    .review:hover { transform: translateY(-5px); }
+    .review::before {
+      content: '\f10d';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 10px; left: 20px;
+      color: rgba(255,0,0,0.3);
+      font-size: 40px;
+    }
+    .review:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(255,0,0,0.4);
+    }
+    .review p { margin-bottom: 15px; }
+    .review strong { color: #ff0000; font-style: italic; }
 
     .doc-img {
-      margin: 20px auto;
-      max-width: 350px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255,0,0,0.6);
+      margin: 30px auto;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(255,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+    .doc-img:hover { transform: scale(1.05); }
+
+    .guarantee p:last-of-type {
+      font-size: 18px;
+      line-height: 2.2;
+      text-align: left;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     footer {
-      background: #1a0000;
+      background: linear-gradient(to top, #1a0000, #000);
       text-align: center;
-      padding: 40px 20px;
-      font-size: 15px;
-      color: #ddd;
+      padding: 50px 20px;
+      font-size: 16px;
+      color: #ccc;
       position: relative;
+      border-top: 1px solid rgba(255,0,0,0.2);
     }
     footer::before {
       content: "⚜";
-      font-size: 40px;
-      color: #ff1a1a;
+      font-size: 50px;
+      color: #ff0000;
       position: absolute;
-      top: -20px;
+      top: -25px;
       left: 50%;
       transform: translateX(-50%);
+      text-shadow: 0 0 15px rgba(255,0,0,0.5);
     }
-    footer span { color: #ff1a1a; font-weight: bold; }
+    footer span { color: #ff0000; font-weight: bold; }
 
     /* Animations */
     @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-    @keyframes fadeInUp { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
-    @keyframes pulse {
-      0%,100% { box-shadow:0 0 20px rgba(255,0,0,0.6); }
-      50% { box-shadow:0 0 40px rgba(255,0,0,1); }
+    @keyframes fadeInUp { from {opacity:0; transform:translateY(50px);} to {opacity:1; transform:translateY(0);} }
+
+    /* Parallax Effect */
+    .parallax {
+      perspective: 1px;
+      height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 15px 20px; }
+      header h1 { font-size: 28px; }
+      nav a { margin-left: 15px; font-size: 14px; }
+      .section { padding: 120px 20px 80px; }
+      h2, h3 { font-size: 36px; }
+      p { font-size: 16px; }
+      .btn { padding: 15px 40px; font-size: 16px; }
+      .reviews-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <header id="header">
     <h1>Scarlet Night</h1>
     <nav>
       <a href="https://t.me/your_bot">Заказать</a>
@@ -213,6 +300,17 @@
   <footer>
     <p>⚜ Официальное подтверждение качества • <span>Scarlet Night © 2025</span> • Проверено организацией России</p>
   </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
 
 </body>
 </html>
