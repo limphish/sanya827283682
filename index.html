@@ -6,60 +6,68 @@
   <title>Scarlet Night – Эскорт Агентство</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Cormorant+Garamond:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lora:wght@400;500;700&display=swap');
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #3b0a1a, #1a0000); /* Rich red-to-dark gradient */
-      color: #f8e1d9; /* Soft cream for text */
+      font-family: 'Lora', serif;
+      background: linear-gradient(135deg, #4b0015, #1a0000); /* Deep red to dark gradient */
+      color: #f9e4d4; /* Soft ivory */
       overflow-x: hidden;
       scroll-behavior: smooth;
       position: relative;
     }
 
-    /* Animated background overlay */
+    /* Dynamic background overlay */
     .bg-overlay {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: url('https://www.transparenttextures.com/patterns/satin-weave.png') repeat;
-      opacity: 0.15;
+      background: url('https://www.transparenttextures.com/patterns/velvet.png') repeat;
+      opacity: 0.12;
       z-index: -2;
-      animation: bgShift 20s infinite linear;
+      animation: bgShift 30s infinite linear;
     }
 
     header {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
-      background: linear-gradient(to bottom, rgba(50,0,15,0.95), rgba(50,0,15,0.85));
+      background: linear-gradient(to bottom, rgba(60,0,20,0.95), rgba(60,0,20,0.85));
       display: flex; justify-content: space-between; align-items: center;
       padding: 25px 80px;
       z-index: 1000;
-      box-shadow: 0 4px 20px rgba(255,80,80,0.4);
+      box-shadow: 0 4px 25px rgba(255,100,100,0.5);
       transition: all 0.3s ease;
     }
 
     header.scrolled {
-      background: rgba(50,0,15,0.98);
+      background: rgba(60,0,20,0.98);
       padding: 15px 80px;
     }
 
     header h1 {
       font-family: 'Cormorant Garamond', serif;
-      color: #ff6666; /* Softer red */
-      font-size: 42px;
-      letter-spacing: 4px;
-      text-shadow: 0 0 15px rgba(255,80,80,0.6);
+      color: #ff8080; /* Softer red */
+      font-size: 44px;
+      letter-spacing: 5px;
+      text-shadow: 0 0 20px rgba(255,100,100,0.7);
+      position: relative;
+    }
+    header h1::after {
+      content: '✨';
+      position: absolute;
+      top: -10px; right: -20px;
+      font-size: 20px;
+      color: #ffd700; /* Gold sparkle */
     }
 
     nav a {
       margin-left: 35px;
       text-decoration: none;
-      color: #f8e1d9;
+      color: #f9e4d4;
       font-weight: 500;
-      font-size: 17px;
+      font-size: 18px;
       position: relative;
       transition: color 0.3s ease;
     }
@@ -68,23 +76,23 @@
       position: absolute;
       bottom: -5px; left: 0;
       width: 100%; height: 2px;
-      background: #ff6666;
+      background: #ff8080;
       transform: scaleX(0);
       transition: transform 0.3s ease;
     }
-    nav a:hover { color: #ff6666; }
+    nav a:hover { color: #ff8080; }
     nav a:hover::after { transform: scaleX(1); }
 
     .section {
       min-height: 100vh;
-      padding: 150px 80px 120px;
+      padding: 160px 80px 120px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       text-align: center;
       position: relative;
       overflow: hidden;
-      transition: opacity 1s ease, transform 1s ease;
+      transition: opacity 1.2s ease, transform 1.2s ease;
     }
 
     .section::before {
@@ -94,17 +102,17 @@
       width: 100%; height: 100%;
       background-size: cover;
       background-position: center;
-      filter: brightness(0.5) contrast(1.3) opacity(0.9);
+      filter: brightness(0.45) contrast(1.4) opacity(0.85);
       z-index: -1;
-      transition: transform 0.6s ease;
+      transform: translateZ(-1px) scale(1.1); /* Parallax effect */
+      transition: transform 0.7s ease;
     }
 
-    .section:hover::before { transform: scale(1.06); }
+    .section:hover::before { transform: translateZ(-1px) scale(1.15); }
 
-    /* Updated backgrounds for escort agency vibe */
+    /* Backgrounds for seductive elegance */
     .hero::before { background-image: url('https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=1920&q=80'); } /* Luxurious interior */
-    .about::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); } /* Red velvet elegance */
-    .gallery::before { background-image: url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1920&q=80'); } /* High-end event */
+    .about::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); } /* Red velvet */
     .guarantee::before { background-image: url('https://images.unsplash.com/photo-1543165363-9a2b7a8b4839?auto=format&fit=crop&w=1920&q=80'); } /* Classy ambiance */
     .reviews::before { background-image: url('https://images.unsplash.com/photo-1519751108947-2168e41e9c90?auto=format&fit=crop&w=1920&q=80'); } /* Chic setting */
     .contact::before { background-image: url('https://images.unsplash.com/photo-1534534576273-9b1b5c7357ac?auto=format&fit=crop&w=1920&q=80'); } /* Urban night */
@@ -115,40 +123,51 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       object-fit: cover;
-      filter: brightness(0.4) opacity(0.8);
+      filter: brightness(0.35) opacity(0.8);
       z-index: -2;
     }
 
+    /* Lens flare effect for hero */
+    .lens-flare {
+      position: absolute;
+      top: 20%; left: 10%;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(255,100,100,0.3), transparent);
+      opacity: 0.5;
+      z-index: -1;
+      animation: flarePulse 4s infinite ease-in-out;
+    }
+
     h2, h3 {
-      font-family: 'Playfair Display', serif;
-      color: #ff6666;
-      font-size: 58px;
-      margin-bottom: 35px;
-      letter-spacing: 2px;
-      text-shadow: 0 3px 15px rgba(255,80,80,0.6);
-      animation: fadeInUp 1.8s ease;
+      font-family: 'Cormorant Garamond', serif;
+      color: #ff8080;
+      font-size: 62px;
+      margin-bottom: 40px;
+      letter-spacing: 2.5px;
+      text-shadow: 0 3px 18px rgba(255,100,100,0.7);
+      animation: fadeInUp 2s ease;
     }
 
     p {
       max-width: 1100px;
-      margin: 0 auto 35px;
+      margin: 0 auto 40px;
       font-size: 20px;
       line-height: 2;
-      font-weight: 300;
-      animation: fadeIn 3s ease;
+      font-weight: 400;
+      animation: fadeIn 3.5s ease;
     }
 
     .btn {
-      margin-top: 35px;
+      margin-top: 40px;
       display: inline-block;
       padding: 20px 60px;
       font-size: 19px;
       border-radius: 50px;
-      background: linear-gradient(45deg, #ff6666, #cc3333);
+      background: linear-gradient(45deg, #ff8080, #cc3333);
       color: #fff;
       text-decoration: none;
       font-weight: 700;
-      box-shadow: 0 6px 30px rgba(255,80,80,0.7);
+      box-shadow: 0 6px 35px rgba(255,100,100,0.8);
       transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
@@ -159,80 +178,52 @@
       position: absolute;
       top: 0; left: -100%;
       width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
       transition: left 0.5s;
       z-index: -1;
     }
     .btn:hover {
-      transform: translateY(-4px) scale(1.06);
-      box-shadow: 0 12px 50px rgba(255,80,80,0.9);
+      transform: translateY(-5px) scale(1.07);
+      box-shadow: 0 12px 50px rgba(255,100,100,0.9);
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
     .btn:hover::before { left: 100%; }
 
     /* Floating CTA Button */
     .floating-cta {
       position: fixed;
-      bottom: 30px; right: 30px;
-      background: linear-gradient(45deg, #ff6666, #cc3333);
+      bottom: 40px; right: 40px;
+      background: linear-gradient(45deg, #ff8080, #cc3333);
       color: #fff;
-      padding: 15px 30px;
+      padding: 15px 35px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 700;
-      box-shadow: 0 5px 20px rgba(255,80,80,0.7);
+      box-shadow: 0 5px 25px rgba(255,100,100,0.8);
       z-index: 1000;
-      transition: transform 0.3s ease;
+      animation: pulseCTA 2s infinite ease-in-out;
     }
     .floating-cta:hover {
-      transform: scale(1.1);
-    }
-
-    /* Gallery Section */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(255,80,80,0.3);
-      transition: transform 0.3s ease;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .gallery-item:hover { transform: scale(1.05); }
-    .gallery-item:hover img { transform: scale(1.1); }
-    .gallery-item::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(to bottom, transparent, rgba(50,0,15,0.7));
-      z-index: 1;
+      transform: scale(1.12);
+      box-shadow: 0 10px 40px rgba(255,100,100,0.9);
     }
 
     .reviews-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
       max-width: 1200px;
       margin: 0 auto;
     }
     .review {
-      background: linear-gradient(to bottom, rgba(50,0,15,0.8), rgba(50,0,15,0.6));
+      background: linear-gradient(to bottom, rgba(60,0,20,0.85), rgba(60,0,20,0.65));
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(255,80,80,0.3);
-      transition: all 0.3s ease;
+      border: 1px solid rgba(255,100,100,0.3);
+      box-shadow: 0 5px 25px rgba(255,100,100,0.4);
+      transition: all 0.4s ease;
       position: relative;
+      animation: fadeInUp 2s ease;
     }
     .review::before {
       content: '\f10d';
@@ -240,34 +231,34 @@
       font-weight: 900;
       position: absolute;
       top: 15px; left: 20px;
-      color: rgba(255,80,80,0.3);
+      color: rgba(255,100,100,0.3);
       font-size: 40px;
     }
     .review:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgba(255,80,80,0.5);
+      transform: translateY(-12px);
+      box-shadow: 0 12px 40px rgba(255,100,100,0.6);
     }
     .review p { margin-bottom: 15px; }
     .review .stars {
-      color: #ffd700; /* Gold for star ratings */
-      margin-bottom: 10px;
-      font-size: 18px;
+      color: #ffd700; /* Gold stars */
+      margin-bottom: 12px;
+      font-size: 20px;
     }
-    .review strong { color: #ff6666; font-style: italic; }
+    .review strong { color: #ff8080; font-style: italic; }
 
     .doc-img {
-      margin: 30px auto;
+      margin: 40px auto;
       max-width: 400px;
       border-radius: 15px;
-      border: 2px solid #ff6666;
-      box-shadow: 0 10px 30px rgba(255,80,80,0.5);
+      border: 2px solid #ff8080;
+      box-shadow: 0 10px 35px rgba(255,100,100,0.6);
       transition: transform 0.3s ease;
     }
-    .doc-img:hover { transform: scale(1.05); }
+    .doc-img:hover { transform: scale(1.06); }
 
     .guarantee p:last-of-type {
-      font-size: 18px;
-      line-height: 2.2;
+      font-size: 19px;
+      line-height: 2.3;
       text-align: left;
       max-width: 800px;
       margin: 0 auto;
@@ -283,59 +274,67 @@
     }
     .particles span {
       position: absolute;
-      background: rgba(255,80,80,0.5);
+      background: rgba(255,100,100,0.6);
       border-radius: 50%;
-      animation: float 15s infinite linear;
+      animation: float 18s infinite linear;
     }
-    .particles span:nth-child(1) { width: 20px; height: 20px; top: 10%; left: 20%; animation-duration: 20s; }
-    .particles span:nth-child(2) { width: 15px; height: 15px; top: 30%; left: 50%; animation-duration: 25s; }
-    .particles span:nth-child(3) { width: 25px; height: 25px; top: 50%; left: 70%; animation-duration: 18s; }
-    .particles span:nth-child(4) { width: 10px; height: 10px; top: 70%; left: 30%; animation-duration: 22s; }
-    .particles span:nth-child(5) { width: 18px; height: 18px; top: 20%; left: 80%; animation-duration: 22s; }
+    .particles span:nth-child(1) { width: 22px; height: 22px; top: 15%; left: 25%; animation-duration: 22s; }
+    .particles span:nth-child(2) { width: 18px; height: 18px; top: 35%; left: 55%; animation-duration: 28s; }
+    .particles span:nth-child(3) { width: 28px; height: 28px; top: 55%; left: 75%; animation-duration: 20s; }
+    .particles span:nth-child(4) { width: 12px; height: 12px; top: 75%; left: 35%; animation-duration: 25s; }
+    .particles span:nth-child(5) { width: 20px; height: 20px; top: 25%; left: 85%; animation-duration: 23s; }
 
     footer {
-      background: linear-gradient(to top, #2c0e1a, #3b0a1a);
+      background: linear-gradient(to top, #2c0e1a, #4b0015);
       text-align: center;
       padding: 60px 20px;
-      font-size: 16px;
-      color: #f8e1d9;
+      font-size: 17px;
+      color: #f9e4d4;
       position: relative;
-      border-top: 1px solid rgba(255,80,80,0.3);
+      border-top: 2px solid #ffd700; /* Gold accent */
     }
     footer::before {
       content: "⚜";
       font-size: 50px;
-      color: #ff6666;
+      color: #ff8080;
       position: absolute;
       top: -25px;
       left: 50%;
       transform: translateX(-50%);
-      text-shadow: 0 0 15px rgba(255,80,80,0.6);
+      text-shadow: 0 0 20px rgba(255,100,100,0.7);
     }
-    footer span { color: #ff6666; font-weight: bold; }
+    footer span { color: #ff8080; font-weight: bold; }
 
     /* Animations */
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes float {
       0% { transform: translateY(0); }
       100% { transform: translateY(-100vh); }
     }
     @keyframes bgShift {
       0% { background-position: 0 0; }
-      100% { background-position: 100% 100%; }
+      100% { background-position: 200% 200%; }
+    }
+    @keyframes flarePulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.2); }
+    }
+    @keyframes pulseCTA {
+      0%, 100% { box-shadow: 0 5px 25px rgba(255,100,100,0.8); }
+      50% { box-shadow: 0 5px 40px rgba(255,100,100,1); }
     }
 
     @media (max-width: 768px) {
       header { padding: 15px 20px; }
-      header h1 { font-size: 32px; }
+      header h1 { font-size: 34px; }
       nav a { margin-left: 15px; font-size: 15px; }
-      .section { padding: 120px 20px 80px; }
-      h2, h3 { font-size: 42px; }
+      .section { padding: 130px 20px 80px; }
+      h2, h3 { font-size: 46px; }
       p { font-size: 17px; }
       .btn { padding: 15px 40px; font-size: 17px; }
-      .reviews-grid, .gallery-grid { grid-template-columns: 1fr; }
-      .particles span, .hero-video { display: none; } /* Hide particles and video on mobile */
+      .reviews-grid { grid-template-columns: 1fr; }
+      .particles span, .hero-video, .lens-flare { display: none; } /* Hide particles and video on mobile */
       .floating-cta { bottom: 20px; right: 20px; padding: 12px 25px; font-size: 15px; }
     }
   </style>
@@ -347,7 +346,6 @@
     <h1>Scarlet Night</h1>
     <nav>
       <a href="https://t.me/your_bot">Заказать</a>
-      <a href="#gallery">Галерея</a>
       <a href="#guarantee">Гарантии</a>
       <a href="#reviews">Отзывы</a>
       <a href="#contact">Связь</a>
@@ -356,8 +354,9 @@
 
   <section class="section hero">
     <video class="hero-video" autoplay loop muted playsinline>
-      <source src="https://player.vimeo.com/external/430020913.sd.mp4?s=8a71d56b2250f99a6b8f387305f77515d266e3a2&profile_id=164" type="video/mp4">
+      <source src="https://player.vimeo.com/external/489051297.sd.mp4?s=8a8b0a6b5b4e8e8b4e8b0a6b5b4e8e8b4e8b0a6b&profile_id=164" type="video/mp4">
     </video>
+    <div class="lens-flare"></div>
     <div class="particles">
       <span></span><span></span><span></span><span></span><span></span>
     </div>
@@ -368,17 +367,7 @@
 
   <section class="section about">
     <h3>О Нас</h3>
-    <p>Scarlet Night – это воплощение утонченности и эксклюзивности. Мы работаем для тех, кто ценит эстетику, стиль и высочайшие стандарты. Наши девушки – это сочетание красоты, интеллекта, харизмы и грации. С нами вы почувствуете себя особенным, наслаждаясь безупречным сервисом и приватными моментами, где каждая деталь продумана до мелочей.</p>
-  </section>
-
-  <section class="section gallery" id="gallery">
-    <h3>Наши Моменты</h3>
-    <p>Погрузитесь в мир роскоши и элегантности с нашими эксклюзивными мероприятиями и сопровождением.</p>
-    <div class="gallery-grid">
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=600&q=80" alt="Luxury Event"></div>
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519225425639-08084b09f7ca?auto=format&fit=crop&w=600&q=80" alt="Elegant Dinner"></div>
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1532634922-8fe0b757fb13?auto=format&fit=crop&w=600&q=80" alt="VIP Night"></div>
-    </div>
+    <p>Scarlet Night – воплощение утонченности и эксклюзивности. Мы создаем незабываемые моменты для тех, кто ценит эстетику, стиль и высочайшие стандарты. Наши девушки – это гармония красоты, интеллекта, харизмы и грации. С нами вы почувствуете себя особенным, наслаждаясь безупречным сервисом, где каждая деталь продумана до мелочей.</p>
   </section>
 
   <section class="section guarantee" id="guarantee">
@@ -444,7 +433,7 @@
 
     sections.forEach(section => {
       section.style.opacity = '0';
-      section.style.transform = 'translateY(50px)';
+      section.style.transform = 'translateY(60px)';
       observer.observe(section);
     });
   </script>
