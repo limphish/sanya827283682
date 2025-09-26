@@ -11,8 +11,8 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
-      background: #000;
-      color: #fff;
+      background: linear-gradient(135deg, #1a0000, #2c0e1a); /* Subtle red-to-dark gradient for a luxurious feel */
+      color: #f5e6e6; /* Softer off-white for text */
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
@@ -21,31 +21,31 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%;
-      background: linear-gradient(to bottom, rgba(26,0,0,0.98), rgba(26,0,0,0.85));
+      background: linear-gradient(to bottom, rgba(40,0,10,0.95), rgba(40,0,10,0.85));
       display: flex; justify-content: space-between; align-items: center;
       padding: 25px 80px;
       z-index: 1000;
-      box-shadow: 0 4px 20px rgba(255,0,0,0.3);
-      transition: background 0.3s ease;
+      box-shadow: 0 4px 20px rgba(255,50,50,0.3);
+      transition: background 0.3s ease, padding 0.3s ease;
     }
 
     header.scrolled {
-      background: rgba(26,0,0,0.98);
+      background: rgba(40,0,10,0.98);
       padding: 15px 80px;
     }
 
     header h1 {
       font-family: 'Cinzel', serif;
-      color: #ff0000;
-      font-size: 36px;
+      color: #ff4d4d;
+      font-size: 38px;
       letter-spacing: 3px;
-      text-shadow: 0 0 10px rgba(255,0,0,0.5);
+      text-shadow: 0 0 12px rgba(255,50,50,0.5);
     }
 
     nav a {
       margin-left: 30px;
       text-decoration: none;
-      color: #ddd;
+      color: #f5e6e6;
       font-weight: 500;
       font-size: 16px;
       position: relative;
@@ -56,11 +56,11 @@
       position: absolute;
       bottom: -5px; left: 0;
       width: 100%; height: 2px;
-      background: #ff0000;
+      background: #ff4d4d;
       transform: scaleX(0);
       transition: transform 0.3s ease;
     }
-    nav a:hover { color: #ff0000; }
+    nav a:hover { color: #ff4d4d; }
     nav a:hover::after { transform: scaleX(1); }
 
     .section {
@@ -81,7 +81,7 @@
       width: 100%; height: 100%;
       background-size: cover;
       background-position: center;
-      filter: brightness(0.3) contrast(1.1);
+      filter: brightness(0.4) contrast(1.2) opacity(0.9);
       z-index: -1;
       transition: transform 0.5s ease;
     }
@@ -90,19 +90,20 @@
       transform: scale(1.05);
     }
 
-    .hero::before { background-image: url('https://images.unsplash.com/photo-1585912280617-0a29a9abf348?auto=format&fit=crop&w=1920&q=80'); }
-    .about::before { background-image: url('https://images.unsplash.com/photo-1529630237227-3a547c8a8cde?auto=format&fit=crop&w=1920&q=80'); }
-    .guarantee::before { background-image: url('https://images.unsplash.com/photo-1599458252566-9f83a25d816f?auto=format&fit=crop&w=1920&q=80'); }
-    .reviews::before { background-image: url('https://images.unsplash.com/photo-1604909053645-23d4b6f52aca?auto=format&fit=crop&w=1920&q=80'); }
-    .contact::before { background-image: url('https://images.unsplash.com/photo-1520962918287-7448c2878f65?auto=format&fit=crop&w=1920&q=80'); }
+    /* Updated background images for an elegant, seductive vibe */
+    .hero::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); } /* Luxurious red velvet */
+    .about::before { background-image: url('https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=1920&q=80'); } /* Elegant interior */
+    .guarantee::before { background-image: url('https://images.unsplash.com/photo-1543165363-9a2b7a8b4839?auto=format&fit=crop&w=1920&q=80'); } /* Classy ambiance */
+    .reviews::before { background-image: url('https://images.unsplash.com/photo-1519751108947-2168e41e9c90?auto=format&fit=crop&w=1920&q=80'); } /* Chic setting */
+    .contact::before { background-image: url('https://images.unsplash.com/photo-1534534576273-9b1b5c7357ac?auto=format&fit=crop&w=1920&q=80'); } /* Sophisticated urban night */
 
     h2, h3 {
       font-family: 'Playfair Display', serif;
-      color: #ff0000;
-      font-size: 52px;
+      color: #ff4d4d;
+      font-size: 54px;
       margin-bottom: 30px;
       letter-spacing: 1.5px;
-      text-shadow: 0 2px 10px rgba(255,0,0,0.4);
+      text-shadow: 0 2px 12px rgba(255,50,50,0.5);
       animation: fadeInUp 1.5s ease;
     }
 
@@ -110,7 +111,7 @@
       max-width: 1000px;
       margin: 0 auto 30px;
       font-size: 19px;
-      line-height: 1.8;
+      line-height: 1.9;
       font-weight: 300;
       animation: fadeIn 2.5s ease;
     }
@@ -121,26 +122,28 @@
       padding: 18px 50px;
       font-size: 18px;
       border-radius: 50px;
-      background: linear-gradient(45deg, #ff0000, #cc0000);
+      background: linear-gradient(45deg, #ff4d4d, #cc0000);
       color: #fff;
       text-decoration: none;
       font-weight: 700;
-      box-shadow: 0 5px 25px rgba(255,0,0,0.5);
+      box-shadow: 0 5px 25px rgba(255,50,50,0.6);
       transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
+      z-index: 1;
     }
     .btn::before {
       content: '';
       position: absolute;
       top: 0; left: -100%;
       width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
       transition: left 0.5s;
+      z-index: -1;
     }
     .btn:hover {
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 10px 40px rgba(255,0,0,0.7);
+      box-shadow: 0 10px 40px rgba(255,50,50,0.8);
     }
     .btn:hover::before { left: 100%; }
 
@@ -152,10 +155,10 @@
       margin: 0 auto;
     }
     .review {
-      background: linear-gradient(to bottom, rgba(26,0,0,0.8), rgba(26,0,0,0.6));
+      background: linear-gradient(to bottom, rgba(40,0,10,0.8), rgba(40,0,10,0.6));
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(255,0,0,0.2);
+      box-shadow: 0 5px 20px rgba(255,50,50,0.3);
       transition: all 0.3s ease;
       position: relative;
     }
@@ -164,22 +167,23 @@
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
       position: absolute;
-      top: 10px; left: 20px;
-      color: rgba(255,0,0,0.3);
+      top: 15px; left: 20px;
+      color: rgba(255,50,50,0.3);
       font-size: 40px;
     }
     .review:hover {
       transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgba(255,0,0,0.4);
+      box-shadow: 0 10px 30px rgba(255,50,50,0.5);
     }
     .review p { margin-bottom: 15px; }
-    .review strong { color: #ff0000; font-style: italic; }
+    .review strong { color: #ff4d4d; font-style: italic; }
 
     .doc-img {
       margin: 30px auto;
       max-width: 400px;
       border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(255,0,0,0.5);
+      border: 2px solid #ff4d4d;
+      box-shadow: 0 10px 30px rgba(255,50,50,0.5);
       transition: transform 0.3s ease;
     }
     .doc-img:hover { transform: scale(1.05); }
@@ -192,48 +196,75 @@
       margin: 0 auto;
     }
 
+    /* Added: Floating decorative element for a luxurious touch */
+    .decorative-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/black-linen.png') repeat;
+      opacity: 0.1;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Added: Subtle particle effect for hero section */
+    .particles {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .particles span {
+      position: absolute;
+      background: rgba(255,50,50,0.5);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+    .particles span:nth-child(1) { width: 20px; height: 20px; top: 10%; left: 20%; animation-duration: 20s; }
+    .particles span:nth-child(2) { width: 15px; height: 15px; top: 30%; left: 50%; animation-duration: 25s; }
+    .particles span:nth-child(3) { width: 25px; height: 25px; top: 50%; left: 70%; animation-duration: 18s; }
+    .particles span:nth-child(4) { width: 10px; height: 10px; top: 70%; left: 30%; animation-duration: 22s; }
+
     footer {
-      background: linear-gradient(to top, #1a0000, #000);
+      background: linear-gradient(to top, #1a0000, #2c0e1a);
       text-align: center;
       padding: 50px 20px;
       font-size: 16px;
-      color: #ccc;
+      color: #f5e6e6;
       position: relative;
-      border-top: 1px solid rgba(255,0,0,0.2);
+      border-top: 1px solid rgba(255,50,50,0.2);
     }
     footer::before {
       content: "⚜";
       font-size: 50px;
-      color: #ff0000;
+      color: #ff4d4d;
       position: absolute;
       top: -25px;
       left: 50%;
       transform: translateX(-50%);
-      text-shadow: 0 0 15px rgba(255,0,0,0.5);
+      text-shadow: 0 0 15px rgba(255,50,50,0.5);
     }
-    footer span { color: #ff0000; font-weight: bold; }
+    footer span { color: #ff4d4d; font-weight: bold; }
 
     /* Animations */
     @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
     @keyframes fadeInUp { from {opacity:0; transform:translateY(50px);} to {opacity:1; transform:translateY(0);} }
-
-    /* Parallax Effect */
-    .parallax {
-      perspective: 1px;
-      height: 100vh;
-      overflow-x: hidden;
-      overflow-y: auto;
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100vh); }
     }
 
     @media (max-width: 768px) {
       header { padding: 15px 20px; }
-      header h1 { font-size: 28px; }
+      header h1 { font-size: 30px; }
       nav a { margin-left: 15px; font-size: 14px; }
       .section { padding: 120px 20px 80px; }
-      h2, h3 { font-size: 36px; }
+      h2, h3 { font-size: 40px; }
       p { font-size: 16px; }
       .btn { padding: 15px 40px; font-size: 16px; }
       .reviews-grid { grid-template-columns: 1fr; }
+      .particles span { display: none; } /* Hide particles on mobile for performance */
     }
   </style>
 </head>
@@ -250,12 +281,17 @@
   </header>
 
   <section class="section hero">
+    <div class="decorative-overlay"></div>
+    <div class="particles">
+      <span></span><span></span><span></span><span></span>
+    </div>
     <h2>Scarlet Night – Искусство Наслаждения</h2>
     <p>Мы создаем атмосферу роскоши, доверия и абсолютной конфиденциальности. Scarlet Night – это агентство для избранных, тех, кто ценит высший класс и умеет наслаждаться жизнью. Каждый момент с нами превращается в произведение искусства.</p>
     <a href="https://t.me/your_bot" class="btn">Сделать заказ</a>
   </section>
 
   <section class="section about">
+    <div class="decorative-overlay"></div>
     <h3>О Нас</h3>
     <p>Наше агентство – это символ исключительности. Мы работаем с клиентами, которые понимают ценность эстетики, утонченности и высоких стандартов.  
     Девушки Scarlet Night – это не только красота, но и воспитание, интеллект, стиль и харизма.  
@@ -264,6 +300,7 @@
   </section>
 
   <section class="section guarantee" id="guarantee">
+    <div class="decorative-overlay"></div>
     <h3>Наши Гарантии</h3>
     <p>Мы дорожим вашей безопасностью и репутацией. Scarlet Night предоставляет официальные гарантии качества и конфиденциальности:</p>
     <p>
@@ -278,17 +315,21 @@
   </section>
 
   <section class="section reviews" id="reviews">
+    <div class="decorative-overlay"></div>
     <h3>Отзывы клиентов</h3>
     <div class="reviews-grid">
       <div class="review"><p>"Scarlet Night – это другой уровень. Всё на высшем уровне, девушки просто богини."</p><strong>— Алексей, Москва</strong></div>
       <div class="review"><p>"Никаких компромиссов: сервис, внимание к деталям, и главное — полная конфиденциальность."</p><strong>— Дмитрий, СПб</strong></div>
       <div class="review"><p>"Я объехал полмира, но такого уровня я не встречал нигде. Scarlet Night – номер один."</p><strong>— Михаил, Сочи</strong></div>
       <div class="review"><p>"Необычайно приятный опыт. Девушка не просто красивая, но и умная собеседница."</p><strong>— Игорь, Дубай</strong></div>
+      <div class="review"><p>"Идеальный вечер, всё организовано безупречно. Рекомендую всем ценителям роскоши."</p><strong>— Сергей, Казань</strong></div>
+      <div class="review"><p>"Стиль, элегантность и внимание к клиенту – это про Scarlet Night."</p><strong>— Анна, Екатеринбург</strong></div>
     </div>
     <a href="https://t.me/your_bot" class="btn">Посмотреть все отзывы</a>
   </section>
 
   <section class="section contact" id="contact">
+    <div class="decorative-overlay"></div>
     <h3>Связь с агентством</h3>
     <p>Мы всегда на связи. Ваш комфорт и уверенность – наш главный приоритет.  
     Свяжитесь с менеджером в любое время суток, чтобы получить консультацию, обсудить детали и оформить заказ.  
