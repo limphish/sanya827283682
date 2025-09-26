@@ -6,48 +6,60 @@
   <title>Scarlet Night – Эскорт Агентство</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Cinzel:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Cormorant+Garamond:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #1a0000, #2c0e1a); /* Subtle red-to-dark gradient for a luxurious feel */
-      color: #f5e6e6; /* Softer off-white for text */
+      background: linear-gradient(135deg, #3b0a1a, #1a0000); /* Rich red-to-dark gradient */
+      color: #f8e1d9; /* Soft cream for text */
       overflow-x: hidden;
       scroll-behavior: smooth;
+      position: relative;
+    }
+
+    /* Animated background overlay */
+    .bg-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/satin-weave.png') repeat;
+      opacity: 0.15;
+      z-index: -2;
+      animation: bgShift 20s infinite linear;
     }
 
     header {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
-      background: linear-gradient(to bottom, rgba(40,0,10,0.95), rgba(40,0,10,0.85));
+      background: linear-gradient(to bottom, rgba(50,0,15,0.95), rgba(50,0,15,0.85));
       display: flex; justify-content: space-between; align-items: center;
       padding: 25px 80px;
       z-index: 1000;
-      box-shadow: 0 4px 20px rgba(255,50,50,0.3);
-      transition: background 0.3s ease, padding 0.3s ease;
+      box-shadow: 0 4px 20px rgba(255,80,80,0.4);
+      transition: all 0.3s ease;
     }
 
     header.scrolled {
-      background: rgba(40,0,10,0.98);
+      background: rgba(50,0,15,0.98);
       padding: 15px 80px;
     }
 
     header h1 {
-      font-family: 'Cinzel', serif;
-      color: #ff4d4d;
-      font-size: 38px;
-      letter-spacing: 3px;
-      text-shadow: 0 0 12px rgba(255,50,50,0.5);
+      font-family: 'Cormorant Garamond', serif;
+      color: #ff6666; /* Softer red */
+      font-size: 42px;
+      letter-spacing: 4px;
+      text-shadow: 0 0 15px rgba(255,80,80,0.6);
     }
 
     nav a {
-      margin-left: 30px;
+      margin-left: 35px;
       text-decoration: none;
-      color: #f5e6e6;
+      color: #f8e1d9;
       font-weight: 500;
-      font-size: 16px;
+      font-size: 17px;
       position: relative;
       transition: color 0.3s ease;
     }
@@ -56,22 +68,23 @@
       position: absolute;
       bottom: -5px; left: 0;
       width: 100%; height: 2px;
-      background: #ff4d4d;
+      background: #ff6666;
       transform: scaleX(0);
       transition: transform 0.3s ease;
     }
-    nav a:hover { color: #ff4d4d; }
+    nav a:hover { color: #ff6666; }
     nav a:hover::after { transform: scaleX(1); }
 
     .section {
       min-height: 100vh;
-      padding: 140px 80px 100px;
+      padding: 150px 80px 120px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       text-align: center;
       position: relative;
       overflow: hidden;
+      transition: opacity 1s ease, transform 1s ease;
     }
 
     .section::before {
@@ -81,52 +94,61 @@
       width: 100%; height: 100%;
       background-size: cover;
       background-position: center;
-      filter: brightness(0.4) contrast(1.2) opacity(0.9);
+      filter: brightness(0.5) contrast(1.3) opacity(0.9);
       z-index: -1;
-      transition: transform 0.5s ease;
+      transition: transform 0.6s ease;
     }
 
-    .section:hover::before {
-      transform: scale(1.05);
-    }
+    .section:hover::before { transform: scale(1.06); }
 
-    /* Updated background images for an elegant, seductive vibe */
-    .hero::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); } /* Luxurious red velvet */
-    .about::before { background-image: url('https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=1920&q=80'); } /* Elegant interior */
+    /* Updated backgrounds for escort agency vibe */
+    .hero::before { background-image: url('https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=1920&q=80'); } /* Luxurious interior */
+    .about::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); } /* Red velvet elegance */
+    .gallery::before { background-image: url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1920&q=80'); } /* High-end event */
     .guarantee::before { background-image: url('https://images.unsplash.com/photo-1543165363-9a2b7a8b4839?auto=format&fit=crop&w=1920&q=80'); } /* Classy ambiance */
     .reviews::before { background-image: url('https://images.unsplash.com/photo-1519751108947-2168e41e9c90?auto=format&fit=crop&w=1920&q=80'); } /* Chic setting */
-    .contact::before { background-image: url('https://images.unsplash.com/photo-1534534576273-9b1b5c7357ac?auto=format&fit=crop&w=1920&q=80'); } /* Sophisticated urban night */
+    .contact::before { background-image: url('https://images.unsplash.com/photo-1534534576273-9b1b5c7357ac?auto=format&fit=crop&w=1920&q=80'); } /* Urban night */
+
+    /* Hero video background */
+    .hero-video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.4) opacity(0.8);
+      z-index: -2;
+    }
 
     h2, h3 {
       font-family: 'Playfair Display', serif;
-      color: #ff4d4d;
-      font-size: 54px;
-      margin-bottom: 30px;
-      letter-spacing: 1.5px;
-      text-shadow: 0 2px 12px rgba(255,50,50,0.5);
-      animation: fadeInUp 1.5s ease;
+      color: #ff6666;
+      font-size: 58px;
+      margin-bottom: 35px;
+      letter-spacing: 2px;
+      text-shadow: 0 3px 15px rgba(255,80,80,0.6);
+      animation: fadeInUp 1.8s ease;
     }
 
     p {
-      max-width: 1000px;
-      margin: 0 auto 30px;
-      font-size: 19px;
-      line-height: 1.9;
+      max-width: 1100px;
+      margin: 0 auto 35px;
+      font-size: 20px;
+      line-height: 2;
       font-weight: 300;
-      animation: fadeIn 2.5s ease;
+      animation: fadeIn 3s ease;
     }
 
     .btn {
-      margin-top: 30px;
+      margin-top: 35px;
       display: inline-block;
-      padding: 18px 50px;
-      font-size: 18px;
+      padding: 20px 60px;
+      font-size: 19px;
       border-radius: 50px;
-      background: linear-gradient(45deg, #ff4d4d, #cc0000);
+      background: linear-gradient(45deg, #ff6666, #cc3333);
       color: #fff;
       text-decoration: none;
       font-weight: 700;
-      box-shadow: 0 5px 25px rgba(255,50,50,0.6);
+      box-shadow: 0 6px 30px rgba(255,80,80,0.7);
       transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
@@ -137,15 +159,65 @@
       position: absolute;
       top: 0; left: -100%;
       width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
       transition: left 0.5s;
       z-index: -1;
     }
     .btn:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 10px 40px rgba(255,50,50,0.8);
+      transform: translateY(-4px) scale(1.06);
+      box-shadow: 0 12px 50px rgba(255,80,80,0.9);
     }
     .btn:hover::before { left: 100%; }
+
+    /* Floating CTA Button */
+    .floating-cta {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      background: linear-gradient(45deg, #ff6666, #cc3333);
+      color: #fff;
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 5px 20px rgba(255,80,80,0.7);
+      z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+    .floating-cta:hover {
+      transform: scale(1.1);
+    }
+
+    /* Gallery Section */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(255,80,80,0.3);
+      transition: transform 0.3s ease;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover { transform: scale(1.05); }
+    .gallery-item:hover img { transform: scale(1.1); }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(50,0,15,0.7));
+      z-index: 1;
+    }
 
     .reviews-grid {
       display: grid;
@@ -155,10 +227,10 @@
       margin: 0 auto;
     }
     .review {
-      background: linear-gradient(to bottom, rgba(40,0,10,0.8), rgba(40,0,10,0.6));
-      padding: 25px;
+      background: linear-gradient(to bottom, rgba(50,0,15,0.8), rgba(50,0,15,0.6));
+      padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(255,50,50,0.3);
+      box-shadow: 0 5px 20px rgba(255,80,80,0.3);
       transition: all 0.3s ease;
       position: relative;
     }
@@ -168,22 +240,27 @@
       font-weight: 900;
       position: absolute;
       top: 15px; left: 20px;
-      color: rgba(255,50,50,0.3);
+      color: rgba(255,80,80,0.3);
       font-size: 40px;
     }
     .review:hover {
       transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgba(255,50,50,0.5);
+      box-shadow: 0 10px 30px rgba(255,80,80,0.5);
     }
     .review p { margin-bottom: 15px; }
-    .review strong { color: #ff4d4d; font-style: italic; }
+    .review .stars {
+      color: #ffd700; /* Gold for star ratings */
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .review strong { color: #ff6666; font-style: italic; }
 
     .doc-img {
       margin: 30px auto;
       max-width: 400px;
       border-radius: 15px;
-      border: 2px solid #ff4d4d;
-      box-shadow: 0 10px 30px rgba(255,50,50,0.5);
+      border: 2px solid #ff6666;
+      box-shadow: 0 10px 30px rgba(255,80,80,0.5);
       transition: transform 0.3s ease;
     }
     .doc-img:hover { transform: scale(1.05); }
@@ -196,18 +273,7 @@
       margin: 0 auto;
     }
 
-    /* Added: Floating decorative element for a luxurious touch */
-    .decorative-overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('https://www.transparenttextures.com/patterns/black-linen.png') repeat;
-      opacity: 0.1;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* Added: Subtle particle effect for hero section */
+    /* Particle effect for hero section */
     .particles {
       position: absolute;
       top: 0; left: 0;
@@ -217,7 +283,7 @@
     }
     .particles span {
       position: absolute;
-      background: rgba(255,50,50,0.5);
+      background: rgba(255,80,80,0.5);
       border-radius: 50%;
       animation: float 15s infinite linear;
     }
@@ -225,55 +291,63 @@
     .particles span:nth-child(2) { width: 15px; height: 15px; top: 30%; left: 50%; animation-duration: 25s; }
     .particles span:nth-child(3) { width: 25px; height: 25px; top: 50%; left: 70%; animation-duration: 18s; }
     .particles span:nth-child(4) { width: 10px; height: 10px; top: 70%; left: 30%; animation-duration: 22s; }
+    .particles span:nth-child(5) { width: 18px; height: 18px; top: 20%; left: 80%; animation-duration: 22s; }
 
     footer {
-      background: linear-gradient(to top, #1a0000, #2c0e1a);
+      background: linear-gradient(to top, #2c0e1a, #3b0a1a);
       text-align: center;
-      padding: 50px 20px;
+      padding: 60px 20px;
       font-size: 16px;
-      color: #f5e6e6;
+      color: #f8e1d9;
       position: relative;
-      border-top: 1px solid rgba(255,50,50,0.2);
+      border-top: 1px solid rgba(255,80,80,0.3);
     }
     footer::before {
       content: "⚜";
       font-size: 50px;
-      color: #ff4d4d;
+      color: #ff6666;
       position: absolute;
       top: -25px;
       left: 50%;
       transform: translateX(-50%);
-      text-shadow: 0 0 15px rgba(255,50,50,0.5);
+      text-shadow: 0 0 15px rgba(255,80,80,0.6);
     }
-    footer span { color: #ff4d4d; font-weight: bold; }
+    footer span { color: #ff6666; font-weight: bold; }
 
     /* Animations */
-    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-    @keyframes fadeInUp { from {opacity:0; transform:translateY(50px);} to {opacity:1; transform:translateY(0);} }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes float {
       0% { transform: translateY(0); }
       100% { transform: translateY(-100vh); }
     }
+    @keyframes bgShift {
+      0% { background-position: 0 0; }
+      100% { background-position: 100% 100%; }
+    }
 
     @media (max-width: 768px) {
       header { padding: 15px 20px; }
-      header h1 { font-size: 30px; }
-      nav a { margin-left: 15px; font-size: 14px; }
+      header h1 { font-size: 32px; }
+      nav a { margin-left: 15px; font-size: 15px; }
       .section { padding: 120px 20px 80px; }
-      h2, h3 { font-size: 40px; }
-      p { font-size: 16px; }
-      .btn { padding: 15px 40px; font-size: 16px; }
-      .reviews-grid { grid-template-columns: 1fr; }
-      .particles span { display: none; } /* Hide particles on mobile for performance */
+      h2, h3 { font-size: 42px; }
+      p { font-size: 17px; }
+      .btn { padding: 15px 40px; font-size: 17px; }
+      .reviews-grid, .gallery-grid { grid-template-columns: 1fr; }
+      .particles span, .hero-video { display: none; } /* Hide particles and video on mobile */
+      .floating-cta { bottom: 20px; right: 20px; padding: 12px 25px; font-size: 15px; }
     }
   </style>
 </head>
 <body>
+  <div class="bg-overlay"></div>
 
   <header id="header">
     <h1>Scarlet Night</h1>
     <nav>
       <a href="https://t.me/your_bot">Заказать</a>
+      <a href="#gallery">Галерея</a>
       <a href="#guarantee">Гарантии</a>
       <a href="#reviews">Отзывы</a>
       <a href="#contact">Связь</a>
@@ -281,9 +355,11 @@
   </header>
 
   <section class="section hero">
-    <div class="decorative-overlay"></div>
+    <video class="hero-video" autoplay loop muted playsinline>
+      <source src="https://player.vimeo.com/external/430020913.sd.mp4?s=8a71d56b2250f99a6b8f387305f77515d266e3a2&profile_id=164" type="video/mp4">
+    </video>
     <div class="particles">
-      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
     </div>
     <h2>Scarlet Night – Искусство Наслаждения</h2>
     <p>Мы создаем атмосферу роскоши, доверия и абсолютной конфиденциальности. Scarlet Night – это агентство для избранных, тех, кто ценит высший класс и умеет наслаждаться жизнью. Каждый момент с нами превращается в произведение искусства.</p>
@@ -291,58 +367,61 @@
   </section>
 
   <section class="section about">
-    <div class="decorative-overlay"></div>
     <h3>О Нас</h3>
-    <p>Наше агентство – это символ исключительности. Мы работаем с клиентами, которые понимают ценность эстетики, утонченности и высоких стандартов.  
-    Девушки Scarlet Night – это не только красота, но и воспитание, интеллект, стиль и харизма.  
-    С нами вы сможете блистать в обществе, наслаждаться приватными моментами и быть уверенными, что каждая деталь продумана заранее.  
-    От первых минут общения до самой последней встречи – всё строится на доверии, уважении и абсолютном комфорте.</p>
+    <p>Scarlet Night – это воплощение утонченности и эксклюзивности. Мы работаем для тех, кто ценит эстетику, стиль и высочайшие стандарты. Наши девушки – это сочетание красоты, интеллекта, харизмы и грации. С нами вы почувствуете себя особенным, наслаждаясь безупречным сервисом и приватными моментами, где каждая деталь продумана до мелочей.</p>
+  </section>
+
+  <section class="section gallery" id="gallery">
+    <h3>Наши Моменты</h3>
+    <p>Погрузитесь в мир роскоши и элегантности с нашими эксклюзивными мероприятиями и сопровождением.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=600&q=80" alt="Luxury Event"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519225425639-08084b09f7ca?auto=format&fit=crop&w=600&q=80" alt="Elegant Dinner"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1532634922-8fe0b757fb13?auto=format&fit=crop&w=600&q=80" alt="VIP Night"></div>
+    </div>
   </section>
 
   <section class="section guarantee" id="guarantee">
-    <div class="decorative-overlay"></div>
     <h3>Наши Гарантии</h3>
     <p>Мы дорожим вашей безопасностью и репутацией. Scarlet Night предоставляет официальные гарантии качества и конфиденциальности:</p>
     <p>
-      ✔ Строгая защита личных данных клиентов.<br>
-      ✔ Каждая девушка проходит медицинский контроль и собеседование.<br>
-      ✔ Договоренности фиксируются и соблюдаются на 100%.<br>
-      ✔ В случае необходимости предоставляются документы о легальности нашей деятельности.<br>
-      ✔ Работаем только с проверенными водителями и партнёрами.<br>
-      ✔ Служба поддержки доступна круглосуточно.<br>
+      ✔ Абсолютная защита личных данных клиентов.<br>
+      ✔ Медицинский контроль и строгий отбор девушек.<br>
+      ✔ Полное соблюдение всех договоренностей.<br>
+      ✔ Официальные документы о легальности деятельности.<br>
+      ✔ Надежные партнеры и водители.<br>
+      ✔ Круглосуточная поддержка 24/7.<br>
     </p>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Sample_certificate.svg/800px-Sample_certificate.svg.png" class="doc-img" alt="Документ">
   </section>
 
   <section class="section reviews" id="reviews">
-    <div class="decorative-overlay"></div>
-    <h3>Отзывы клиентов</h3>
+    <h3>Отзывы Клиентов</h3>
     <div class="reviews-grid">
-      <div class="review"><p>"Scarlet Night – это другой уровень. Всё на высшем уровне, девушки просто богини."</p><strong>— Алексей, Москва</strong></div>
-      <div class="review"><p>"Никаких компромиссов: сервис, внимание к деталям, и главное — полная конфиденциальность."</p><strong>— Дмитрий, СПб</strong></div>
-      <div class="review"><p>"Я объехал полмира, но такого уровня я не встречал нигде. Scarlet Night – номер один."</p><strong>— Михаил, Сочи</strong></div>
-      <div class="review"><p>"Необычайно приятный опыт. Девушка не просто красивая, но и умная собеседница."</p><strong>— Игорь, Дубай</strong></div>
-      <div class="review"><p>"Идеальный вечер, всё организовано безупречно. Рекомендую всем ценителям роскоши."</p><strong>— Сергей, Казань</strong></div>
-      <div class="review"><p>"Стиль, элегантность и внимание к клиенту – это про Scarlet Night."</p><strong>— Анна, Екатеринбург</strong></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Scarlet Night – это другой уровень. Всё на высшем уровне, девушки просто богини."</p><strong>— Алексей, Москва</strong></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Сервис без компромиссов: внимание к деталям и полная конфиденциальность."</p><strong>— Дмитрий, СПб</strong></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Такого уровня я не встречал нигде. Scarlet Night – номер один."</p><strong>— Михаил, Сочи</strong></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Необычайно приятный опыт. Девушка – идеальная собеседница и красавица."</p><strong>— Игорь, Дубай</strong></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Идеальный вечер, всё организовано безупречно. Настоящая роскошь."</p><strong>— Сергей, Казань</strong></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Стиль, элегантность и внимание к клиенту – это Scarlet Night."</p><strong>— Анна, Екатеринбург</strong></div>
     </div>
     <a href="https://t.me/your_bot" class="btn">Посмотреть все отзывы</a>
   </section>
 
   <section class="section contact" id="contact">
-    <div class="decorative-overlay"></div>
-    <h3>Связь с агентством</h3>
-    <p>Мы всегда на связи. Ваш комфорт и уверенность – наш главный приоритет.  
-    Свяжитесь с менеджером в любое время суток, чтобы получить консультацию, обсудить детали и оформить заказ.  
-    Ваша заявка будет обработана мгновенно, и мы гарантируем конфиденциальность на каждом этапе общения.  
-    Независимо от того, где вы находитесь – мы организуем сопровождение в любом городе и за границей.</p>
+    <h3>Связь с Агентством</h3>
+    <p>Мы всегда рядом, чтобы обеспечить ваш комфорт и уверенность. Свяжитесь с нами в любое время, чтобы обсудить детали, получить консультацию или оформить заказ. Конфиденциальность гарантирована на каждом этапе. Мы организуем сопровождение в любом городе и за границей.</p>
     <a href="https://t.me/your_bot" class="btn">Связаться с агентством</a>
   </section>
+
+  <a href="https://t.me/your_bot" class="floating-cta">Заказать сейчас</a>
 
   <footer>
     <p>⚜ Официальное подтверждение качества • <span>Scarlet Night © 2025</span> • Проверено организацией России</p>
   </footer>
 
   <script>
+    // Header scroll effect
     window.addEventListener('scroll', () => {
       const header = document.getElementById('header');
       if (window.scrollY > 50) {
@@ -351,7 +430,23 @@
         header.classList.remove('scrolled');
       }
     });
-  </script>
 
+    // Section reveal animation
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(50px)';
+      observer.observe(section);
+    });
+  </script>
 </body>
 </html>
