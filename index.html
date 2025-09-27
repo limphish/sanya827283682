@@ -62,6 +62,14 @@
 
     nav {
       display: flex;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    nav.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     nav a {
@@ -70,20 +78,16 @@
       color: #f9e4d4;
       font-weight: 400;
       font-size: 16px;
-      position: relative;
-      transition: color 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(255,120,120,0.1);
+      border: 1px solid rgba(255,120,120,0.3);
+      transition: background 0.3s ease, color 0.3s ease;
     }
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px; left: 0;
-      width: 100%; height: 2px;
-      background: #ff8c8c;
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
+    nav a:hover {
+      background: rgba(255,120,120,0.3);
+      color: #ff8c8c;
     }
-    nav a:hover { color: #ff8c8c; }
-    nav a:hover::after { transform: scaleX(1); }
 
     .section {
       min-height: 100vh;
@@ -215,14 +219,18 @@
       box-shadow: 0 8px 35px rgba(255,120,120,0.9);
     }
 
-    .guarantee-grid, .order-grid, .faq-grid, .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
+    .guarantee-grid, .reviews-grid, .faq-grid, .order-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 20px;
       max-width: 1000px;
       margin: 0 auto;
+      padding: 10px 0;
+      scroll-snap-type: x mandatory;
     }
-    .guarantee-item, .order-item, .faq-item, .review {
+    .guarantee-item, .review, .faq-item, .order-item {
+      flex: 0 0 300px;
       background: linear-gradient(to bottom, rgba(70,0,20,0.85), rgba(70,0,20,0.65));
       padding: 25px;
       border-radius: 12px;
@@ -231,8 +239,9 @@
       transition: all 0.4s ease;
       position: relative;
       animation: fadeInUp 2s ease;
+      scroll-snap-align: start;
     }
-    .guarantee-item::before, .order-item::before, .faq-item::before, .review::before {
+    .guarantee-item::before, .review::before, .faq-item::before, .order-item::before {
       content: '\f058';
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
@@ -243,11 +252,11 @@
     }
     .faq-item::before { content: '\f059'; }
     .review::before { content: '\f10d'; }
-    .guarantee-item:hover, .order-item:hover, .faq-item:hover, .review:hover {
+    .guarantee-item:hover, .review:hover, .faq-item:hover, .order-item:hover {
       transform: translateY(-8px);
       box-shadow: 0 10px 35px rgba(255,120,120,0.5);
     }
-    .guarantee-item p, .order-item p, .faq-item p, .review p { margin-bottom: 12px; }
+    .guarantee-item p, .review p, .faq-item p, .order-item p { margin-bottom: 12px; }
     .review .stars {
       color: #ffd700;
       margin-bottom: 10px;
@@ -264,14 +273,6 @@
       transition: transform 0.3s ease;
     }
     .doc-img:hover { transform: scale(1.04); }
-
-    .divider {
-      width: 80px;
-      height: 2px;
-      background: #ffd700;
-      margin: 30px auto;
-      box-shadow: 0 0 8px rgba(255,215,0,0.5);
-    }
 
     .blog-links {
       display: flex;
@@ -365,16 +366,16 @@
       header { padding: 10px 20px; }
       header h1 { font-size: 28px; letter-spacing: 2px; }
       .menu-toggle { display: block; }
-      nav { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background: rgba(70,0,20,0.95); padding: 20px; }
-      nav.active { display: flex; }
-      nav a { margin: 10px 0; text-align: center; font-size: 18px; }
+      nav { display: none; flex-direction: column; position: absolute; top: 50px; left: 0; width: 100%; background: rgba(70,0,20,0.95); padding: 15px; opacity: 0; transform: translateY(-20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+      nav.active { display: flex; opacity: 1; transform: translateY(0); }
+      nav a { margin: 8px 0; text-align: center; font-size: 16px; padding: 10px; border-radius: 30px; background: rgba(255,120,120,0.2); border: none; }
       .section { padding: 100px 20px 80px; }
       h2, h3 { font-size: 36px; margin-bottom: 20px; }
       h4 { font-size: 24px; }
       p { font-size: 16px; line-height: 1.6; }
       .btn { padding: 12px 40px; font-size: 16px; }
-      .guarantee-grid, .order-grid, .faq-grid, .reviews-grid { gap: 20px; }
-      .guarantee-item, .order-item, .faq-item, .review { padding: 20px; }
+      .guarantee-grid, .reviews-grid, .faq-grid, .order-grid { flex-wrap: nowrap; overflow-x: auto; gap: 15px; }
+      .guarantee-item, .review, .faq-item, .order-item { flex: 0 0 80vw; padding: 20px; }
       .doc-img { max-width: 300px; }
       .floating-cta { bottom: 20px; right: 20px; padding: 10px 25px; font-size: 14px; }
       .blog-links { flex-direction: column; align-items: center; }
@@ -409,7 +410,7 @@
       <span></span><span></span><span></span><span></span><span></span>
     </div>
     <h2>Scarlet Night – Элитные Эскорт-Услуги по Всей России</h2>
-    <p>Элитное эскорт агентство Scarlet Night. Элитный эскорт по всей России – эксклюзивные девушки для ценителей настоящего комфорта. Если вы хотите добавить в свою жизнь стиль и удовольствие, эскорт от Scarlet Night – это то, что вам нужно. Все наши модели тщательно проверены: внешность, манеры, профессионализм – мы гарантируем высший уровень. Этот текст подготовлен командой сайта scarletnight.com, и мы собрали для вас лучшие советы, чтобы ваш выбор эскорта был лёгким и безопасным. Scarlet Night – это ваш билет к незабываемым встречам в любом городе России. Эскорт от нас – это стиль, конфиденциальность и удовольствие. Давайте разберёмся, почему стоит выбрать наши услуги прямо сейчас.</p>
+    <p>Элитное эскорт агентство Scarlet Night. Элитный эскорт по всей России – эксклюзивные девушки для ценителей настоящего комфорта. Если вы хотите добавить в свою жизнь стиль и удовольствие, эскорт от Scarlet Night – это то, что вам нужно. Все наши модели тщательно проверены: внешность, манеры, профессионализм – мы гарантируем высший уровень. Этот текст подготовлен командой сайта scarletnight.com, и мы собрали для вас лучшие советы, чтобы ваш выбор эскорта был лёгким и безопасным. Scarlet Night – это ваш билет к незабываемым встречам в любом городе России. Эскорт от нас – это стиль, конфиденциальность и удовольствие. Давайте разберёмся, почему стоит выбрать услуги прямо сейчас.</p>
     <a href="https://t.me/your_bot" class="btn">Выбрать Модель</a>
   </section>
 
@@ -417,14 +418,14 @@
 
   <section class="section why-choose" id="why-choose">
     <h3>Почему Эскорт от Scarlet Night – Это Ваш Выбор</h3>
-    <p>Решение заказать VIP эскорт от Scarlet Night – это шаг к комфорту и роскоши. Наши услуги – это про девушек, которые выглядят шикарно, знают этикет и подходят для любого случая. Все модели проходят строгий отбор: внешность, манеры, умение держаться в обществе – мы проверяем всё. Я сам выбрал элитный эскорт для делового ужина, и моя спутница сделала вечер идеальным – она легко поддерживала беседу и выглядела на уровне топ-модели. Эскорт от Scarlet Night – это качество и конфиденциальность. Ваши данные под защитой, и никто не узнает о встрече. Мы доступны 24/7 – звоните в любое время, и мы организуем всё быстро. Эскорт услуги от Scarlet Night – это индивидуальный подход к каждому клиенту, в любом городе России.</p>
+    <p>Решение заказать VIP эскорт от Scarlet Night – это шаг к комфорту и роскоши. Наши услуги – это про девушек, которые выглядят шикарно, знают этикет и подходят для любого случая. Все модели проходят строгий отбор: внешность, манеры, умение держаться в обществе – мы проверяем всё. Я сам выбрал элитный эскорт для делового ужина, и моя спутница сделала вечер идеальным – она легко поддерживала беседу и выглядела на уровне топ-модели. Эскорт от Scarlet Night – это качество и конфиденциальность. Ваши данные под защитой, и никто не узнает о встрече. Мы доступны 24/7 – звоните в любое время, и мы организуем всё быстро. Мы предоставляем моделей по всем городам России – индивидуальный подход к каждому клиенту.</p>
   </section>
 
   <div class="divider"></div>
 
   <section class="section advantages" id="advantages">
     <h3>Преимущества Эскорта от Scarlet Night для Разных Ситуаций</h3>
-    <p>На сайте scarletnight.com мы предлагаем услуги VIP сопровождения по всей России, чтобы каждый клиент нашёл подходящий вариант. Все наши модели тщательно проверены, чтобы гарантировать вам высший уровень сервиса. Вот почему наши услуги – это ваш лучший выбор:</p>
+    <p>На сайте scarletnight.com мы предоставляем услуги VIP сопровождения по всей России, чтобы каждый клиент нашёл подходящий вариант. Все наши модели тщательно проверены, чтобы гарантировать вам высший уровень сервиса. Вот почему наши услуги – это ваш лучший выбор:</p>
     <h4>Элитный Эскорт для Светских Мероприятий</h4>
     <p>VIP эскорт для вечеринок или ужинов – это способ выделиться. Наши спутницы знают, как выглядеть элегантно и вести себя в обществе. Эскортницы экономят ваше время – вам не нужно думать, как произвести впечатление. Наш премиальный эскорт добавляет уверенности на любом событии.</p>
     <h4>Эскорт на Час для Деловых Встреч</h4>
