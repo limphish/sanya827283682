@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scarlet Night – Элитные Эскорт-Услуги для Ценителей Комфорта</title>
+  <title>Scarlet Night – Элитные Эскорт-Услуги по Всей России</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lora:wght@400;500;700&display=swap');
@@ -11,14 +11,13 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Lora', serif;
-      background: linear-gradient(135deg, #5a001a, #1a0000); /* Richer red gradient */
-      color: #f9e4d4; /* Soft ivory */
+      background: linear-gradient(135deg, #5a001a, #1a0000);
+      color: #f9e4d4;
       overflow-x: hidden;
       scroll-behavior: smooth;
       position: relative;
     }
 
-    /* Animated background overlay with shimmer */
     .bg-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -48,7 +47,7 @@
 
     header h1 {
       font-family: 'Cormorant Garamond', serif;
-      color: #ff8c8c; /* Softer red */
+      color: #ff8c8c;
       font-size: 46px;
       letter-spacing: 5px;
       text-shadow: 0 0 20px rgba(255,120,120,0.7);
@@ -59,7 +58,7 @@
       position: absolute;
       top: -10px; right: -20px;
       font-size: 22px;
-      color: #ffd700; /* Champagne gold */
+      color: #ffd700;
     }
 
     nav a {
@@ -104,21 +103,19 @@
       background-position: center;
       filter: brightness(0.4) contrast(1.4) opacity(0.85);
       z-index: -1;
-      transform: translateZ(-1px) scale(1.1); /* Parallax effect */
+      transform: translateZ(-1px) scale(1.1);
       transition: transform 0.7s ease;
     }
 
     .section:hover::before { transform: translateZ(-1px) scale(1.15); }
 
-    /* Backgrounds for seductive elegance */
-    .hero::before { background-image: url('https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=1920&q=80'); } /* Luxurious interior */
-    .why-choose::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); } /* Red velvet */
-    .advantages::before { background-image: url('https://images.unsplash.com/photo-1543165363-9a2b7a8b4839?auto=format&fit=crop&w=1920&q=80'); } /* Classy ambiance */
-    .how-to-order::before { background-image: url('https://images.unsplash.com/photo-1519751108947-2168e41e9c90?auto=format&fit=crop&w=1920&q=80'); } /* Chic setting */
-    .faq::before { background-image: url('https://images.unsplash.com/photo-1534534576273-9b1b5c7357ac?auto=format&fit=crop&w=1920&q=80'); } /* Urban night */
-    .call-to-action::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); } /* Red velvet */
+    .hero::before { background-image: url('https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=1920&q=80'); }
+    .why-choose::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); }
+    .advantages::before { background-image: url('https://images.unsplash.com/photo-1543165363-9a2b7a8b4839?auto=format&fit=crop&w=1920&q=80'); }
+    .how-to-order::before { background-image: url('https://images.unsplash.com/photo-1519751108947-2168e41e9c90?auto=format&fit=crop&w=1920&q=80'); }
+    .faq::before { background-image: url('https://images.unsplash.com/photo-1534534576273-9b1b5c7357ac?auto=format&fit=crop&w=1920&q=80'); }
+    .call-to-action::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); }
 
-    /* Hero video background */
     .hero-video {
       position: absolute;
       top: 0; left: 0;
@@ -128,7 +125,6 @@
       z-index: -2;
     }
 
-    /* Lens flare effect for hero */
     .lens-flare {
       position: absolute;
       top: 15%; left: 15%;
@@ -198,7 +194,6 @@
     }
     .btn:hover::before { left: 100%; }
 
-    /* Floating CTA Button */
     .floating-cta {
       position: fixed;
       bottom: 40px; right: 40px;
@@ -217,7 +212,6 @@
       box-shadow: 0 10px 40px rgba(255,120,120,0.9);
     }
 
-    /* Guarantee, Order Steps, FAQ, and Review Blocks */
     .guarantee-grid, .order-grid, .faq-grid, .reviews-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -236,7 +230,7 @@
       animation: fadeInUp 2s ease;
     }
     .guarantee-item::before, .order-item::before, .faq-item::before, .review::before {
-      content: '\f058'; /* Checkmark for guarantee and order, question for FAQ, quote for reviews */
+      content: '\f058';
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
       position: absolute;
@@ -244,7 +238,7 @@
       color: rgba(255,120,120,0.3);
       font-size: 40px;
     }
-    .faq-item::before { content: '\f059'; } /* Question mark icon */
+    .faq-item::before { content: '\f059'; }
     .review::before { content: '\f10d'; }
     .guarantee-item:hover, .order-item:hover, .faq-item:hover, .review:hover {
       transform: translateY(-12px);
@@ -252,7 +246,7 @@
     }
     .guarantee-item p, .order-item p, .faq-item p, .review p { margin-bottom: 15px; }
     .review .stars {
-      color: #ffd700; /* Champagne gold stars */
+      color: #ffd700;
       margin-bottom: 12px;
       font-size: 20px;
     }
@@ -268,7 +262,6 @@
     }
     .doc-img:hover { transform: scale(1.06); }
 
-    /* Gold divider between sections */
     .divider {
       width: 100px;
       height: 2px;
@@ -301,26 +294,6 @@
     }
     .blog-item p { margin: 0; }
 
-    /* Particle effect for hero section */
-    .particles {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
-    .particles span {
-      position: absolute;
-      background: rgba(255,120,120,0.6);
-      border-radius: 50%;
-      animation: float 18s infinite linear;
-    }
-    .particles span:nth-child(1) { width: 22px; height: 22px; top: 15%; left: 25%; animation-duration: 22s; }
-    .particles span:nth-child(2) { width: 18px; height: 18px; top: 35%; left: 55%; animation-duration: 28s; }
-    .particles span:nth-child(3) { width: 28px; height: 28px; top: 55%; left: 75%; animation-duration: 20s; }
-    .particles span:nth-child(4) { width: 12px; height: 12px; top: 75%; left: 35%; animation-duration: 25s; }
-    .particles span:nth-child(5) { width: 20px; height: 20px; top: 25%; left: 85%; animation-duration: 23s; }
-
     footer {
       background: linear-gradient(to top, #2c0e1a, #5a001a);
       text-align: center;
@@ -328,7 +301,7 @@
       font-size: 17px;
       color: #f9e4d4;
       position: relative;
-      border-top: 2px solid #ffd700; /* Gold accent */
+      border-top: 2px solid #ffd700;
       animation: gradientFade 5s infinite ease-in-out;
     }
     footer::before {
@@ -343,7 +316,6 @@
     }
     footer span { color: #ff8c8c; font-weight: bold; }
 
-    /* Animations */
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes float {
@@ -405,48 +377,77 @@
     <div class="particles">
       <span></span><span></span><span></span><span></span><span></span>
     </div>
-    <h2>Scarlet Night – Элитные Эскорт-Услуги для Ценителей Комфорта</h2>
-    <p>Элитное эскорт агентство в Москве. Элитный эскорт в Москве – эксклюзивные девушки для ценителей настоящего комфорта. Привет, друзья! Если вы хотите добавить в свою жизнь стиль и комфорт, эскорт в Москве – это то, что вам нужно. Я сам недавно решил попробовать элитный эскорт в Москве, когда искал компанию для важного ужина, и остался доволен. Этот текст подготовлен командой сайта scarletnight.com, и мы собрали для вас лучшие советы, чтобы ваш выбор эскорта в Москве был лёгким и безопасным. Москва – город возможностей, и элитный эскорт в Москве – это ваш билет к незабываемым встречам. Эскорт в Мск – это про стиль, конфиденциальность и удовольствие. Давайте разберёмся, почему стоит выбрать услуги эскорта в Москве прямо сейчас.</p>
+    <h2>Scarlet Night – Элитные Эскорт-Услуги по Всей России</h2>
+    <p>Элитное эскорт агентство Scarlet Night. Элитный эскорт по всей России – эксклюзивные девушки для ценителей настоящего комфорта. Если вы хотите добавить в свою жизнь стиль и удовольствие, эскорт от Scarlet Night – это то, что вам нужно. Все наши модели тщательно проверены: внешность, манеры, профессионализм – мы гарантируем высший уровень. Этот текст подготовлен командой сайта scarletnight.com, и мы собрали для вас лучшие советы, чтобы ваш выбор эскорта был лёгким и безопасным. Scarlet Night – это ваш билет к незабываемым встречам в любом городе России. Эскорт от нас – это стиль, конфиденциальность и удовольствие. Давайте разберёмся, почему стоит выбрать наши услуги прямо сейчас.</p>
     <a href="https://t.me/your_bot" class="btn">Выбрать Модель</a>
   </section>
 
   <div class="divider"></div>
 
   <section class="section why-choose" id="why-choose">
-    <h3>Почему Эскорт в Москве – Это Мой Выбор</h3>
-    <p>Решение заказать vip эскорт в Москве – это шаг к комфорту. Услуги эскорта – это про девушек, которые выглядят шикарно, знают этикет и подходят для любого случая. Я сам выбрал элитный эскорт в Москве для делового ужина, и моя спутница сделала вечер идеальным – она легко поддерживала беседу и выглядела на уровне топ-модели. Escort в Москве – это про качество и конфиденциальность. Эскорт сопровождения – это строгий отбор. Каждая девушка проходит проверку: внешность, манеры, умение держаться в обществе. Эскорт на мероприятия в – это безопасность: ваши данные под защитой, и никто не узнает о встрече. Элитный эскорт в Москве доступен 24/7 – звоните в любое время, и мы организуем всё быстро. Эскорт услуги в Москве – это индивидуальный подход к каждому клиенту.</p>
+    <h3>Почему Эскорт от Scarlet Night – Это Ваш Выбор</h3>
+    <p>Решение заказать VIP эскорт от Scarlet Night – это шаг к комфорту и роскоши. Наши услуги – это про девушек, которые выглядят шикарно, знают этикет и подходят для любого случая. Все модели проходят строгий отбор: внешность, манеры, умение держаться в обществе – мы проверяем всё. Я сам выбрал элитный эскорт для делового ужина, и моя спутница сделала вечер идеальным – она легко поддерживала беседу и выглядела на уровне топ-модели. Эскорт от Scarlet Night – это качество и конфиденциальность. Ваши данные под защитой, и никто не узнает о встрече. Мы доступны 24/7 – звоните в любое время, и мы организуем всё быстро. Эскорт услуги от Scarlet Night – это индивидуальный подход к каждому клиенту, в любом городе России.</p>
   </section>
 
   <div class="divider"></div>
 
   <section class="section advantages" id="advantages">
-    <h3>Преимущества Эскорта в Москве для Разных Ситуаций</h3>
-    <p>На сайте scarletnight.com мы предлагаем услуги VIP сопровождения в Москве, чтобы каждый мужчина нашёл подходящий вариант. Вот почему наши услуги – это ваш лучший выбор:</p>
-    <h4>Элитный Эскорт в Москве для Светских Мероприятий</h4>
-    <p>Вип эскорт для вечеринок или ужинов – это способ выделиться. Спутницы знают, как выглядеть элегантно и вести себя в обществе. Эскортницы экономят время – вам не нужно думать, как произвести впечатление. Наш премиальный эскорт в Москве добавляет уверенности на любом событии.</p>
+    <h3>Преимущества Эскорта от Scarlet Night для Разных Ситуаций</h3>
+    <p>На сайте scarletnight.com мы предлагаем услуги VIP сопровождения по всей России, чтобы каждый клиент нашёл подходящий вариант. Все наши модели тщательно проверены, чтобы гарантировать вам высший уровень сервиса. Вот почему наши услуги – это ваш лучший выбор:</p>
+    <h4>Элитный Эскорт для Светских Мероприятий</h4>
+    <p>VIP эскорт для вечеринок или ужинов – это способ выделиться. Наши спутницы знают, как выглядеть элегантно и вести себя в обществе. Эскортницы экономят ваше время – вам не нужно думать, как произвести впечатление. Наш премиальный эскорт добавляет уверенности на любом событии.</p>
     <h4>Эскорт на Час для Деловых Встреч</h4>
-    <p>Эскорт на час или день – это профессионализм. Девушки с отличным знанием языка и этикета помогают создать нужный имидж. Модельное сопровождение повышает шансы на успех в переговорах. Эскорт в Москве от нашего агентства – это ваш надёжный партнёр на деловых встречах.</p>
-    <h4>Приватный Эскорт в Москве для Отдыха</h4>
-    <p>Премиум эскорт – это отдых и удовольствие. Вы получаете уютную атмосферу и интересного собеседника. Элитный эскорт в Москве даёт гибкость – встреча может быть где угодно, на ваших условиях. Наши модели помогут снять стресс после работы. Гарантируем высокий уровень обслуживания и конфиденциальность каждой встречи.</p>
-    <h4>Эскорт в Москве на Мероприятия</h4>
-    <p>Для гала-ужинов или выставок вип эскорт в Москве – это стиль. Спутницы подчёркивают ваш образ, делая вас заметным. Сопровождение в Москве экономит время на поиск компании. Эскорт в Москве – это ваш ключ к успеху на мероприятиях.</p>
-    <h4>Элитный Эскорт в Столице с Выездом</h4>
-    <p>Эскорт на выезд в Москве – это удобство. Вы получаете спутницу для поездок за город или за границу. Эскорт в путешествия адаптируется к вашим планам. Вип эскорт в Москве – это комфорт в любой точке мира.</p>
-    <h4>Эскорт в Москве и Подмосковье – Доступность и Комфорт</h4>
-    <p>Эскорт в Москве охватывает не только столицу, но и Подмосковье: Химки, Балашиха, Люберцы, Лобня, Красногорск. Эскорт дивы доступны в этих городах с высоким качеством. Элитный эскорт в Подмосковье – это гибкость: от коротких встреч до долгих вечеров. Безопасный эскорт в Москве – это реальность. Цены начинаются от 15 000 рублей за час и доходят до 40 000 рублей за ночь. Элитный эскорт в Москве – это прозрачность: все детали обсуждаются заранее.</p>
+    <p>Эскорт на час или день – это профессионализм. Девушки с отличным знанием языка и этикета помогают создать нужный имидж. Модельное сопровождение повышает шансы на успех в переговорах. Эскорт от Scarlet Night – это ваш надёжный партнёр на деловых встречах.</p>
+    <h4>Приватный Эскорт для Отдыха</h4>
+    <p>Премиум эскорт – это отдых и удовольствие. Вы получаете уютную атмосферу и интересного собеседника. Элитный эскорт от Scarlet Night даёт гибкость – встреча может быть где угодно, на ваших условиях. Наши проверенные модели помогут снять стресс после работы. Гарантируем высокий уровень обслуживания и конфиденциальность каждой встречи.</p>
+    <h4>Эскорт на Мероприятия</h4>
+    <p>Для гала-ужинов или выставок VIP эскорт от Scarlet Night – это стиль. Проверенные спутницы подчёркивают ваш образ, делая вас заметным. Сопровождение экономит время на поиск компании. Эскорт от нас – это ваш ключ к успеху на мероприятиях.</p>
+    <h4>Элитный Эскорт с Выездом</h4>
+    <p>Эскорт на выезд – это удобство. Вы получаете проверенную спутницу для поездок по России или за границу. Эскорт в путешествия адаптируется к вашим планам. VIP эскорт от Scarlet Night – это комфорт в любой точке мира.</p>
   </section>
 
   <div class="divider"></div>
 
   <section class="section how-to-order" id="how-to-order">
-    <h3>Как Заказать Наши Услуги в Москве – Просто и Быстро</h3>
+    <h3>Как Заказать Наши Услуги – Просто и Быстро</h3>
     <p>Процесс заказа эскорт моделей – это удобство:</p>
     <div class="order-grid">
-      <div class="order-item"><p>Выбор. На scarletnight.com смотрите анкеты с фото и описаниями. Каталог эскортниц – выбирайте по вашим пожеланиям.</p></div>
-      <div class="order-item"><p>Связь. Пишите в Telegram или WhatsApp, звоните. Эскорт в Москве – заказ за пару минут.</p></div>
-      <div class="order-item"><p>Договоритесь. Уточните место, время, детали. Элитный эскорт в Москве – всё под вас.</p></div>
-      <div class="order-item"><p>Встреча. Наслаждайтесь! Эскорт в Москве – это ваш комфорт.</p></div>
+      <div class="order-item"><p>Выбор. На scarletnight.com смотрите анкеты с фото и описаниями. Каталог проверенных эскортниц – выбирайте по вашим пожеланиям.</p></div>
+      <div class="order-item"><p>Связь. Пишите в Telegram или WhatsApp, звоните. Эскорт от Scarlet Night – заказ за пару минут.</p></div>
+      <div class="order-item"><p>Договоритесь. Уточните место, время, детали. Элитный эскорт – всё под вас.</p></div>
+      <div class="order-item"><p>Встреча. Наслаждайтесь! Эскорт от Scarlet Night – это ваш комфорт.</p></div>
     </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section guarantee" id="guarantee">
+    <h3>Наши Гарантии</h3>
+    <p>Мы дорожим вашей безопасностью и репутацией. Scarlet Night предоставляет официальные гарантии качества и конфиденциальности:</p>
+    <div class="guarantee-grid">
+      <div class="guarantee-item"><p>Абсолютная защита личных данных клиентов.</p></div>
+      <div class="guarantee-item"><p>Медицинский контроль и строгий отбор девушек.</p></div>
+      <div class="guarantee-item"><p>Полное соблюдение всех договоренностей.</p></div>
+      <div class="guarantee-item"><p>Официальные документы о легальности деятельности.</p></div>
+      <div class="guarantee-item"><p>Надежные партнеры и водители.</p></div>
+      <div class="guarantee-item"><p>Круглосуточная поддержка 24/7.</p></div>
+    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Sample_certificate.svg/800px-Sample_certificate.svg.png" class="doc-img" alt="Документ">
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section reviews" id="reviews">
+    <h3>Отзывы Клиентов</h3>
+    <div class="reviews-grid">
+      <div class="review"><div class="stars">★★★★★</div><p>"Scarlet Night – это другой уровень. Всё на высшем уровне, девушки просто богини."</p><strong>— Алексей</strong></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Сервис без компромиссов: внимание к деталям и полная конфиденциальность."</p><strong>— Дмитрий</strong></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Такого уровня я не встречал нигде. Scarlet Night – номер один."</p><strong>— Михаил</strong></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Необычайно приятный опыт. Девушка – идеальная собеседница и красавица."</p><strong>— Игорь</strong></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Идеальный вечер, всё организовано безупречно. Настоящая роскошь."</p><strong>— Сергей</strong></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Стиль, элегантность и внимание к клиенту – это Scarlet Night."</p><strong>— Анна</strong></div>
+    </div>
+    <a href="https://t.me/your_bot" class="btn">Посмотреть все отзывы</a>
   </section>
 
   <div class="divider"></div>
@@ -455,9 +456,9 @@
     <h3>Часто Задаваемые Вопросы (FAQ)</h3>
     <div class="faq-grid">
       <div class="faq-item"><p>Насколько конфиденциальны эскорт-услуги? Все встречи проходят абсолютно анонимно, без передачи личных данных третьим лицам.</p></div>
-      <div class="faq-item"><p>Как выбрать девушку для встречи? На сайте представлены детальные анкеты и фото моделей, а также возможность выбора по параметрам.</p></div>
-      <div class="faq-item"><p>Можно ли заказать эскорт на выезд? Да, девушки могут сопровождать вас в любом месте Москвы, Подмосковья и за границей.</p></div>
-      <div class="faq-item"><p>Сколько стоит эскорт в Москве? Стоимость зависит от времени, уровня модели и типа встречи. Подробности можно уточнить у менеджера.</p></div>
+      <div class="faq-item"><p>Как выбрать девушку для встречи? На сайте представлены детальные анкеты и фото проверенных моделей, а также возможность выбора по параметрам.</p></div>
+      <div class="faq-item"><p>Можно ли заказать эскорт на выезд? Да, девушки могут сопровождать вас в любом городе России или за границей.</p></div>
+      <div class="faq-item"><p>Сколько стоит эскорт? Стоимость зависит от времени, уровня модели и типа встречи. Подробности можно уточнить у менеджера.</p></div>
       <div class="faq-item"><p>Какие дополнительные услуги можно заказать? Помимо классического эскорта, доступны VIP-услуги, сопровождение в путешествиях и эксклюзивные предложения для постоянных клиентов.</p></div>
     </div>
   </section>
@@ -465,8 +466,8 @@
   <div class="divider"></div>
 
   <section class="section call-to-action" id="contact">
-    <h3>Начните с Эскорта в Москве Уже Сегодня!</h3>
-    <p>Эскорт на вечер, эскорт-путешествия, эскорт на день, элитный эскорт в Москве – это стиль и удовольствие. Luxury escort в Москве для ужина, встречи или поездки – всё на сайте scarletnight.com. Элитный эскорт в Москве 24/7 – звоните или пишите в Telegram, WhatsApp, чтобы заказать эскорт на ночь, vip эскорт в Москве, эскорт в Москве, Эскорт на выезд и насладиться временем с лучшими спутницами!</p>
+    <h3>Начните с Эскорта от Scarlet Night Уже Сегодня!</h3>
+    <p>Эскорт на вечер, эскорт-путешествия, эскорт на день, элитный эскорт по всей России – это стиль и удовольствие. Luxury escort для ужина, встречи или поездки – всё на сайте scarletnight.com. Элитный эскорт 24/7 – звоните или пишите в Telegram, WhatsApp, чтобы заказать эскорт на ночь, VIP эскорт, эскорт на выезд и насладиться временем с лучшими проверенными спутницами!</p>
     <p>Агентство не предоставляет услуг интимного характера!</p>
     <a href="https://t.me/your_bot" class="btn">Связаться с Агентством</a>
   </section>
@@ -474,12 +475,10 @@
   <div class="divider"></div>
 
   <section class="section blog">
-    <h3>Актуальные Статьи про Эскорт Индустрию в Москве</h3>
+    <h3>Актуальные Статьи про Эскорт Индустрию</h3>
     <div class="blog-links">
-      <div class="blog-item"><p>Эскорт услуги в Дубае с ТОП моделями и VIP девушками: отд…</p></div>
-      <div class="blog-item"><p>Безотказные красавицы Подмосковья от агентства scarletnight.com…</p></div>
+      <div class="blog-item"><p>Эскорт услуги с ТОП моделями и VIP девушками: отд…</p></div>
       <div class="blog-item"><p>Элитные знакомства с самыми шикарными девушками: твой пут…</p></div>
-      <div class="blog-item"><p>«ВИА Гра»: прощай, икона нулевых – с вайбом и драмами!</p></div>
     </div>
   </section>
 
@@ -490,7 +489,6 @@
   </footer>
 
   <script>
-    // Header scroll effect
     window.addEventListener('scroll', () => {
       const header = document.getElementById('header');
       if (window.scrollY > 50) {
@@ -500,7 +498,6 @@
       }
     });
 
-    // Section reveal animation
     const sections = document.querySelectorAll('.section');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
