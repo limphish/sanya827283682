@@ -6,11 +6,11 @@
   <title>Scarlet Night – Элитные Эскорт-Услуги по Всей России</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lora:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap');
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Lora', serif;
+      font-family: 'Roboto', sans-serif;
       background: linear-gradient(135deg, #5a001a, #1a0000);
       color: #f9e4d4;
       overflow-x: hidden;
@@ -34,7 +34,7 @@
       width: 100%;
       background: linear-gradient(to bottom, rgba(70,0,20,0.95), rgba(70,0,20,0.85));
       display: flex; justify-content: space-between; align-items: center;
-      padding: 25px 80px;
+      padding: 15px 40px;
       z-index: 1000;
       box-shadow: 0 4px 25px rgba(255,120,120,0.5);
       transition: all 0.3s ease;
@@ -42,31 +42,34 @@
 
     header.scrolled {
       background: rgba(70,0,20,0.98);
-      padding: 15px 80px;
+      padding: 10px 40px;
     }
 
     header h1 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Montserrat', sans-serif;
       color: #ff8c8c;
-      font-size: 46px;
-      letter-spacing: 5px;
-      text-shadow: 0 0 20px rgba(255,120,120,0.7);
-      position: relative;
+      font-size: 32px;
+      letter-spacing: 3px;
+      text-shadow: 0 0 15px rgba(255,120,120,0.7);
     }
-    header h1::after {
-      content: '✨';
-      position: absolute;
-      top: -10px; right: -20px;
-      font-size: 22px;
-      color: #ffd700;
+
+    .menu-toggle {
+      display: none;
+      font-size: 28px;
+      color: #f9e4d4;
+      cursor: pointer;
+    }
+
+    nav {
+      display: flex;
     }
 
     nav a {
-      margin-left: 35px;
+      margin-left: 25px;
       text-decoration: none;
       color: #f9e4d4;
-      font-weight: 500;
-      font-size: 18px;
+      font-weight: 400;
+      font-size: 16px;
       position: relative;
       transition: color 0.3s ease;
     }
@@ -84,7 +87,7 @@
 
     .section {
       min-height: 100vh;
-      padding: 160px 80px 120px;
+      padding: 120px 40px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -136,43 +139,43 @@
     }
 
     h2, h3 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Montserrat', sans-serif;
       color: #ff8c8c;
-      font-size: 64px;
-      margin-bottom: 40px;
-      letter-spacing: 2.5px;
-      text-shadow: 0 3px 20px rgba(255,120,120,0.7);
+      font-size: 48px;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 15px rgba(255,120,120,0.6);
       animation: fadeInUp 2s ease;
     }
 
     h4 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Montserrat', sans-serif;
       color: #ffd700;
-      font-size: 32px;
-      margin-bottom: 20px;
+      font-size: 28px;
+      margin-bottom: 15px;
       text-shadow: 0 2px 10px rgba(255,215,0,0.5);
     }
 
     p {
-      max-width: 1100px;
-      margin: 0 auto 40px;
-      font-size: 20px;
-      line-height: 2;
-      font-weight: 400;
-      animation: fadeIn 3.5s ease;
+      max-width: 900px;
+      margin: 0 auto 30px;
+      font-size: 18px;
+      line-height: 1.8;
+      font-weight: 300;
+      animation: fadeIn 3s ease;
     }
 
     .btn {
-      margin-top: 40px;
+      margin-top: 30px;
       display: inline-block;
-      padding: 20px 60px;
-      font-size: 19px;
+      padding: 15px 50px;
+      font-size: 18px;
       border-radius: 50px;
       background: linear-gradient(45deg, #ff8c8c, #cc3333);
       color: #fff;
       text-decoration: none;
-      font-weight: 700;
-      box-shadow: 0 6px 35px rgba(255,120,120,0.8);
+      font-weight: 600;
+      box-shadow: 0 5px 30px rgba(255,120,120,0.7);
       transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
@@ -188,43 +191,43 @@
       z-index: -1;
     }
     .btn:hover {
-      transform: translateY(-5px) scale(1.07);
-      box-shadow: 0 12px 50px rgba(255,120,120,0.9);
-      text-shadow: 0 0 10px rgba(255,255,255,0.5);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 10px 45px rgba(255,120,120,0.9);
+      text-shadow: 0 0 8px rgba(255,255,255,0.5);
     }
     .btn:hover::before { left: 100%; }
 
     .floating-cta {
       position: fixed;
-      bottom: 40px; right: 40px;
+      bottom: 30px; right: 30px;
       background: linear-gradient(45deg, #ff8c8c, #cc3333);
       color: #fff;
-      padding: 15px 35px;
+      padding: 12px 30px;
       border-radius: 50px;
       text-decoration: none;
-      font-weight: 700;
-      box-shadow: 0 5px 25px rgba(255,120,120,0.8);
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(255,120,120,0.7);
       z-index: 1000;
       animation: pulseCTA 2s infinite ease-in-out;
     }
     .floating-cta:hover {
-      transform: scale(1.12);
-      box-shadow: 0 10px 40px rgba(255,120,120,0.9);
+      transform: scale(1.1);
+      box-shadow: 0 8px 35px rgba(255,120,120,0.9);
     }
 
     .guarantee-grid, .order-grid, .faq-grid, .reviews-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 35px;
-      max-width: 1200px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1000px;
       margin: 0 auto;
     }
     .guarantee-item, .order-item, .faq-item, .review {
       background: linear-gradient(to bottom, rgba(70,0,20,0.85), rgba(70,0,20,0.65));
-      padding: 30px;
-      border-radius: 15px;
-      border: 1px solid rgba(255,120,120,0.3);
-      box-shadow: 0 5px 25px rgba(255,120,120,0.4);
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,120,120,0.25);
+      box-shadow: 0 4px 20px rgba(255,120,120,0.3);
       transition: all 0.4s ease;
       position: relative;
       animation: fadeInUp 2s ease;
@@ -236,38 +239,38 @@
       position: absolute;
       top: 15px; left: 20px;
       color: rgba(255,120,120,0.3);
-      font-size: 40px;
+      font-size: 35px;
     }
     .faq-item::before { content: '\f059'; }
     .review::before { content: '\f10d'; }
     .guarantee-item:hover, .order-item:hover, .faq-item:hover, .review:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 12px 40px rgba(255,120,120,0.6);
+      transform: translateY(-8px);
+      box-shadow: 0 10px 35px rgba(255,120,120,0.5);
     }
-    .guarantee-item p, .order-item p, .faq-item p, .review p { margin-bottom: 15px; }
+    .guarantee-item p, .order-item p, .faq-item p, .review p { margin-bottom: 12px; }
     .review .stars {
       color: #ffd700;
-      margin-bottom: 12px;
-      font-size: 20px;
+      margin-bottom: 10px;
+      font-size: 18px;
     }
     .review strong { color: #ff8c8c; font-style: italic; }
 
     .doc-img {
-      margin: 40px auto;
-      max-width: 400px;
-      border-radius: 15px;
+      margin: 30px auto;
+      max-width: 350px;
+      border-radius: 12px;
       border: 2px solid #ff8c8c;
-      box-shadow: 0 10px 35px rgba(255,120,120,0.6);
+      box-shadow: 0 8px 30px rgba(255,120,120,0.5);
       transition: transform 0.3s ease;
     }
-    .doc-img:hover { transform: scale(1.06); }
+    .doc-img:hover { transform: scale(1.04); }
 
     .divider {
-      width: 100px;
+      width: 80px;
       height: 2px;
       background: #ffd700;
-      margin: 40px auto;
-      box-shadow: 0 0 10px rgba(255,215,0,0.5);
+      margin: 30px auto;
+      box-shadow: 0 0 8px rgba(255,215,0,0.5);
     }
 
     .blog-links {
@@ -275,30 +278,30 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
-      max-width: 1200px;
+      max-width: 900px;
       margin: 0 auto;
     }
     .blog-item {
       background: linear-gradient(to bottom, rgba(70,0,20,0.85), rgba(70,0,20,0.65));
-      padding: 20px;
-      border-radius: 15px;
+      padding: 18px;
+      border-radius: 12px;
       border: 1px solid rgba(255,120,120,0.3);
-      box-shadow: 0 5px 25px rgba(255,120,120,0.4);
+      box-shadow: 0 4px 20px rgba(255,120,120,0.4);
       transition: all 0.4s ease;
-      width: 300px;
+      width: 280px;
       text-align: left;
     }
     .blog-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 40px rgba(255,120,120,0.6);
+      transform: translateY(-8px);
+      box-shadow: 0 10px 35px rgba(255,120,120,0.6);
     }
     .blog-item p { margin: 0; }
 
     footer {
       background: linear-gradient(to top, #2c0e1a, #5a001a);
       text-align: center;
-      padding: 60px 20px;
-      font-size: 17px;
+      padding: 50px 20px;
+      font-size: 15px;
       color: #f9e4d4;
       position: relative;
       border-top: 2px solid #ffd700;
@@ -306,18 +309,37 @@
     }
     footer::before {
       content: "⚜";
-      font-size: 50px;
+      font-size: 40px;
       color: #ff8c8c;
       position: absolute;
-      top: -25px;
+      top: -20px;
       left: 50%;
       transform: translateX(-50%);
-      text-shadow: 0 0 20px rgba(255,120,120,0.7);
+      text-shadow: 0 0 15px rgba(255,120,120,0.7);
     }
     footer span { color: #ff8c8c; font-weight: bold; }
 
+    .falling-emojis {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .falling-emojis span {
+      position: absolute;
+      font-size: 24px;
+      animation: fall 10s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100vh) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes float {
       0% { transform: translateY(0); }
       100% { transform: translateY(-100vh); }
@@ -340,25 +362,34 @@
     }
 
     @media (max-width: 768px) {
-      header { padding: 15px 20px; }
-      header h1 { font-size: 36px; }
-      nav a { margin-left: 15px; font-size: 15px; }
-      .section { padding: 130px 20px 80px; }
-      h2, h3 { font-size: 48px; }
-      p { font-size: 17px; }
-      .btn { padding: 15px 40px; font-size: 17px; }
-      .guarantee-grid, .order-grid, .faq-grid, .reviews-grid { grid-template-columns: 1fr; }
-      .particles span, .hero-video, .lens-flare { display: none; }
-      .floating-cta { bottom: 20px; right: 20px; padding: 12px 25px; font-size: 15px; }
-      .blog-links { flex-direction: column; }
+      header { padding: 10px 20px; }
+      header h1 { font-size: 28px; letter-spacing: 2px; }
+      .menu-toggle { display: block; }
+      nav { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background: rgba(70,0,20,0.95); padding: 20px; }
+      nav.active { display: flex; }
+      nav a { margin: 10px 0; text-align: center; font-size: 18px; }
+      .section { padding: 100px 20px 80px; }
+      h2, h3 { font-size: 36px; margin-bottom: 20px; }
+      h4 { font-size: 24px; }
+      p { font-size: 16px; line-height: 1.6; }
+      .btn { padding: 12px 40px; font-size: 16px; }
+      .guarantee-grid, .order-grid, .faq-grid, .reviews-grid { gap: 20px; }
+      .guarantee-item, .order-item, .faq-item, .review { padding: 20px; }
+      .doc-img { max-width: 300px; }
+      .floating-cta { bottom: 20px; right: 20px; padding: 10px 25px; font-size: 14px; }
+      .blog-links { flex-direction: column; align-items: center; }
+      .blog-item { width: 90%; }
+      .falling-emojis span { font-size: 20px; animation-duration: 15s; }
     }
   </style>
 </head>
 <body>
   <div class="bg-overlay"></div>
+  <div class="falling-emojis"></div>
 
   <header id="header">
     <h1>Scarlet Night</h1>
+    <div class="menu-toggle"><i class="fas fa-bars"></i></div>
     <nav>
       <a href="https://t.me/your_bot">Заказать</a>
       <a href="#why-choose">Почему Мы</a>
@@ -489,6 +520,12 @@
   </footer>
 
   <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
     window.addEventListener('scroll', () => {
       const header = document.getElementById('header');
       if (window.scrollY > 50) {
@@ -510,9 +547,24 @@
 
     sections.forEach(section => {
       section.style.opacity = '0';
-      section.style.transform = 'translateY(60px)';
+      section.style.transform = 'translateY(40px)';
       observer.observe(section);
     });
+
+    // Falling kiss emojis
+    const fallingEmojis = document.querySelector('.falling-emojis');
+    function createEmoji() {
+      const emoji = document.createElement('span');
+      emoji.textContent = '💋';
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.animationDuration = Math.random() * 10 + 5 + 's';
+      emoji.style.fontSize = Math.random() * 20 + 20 + 'px';
+      fallingEmojis.appendChild(emoji);
+      setTimeout(() => {
+        emoji.remove();
+      }, 15000);
+    }
+    setInterval(createEmoji, 500);
   </script>
 </body>
 </html>
