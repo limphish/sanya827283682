@@ -227,7 +227,7 @@
       box-shadow: 0 8px 35px rgba(255,120,120,0.9);
     }
 
-    .guarantee-grid, .reviews-grid, .faq-grid, .order-grid {
+    .guarantee-grid, .reviews-grid, .faq-grid, .order-grid, .blog-grid, .advantages-grid {
       display: flex;
       flex-wrap: nowrap;
       overflow-x: auto;
@@ -237,7 +237,7 @@
       padding: 10px 0;
       scroll-snap-type: x mandatory;
     }
-    .guarantee-item, .review, .faq-item, .order-item {
+    .guarantee-item, .review, .faq-item, .order-item, .blog-item, .advantage-item {
       flex: 0 0 300px;
       background: linear-gradient(to bottom, rgba(70,0,20,0.85), rgba(70,0,20,0.65));
       padding: 25px;
@@ -249,6 +249,19 @@
       animation: fadeInUp 2s ease;
       scroll-snap-align: start;
     }
+    .advantage-item {
+      background: linear-gradient(to bottom, rgba(90,0,26,0.85), rgba(90,0,26,0.65));
+      border: 1px solid rgba(255,140,140,0.35);
+      box-shadow: 0 4px 20px rgba(255,140,140,0.4);
+    }
+    .advantage-item h4 {
+      color: #ffe066;
+      text-shadow: 0 2px 10px rgba(255,224,102,0.5);
+    }
+    .advantage-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 10px 35px rgba(255,140,140,0.6);
+    }
     .review::before {
       content: '\f10d';
       font-family: 'Font Awesome 6 Free';
@@ -258,11 +271,11 @@
       color: rgba(255,120,120,0.3);
       font-size: 35px;
     }
-    .guarantee-item:hover, .review:hover, .faq-item:hover, .order-item:hover {
+    .guarantee-item:hover, .review:hover, .faq-item:hover, .order-item:hover, .blog-item:hover, .advantage-item:hover {
       transform: translateY(-8px);
       box-shadow: 0 10px 35px rgba(255,120,120,0.5);
     }
-    .guarantee-item p, .review p, .faq-item p, .order-item p { margin-bottom: 12px; }
+    .guarantee-item p, .review p, .faq-item p, .order-item p, .blog-item p, .advantage-item p { margin-bottom: 12px; }
     .review .stars {
       color: #ffd700;
       margin-bottom: 10px;
@@ -280,28 +293,9 @@
     }
     .doc-img:hover { transform: scale(1.04); }
 
-    .blog-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
     .blog-item {
-      background: linear-gradient(to bottom, rgba(70,0,20,0.85), rgba(70,0,20,0.65));
-      padding: 18px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,120,120,0.3);
-      box-shadow: 0 4px 20px rgba(255,120,120,0.4);
-      transition: all 0.4s ease;
-      width: 280px;
       text-align: left;
       animation: fadeInUp 2s ease;
-    }
-    .blog-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 35px rgba(255,120,120,0.6);
     }
     .blog-item p { margin: 0; animation: none; }
 
@@ -425,12 +419,10 @@
       h4 { font-size: 24px; }
       p { font-size: 16px; line-height: 1.6; }
       .btn { padding: 12px 40px; font-size: 16px; }
-      .guarantee-grid, .reviews-grid, .faq-grid, .order-grid { gap: 15px; }
-      .guarantee-item, .review, .faq-item, .order-item { flex: 0 0 80vw; padding: 20px; }
+      .guarantee-grid, .reviews-grid, .faq-grid, .order-grid, .blog-grid, .advantages-grid { gap: 15px; }
+      .guarantee-item, .review, .faq-item, .order-item, .blog-item, .advantage-item { flex: 0 0 80vw; padding: 20px; }
       .doc-img { max-width: 300px; }
       .floating-cta { bottom: 20px; right: 20px; padding: 10px 25px; font-size: 14px; }
-      .blog-links { flex-direction: column; align-items: center; }
-      .blog-item { width: 90%; }
       .falling-emojis span { font-size: 20px; animation-duration: 15s; }
     }
   </style>
@@ -477,16 +469,28 @@
   <section class="section advantages" id="advantages">
     <h3>Преимущества Эскорта от Scarlet Night для Разных Ситуаций</h3>
     <p>На сайте scarletnight.com мы предоставляем услуги VIP сопровождения по всей России, чтобы каждый клиент нашёл подходящий вариант. Все наши модели тщательно проверены, чтобы гарантировать вам высший уровень сервиса. Вот почему наши услуги – это ваш лучший выбор:</p>
-    <h4>Элитный Эскорт для Светских Мероприятий</h4>
-    <p>VIP эскорт для вечеринок или ужинов – это способ выделиться. Наши спутницы знают, как выглядеть элегантно и вести себя в обществе. Эскортницы экономят ваше время – вам не нужно думать, как произвести впечатление. Наш премиальный эскорт добавляет уверенности на любом событии.</p>
-    <h4>Эскорт на Час для Деловых Встреч</h4>
-    <p>Эскорт на час или день – это профессионализм. Девушки с отличным знанием языка и этикета помогают создать нужный имидж. Модельное сопровождение повышает шансы на успех в переговорах. Эскорт от Scarlet Night – это ваш надёжный партнёр на деловых встречах.</p>
-    <h4>Приватный Эскорт для Отдыха</h4>
-    <p>Премиум эскорт – это отдых и удовольствие. Вы получаете уютную атмосферу и интересного собеседника. Элитный эскорт от Scarlet Night даёт гибкость – встреча может быть где угодно, на ваших условиях. Наши проверенные модели помогут снять стресс после работы. Гарантируем высокий уровень обслуживания и конфиденциальность каждой встречи.</p>
-    <h4>Эскорт на Мероприятия</h4>
-    <p>Для гала-ужинов или выставок VIP эскорт от Scarlet Night – это стиль. Проверенные спутницы подчёркивают ваш образ, делая вас заметным. Сопровождение экономит время на поиск компании. Эскорт от нас – это ваш ключ к успеху на мероприятиях.</p>
-    <h4>Элитный Эскорт с Выездом</h4>
-    <p>Эскорт на выезд – это удобство. Вы получаете проверенную спутницу для поездок по России или за границу. Эскорт в путешествия адаптируется к вашим планам. VIP эскорт от Scarlet Night – это комфорт в любой точке мира.</p>
+    <div class="advantages-grid">
+      <div class="advantage-item">
+        <h4>Элитный Эскорт для Светских Мероприятий</h4>
+        <p>VIP эскорт для вечеринок или ужинов – это способ выделиться. Наши спутницы знают, как выглядеть элегантно и вести себя в обществе. Эскортницы экономят ваше время – вам не нужно думать, как произвести впечатление. Наш премиальный эскорт добавляет уверенности на любом событии.</p>
+      </div>
+      <div class="advantage-item">
+        <h4>Эскорт на Час для Деловых Встреч</h4>
+        <p>Эскорт на час или день – это профессионализм. Девушки с отличным знанием языка и этикета помогают создать нужный имидж. Модельное сопровождение повышает шансы на успех в переговорах. Эскорт от Scarlet Night – это ваш надёжный партнёр на деловых встречах.</p>
+      </div>
+      <div class="advantage-item">
+        <h4>Приватный Эскорт для Отдыха</h4>
+        <p>Премиум эскорт – это отдых и удовольствие. Вы получаете уютную атмосферу и интересного собеседника. Элитный эскорт от Scarlet Night даёт гибкость – встреча может быть где угодно, на ваших условиях. Наши проверенные модели помогут снять стресс после работы. Гарантируем высокий уровень обслуживания и конфиденциальность каждой встречи.</p>
+      </div>
+      <div class="advantage-item">
+        <h4>Эскорт на Мероприятия</h4>
+        <p>Для гала-ужинов или выставок VIP эскорт от Scarlet Night – это стиль. Проверенные спутницы подчёркивают ваш образ, делая вас заметным. Сопровождение экономит время на поиск компании. Эскорт от нас – это ваш ключ к успеху на мероприятиях.</p>
+      </div>
+      <div class="advantage-item">
+        <h4>Элитный Эскорт с Выездом</h4>
+        <p>Эскорт на выезд – это удобство. Вы получаете проверенную спутницу для поездок по России или за границу. Эскорт в путешествия адаптируется к вашим планам. VIP эскорт от Scarlet Night – это комфорт в любой точке мира.</p>
+      </div>
+    </div>
   </section>
 
   <div class="divider"></div>
@@ -559,7 +563,7 @@
 
   <section class="section blog">
     <h3>Актуальные Статьи про Эскорт Индустрию</h3>
-    <div class="blog-links">
+    <div class="blog-grid">
       <div class="blog-item"><p>Эскорт услуги с ТОП моделями и VIP девушками: отдых на высшем уровне. Узнайте, как выбрать идеальную компанию для незабываемого вечера и насладиться элитным сопровождением.</p></div>
       <div class="blog-item"><p>Элитные знакомства с самыми шикарными девушками: твой путь к роскоши. Откройте секреты успешных встреч и как найти спутницу, которая подчеркнет ваш статус.</p></div>
       <div class="blog-item"><p>Как выбрать идеальную спутницу для мероприятия: советы от экспертов. Полезные рекомендации по подбору эскорта для светских событий и деловых встреч.</p></div>
