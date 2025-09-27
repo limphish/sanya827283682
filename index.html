@@ -58,18 +58,13 @@
       font-size: 28px;
       color: #f9e4d4;
       cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .menu-toggle.active i {
-      transform: rotate(90deg);
     }
 
     nav {
       display: flex;
       opacity: 0;
       transform: translateY(-20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     nav.active {
@@ -87,12 +82,11 @@
       border-radius: 20px;
       background: rgba(255,120,120,0.1);
       border: 1px solid rgba(255,120,120,0.3);
-      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+      transition: background 0.3s ease, color 0.3s ease;
     }
     nav a:hover {
       background: rgba(255,120,120,0.3);
       color: #ff8c8c;
-      transform: scale(1.05);
     }
 
     .section {
@@ -126,11 +120,8 @@
     .why-choose::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); }
     .advantages::before { background-image: url('https://images.unsplash.com/photo-1543165363-9a2b7a8b4839?auto=format&fit=crop&w=1920&q=80'); }
     .how-to-order::before { background-image: url('https://images.unsplash.com/photo-1519751108947-2168e41e9c90?auto=format&fit=crop&w=1920&q=80'); }
-    .guarantee::before { background-image: url('https://images.unsplash.com/photo-1543165363-9a2b7a8b4839?auto=format&fit=crop&w=1920&q=80'); }
-    .reviews::before { background-image: url('https://images.unsplash.com/photo-1519751108947-2168e41e9c90?auto=format&fit=crop&w=1920&q=80'); }
     .faq::before { background-image: url('https://images.unsplash.com/photo-1534534576273-9b1b5c7357ac?auto=format&fit=crop&w=1920&q=80'); }
     .call-to-action::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); }
-    .blog::before { background-image: url('https://images.unsplash.com/photo-1543165363-9a2b7a8b4839?auto=format&fit=crop&w=1920&q=80'); }
 
     .hero-video {
       position: absolute;
@@ -167,7 +158,6 @@
       font-size: 28px;
       margin-bottom: 15px;
       text-shadow: 0 2px 10px rgba(255,215,0,0.5);
-      animation: glow 2s infinite alternate;
     }
 
     p {
@@ -194,7 +184,6 @@
       position: relative;
       overflow: hidden;
       z-index: 1;
-      animation: pulseBtn 2s infinite;
     }
     .btn::before {
       content: '';
@@ -209,7 +198,6 @@
       transform: translateY(-4px) scale(1.05);
       box-shadow: 0 10px 45px rgba(255,120,120,0.9);
       text-shadow: 0 0 8px rgba(255,255,255,0.5);
-      animation: none;
     }
     .btn:hover::before { left: 100%; }
 
@@ -231,7 +219,7 @@
       box-shadow: 0 8px 35px rgba(255,120,120,0.9);
     }
 
-    .guarantee-grid, .reviews-grid, .faq-grid, .order-grid, .blog-links {
+    .guarantee-grid, .reviews-grid, .faq-grid, .order-grid {
       display: flex;
       flex-wrap: nowrap;
       overflow-x: auto;
@@ -241,7 +229,7 @@
       padding: 10px 0;
       scroll-snap-type: x mandatory;
     }
-    .guarantee-item, .review, .faq-item, .order-item, .blog-item {
+    .guarantee-item, .review, .faq-item, .order-item {
       flex: 0 0 300px;
       background: linear-gradient(to bottom, rgba(70,0,20,0.85), rgba(70,0,20,0.65));
       padding: 25px;
@@ -264,7 +252,7 @@
     }
     .faq-item::before { content: '\f059'; }
     .review::before { content: '\f10d'; }
-    .guarantee-item:hover, .review:hover, .faq-item:hover, .order-item:hover, .blog-item:hover {
+    .guarantee-item:hover, .review:hover, .faq-item:hover, .order-item:hover {
       transform: translateY(-8px);
       box-shadow: 0 10px 35px rgba(255,120,120,0.5);
     }
@@ -283,9 +271,32 @@
       border: 2px solid #ff8c8c;
       box-shadow: 0 8px 30px rgba(255,120,120,0.5);
       transition: transform 0.3s ease;
-      animation: floatImg 3s infinite ease-in-out;
     }
     .doc-img:hover { transform: scale(1.04); }
+
+    .blog-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .blog-item {
+      background: linear-gradient(to bottom, rgba(70,0,20,0.85), rgba(70,0,20,0.65));
+      padding: 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,120,120,0.3);
+      box-shadow: 0 4px 20px rgba(255,120,120,0.4);
+      transition: all 0.4s ease;
+      width: 280px;
+      text-align: left;
+    }
+    .blog-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 35px rgba(255,120,120,0.6);
+    }
+    .blog-item p { margin: 0; }
 
     footer {
       background: linear-gradient(to top, #2c0e1a, #5a001a);
@@ -306,7 +317,6 @@
       left: 50%;
       transform: translateX(-50%);
       text-shadow: 0 0 15px rgba(255,120,120,0.7);
-      animation: spin 5s infinite linear;
     }
     footer span { color: #ff8c8c; font-weight: bold; }
 
@@ -351,29 +361,12 @@
       0%, 100% { background: linear-gradient(to top, #2c0e1a, #5a001a); }
       50% { background: linear-gradient(to top, #2c0e1a, #6a0020); }
     }
-    @keyframes glow {
-      0% { text-shadow: 0 0 5px #ffd700; }
-      100% { text-shadow: 0 0 15px #ffd700; }
-    }
-    @keyframes pulseBtn {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-    @keyframes floatImg {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    @keyframes spin {
-      0% { transform: translateX(-50%) rotate(0deg); }
-      100% { transform: translateX(-50%) rotate(360deg); }
-    }
 
     @media (max-width: 768px) {
       header { padding: 10px 20px; }
       header h1 { font-size: 28px; letter-spacing: 2px; }
       .menu-toggle { display: block; }
-      nav { display: none; flex-direction: column; position: absolute; top: 50px; left: 0; width: 100%; background: rgba(70,0,20,0.95); padding: 15px; opacity: 0; transform: translateY(-20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+      nav { display: none; flex-direction: column; position: absolute; top: 50px; left: 0; width: 100%; background: rgba(70,0,20,0.95); padding: 15px; opacity: 0; transform: translateY(-20px); transition: opacity 0.5s ease, transform 0.5s ease; }
       nav.active { display: flex; opacity: 1; transform: translateY(0); }
       nav a { margin: 8px 0; text-align: center; font-size: 16px; padding: 10px; border-radius: 30px; background: rgba(255,120,120,0.2); border: none; }
       .section { padding: 100px 20px 80px; }
@@ -381,11 +374,12 @@
       h4 { font-size: 24px; }
       p { font-size: 16px; line-height: 1.6; }
       .btn { padding: 12px 40px; font-size: 16px; }
-      .guarantee-grid, .reviews-grid, .faq-grid, .order-grid, .blog-links { gap: 15px; }
-      .guarantee-item, .review, .faq-item, .order-item, .blog-item { flex: 0 0 80vw; padding: 20px; }
+      .guarantee-grid, .reviews-grid, .faq-grid, .order-grid { gap: 15px; }
+      .guarantee-item, .review, .faq-item, .order-item { flex: 0 0 80vw; padding: 20px; }
       .doc-img { max-width: 300px; }
       .floating-cta { bottom: 20px; right: 20px; padding: 10px 25px; font-size: 14px; }
-      .blog-links { flex-wrap: nowrap; overflow-x: auto; }
+      .blog-links { flex-direction: column; align-items: center; }
+      .blog-item { width: 90%; }
       .falling-emojis span { font-size: 20px; animation-duration: 15s; }
     }
   </style>
@@ -470,7 +464,7 @@
       <div class="guarantee-item"><p>Надежные партнеры и водители.</p></div>
       <div class="guarantee-item"><p>Круглосуточная поддержка 24/7.</p></div>
     </div>
-    <img src="path/to/your/document.jpg" class="doc-img" alt="Документ"> <!-- Replace 'path/to/your/document.jpg' with the actual file path of your document -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Sample_certificate.svg/800px-Sample_certificate.svg.png" class="doc-img" alt="Документ">
   </section>
 
   <div class="divider"></div>
@@ -517,12 +511,6 @@
     <div class="blog-links">
       <div class="blog-item"><p>Эскорт услуги с ТОП моделями и VIP девушками: отд…</p></div>
       <div class="blog-item"><p>Элитные знакомства с самыми шикарными девушками: твой пут…</p></div>
-      <div class="blog-item"><p>Тренды в эскорт индустрии 2025: что ждет впереди?</p></div>
-      <div class="blog-item"><p>Как выбрать идеальную спутницу для путешествий</p></div>
-      <div class="blog-item"><p>Секреты успешных деловых встреч с эскортом</p></div>
-      <div class="blog-item"><p>Эскорт и конфиденциальность: почему это важно</p></div>
-      <div class="blog-item"><p>Истории успеха от клиентов Scarlet Night</p></div>
-      <div class="blog-item"><p>Как поддерживать стиль в любой ситуации</p></div>
     </div>
   </section>
 
@@ -537,14 +525,12 @@
     const nav = document.querySelector('nav');
     menuToggle.addEventListener('click', () => {
       nav.classList.toggle('active');
-      menuToggle.classList.toggle('active');
     });
 
     const navLinks = document.querySelectorAll('nav a');
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         nav.classList.remove('active');
-        menuToggle.classList.remove('active');
       });
     });
 
