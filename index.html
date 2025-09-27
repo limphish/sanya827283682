@@ -234,8 +234,14 @@
       gap: 20px;
       max-width: 1000px;
       margin: 0 auto;
-      padding: 10px 0;
+      padding: 10px 20px 10px 0; /* Added right padding to ensure last item is fully visible */
       scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+    }
+    .guarantee-grid::after, .reviews-grid::after, .faq-grid::after, .order-grid::after, .blog-grid::after, .advantages-grid::after {
+      content: '';
+      flex: 0 0 20px; /* Spacer to ensure last item can snap into view */
     }
     .guarantee-item, .review, .faq-item, .order-item, .blog-item, .advantage-item {
       flex: 0 0 300px;
@@ -419,7 +425,7 @@
       h4 { font-size: 24px; }
       p { font-size: 16px; line-height: 1.6; }
       .btn { padding: 12px 40px; font-size: 16px; }
-      .guarantee-grid, .reviews-grid, .faq-grid, .order-grid, .blog-grid, .advantages-grid { gap: 15px; }
+      .guarantee-grid, .reviews-grid, .faq-grid, .order-grid, .blog-grid, .advantages-grid { gap: 15px; padding: 10px 15px 10px 0; }
       .guarantee-item, .review, .faq-item, .order-item, .blog-item, .advantage-item { flex: 0 0 80vw; padding: 20px; }
       .doc-img { max-width: 300px; }
       .floating-cta { bottom: 20px; right: 20px; padding: 10px 25px; font-size: 14px; }
