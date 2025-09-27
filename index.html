@@ -249,8 +249,8 @@
       animation: fadeInUp 2s ease;
       scroll-snap-align: start;
     }
-    .guarantee-item::before, .review::before, .faq-item::before, .order-item::before {
-      content: '\f058';
+    .review::before {
+      content: '\f10d';
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
       position: absolute;
@@ -258,8 +258,6 @@
       color: rgba(255,120,120,0.3);
       font-size: 35px;
     }
-    .faq-item::before { content: '\f059'; }
-    .review::before { content: '\f10d'; }
     .guarantee-item:hover, .review:hover, .faq-item:hover, .order-item:hover {
       transform: translateY(-8px);
       box-shadow: 0 10px 35px rgba(255,120,120,0.5);
@@ -299,12 +297,13 @@
       transition: all 0.4s ease;
       width: 280px;
       text-align: left;
+      animation: fadeInUp 2s ease;
     }
     .blog-item:hover {
       transform: translateY(-8px);
       box-shadow: 0 10px 35px rgba(255,120,120,0.6);
     }
-    .blog-item p { margin: 0; }
+    .blog-item p { margin: 0; animation: none; }
 
     .divider {
       width: 100%;
@@ -335,8 +334,8 @@
       top: -20px;
       left: 50%;
       transform: translateX(-50%);
-      background: #1a0000;
-      padding: 0 15px;
+      background: none;
+      padding: 0;
       color: #ff8c8c;
       text-shadow: 0 0 10px rgba(255,120,120,0.7);
     }
@@ -561,8 +560,12 @@
   <section class="section blog">
     <h3>Актуальные Статьи про Эскорт Индустрию</h3>
     <div class="blog-links">
-      <div class="blog-item"><p>Эскорт услуги с ТОП моделями и VIP девушками: отд…</p></div>
-      <div class="blog-item"><p>Элитные знакомства с самыми шикарными девушками: твой пут…</p></div>
+      <div class="blog-item"><p>Эскорт услуги с ТОП моделями и VIP девушками: отдых на высшем уровне. Узнайте, как выбрать идеальную компанию для незабываемого вечера и насладиться элитным сопровождением.</p></div>
+      <div class="blog-item"><p>Элитные знакомства с самыми шикарными девушками: твой путь к роскоши. Откройте секреты успешных встреч и как найти спутницу, которая подчеркнет ваш статус.</p></div>
+      <div class="blog-item"><p>Как выбрать идеальную спутницу для мероприятия: советы от экспертов. Полезные рекомендации по подбору эскорта для светских событий и деловых встреч.</p></div>
+      <div class="blog-item"><p>Преимущества VIP эскорта в путешествиях: комфорт и стиль в любой точке мира. Почему стоит взять с собой элитную модель в поездку и как это сделать правильно.</p></div>
+      <div class="blog-item"><p>Секреты успешного эскорта: что нужно знать клиентам. Инсайды из индустрии, советы по конфиденциальности и максимальному удовольствию от услуг.</p></div>
+      <div class="blog-item"><p>Тренды в элитном эскорте 2025: что ждет клиентов. Обзор новых тенденций, популярных моделей и инноваций в сфере VIP сопровождения.</p></div>
     </div>
   </section>
 
