@@ -374,7 +374,7 @@
       h4 { font-size: 24px; }
       p { font-size: 16px; line-height: 1.6; }
       .btn { padding: 12px 40px; font-size: 16px; }
-      .guarantee-grid, .reviews-grid, .faq-grid, .order-grid { flex-wrap: nowrap; overflow-x: auto; gap: 15px; }
+      .guarantee-grid, .reviews-grid, .faq-grid, .order-grid { gap: 15px; }
       .guarantee-item, .review, .faq-item, .order-item { flex: 0 0 80vw; padding: 20px; }
       .doc-img { max-width: 300px; }
       .floating-cta { bottom: 20px; right: 20px; padding: 10px 25px; font-size: 14px; }
@@ -525,6 +525,13 @@
     const nav = document.querySelector('nav');
     menuToggle.addEventListener('click', () => {
       nav.classList.toggle('active');
+    });
+
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        nav.classList.remove('active');
+      });
     });
 
     window.addEventListener('scroll', () => {
