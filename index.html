@@ -32,7 +32,7 @@
         }
         body {
             font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-            background: radial-gradient(1200px 600px at 10% 10%, rgba(183,28,28,0.12), transparent), var(--bg-1);
+            background: radial-gradient(circle at 50% 50%, rgba(183,28,28,0.2), transparent 70%), var(--bg-1);
             color: var(--muted);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -40,14 +40,31 @@
             scroll-behavior: smooth;
             position: relative;
         }
-        /* Subtle textured overlay */
+        /* Animated background with glowing effect */
         .bg-overlay {
             position: fixed;
             inset: 0;
-            background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
-            opacity: 0.04;
+            background: radial-gradient(circle at 30% 30%, rgba(183,28,28,0.3), rgba(22,6,6,0.2) 50%, transparent 80%);
+            opacity: 0.15;
             pointer-events: none;
             z-index: -2;
+            animation: glowPulse 8s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.15; transform: scale(1); }
+            50% { opacity: 0.25; transform: scale(1.05); }
+        }
+        /* Scroll line animation */
+        .scroll-line {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 2px;
+            width: 0;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            z-index: 999;
+            opacity: 0;
+            transition: width 0.3s ease, opacity 0.3s ease;
         }
         header {
             position: fixed;
@@ -152,10 +169,14 @@
             inset: 0;
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Fixed for smooth scrolling */
+            background-attachment: fixed;
             filter: brightness(.35) saturate(.95);
             z-index: -1;
+            transform: translateY(0);
             transition: transform .8s ease;
+        }
+        .section.visible::before {
+            transform: translateY(-20px); /* Subtle parallax on scroll */
         }
         .hero::before {
             background-image: url('https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=1920&q=80');
@@ -168,7 +189,7 @@
             text-shadow: 0 6px 30px rgba(183,28,28,0.06);
         }
         h2 {
-            font-family: 'Dancing Script', cursive; /* Handwritten font for hero */
+            font-family: 'Dancing Script', cursive;
             letter-spacing: 1px;
         }
         p {
@@ -191,7 +212,7 @@
             overflow: hidden;
             box-shadow: 0 10px 40px rgba(183,28,28,0.16);
             transition: transform .18s ease, box-shadow .18s ease;
-            margin: 0 auto; /* Center buttons */
+            margin: 0 auto;
         }
         .btn:active {
             transform: scale(.98);
@@ -210,7 +231,7 @@
         .floating-cta {
             position: fixed;
             right: 50%;
-            transform: translateX(50%); /* Center horizontally */
+            transform: translateX(50%);
             bottom: 28px;
             padding: 12px 22px;
             border-radius: 999px;
@@ -397,6 +418,7 @@
 </head>
 <body>
     <div class="bg-overlay"></div>
+    <div class="scroll-line" id="scrollLine"></div>
     <div class="cursor-glow" id="cursorGlow" style="opacity:0"></div>
     <header id="header">
         <div class="logo">
@@ -457,7 +479,7 @@
         <div class="divider"></div>
         <section class="section guarantee" id="guarantee">
             <h3>Наши Гарантии</h3>
-            <p>Мы понимаем, что доверие — основа премиального сервиса. Scarlet Night гарантирует полную анонимность, прозрачные условия и соответствие ожиданий реальности. Каждая модель подтверждает свою личность и фотографии, а каждая встреча проходит в безопасной и уважительной обстановке. Вы получаете уверенность в качестве, надёжности и корректности на каждом этапе взаимодействия.</p>
+            <p>Мы понимаем, что доверие — основа премиального сервиса. Scarlet Night гарантирует полную анонимность, прозрачные условия и соответствие ожиданий реальности. Каждая модель подтверждает свою личность и фотографии, а каждая встреча проходит в безопасной и уважительной обстановке. Вы получаете уверенность в качества, надёжности и корректности на каждом этапе взаимодействия.</p>
             <div class="guarantee-grid">
                 <div class="guarantee-item"><p>Абсолютная защита личных данных.</p></div>
                 <div class="guarantee-item"><p>Регулярный медицинский контроль и строгий отбор моделей.</p></div>
@@ -522,7 +544,7 @@
             });
         });
 
-        // IntersectionObserver for section reveal
+        // IntersectionObserver for section reveal and parallax
         const sections = document.querySelectorAll('.section');
         const io = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -557,7 +579,7 @@
 
         // Lightweight tilt effect for cards
         function addTilt(container) {
-            if (!isTouch) { // Disable tilt on touch devices for better performance
+            if (!isTouch) {
                 container.addEventListener('mousemove', (ev) => {
                     const rect = container.getBoundingClientRect();
                     const cx = rect.left + rect.width / 2;
@@ -598,6 +620,19 @@
                 duration: 1500,
                 delay: anime.stagger(50, { start: 500 }),
             });
+        });
+
+        // Scroll line animation
+        let isScrolling;
+        const scrollLine = document.getElementById('scrollLine');
+        window.addEventListener('scroll', () => {
+            scrollLine.style.width = '100%';
+            scrollLine.style.opacity = '1';
+            clearTimeout(isScrolling);
+            isScrolling = setTimeout(() => {
+                scrollLine.style.opacity = '0';
+                scrollLine.style.width = '0';
+            }, 300);
         });
     </script>
 </body>
