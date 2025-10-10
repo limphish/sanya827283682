@@ -4,658 +4,337 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scarlet Night – Элитные Эскорт-Услуги по Всей России</title>
+  <!-- Fonts: elegant headings + readable body -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap');
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #5a001a, #1a0000);
-      color: #f9e4d4;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      position: relative;
+    /* Color palette and variables for luxurious black/gold/red theme */
+    :root{
+      --bg-1: #050505; /* deep black */
+      --bg-2: #160606; /* deep maroon */
+      --accent-1: #d4af37; /* gold */
+      --accent-2: #b71c1c; /* deep red */
+      --muted: #e9ddd2;
+      --glass: rgba(255,255,255,0.03);
+      --card: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      --glow: 0 8px 40px rgba(212,175,55,0.06);
+      --nav-height: 72px;
     }
 
-    .bg-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('https://www.transparenttextures.com/patterns/velvet.png') repeat;
-      opacity: 0.1;
-      z-index: -2;
-      animation: shimmer 25s infinite linear;
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(183,28,28,0.12), transparent), var(--bg-1);
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+      position:relative;
     }
 
-    header {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      background: linear-gradient(to bottom, rgba(70,0,20,0.95), rgba(70,0,20,0.85));
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 15px 40px;
-      z-index: 1000;
-      box-shadow: 0 4px 25px rgba(255,120,120,0.5);
-      transition: all 0.3s ease;
+    /* Subtle textured overlay */
+    .bg-overlay{position:fixed;inset:0;background-image:url('https://www.transparenttextures.com/patterns/asfalt-light.png');opacity:0.04;pointer-events:none;z-index:-2}
+
+    header{
+      position:fixed;left:0;top:0;width:100%;height:var(--nav-height);
+      display:flex;align-items:center;justify-content:space-between;padding:0 28px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15));backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(212,175,55,0.07);z-index:1000;transition:all .35s ease;
+      box-shadow:var(--glow);
+    }
+    header.scrolled{height:60px;background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6))}
+
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo h1{font-family:'Playfair Display',serif;color:var(--accent-1);font-size:22px;letter-spacing:1px}
+    .logo .sub{font-size:12px;color:rgba(233,221,210,0.6)}
+
+    .menu-toggle{display:none;font-size:22px;color:var(--muted);cursor:pointer}
+
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{
+      text-decoration:none;color:var(--muted);font-weight:500;padding:10px 14px;border-radius:999px;border:1px solid transparent;position:relative;
+      transition:all .25s ease;backface-visibility:hidden;
+    }
+    nav a::after{content:'';position:absolute;inset:0;border-radius:999px;transition:transform .35s cubic-bezier(.2,.9,.3,1);transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg, rgba(212,175,55,0.06), rgba(183,28,28,0.03));z-index:-1}
+    nav a:hover{color:var(--accent-1);transform:translateY(-3px);box-shadow:0 6px 30px rgba(183,28,28,0.06)}
+    nav a:hover::after{transform:scaleX(1)}
+
+    /* Call-to-action accent for header */
+    .cta-small{background:linear-gradient(90deg,var(--accent-2),var(--accent-1));color:#111;padding:8px 16px;border-radius:999px;font-weight:700;box-shadow:0 6px 30px rgba(183,28,28,0.18)}
+
+    .section{min-height:100vh;padding:calc(var(--nav-height) + 40px) 40px 80px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+    .section::before{content:'';position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.35) saturate(.95);z-index:-1;transition:transform .8s ease}
+    .hero::before{background-image:url('https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=1920&q=80')}
+
+    h2,h3{font-family:'Playfair Display',serif;color:var(--accent-1);font-size:46px;margin-bottom:18px;text-shadow:0 6px 30px rgba(183,28,28,0.06)}
+    h2{letter-spacing:1px}
+    p{max-width:900px;margin:0 auto 22px;font-size:17px;line-height:1.9;color:rgba(233,221,210,0.95)}
+
+    /* Buttons: ripple on click + subtle lift */
+    .btn{display:inline-block;padding:14px 44px;border-radius:999px;font-weight:700;background:linear-gradient(90deg,var(--accent-2),#8c1b1b);color:#fff;text-decoration:none;position:relative;overflow:hidden;box-shadow:0 10px 40px rgba(183,28,28,0.16);transition:transform .18s ease,box-shadow .18s ease}
+    .btn:active{transform:scale(.98)}
+    .btn:focus{outline:none}
+    .btn .ripple{position:absolute;border-radius:999px;transform:scale(0);opacity:.6;pointer-events:none}
+
+    /* Floating CTA */
+    .floating-cta{position:fixed;right:30px;bottom:28px;padding:12px 22px;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#080808;font-weight:800;box-shadow:0 18px 70px rgba(212,175,55,0.08);z-index:900;transition:transform .18s ease}
+    .floating-cta:hover{transform:translateY(-6px) rotate(-1deg)}
+
+    /* Grids with 3D tilt & gentle parallax */
+    .guarantee-grid,.reviews-grid,.faq-grid,.order-grid,.blog-grid,.advantages-grid{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:18px;padding:10px 6px;max-width:1100px;margin:10px auto}
+    .guarantee-item,.review,.faq-item,.order-item,.blog-item,.advantage-item{flex:0 0 320px;background:var(--card);padding:22px;border-radius:14px;border:1px solid rgba(212,175,55,0.06);box-shadow:0 8px 40px rgba(0,0,0,0.6);transition:transform .45s cubic-bezier(.2,.9,.3,1),box-shadow .35s}
+    .guarantee-item:hover,.review:hover,.faq-item:hover,.order-item:hover,.blog-item:hover,.advantage-item:hover{transform:translateY(-12px) rotateX(6deg);box-shadow:0 24px 80px rgba(0,0,0,0.6)}
+
+    .advantage-item h4{color:var(--accent-1);font-family:'Playfair Display',serif}
+
+    /* Reviews style */
+    .review .stars{color:var(--accent-1);font-size:18px;margin-bottom:10px}
+    .review strong{display:block;margin-top:10px;color:var(--accent-2)}
+
+    /* Divider decorative */
+    .divider{width:100%;text-align:center;margin:50px 0;position:relative}
+    .divider::after{content:'⚜';color:var(--accent-1);font-size:26px;display:inline-block;padding:0 12px}
+
+    footer{background:linear-gradient(180deg,#080404,#1a0505);padding:48px 16px;text-align:center;color:rgba(233,221,210,0.85);border-top:1px solid rgba(212,175,55,0.05);margin-top:40px}
+
+    /* Lens flare and particles */
+    .lens-flare{position:absolute;top:12%;left:12%;width:220px;height:220px;border-radius:999px;background:radial-gradient(circle, rgba(212,175,55,0.14), transparent);filter:blur(14px);animation:flare 5s ease-in-out infinite}
+    @keyframes flare{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.25);opacity:1}}
+
+    /* Fade/slide-in for sections */
+    .section{opacity:0;transform:translateY(36px);transition:opacity .9s ease,transform .9s ease}
+    .section.visible{opacity:1;transform:translateY(0)}
+
+    /* small screens */
+    @media (max-width:900px){
+      header{padding:0 16px}
+      .menu-toggle{display:block}
+      nav{position:fixed;left:0;right:0;top:var(--nav-height);background:linear-gradient(180deg,rgba(0,0,0,0.92),rgba(20,6,6,0.96));flex-direction:column;padding:18px;gap:6px;display:none}
+      nav.show{display:flex}
+      nav a{padding:12px;border-radius:12px}
+      .guarantee-grid,.reviews-grid,.faq-grid,.order-grid,.blog-grid,.advantages-grid{gap:12px}
+      .guarantee-item,.review,.faq-item,.order-item,.blog-item,.advantage-item{flex:0 0 85vw}
+      .floating-cta{right:18px;bottom:18px}
+      h2,h3{font-size:32px}
     }
 
-    header.scrolled {
-      background: rgba(70,0,20,0.98);
-      padding: 10px 40px;
+    /* desktop always show nav inline */
+    @media (min-width:901px){
+      nav{display:flex}
     }
 
-    header h1 {
-      font-family: 'Montserrat', sans-serif;
-      color: #ff8c8c;
-      font-size: 32px;
-      letter-spacing: 3px;
-      text-shadow: 0 0 15px rgba(255,120,120,0.7);
-    }
+    /* subtle pointer-follow glow for desktop */
+    .cursor-glow{position:fixed;pointer-events:none;z-index:999;mix-blend-mode:screen;border-radius:999px;padding:6px 10px;background:radial-gradient(circle, rgba(212,175,55,0.14), transparent);transform:translate(-50%,-50%);transition:width .12s ease,height .12s ease,opacity .12s}
 
-    .menu-toggle {
-      display: none;
-      font-size: 28px;
-      color: #f9e4d4;
-      cursor: pointer;
-    }
+    /* accessibility focus styles */
+    a:focus{outline:2px dashed rgba(212,175,55,0.22);outline-offset:4px}
 
-    nav {
-      display: flex;
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    nav.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    nav a {
-      margin-left: 25px;
-      text-decoration: none;
-      color: #f9e4d4;
-      font-weight: 400;
-      font-size: 16px;
-      padding: 8px 16px;
-      border-radius: 20px;
-      background: rgba(255,120,120,0.1);
-      border: 1px solid rgba(255,120,120,0.3);
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-    nav a:hover {
-      background: rgba(255,120,120,0.3);
-      color: #ff8c8c;
-    }
-
-    .section {
-      min-height: 100vh;
-      padding: 120px 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      transition: opacity 1.2s ease, transform 1.2s ease;
-    }
-
-    .section::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.4) contrast(1.4) opacity(0.85);
-      z-index: -1;
-      transform: translateZ(-1px) scale(1.1);
-      transition: transform 0.7s ease;
-    }
-
-    .section:hover::before { transform: translateZ(-1px) scale(1.15); }
-
-    .hero::before { background-image: url('https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=1920&q=80'); }
-    .why-choose::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); }
-    .advantages::before { background-image: url('https://images.unsplash.com/photo-1543165363-9a2b7a8b4839?auto=format&fit=crop&w=1920&q=80'); }
-    .how-to-order::before { background-image: url('https://images.unsplash.com/photo-1519751108947-2168e41e9c90?auto=format&fit=crop&w=1920&q=80'); }
-    .faq::before { background-image: url('https://images.unsplash.com/photo-1534534576273-9b1b5c7357ac?auto=format&fit=crop&w=1920&q=80'); }
-    .call-to-action::before { background-image: url('https://images.unsplash.com/photo-1611048267451-e6ed903dbfb1?auto=format&fit=crop&w=1920&q=80'); }
-
-    .hero-video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      filter: brightness(0.3) opacity(0.85);
-      z-index: -2;
-    }
-
-    .lens-flare {
-      position: absolute;
-      top: 15%; left: 15%;
-      width: 220px; height: 220px;
-      background: radial-gradient(circle, rgba(255,120,120,0.35), transparent);
-      opacity: 0.6;
-      z-index: -1;
-      animation: flarePulse 4.5s infinite ease-in-out;
-    }
-
-    h2, h3 {
-      font-family: 'Montserrat', sans-serif;
-      color: #ff8c8c;
-      font-size: 48px;
-      margin-bottom: 30px;
-      letter-spacing: 2px;
-      text-shadow: 0 2px 15px rgba(255,120,120,0.6);
-      animation: fadeInUp 2s ease;
-    }
-
-    h4 {
-      font-family: 'Montserrat', sans-serif;
-      color: #ffd700;
-      font-size: 28px;
-      margin-bottom: 15px;
-      text-shadow: 0 2px 10px rgba(255,215,0,0.5);
-    }
-
-    p {
-      max-width: 900px;
-      margin: 0 auto 30px;
-      font-size: 18px;
-      line-height: 1.8;
-      font-weight: 300;
-      animation: fadeIn 3s ease;
-    }
-
-    .btn, .floating-cta {
-      transition: all 0.3s ease, transform 0.1s ease;
-    }
-
-    .btn {
-      margin-top: 30px;
-      display: inline-block;
-      padding: 15px 50px;
-      font-size: 18px;
-      border-radius: 50px;
-      background: linear-gradient(45deg, #ff8c8c, #cc3333);
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 5px 30px rgba(255,120,120,0.7);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      animation: glowPulse 3s infinite ease-in-out;
-    }
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-      transition: left 0.5s;
-      z-index: -1;
-    }
-    .btn:hover {
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 10px 45px rgba(255,120,120,0.9);
-      text-shadow: 0 0 8px rgba(255,255,255,0.5);
-    }
-    .btn:hover::before { left: 100%; }
-    .btn:active, .floating-cta:active {
-      transform: scale(0.95) rotate(-1deg);
-      box-shadow: 0 2px 15px rgba(255,120,120,0.7);
-    }
-
-    .floating-cta {
-      position: fixed;
-      bottom: 30px; right: 30px;
-      background: linear-gradient(45deg, #ff8c8c, #cc3333);
-      color: #fff;
-      padding: 12px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 4px 20px rgba(255,120,120,0.7);
-      z-index: 1000;
-      animation: pulseCTA 2s infinite ease-in-out;
-    }
-    .floating-cta:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 35px rgba(255,120,120,0.9);
-    }
-
-    .guarantee-grid, .reviews-grid, .faq-grid, .order-grid, .blog-grid, .advantages-grid {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      gap: 10px;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 10px 20px 10px 0;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-    }
-    .guarantee-grid::after, .reviews-grid::after, .faq-grid::after, .order-grid::after, .blog-grid::after, .advantages-grid::after {
-      content: '';
-      flex: 0 0 20px;
-    }
-    .guarantee-item, .review, .faq-item, .order-item, .blog-item, .advantage-item {
-      flex: 0 0 300px;
-      background: linear-gradient(to bottom, rgba(70,0,20,0.85), rgba(70,0,20,0.65));
-      padding: 25px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,120,120,0.25);
-      box-shadow: 0 4px 20px rgba(255,120,120,0.3);
-      transition: all 0.4s ease;
-      position: relative;
-      animation: fadeInUp 2s ease;
-      scroll-snap-align: start;
-    }
-    .advantage-item {
-      background: linear-gradient(to bottom, rgba(90,0,26,0.85), rgba(90,0,26,0.65));
-      border: 1px solid rgba(255,140,140,0.35);
-      box-shadow: 0 4px 20px rgba(255,140,140,0.4);
-    }
-    .advantage-item h4 {
-      color: #ffe066;
-      text-shadow: 0 2px 10px rgba(255,224,102,0.5);
-    }
-    .advantage-item:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 10px 35px rgba(255,140,140,0.6);
-    }
-    .review::before {
-      content: '\f10d';
-      font-family: 'Font Awesome 6 Free';
-      font-weight: 900;
-      position: absolute;
-      top: 15px; left: 20px;
-      color: rgba(255,120,120,0.3);
-      font-size: 35px;
-    }
-    .guarantee-item:hover, .review:hover, .faq-item:hover, .order-item:hover, .blog-item:hover, .advantage-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 35px rgba(255,120,120,0.5);
-    }
-    .guarantee-item p, .review p, .faq-item p, .order-item p, .blog-item p, .advantage-item p { margin-bottom: 12px; }
-    .review .stars {
-      color: #ffd700;
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-    .review strong { color: #ff8c8c; font-style: italic; }
-
-    .doc-img {
-      margin: 30px auto;
-      max-width: 350px;
-      border-radius: 12px;
-      border: 2px solid #ff8c8c;
-      box-shadow: 0 8px 30px rgba(255,120,120,0.5);
-      transition: transform 0.3s ease;
-    }
-    .doc-img:hover { transform: scale(1.04); }
-
-    .blog-item {
-      text-align: left;
-      animation: fadeInUp 2s ease;
-    }
-    .blog-item p { margin: 0; animation: none; }
-
-    .divider {
-      width: 100%;
-      text-align: center;
-      margin: 50px 0;
-      position: relative;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 1.5s ease forwards;
-    }
-
-    .divider::before {
-      content: " ";
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(to right, transparent, #ff8c8c, transparent);
-      margin: 0 auto;
-      border-radius: 2px;
-      position: relative;
-      animation: shimmerLine 4s infinite linear;
-    }
-
-    .divider::after {
-      content: "💋";
-      font-size: 28px;
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: none;
-      padding: 0;
-      color: #ff8c8c;
-      text-shadow: 0 0 10px rgba(255,120,120,0.7);
-    }
-
-    footer {
-      background: linear-gradient(to top, #2c0e1a, #5a001a);
-      text-align: center;
-      padding: 50px 20px;
-      font-size: 15px;
-      color: #f9e4d4;
-      position: relative;
-      border-top: 2px solid #ffd700;
-      animation: gradientFade 5s infinite ease-in-out;
-    }
-    footer::before {
-      content: "⚜";
-      font-size: 40px;
-      color: #ff8c8c;
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-shadow: 0 0 15px rgba(255,120,120,0.7);
-    }
-    footer span { color: #ff8c8c; font-weight: bold; }
-
-    .falling-emojis {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: -1;
-      overflow: hidden;
-    }
-    .falling-emojis span {
-      position: absolute;
-      font-size: 24px;
-      animation: fall 10s linear infinite;
-      opacity: 0.8;
-    }
-    @keyframes fall {
-      0% { transform: translateY(-100vh) rotate(0deg); }
-      100% { transform: translateY(100vh) rotate(360deg); }
-    }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-    @keyframes float {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-100vh); }
-    }
-    @keyframes shimmer {
-      0% { background-position: 0 0; }
-      100% { background-position: 300% 300%; }
-    }
-    @keyframes shimmerLine {
-      0% { background-position: -200px 0; }
-      100% { background-position: 200px 0; }
-    }
-    @keyframes flarePulse {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50% { opacity: 0.9; transform: scale(1.3); }
-    }
-    @keyframes pulseCTA {
-      0%, 100% { box-shadow: 0 5px 25px rgba(255,120,120,0.8); }
-      50% { box-shadow: 0 5px 40px rgba(255,120,120,1); }
-    }
-    @keyframes gradientFade {
-      0%, 100% { background: linear-gradient(to top, #2c0e1a, #5a001a); }
-      50% { background: linear-gradient(to top, #2c0e1a, #6a0020); }
-    }
-    @keyframes glowPulse {
-      0%, 100% { box-shadow: 0 0 15px rgba(255,120,120,0.6); }
-      50% { box-shadow: 0 0 35px rgba(255,120,120,1); }
-    }
-
-    @media (max-width: 768px) {
-      header { padding: 10px 20px; }
-      header h1 { font-size: 28px; letter-spacing: 2px; }
-      .menu-toggle { display: block; }
-      nav { display: none; flex-direction: column; position: absolute; top: 50px; left: 0; width: 100%; background: rgba(70,0,20,0.95); padding: 15px; opacity: 0; transform: translateY(-20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-      nav.active { display: flex; opacity: 1; transform: translateY(0); }
-      nav a { margin: 8px 0; text-align: center; font-size: 16px; padding: 10px; border-radius: 30px; background: rgba(255,120,120,0.2); border: none; }
-      .section { padding: 100px 20px 80px; }
-      h2, h3 { font-size: 36px; margin-bottom: 20px; }
-      h4 { font-size: 24px; }
-      p { font-size: 16px; line-height: 1.6; }
-      .btn { padding: 12px 40px; font-size: 16px; }
-      .guarantee-grid, .reviews-grid, .faq-grid, .order-grid, .blog-grid, .advantages-grid { gap: 8px; padding: 10px 15px 10px 0; }
-      .guarantee-item, .review, .faq-item, .order-item, .blog-item, .advantage-item { flex: 0 0 80vw; padding: 20px; }
-      .doc-img { max-width: 300px; }
-      .floating-cta { bottom: 20px; right: 20px; padding: 10px 25px; font-size: 14px; }
-      .falling-emojis span { font-size: 20px; animation-duration: 15s; }
-    }
   </style>
 </head>
 <body>
   <div class="bg-overlay"></div>
-  <div class="falling-emojis"></div>
+  <div class="cursor-glow" id="cursorGlow" style="opacity:0"></div>
 
   <header id="header">
-    <h1>Scarlet Night</h1>
-    <div class="menu-toggle"><i class="fas fa-bars"></i></div>
-    <nav>
+    <div class="logo">
+      <h1>Scarlet Night</h1>
+      <div class="sub">Luxury Escort — 24/7</div>
+    </div>
+
+    <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+    <nav id="nav">
       <a href="https://t.me/your_bot">Заказать</a>
       <a href="#why-choose">Почему Мы</a>
       <a href="#advantages">Преимущества</a>
       <a href="#how-to-order">Как Заказать</a>
       <a href="#faq">FAQ</a>
-      <a href="#contact">Связь</a>
+      <a href="#contact" class="cta-small">Связаться</a>
     </nav>
   </header>
 
-  <section class="section hero">
-    <video class="hero-video" autoplay loop muted playsinline>
-      <source src="https://player.vimeo.com/external/489051297.sd.mp4?s=8a8b0a6b5b4e8e8b4e8b0a6b5b4e8e8b4e8b0a6b&profile_id=164" type="video/mp4">
-    </video>
-    <div class="lens-flare"></div>
-    <div class="particles">
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-    <h2>Scarlet Night – Элитные Эскорт-Услуги по Всей России</h2>
-    <p>Элитное эскорт агентство Scarlet Night. Элитный эскорт по всей России – эксклюзивные девушки для ценителей настоящего комфорта. Если вы хотите добавить в свою жизнь стиль и удовольствие, эскорт от Scarlet Night – это то, что вам нужно. Все наши модели тщательно проверены: внешность, манеры, профессионализм – мы гарантируем высший уровень. Этот текст подготовлен командой сайта scarletnight.com, и мы собрали для вас лучшие советы, чтобы ваш выбор эскорта был лёгким и безопасным. Scarlet Night – это ваш билет к незабываемым встречам в любом городе России. Эскорт от нас – это стиль, конфиденциальность и удовольствие. Давайте разберёмся, почему стоит выбрать услуги прямо сейчас.</p>
-    <a href="https://t.me/your_bot" class="btn">Выбрать Модель</a>
-  </section>
+  <main>
+    <section class="section hero" id="hero">
+      <div class="lens-flare"></div>
+      <h2>Scarlet Night – Элитные Эскорт-Услуги по Всей России</h2>
+      <p>Элитное эскорт агентство Scarlet Night — конфиденциально, стильно и на высшем уровне. Наши модели проходят строгий отбор, и мы гарантируем вам исключительный сервис.</p>
+      <a href="https://t.me/your_bot" class="btn js-ripple">Выбрать Модель</a>
+    </section>
 
-  <div class="divider"></div>
+    <div class="divider"></div>
 
-  <section class="section why-choose" id="why-choose">
-    <h3>Почему Эскорт от Scarlet Night – Это Ваш Выбор</h3>
-    <p>Решение заказать VIP эскорт от Scarlet Night – это шаг к комфорту и роскоши. Наши услуги – это про девушек, которые выглядят шикарно, знают этикет и подходят для любого случая. Все модели проходят строгий отбор: внешность, манеры, умение держаться в обществе – мы проверяем всё. Я сам выбрал элитный эскорт для делового ужина, и моя спутница сделала вечер идеальным – она легко поддерживала беседу и выглядела на уровне топ-модели. Эскорт от Scarlet Night – это качество и конфиденциальность. Ваши данные под защитой, и никто не узнает о встрече. Мы доступны 24/7 – звоните в любое время, и мы организуем всё быстро. Мы предоставляем моделей по всем городам России – индивидуальный подход к каждому клиенту.</p>
-  </section>
+    <section class="section why-choose" id="why-choose">
+      <h3>Почему Эскорт от Scarlet Night — Это Ваш Выбор</h3>
+      <p>Наши услуги — это про уверенность, стиль и абсолютную конфиденциальность. Мы работаем по всей России и подбираем спутницу под любые задачи.</p>
+    </section>
 
-  <div class="divider"></div>
+    <div class="divider"></div>
 
-  <section class="section advantages" id="advantages">
-    <h3>Преимущества Эскорта от Scarlet Night для Разных Ситуаций</h3>
-    <p>На сайте scarletnight.com мы предоставляем услуги VIP сопровождения по всей России, чтобы каждый клиент нашёл подходящий вариант. Все наши модели тщательно проверены, чтобы гарантировать вам высший уровень сервиса. Вот почему наши услуги – это ваш лучший выбор:</p>
-    <div class="advantages-grid">
-      <div class="advantage-item">
-        <h4>Элитный Эскорт для Светских Мероприятий</h4>
-        <p>VIP эскорт для вечеринок или ужинов – это способ выделиться. Наши спутницы знают, как выглядеть элегантно и вести себя в обществе. Эскортницы экономят ваше время – вам не нужно думать, как произвести впечатление. Наш премиальный эскорт добавляет уверенности на любом событии.</p>
+    <section class="section advantages" id="advantages">
+      <h3>Преимущества Эскорта от Scarlet Night</h3>
+      <p>Элегантность, профессионализм и утончённый вкус — вот что отличает наш сервис.</p>
+      <div class="advantages-grid" id="advantagesGrid">
+        <div class="advantage-item">
+          <h4>Элитный Эскорт для Светских Мероприятий</h4>
+          <p>Наши спутницы знают, как подчеркнуть ваш статус и уверенность в обществе.</p>
+        </div>
+        <div class="advantage-item">
+          <h4>Эскорт на Час для Деловых Встреч</h4>
+          <p>Профессиональное сопровождение и помощь в создании образа для деловой среды.</p>
+        </div>
+        <div class="advantage-item">
+          <h4>Приватный Эскорт для Отдыха</h4>
+          <p>Уютная атмосфера и искренняя беседа, чтобы вы могли расслабиться и получить удовольствие.</p>
+        </div>
       </div>
-      <div class="advantage-item">
-        <h4>Эскорт на Час для Деловых Встреч</h4>
-        <p>Эскорт на час или день – это профессионализм. Девушки с отличным знанием языка и этикета помогают создать нужный имидж. Модельное сопровождение повышает шансы на успех в переговорах. Эскорт от Scarlet Night – это ваш надёжный партнёр на деловых встречах.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section how-to-order" id="how-to-order">
+      <h3>Как Заказать Наши Услуги — Просто и Быстро</h3>
+      <div class="order-grid">
+        <div class="order-item"><p>Выбор модели в каталоге.</p></div>
+        <div class="order-item"><p>Связь с менеджером в Telegram/WhatsApp.</p></div>
+        <div class="order-item"><p>Согласование всех деталей и подтверждение бронирования.</p></div>
       </div>
-      <div class="advantage-item">
-        <h4>Приватный Эскорт для Отдыха</h4>
-        <p>Премиум эскорт – это отдых и удовольствие. Вы получаете уютную атмосферу и интересного собеседника. Элитный эскорт от Scarlet Night даёт гибкость – встреча может быть где угодно, на ваших условиях. Наши проверенные модели помогут снять стресс после работы. Гарантируем высокий уровень обслуживания и конфиденциальность каждой встречи.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section guarantee" id="guarantee">
+      <h3>Наши Гарантии</h3>
+      <p>Мы гарантируем конфиденциальность, проверенные модели и полный профессионализм на каждой встрече.</p>
+      <div class="guarantee-grid">
+        <div class="guarantee-item"><p>Абсолютная защита личных данных.</p></div>
+        <div class="guarantee-item"><p>Регулярный медицинский контроль и строгий отбор моделей.</p></div>
+        <div class="guarantee-item"><p>Круглосуточная поддержка 24/7.</p></div>
       </div>
-      <div class="advantage-item">
-        <h4>Эскорт на Мероприятия</h4>
-        <p>Для гала-ужинов или выставок VIP эскорт от Scarlet Night – это стиль. Проверенные спутницы подчёркивают ваш образ, делая вас заметным. Сопровождение экономит время на поиск компании. Эскорт от нас – это ваш ключ к успеху на мероприятиях.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section reviews" id="reviews">
+      <h3>Отзывы Клиентов</h3>
+      <div class="reviews-grid">
+        <div class="review"><div class="stars">★★★★★</div><p>"Scarlet Night — это другой уровень. Всё на высшем уровне."</p><strong>— Алексей</strong></div>
+        <div class="review"><div class="stars">★★★★★</div><p>"Сервис без компромиссов: внимание к деталям и полная конфиденциальность."</p><strong>— Дмитрий</strong></div>
+        <div class="review"><div class="stars">★★★★★</div><p>"Идеальный вечер, всё организовано безупречно."</p><strong>— Сергей</strong></div>
       </div>
-      <div class="advantage-item">
-        <h4>Элитный Эскорт с Выездом</h4>
-        <p>Эскорт на выезд – это удобство. Вы получаете проверенную спутницу для поездок по России или за границу. Эскорт в путешествия адаптируется к вашим планам. VIP эскорт от Scarlet Night – это комфорт в любой точке мира.</p>
+      <a href="https://t.me/your_bot" class="btn js-ripple">Посмотреть все отзывы</a>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section faq" id="faq">
+      <h3>Часто Задаваемые Вопросы (FAQ)</h3>
+      <div class="faq-grid">
+        <div class="faq-item"><p>Насколько конфиденциальны услуги? — Абсолютно анонимно и безопасно.</p></div>
+        <div class="faq-item"><p>Сколько стоит эскорт? — Зависит от времени и уровня модели. Уточняйте у менеджера.</p></div>
+        <div class="faq-item"><p>Можно ли заказать эскорт на выезд? — Да, по России и за границу.</p></div>
       </div>
-      <div class="advantage-item">
-        <h4>Эскорт для Эксклюзивных Событий</h4>
-        <p>Для закрытых вечеринок или частных мероприятий наши модели предлагают непревзойденный уровень сервиса. Они подстраиваются под формат события, обеспечивая вам статус и внимание. Scarlet Night гарантирует, что ваш вечер будет незабываемым.</p>
-      </div>
-      <div class="advantage-item">
-        <h4>Персонализированный Эскорт</h4>
-        <p>Мы предлагаем индивидуальный подбор спутницы под ваши предпочтения и цели. Будь то романтический вечер или деловая поездка, наши модели идеально соответствуют вашим ожиданиям, обеспечивая максимальный комфорт и удовольствие.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <div class="divider"></div>
+    <div class="divider"></div>
 
-  <section class="section how-to-order" id="how-to-order">
-    <h3>Как Заказать Наши Услуги – Просто и Быстро</h3>
-    <p>Процесс заказа эскорт моделей – это удобство:</p>
-    <div class="order-grid">
-      <div class="order-item"><p>Выбор модели. На сайте scarletnight.com доступен каталог с подробными анкетами и профессиональными фотографиями. Вы можете выбрать спутницу по внешности, навыкам и предпочтениям, чтобы она идеально соответствовала вашим ожиданиям.</p></div>
-      <div class="order-item"><p>Связь с менеджером. Свяжитесь с нами через Telegram, WhatsApp или по телефону. Наши специалисты оперативно ответят и помогут уточнить все детали заказа. Эскорт от Scarlet Night – это быстро и удобно.</p></div>
-      <div class="order-item"><p>Согласование деталей. Укажите место, время и формат встречи. Мы учтем ваши пожелания, будь то деловой ужин, путешествие или приватная встреча. Элитный эскорт подстраивается под вас.</p></div>
-      <div class="order-item"><p>Подтверждение заказа. После согласования всех деталей мы подтвердим бронирование. Вы получите уведомление с информацией о встрече, чтобы всё прошло безупречно.</p></div>
-      <div class="order-item"><p>Встреча с моделью. Наслаждайтесь временем с выбранной спутницей. Наши модели гарантируют высокий уровень профессионализма и комфорта, делая ваш опыт незабываемым.</p></div>
-      <div class="order-item"><p>Обратная связь. После встречи вы можете оставить отзыв или запросить дополнительные услуги. Мы ценим ваше мнение и стремимся сделать каждую встречу идеальной.</p></div>
-    </div>
-  </section>
+    <section class="section call-to-action" id="contact">
+      <h3>Начните с Эскорта от Scarlet Night Уже Сегодня!</h3>
+      <p>Напишите нам в Telegram или WhatsApp, и мы подберем идеальную спутницу под ваш случай.</p>
+      <a href="https://t.me/your_bot" class="btn floating-cta js-ripple">Связаться с Агентством</a>
+    </section>
 
-  <div class="divider"></div>
-
-  <section class="section guarantee" id="guarantee">
-    <h3>Наши Гарантии</h3>
-    <p>Мы дорожим вашей безопасностью и репутацией. Scarlet Night предоставляет официальные гарантии качества и конфиденциальности:</p>
-    <div class="guarantee-grid">
-      <div class="guarantee-item"><p>Абсолютная защита личных данных клиентов. Мы используем передовые технологии шифрования и строгие протоколы конфиденциальности, чтобы ваши данные оставались в безопасности. Никто не узнает о ваших заказах или личной информации.</p></div>
-      <div class="guarantee-item"><p>Медицинский контроль и строгий отбор девушек. Все наши модели проходят регулярные медицинские проверки и тщательный отбор по внешности, манерам и профессиональным навыкам, чтобы обеспечить высший уровень сервиса.</p></div>
-      <div class="guarantee-item"><p>Полное соблюдение всех договоренностей. Мы гарантируем, что все условия заказа, включая время, место и формат встречи, будут выполнены в точности, как было оговорено с вами.</p></div>
-      <div class="guarantee-item"><p>Официальные документы о легальности деятельности. Scarlet Night работает в полном соответствии с законодательством, предоставляя прозрачные и легальные услуги эскорта.</p></div>
-      <div class="guarantee-item"><p>Надежные партнеры и водители. Мы сотрудничаем только с проверенными профессионалами, которые обеспечивают безопасный и комфортный трансфер для вас и наших моделей.</p></div>
-      <div class="guarantee-item"><p>Круглосуточная поддержка 24/7. Наша команда доступна в любое время дня и ночи, чтобы ответить на ваши вопросы, помочь с заказом или решить любые возникшие проблемы.</p></div>
-      <div class="guarantee-item"><p>Индивидуальный подход к каждому клиенту. Мы учитываем ваши предпочтения и создаем персонализированный опыт, чтобы каждая встреча соответствовала вашим ожиданиям.</p></div>
-      <div class="guarantee-item"><p>Гарантия удовлетворенности. Если что-то пошло не так, мы оперативно решим вопрос, предложив замену модели или возврат средств в соответствии с нашими условиями.</p></div>
-    </div>
-    <img src="/documents/doc.png" class="doc-img" alt="Документ">
-  </section>
-
-  <div class="divider"></div>
-
-  <section class="section reviews" id="reviews">
-    <h3>Отзывы Клиентов</h3>
-    <div class="reviews-grid">
-      <div class="review"><div class="stars">★★★★★</div><p>"Scarlet Night – это другой уровень. Всё на высшем уровне, девушки просто богини. Моя спутница сделала деловой ужин незабываемым, а организация была безупречной."</p><strong>— Алексей</strong></div>
-      <div class="review"><div class="stars">★★★★★</div><p>"Сервис без компромиссов: внимание к деталям и полная конфиденциальность. Заказал эскорт для поездки, и всё прошло идеально, начиная от выбора модели до самой встречи."</p><strong>— Дмитрий</strong></div>
-      <div class="review"><div class="stars">★★★★★</div><p>"Такого уровня я не встречал нигде. Scarlet Night – номер один. Девушка была не только красива, но и умна, что сделало вечер по-настоящему особенным."</p><strong>— Михаил</strong></div>
-      <div class="review"><div class="stars">★★★★★</div><p>"Необычайно приятный опыт. Девушка – идеальная собеседница и красавица. Всё организовано на высшем уровне, от связи с менеджером до самой встречи."</p><strong>— Игорь</strong></div>
-      <div class="review"><div class="stars">★★★★★</div><p>"Идеальный вечер, всё организовано безупречно. Настоящая роскошь. Модель была пунктуальна, элегантна и добавила шарма моему мероприятию."</p><strong>— Сергей</strong></div>
-      <div class="review"><div class="stars">★★★★★</div><p>"Стиль, элегантность и внимание к клиенту – это Scarlet Night. Я осталась в восторге от профессионализма команды и качества обслуживания."</p><strong>— Анна</strong></div>
-      <div class="review"><div class="stars">★★★★★</div><p>"Заказал эскорт для светского мероприятия – результат превзошел ожидания. Девушка была настоящей звездой вечера, а организация прошла без единого сбоя."</p><strong>— Виктор</strong></div>
-      <div class="review"><div class="stars">★★★★★</div><p>"Scarlet Night знает, как создать идеальный вечер. Моя спутница была очаровательной, а сервис – на высшем уровне. Обязательно обращусь снова!"</p><strong>— Елена</strong></div>
-    </div>
-    <a href="https://t.me/your_bot" class="btn">Посмотреть все отзывы</a>
-  </section>
-
-  <div class="divider"></div>
-
-  <section class="section faq" id="faq">
-    <h3>Часто Задаваемые Вопросы (FAQ)</h3>
-    <div class="faq-grid">
-      <div class="faq-item"><p>Насколько конфиденциальны эскорт-услуги? Все встречи проходят абсолютно анонимно, без передачи личных данных третьим лицам. Мы используем защищенные каналы связи и строгие протоколы конфиденциальности.</p></div>
-      <div class="faq-item"><p>Как выбрать девушку для встречи? На сайте представлены детальные анкеты и фото проверенных моделей, а также возможность выбора по параметрам. Вы можете уточнить детали у менеджера для идеального подбора.</p></div>
-      <div class="faq-item"><p>Можно ли заказать эскорт на выезд? Да, девушки могут сопровождать вас в любом городе России или за границей. Мы организуем логистику для вашего удобства.</p></div>
-      <div class="faq-item"><p>Сколько стоит эскорт? Стоимость зависит от времени, уровня модели и типа встречи. Подробности можно уточнить у менеджера, который предоставит прозрачную информацию о ценах.</p></div>
-      <div class="faq-item"><p>Какие дополнительные услуги можно заказать? Помимо классического эскорта, доступны VIP-услуги, сопровождение в путешествиях и эксклюзивные предложения для постоянных клиентов, включая персонализированный подбор.</p></div>
-      <div class="faq-item"><p>Как обеспечивается безопасность встреч? Все наши модели проходят медицинские проверки, а встречи организуются с учетом строгих мер безопасности и конфиденциальности.</p></div>
-      <div class="faq-item"><p>Можно ли заказать эскорт на короткий срок? Да, мы предлагаем гибкие варианты, включая эскорт на час, вечер или даже несколько дней, в зависимости от ваших потребностей.</p></div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <section class="section call-to-action" id="contact">
-    <h3>Начните с Эскорта от Scarlet Night Уже Сегодня!</h3>
-    <p>Эскорт на вечер, эскорт-путешествия, эскорт на день, элитный эскорт по всей России – это стиль и удовольствие. Luxury escort для ужина, встречи или поездки – всё на сайте scarletnight.com. Элитный эскорт 24/7 – звоните или пишите в Telegram, WhatsApp, чтобы заказать эскорт на ночь, VIP эскорт, эскорт на выезд и насладиться временем с лучшими проверенными спутницами!</p>
-    <p>Агентство не предоставляет услуг интимного характера!</p>
-    <a href="https://t.me/your_bot" class="btn">Связаться с Агентством</a>
-  </section>
-
-  <div class="divider"></div>
-
-  <section class="section blog">
-    <h3>Актуальные Статьи про Эскорт Индустрию</h3>
-    <div class="blog-grid">
-      <div class="blog-item"><p>Эскорт услуги с ТОП моделями и VIP девушками: отдых на высшем уровне. Узнайте, как выбрать идеальную компанию для незабываемого вечера и насладиться элитным сопровождением, которое подчеркнет ваш статус и вкус.</p></div>
-      <div class="blog-item"><p>Элитные знакомства с самыми шикарными девушками: твой путь к роскоши. Откройте секреты успешных встреч и как найти спутницу, которая идеально впишется в ваше окружение и подчеркнет ваш стиль.</p></div>
-      <div class="blog-item"><p>Как выбрать идеальную спутницу для мероприятия: советы от экспертов. Полезные рекомендации по подбору эскорта для светских событий, деловых встреч и частных вечеринок, чтобы всё прошло на высшем уровне.</p></div>
-      <div class="blog-item"><p>Преимущества VIP эскорта в путешествиях: комфорт и стиль в любой точке мира. Узнайте, почему стоит взять с собой элитную модель в поездку, и как правильно организовать сопровождение за границей.</p></div>
-      <div class="blog-item"><p>Секреты успешного эскорта: что нужно знать клиентам. Инсайды из индустрии, советы по конфиденциальности и максимальному удовольствию от услуг, чтобы каждая встреча была идеальной.</p></div>
-      <div class="blog-item"><p>Тренды в элитном эскорте 2025: что ждет клиентов. Обзор новых тенденций, популярных моделей и инноваций в сфере VIP сопровождения, которые задают тон в индустрии.</p></div>
-      <div class="blog-item"><p>Эскорт и бизнес: как сопровождение помогает в деловых переговорах. Узнайте, как правильно подобранная спутница может повлиять на успех сделки и создать нужный имидж.</p></div>
-      <div class="blog-item"><p>Как организовать идеальный вечер с эскортом: пошаговое руководство. Советы по планированию встречи, выбору модели и созданию незабываемой атмосферы с помощью услуг Scarlet Night.</p></div>
-    </div>
-  </section>
-
-  <a href="https://t.me/your_bot" class="floating-cta">Заказать сейчас</a>
+    <div style="height:120px"></div>
+  </main>
 
   <footer>
-    <p>⚜ Официальное подтверждение качества • <span>Scarlet Night © 2025</span> • Проверено организацией России</p>
+    <p>⚜ Официальное подтверждение качества • <span>Scarlet Night © 2025</span></p>
   </footer>
 
   <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
-    menuToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
+    /* Small inline JS for enhanced animations and interactions.
+       - ripple effect on buttons
+       - section reveal on scroll
+       - mobile nav toggle
+       - cursor glow on desktop
+       - lightweight tilt effect for cards
+    */
+
+    // Ripple
+    document.querySelectorAll('.js-ripple').forEach(btn => {
+      btn.addEventListener('click', function(e){
+        const rect = this.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+        ripple.style.left = (e.clientX - rect.left - rect.width/2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - rect.height/2) + 'px';
+        ripple.style.position = 'absolute';
+        ripple.style.background = 'radial-gradient(circle, rgba(255,255,255,0.18), rgba(212,175,55,0.06))';
+        ripple.style.borderRadius = '999px';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.opacity = '0.9';
+        ripple.style.pointerEvents = 'none';
+        ripple.style.transition = 'transform .6s cubic-bezier(.2,.9,.3,1), opacity .6s ease';
+        this.appendChild(ripple);
+        requestAnimationFrame(()=>{
+          ripple.style.transform = 'scale(2.6)';
+          ripple.style.opacity = '0';
+        });
+        setTimeout(()=>ripple.remove(),700);
+      })
     });
 
-    const navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        nav.classList.remove('active');
-      });
-    });
-
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('header');
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-
+    // IntersectionObserver for sections
     const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    },{threshold:0.12});
+    sections.forEach(s=>io.observe(s));
 
-    sections.forEach(section => {
-      section.style.opacity = '0';
-      section.style.transform = 'translateY(40px)';
-      observer.observe(section);
-    });
+    // Mobile nav toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
+    menuToggle.addEventListener('click', ()=> nav.classList.toggle('show'));
+    document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click', ()=> nav.classList.remove('show')));
 
-    // Falling kiss emojis
-    const fallingEmojis = document.querySelector('.falling-emojis');
-    function createEmoji() {
-      const emoji = document.createElement('span');
-      emoji.textContent = '💋';
-      emoji.style.left = Math.random() * 100 + 'vw';
-      emoji.style.animationDuration = Math.random() * 10 + 5 + 's';
-      emoji.style.fontSize = Math.random() * 20 + 20 + 'px';
-      fallingEmojis.appendChild(emoji);
-      setTimeout(() => {
-        emoji.remove();
-      }, 15000);
+    // Cursor glow effect on desktop
+    const cursorGlow = document.getElementById('cursorGlow');
+    let isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if(!isTouch){
+      cursorGlow.style.opacity = '1';
+      document.addEventListener('mousemove', (e)=>{
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+        cursorGlow.style.width = cursorGlow.style.height = '48px';
+      });
+      document.addEventListener('mousedown', ()=>{cursorGlow.style.transform='translate(-50%,-50%) scale(.8)';setTimeout(()=>cursorGlow.style.transform='translate(-50%,-50%) scale(1)',120)});
     }
-    setInterval(createEmoji, 500);
+
+    // Lightweight tilt on cards
+    function addTilt(container){
+      container.addEventListener('mousemove', (ev)=>{
+        const rect = container.getBoundingClientRect();
+        const cx = rect.left + rect.width/2;
+        const cy = rect.top + rect.height/2;
+        const dx = ev.clientX - cx; const dy = ev.clientY - cy;
+        const tiltX = (dy / rect.height) * -10; const tiltY = (dx / rect.width) * 10;
+        container.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(0)`;
+      });
+      container.addEventListener('mouseleave', ()=>{container.style.transform='none'});
+    }
+    document.querySelectorAll('.guarantee-item, .advantage-item, .review, .faq-item, .order-item').forEach(addTilt);
+
+    // Make sure nav visible on desktop (safety) — handled in CSS, but ensure class removed on resize.
+    window.addEventListener('resize', ()=>{ if(window.innerWidth>900) nav.classList.remove('show'); });
+
+    // Accessibility: focus visible on keyboard nav
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Tab') document.body.classList.add('user-is-tabbing'); });
+
   </script>
 </body>
 </html>
