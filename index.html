@@ -431,8 +431,8 @@
             transition: transform 0.3s ease;
         }
         
-        /* === МОДАЛЬНОЕ ОКНО ДОГОВОРА === */
-        .contract-modal {
+        /* === МОДАЛЬНОЕ ОКНО ДЛЯ PDF === */
+        .pdf-modal {
             display: none;
             position: fixed;
             z-index: 2000;
@@ -449,15 +449,15 @@
             transition: opacity 0.4s ease;
         }
         
-        .contract-modal.active {
+        .pdf-modal.active {
             display: flex;
             opacity: 1;
         }
         
-        .contract-modal-content {
+        .pdf-modal-content {
             position: relative;
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             height: 85vh;
             background: var(--bg-1);
             border-radius: 20px;
@@ -471,66 +471,30 @@
             flex-direction: column;
         }
         
-        .contract-modal.active .contract-modal-content {
+        .pdf-modal.active .pdf-modal-content {
             transform: scale(1);
         }
         
-        .contract-header {
+        .pdf-header {
             background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
             padding: 20px;
             text-align: center;
             border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .contract-header h3 {
+        .pdf-header h3 {
             color: #000;
             margin: 0;
             font-size: 1.5rem;
             font-weight: 800;
-        }
-        
-        .contract-body {
             flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-            background: linear-gradient(180deg, rgba(212,175,55,0.03), transparent);
+            text-align: center;
         }
         
-        .contract-text {
-            text-align: left;
-            line-height: 1.8;
-            color: rgba(233, 221, 210, 0.95);
-            font-size: 14px;
-        }
-        
-        .contract-text h4 {
-            color: var(--accent-1);
-            margin: 25px 0 15px;
-            font-size: 1.2rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            padding-bottom: 8px;
-        }
-        
-        .contract-text p {
-            margin-bottom: 15px;
-            text-align: left;
-            padding: 0;
-        }
-        
-        .contract-text ul {
-            margin: 15px 0;
-            padding-left: 20px;
-        }
-        
-        .contract-text li {
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-        
-        .contract-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
+        .pdf-close {
             font-size: 28px;
             color: #000;
             cursor: pointer;
@@ -543,25 +507,80 @@
             border-radius: 50%;
             transition: all 0.3s ease;
             font-weight: bold;
+            border: none;
         }
         
-        .contract-close:hover {
+        .pdf-close:hover {
             background: var(--accent-1);
             transform: rotate(90deg);
         }
         
-        .contract-signature {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(212, 175, 55, 0.3);
-            text-align: center;
+        .pdf-viewer {
+            flex: 1;
+            width: 100%;
+            border: none;
+            background: white;
         }
         
-        .signature-line {
-            display: inline-block;
-            width: 200px;
-            border-bottom: 1px solid var(--accent-1);
-            margin: 20px 0 5px;
+        .pdf-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            color: var(--accent-1);
+            font-size: 18px;
+        }
+        
+        .pdf-loading .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(212, 175, 55, 0.3);
+            border-top: 4px solid var(--accent-1);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .pdf-error {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            color: var(--accent-1);
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .pdf-error i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--accent-2);
+        }
+        
+        .pdf-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .pdf-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
         }
         
         /* === ОТЗЫВЫ === */
@@ -725,32 +744,22 @@
                 font-size: 14px;
             }
             
-            /* Адаптация модального окна */
-            .contract-modal-content {
+            /* Адаптация модального окна PDF */
+            .pdf-modal-content {
                 height: 90vh;
                 margin: 10px;
                 border-radius: 15px;
             }
             
-            .contract-body {
-                padding: 20px;
-            }
-            
-            .contract-header {
+            .pdf-header {
                 padding: 15px;
             }
             
-            .contract-header h3 {
+            .pdf-header h3 {
                 font-size: 1.3rem;
             }
             
-            .contract-text {
-                font-size: 13px;
-            }
-            
-            .contract-close {
-                top: 10px;
-                right: 15px;
+            .pdf-close {
                 width: 35px;
                 height: 35px;
                 font-size: 24px;
@@ -784,14 +793,6 @@
                 padding: 12px 25px;
                 font-size: 13px;
                 max-width: 260px;
-            }
-            
-            .contract-body {
-                padding: 15px;
-            }
-            
-            .contract-text {
-                font-size: 12px;
             }
         }
         
@@ -1044,96 +1045,100 @@
         <p>Официальный сайт агентства • <span>Scarlet Night © 2025</span></p>
     </footer>
 
-    <!-- Модальное окно договора -->
-    <div class="contract-modal" id="contractModal">
-        <div class="contract-modal-content">
-            <div class="contract-header">
-                <h3>ДОГОВОР ОБ ОКАЗАНИИ ЭСКОРТ-УСЛУГ</h3>
+    <!-- Модальное окно для PDF -->
+    <div class="pdf-modal" id="pdfModal">
+        <div class="pdf-modal-content">
+            <div class="pdf-header">
+                <h3>ДОГОВОР ОБ ОКАЗАНИИ УСЛУГ</h3>
+                <button class="pdf-close" id="pdfClose">×</button>
             </div>
-            <span class="contract-close" id="contractClose">×</span>
-            <div class="contract-body">
-                <div class="contract-text">
-                    <h4>1. ПРЕДМЕТ ДОГОВОРА</h4>
-                    <p>1.1. Исполнитель обязуется оказать Заказчику услуги эскорта, а Заказчик обязуется оплатить эти услуги в размере и порядке, установленном настоящим Договором.</p>
-                    
-                    <h4>2. ПРАВА И ОБЯЗАННОСТИ СТОРОН</h4>
-                    <p>2.1. Исполнитель обязуется:</p>
-                    <ul>
-                        <li>Обеспечить присутствие модели в согласованное время и месте</li>
-                        <li>Гарантировать соответствие модели заявленным характеристикам</li>
-                        <li>Соблюдать полную конфиденциальность</li>
-                        <li>Обеспечить профессиональное поведение модели</li>
-                    </ul>
-                    
-                    <p>2.2. Заказчик обязуется:</p>
-                    <ul>
-                        <li>Соблюдать условия договора и правила поведения</li>
-                        <li>Оплатить услуги в установленные сроки</li>
-                        <li>Уважительно относиться к модели</li>
-                        <li>Соблюдать конфиденциальность</li>
-                    </ul>
-                    
-                    <h4>3. СТОИМОСТЬ УСЛУГ И ПОРЯДОК РАСЧЕТОВ</h4>
-                    <p>3.1. Стоимость услуг составляет от 25 000 рублей за час.</p>
-                    <p>3.2. Оплата производится: 50% предоплата, 50% при встрече.</p>
-                    <p>3.3. Принимаются: наличные, банковские карты, USDT, BTC.</p>
-                    
-                    <h4>4. КОНФИДЕНЦИАЛЬНОСТЬ</h4>
-                    <p>4.1. Стороны обязуются сохранять в тайне условия Договора и любую информацию, полученную в ходе его исполнения.</p>
-                    <p>4.2. Все персональные данные Заказчика уничтожаются после оказания услуг.</p>
-                    
-                    <h4>5. ОТВЕТСТВЕННОСТЬ СТОРОН</h4>
-                    <p>5.1. За неисполнение или ненадлежащее исполнение обязательств по Договору Стороны несут ответственность в соответствии с законодательством РФ.</p>
-                    
-                    <h4>6. ФОРС-МАЖОР</h4>
-                    <p>6.1. Стороны освобождаются от ответственности за неисполнение обязательств по Договору, если это неисполнение вызвано обстоятельствами непреодолимой силы.</p>
-                    
-                    <h4>7. СРОК ДЕЙСТВИЯ ДОГОВОРА</h4>
-                    <p>7.1. Настоящий Договор вступает в силу с момента его акцепта Заказчиком и действует до полного исполнения Сторонами своих обязательств.</p>
-                    
-                    <div class="contract-signature">
-                        <p>ИСПОЛНИТЕЛЬ: Агентство "Scarlet Night"</p>
-                        <div class="signature-line"></div>
-                        <p>Подпись</p>
-                        
-                        <p style="margin-top: 30px;">ЗАКАЗЧИК: _________________________</p>
-                        <div class="signature-line"></div>
-                        <p>Подпись</p>
-                    </div>
-                </div>
+            
+            <div id="pdfLoading" class="pdf-loading">
+                <div class="spinner"></div>
+                <p>Загрузка договора...</p>
             </div>
+            
+            <div id="pdfError" class="pdf-error" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h4>Не удалось загрузить договор</h4>
+                <p>Возможно, файл не найден или произошла ошибка при загрузке.</p>
+                <a href="contract.pdf" class="pdf-download-btn" download>
+                    <i class="fas fa-download"></i>
+                    Скачать договор
+                </a>
+            </div>
+            
+            <iframe id="pdfViewer" class="pdf-viewer" style="display: none;" 
+                    frameborder="0"></iframe>
         </div>
     </div>
 
     <script>
-        // Управление модальным окном договора
-        const contractModal = document.getElementById('contractModal');
+        // Управление модальным окном PDF
+        const pdfModal = document.getElementById('pdfModal');
         const viewContractBtn = document.getElementById('viewContractBtn');
-        const contractClose = document.getElementById('contractClose');
+        const pdfClose = document.getElementById('pdfClose');
+        const pdfViewer = document.getElementById('pdfViewer');
+        const pdfLoading = document.getElementById('pdfLoading');
+        const pdfError = document.getElementById('pdfError');
 
-        // Открытие модального окна
+        // Открытие модального окна с PDF
         viewContractBtn.addEventListener('click', () => {
-            contractModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            openPdfModal();
         });
+
+        function openPdfModal() {
+            pdfModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Показываем загрузку
+            pdfLoading.style.display = 'flex';
+            pdfViewer.style.display = 'none';
+            pdfError.style.display = 'none';
+            
+            // Загружаем PDF
+            const pdfUrl = 'contract.pdf';
+            pdfViewer.src = pdfUrl;
+            
+            // Проверяем загрузку PDF
+            pdfViewer.onload = function() {
+                pdfLoading.style.display = 'none';
+                pdfViewer.style.display = 'block';
+            };
+            
+            pdfViewer.onerror = function() {
+                pdfLoading.style.display = 'none';
+                pdfError.style.display = 'flex';
+            };
+            
+            // Таймаут на случай если PDF не загрузится
+            setTimeout(() => {
+                if (pdfLoading.style.display !== 'none') {
+                    pdfLoading.style.display = 'none';
+                    pdfError.style.display = 'flex';
+                }
+            }, 5000);
+        }
 
         // Закрытие модального окна
-        contractClose.addEventListener('click', closeContractModal);
-        contractModal.addEventListener('click', (e) => {
-            if (e.target === contractModal) closeContractModal();
+        pdfClose.addEventListener('click', closePdfModal);
+        pdfModal.addEventListener('click', (e) => {
+            if (e.target === pdfModal) closePdfModal();
         });
 
-        function closeContractModal() {
-            contractModal.classList.remove('active');
+        function closePdfModal() {
+            pdfModal.classList.remove('active');
             setTimeout(() => {
                 document.body.style.overflow = '';
+                // Очищаем iframe при закрытии
+                pdfViewer.src = '';
             }, 400);
         }
 
         // Закрытие по ESC
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && contractModal.classList.contains('active')) {
-                closeContractModal();
+            if (e.key === 'Escape' && pdfModal.classList.contains('active')) {
+                closePdfModal();
             }
         });
 
