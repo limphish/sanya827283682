@@ -113,6 +113,150 @@
 
         .cursor-glow { position: fixed; pointer-events: none; z-index: 999; mix-blend-mode: screen; border-radius: 999px; background: radial-gradient(circle, rgba(212,175,55,0.14), transparent); transform: translate(-50%, -50%); transition: width .12s ease, height .12s ease, opacity .12s; }
         a:focus { outline: 2px dashed rgba(212,175,55,0.22); outline-offset: 4px; }
+
+/* ПОШАГОВЫЕ КАРТОЧКИ */
+.order-steps {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 24px;
+    padding: 20px 10px;
+    max-width: 1200px;
+    margin: 32px auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-1) transparent;
+}
+
+.order-step {
+    flex: 0 0 260px;
+    background: var(--card);
+    padding: 28px 20px;
+    border-radius: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+    backdrop-filter: blur(4px);
+}
+
+.order-step:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.2);
+}
+
+.step-number {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--accent-1), #b8972a);
+    color: #000;
+    font-weight: 800;
+    font-size: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+    z-index: 2;
+}
+
+.step-icon {
+    font-size: 32px;
+    color: var(--accent-1);
+    margin: 16px 0 12px;
+    text-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+.order-step h4 {
+    color: var(--accent-1);
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.order-step p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(233, 221, 210, 0.9);
+    margin: 0;
+}
+
+/* КНОПКА "НАЧАТЬ ЗАКАЗ" */
+.btn-order-now {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 48px;
+    margin: 20px auto 0;
+    font-weight: 700;
+    font-size: 17px;
+    color: #000;
+    background: linear-gradient(135deg, #f1d48a 0%, #d4af37 50%, #b8972a 100%);
+    border: none;
+    border-radius: 999px;
+    box-shadow: 
+        0 10px 40px rgba(212, 175, 55, 0.3),
+        0 0 0 1px rgba(212, 175, 55, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-order-now:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+        0 18px 60px rgba(212, 175, 55, 0.4),
+        0 0 0 1px rgba(212, 175, 55, 0.3);
+}
+
+.btn-order-now:active {
+    transform: translateY(-2px) scale(0.99);
+}
+
+.btn-order-now i {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.btn-order-now:hover i {
+    transform: translateX(4px);
+}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ */
+@media (max-width: 900px) {
+    .order-steps {
+        gap: 16px;
+        padding: 16px 8px;
+    }
+    .order-step {
+        flex: 0 0 78vw;
+        padding: 24px 16px;
+    }
+    .step-number {
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+        top: -14px;
+    }
+    .step-icon {
+        font-size: 28px;
+    }
+    .btn-order-now {
+        padding: 14px 36px;
+        font-size: 16px;
+        max-width: 280px;
+    }
+}
+        
 /* КРАСИВЫЕ ЗВЁЗДЫ */
 .stars {
     color: var(--accent-1);
@@ -234,15 +378,44 @@
 
         <div class="divider"></div>
 
-        <section class="section how-to-order" id="how-to-order">
-            <h3>Как Заказать Наши Услуги — Просто и Быстро</h3>
-            <p>Сервис Scarlet Night создан так, чтобы вы могли оформить встречу без лишних шагов и ожиданий. Выберите понравившуюся модель, укажите желаемое время — и мы позаботимся обо всём остальном. Свяжитесь с нашим менеджером, уточните детали встречи и подтвердите заказ. Все процессы автоматизированы и конфиденциальны. Мы ценим ваше время и обеспечиваем лёгкий, интуитивно понятный путь от выбора до встречи. Scarlet Night — это сервис, который работает так же безупречно, как и выглядит.</p>
-            <div class="order-grid">
-                <div class="order-item"><p>Выбор модели в каталоге.</p></div>
-                <div class="order-item"><p>Связь с менеджером в Telegram/WhatsApp.</p></div>
-                <div class="order-item"><p>Согласование всех деталей и подтверждение бронирования.</p></div>
-            </div>
-        </section>
+<section class="section how-to-order" id="how-to-order">
+    <h3>Как Заказать — Пошаговая Инструкция</h3>
+    <p>Мы сделали процесс заказа максимально простым, быстрым и конфиденциальным. Всё, что нужно — выбрать девушку, связаться с нами и наслаждаться вечером. Никаких сложных форм, очередей или лишних вопросов. Scarlet Night — это сервис, который работает на вас, а не наоборот.</p>
+
+    <div class="order-steps">
+        <div class="order-step">
+            <div class="step-number">1</div>
+            <div class="step-icon"><i class="fas fa-image"></i></div>
+            <h4>Выберите модель</h4>
+            <p>Перейдите в каталог и выберите девушку, которая соответствует вашему настроению и предпочтениям.</p>
+        </div>
+
+        <div class="order-step">
+            <div class="step-number">2</div>
+            <div class="step-icon"><i class="fas fa-paper-plane"></i></div>
+            <h4>Напишите менеджеру</h4>
+            <p>Свяжитесь с нами в <strong>Telegram</strong> или <strong>WhatsApp</strong> — ответим мгновенно, 24/7.</p>
+        </div>
+
+        <div class="order-step">
+            <div class="step-number">3</div>
+            <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+            <h4>Подтвердите детали</h4>
+            <p>Уточните время, место, продолжительность и любые пожелания. Мы всё организуем идеально.</p>
+        </div>
+
+        <div class="order-step">
+            <div class="step-number">4</div>
+            <div class="step-icon"><i class="fas fa-glass-cheers"></i></div>
+            <h4>Наслаждайтесь вечером</h4>
+            <p>Встречайтесь с моделью в назначенное время. Всё уже готово — просто расслабьтесь и получайте удовольствие.</p>
+        </div>
+    </div>
+
+    <a href="https://t.me/your_bot" class="btn-order-now js-ripple">
+        <i class="fab fa-telegram-plane"></i> Начать заказ прямо сейчас
+    </a>
+</section>
 
         <div class="divider"></div>
 
@@ -442,5 +615,6 @@
     </script>
 </body>
 </html>
+
 
 
