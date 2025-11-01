@@ -113,6 +113,75 @@
 
         .cursor-glow { position: fixed; pointer-events: none; z-index: 999; mix-blend-mode: screen; border-radius: 999px; background: radial-gradient(circle, rgba(212,175,55,0.14), transparent); transform: translate(-50%, -50%); transition: width .12s ease, height .12s ease, opacity .12s; }
         a:focus { outline: 2px dashed rgba(212,175,55,0.22); outline-offset: 4px; }
+/* КРАСИВЫЕ ЗВЁЗДЫ */
+.stars {
+    color: var(--accent-1);
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+/* ПРЕМИУМ-КНОПКА ОТЗЫВОВ */
+.btn-reviews {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 48px;
+    margin: 32px auto 0;
+    font-weight: 700;
+    font-size: 16px;
+    color: #000;
+    background: linear-gradient(135deg, #f1d48a 0%, #d4af37 50%, #b8972a 100%);
+    border: none;
+    border-radius: 999px;
+    box-shadow: 
+        0 8px 32px rgba(212, 175, 55, 0.25),
+        0 0 0 1px rgba(212, 175, 55, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    backdrop-filter: blur(4px);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-reviews:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+        0 16px 50px rgba(212, 175, 55, 0.35),
+        0 0 0 1px rgba(212, 175, 55, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 50%, #ccad38 100%);
+}
+
+.btn-reviews:active {
+    transform: translateY(-2px) scale(0.99);
+}
+
+.btn-reviews .btn-icon {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.btn-reviews:hover .btn-icon {
+    transform: rotate(12deg) scale(1.1);
+}
+
+/* Мобильная адаптация */
+@media (max-width: 900px) {
+    .btn-reviews {
+        padding: 14px 36px;
+        font-size: 15px;
+        max-width: 280px;
+    }
+    .stars {
+        font-size: 20px;
+    }
+}
     </style>
 </head>
 <body>
@@ -194,16 +263,34 @@
 
         <div class="divider"></div>
 
-        <section class="section reviews" id="reviews">
-            <h3>Отзывы Клиентов</h3>
-            <p>Наши клиенты — люди, которые привыкли выбирать лучшее. Они ценят искренность, умение слушать и атмосферу, в которой всё происходит естественно. В отзывах отмечают не только красоту наших девушек, но и высокий уровень сервиса, деликатность и вкус. Мы гордимся тем, что значительная часть клиентов возвращается снова — ведь с Scarlet Night каждая встреча оставляет след из эмоций, которые хочется повторить.</p>
-            <div class="reviews-grid">
-                <div class="review"><div class="stars">5 stars</div><p>"Scarlet Night — это другой уровень. Всё на высшем уровне."</p><strong>— Алексей</strong></div>
-                <div class="review"><div class="stars">5 stars</div><p>"Сервис без компромиссов: внимание к деталям и полная конфиденциальность."</p><strong>— Дмитрий</strong></div>
-                <div class="review"><div class="stars">5 stars</div><p>"Идеальный вечер, всё организовано безупречно."</p><strong>— Сергей</strong></div>
-            </div>
-            <a href="https://t.me/your_bot" class="btn js-ripple">Посмотреть все отзывы</a>
-        </section>
+<section class="section reviews" id="reviews">
+    <h3>Отзывы Клиентов</h3>
+    <p>Наши клиенты — люди, которые привыкли выбирать лучшее. Они ценят искренность, умение слушать и атмосферу, в которой всё происходит естественно. В отзывах отмечают не только красоту наших девушек, но и высокий уровень сервиса, деликатность и вкус. Мы гордимся тем, что значительная часть клиентов возвращается снова — ведь с Scarlet Night каждая встреча оставляет след из эмоций, которые хочется повторить.</p>
+
+    <div class="reviews-grid">
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Scarlet Night — это другой уровень. Всё на высшем уровне."</p>
+            <strong>— Алексей</strong>
+        </div>
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Сервис без компромиссов: внимание к деталям и полная конфиденциальность."</p>
+            <strong>— Дмитрий</strong>
+        </div>
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Идеальный вечер, всё организовано безупречно."</p>
+            <strong>— Сергей</strong>
+        </div>
+    </div>
+
+    <!-- КРАСИВАЯ КНОПКА -->
+    <a href="https://t.me/your_bot" class="btn-reviews js-ripple">
+        <span class="btn-icon"><i class="fas fa-comments"></i></span>
+        Посмотреть все отзывы
+    </a>
+</section>
 
         <div class="divider"></div>
 
@@ -355,4 +442,5 @@
     </script>
 </body>
 </html>
+
 
