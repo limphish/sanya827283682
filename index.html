@@ -637,121 +637,81 @@
     }
 }
 
-/* === ПОЧЕМУ МЫ — СТИЛЬ КАК У "ПРЕИМУЩЕСТВ" === */
-.why-steps {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 28px;
-    padding: 26px 10px;
-    max-width: 1200px;
-    margin: 38px auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent-1) transparent;
-}
-
-.why-step {
-    flex: 0 0 290px;
-    background: var(--card);
-    padding: 34px 26px;
-    border-radius: 22px;
-    border: 1px solid rgba(212, 175, 55, 0.07);
-    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.58);
-    text-align: center;
-    position: relative;
-    transition: all 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
-    backdrop-filter: blur(7px);
-    opacity: 0;
-    transform: translateY(40px);
-}
-
-.why-step.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.why-step:hover {
-    transform: translateY(-16px) scale(1.04);
-    box-shadow:
-        0 32px 90px rgba(0, 0, 0, 0.7),
-        0 0 0 1px rgba(212, 175, 55, 0.22),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    border-color: rgba(212, 175, 55, 0.28);
-    z-index: 2;
-}
-
-.why-step .step-number {
+/* === ШЕСТИУГОЛЬНЫЙ НОМЕР С ГЛЯНЦЕМ И СВЕЧЕНИЕМ === */
+.why-step .step-number,
+.advantage-step .step-number,
+.guarantee-step .step-number,
+.order-step .step-number {
     position: absolute;
     top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, #f8e6a0, #d4af37, #b8972a);
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%);
     color: #000;
     font-weight: 900;
     font-size: 18px;
-    border-radius: 50%;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow:
-        0 10px 28px rgba(212, 175, 55, 0.4),
-        0 0 0 4px rgba(5, 5, 5, 0.35);
-    z-index: 2;
+    z-index: 3;
     letter-spacing: 0.6px;
+    
+    /* ШЕСТИУГОЛЬНИК */
+    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+    
+    /* ТОНКАЯ ЗОЛОТАЯ ОБВОДКА */
+    box-shadow: 
+        0 0 0 2px rgba(212, 175, 55, 0.35),
+        0 0 0 4px rgba(5, 5, 5, 0.3);
+    
+    /* МЯГКОЕ ВНЕШНЕЕ СВЕЧЕНИЕ (EMBER GLOW) */
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.4));
+    
+    /* ГЛЯНЦЕВЫЙ БЛИК СВЕРХУ */
+    background-image: 
+        linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%),
+        radial-gradient(at 30% 30%, rgba(255, 255, 255, 0.4), transparent 60%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    
+    /* АНИМАЦИЯ ПРИ HOVER */
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
-.why-step .step-icon {
-    font-size: 36px;
-    color: var(--accent-1);
-    margin: 20px 0 16px;
-    text-shadow: 0 5px 16px rgba(212, 175, 55, 0.28);
-    transition: all 0.45s ease;
+.why-step:hover .step-number,
+.advantage-step:hover .step-number,
+.guarantee-step:hover .step-number,
+.order-step:hover .step-number {
+    transform: translateX(-50%) translateY(-2px) scale(1.08);
+    filter: 
+        drop-shadow(0 0 18px rgba(212, 175, 55, 0.55))
+        drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+    box-shadow: 
+        0 0 0 2px rgba(212, 175, 55, 0.5),
+        0 0 0 5px rgba(5, 5, 5, 0.35),
+        0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-.why-step:hover .step-icon {
-    transform: scale(1.18) rotate(10deg);
-    filter: drop-shadow(0 8px 20px rgba(212, 175, 55, 0.35));
-}
-
-.why-step h4 {
-    color: var(--accent-1);
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    margin-bottom: 12px;
-    letter-spacing: 0.6px;
-}
-
-.why-step p {
-    font-size: 15.8px;
-    line-height: 1.78;
-    color: rgba(233, 221, 210, 0.94);
-    margin: 0;
-}
-
-/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+/* МОБИЛЬНАЯ ВЕРСИЯ */
 @media (max-width: 900px) {
-    .why-steps {
-        gap: 20px;
-        padding: 22px 8px;
-        margin: 32px auto;
-    }
-    .why-step {
-        flex: 0 0 78vw;
-        padding: 30px 20px;
-    }
-    .why-step .step-number {
-        width: 38px;
-        height: 38px;
+    .why-step .step-number,
+    .advantage-step .step-number,
+    .guarantee-step .step-number,
+    .order-step .step-number {
+        width: 40px;
+        height: 40px;
         font-size: 16px;
         top: -18px;
+        filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.35));
     }
-    .why-step .step-icon {
-        font-size: 32px;
-    }
-    .why-step h4 {
-        font-size: 18.5px;
+    .why-step:hover .step-number,
+    .advantage-step:hover .step-number,
+    .guarantee-step:hover .step-number,
+    .order-step:hover .step-number {
+        transform: translateX(-50%) translateY(-1px) scale(1.06);
     }
 }
         
@@ -1505,6 +1465,7 @@ guaranteeSteps.forEach(step => {
     </script>
 </body>
 </html>
+
 
 
 
