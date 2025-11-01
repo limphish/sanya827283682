@@ -82,980 +82,535 @@
         #pdfViewer { width: 100%; height: 100%; border: none; }
         .pdf-close { position: absolute; top: 16px; right: 20px; font-size: 32px; color: var(--accent-1); cursor: pointer; z-index: 10; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(212, 175, 55, 0.1); border-radius: 50%; transition: all 0.3s ease; backdrop-filter: blur(4px); }
         .pdf-close:hover { background: var(--accent-1); color: #000; transform: rotate(90deg); }
+        
+        /* === ОБЩИЕ СТИЛИ ДЛЯ КАРТОЧЕК С ШЕСТИУГОЛЬНИКАМИ === */
+        .why-steps, .advantages-steps, .order-steps, .guarantee-steps {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 28px;
+            padding: 40px 12px 30px; /* Увеличил верхний паддинг для шестиугольников */
+            max-width: 1200px;
+            margin: 40px auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-1) transparent;
+            justify-content: center;
+        }
+        
+        .why-step, .advantage-step, .order-step, .guarantee-step {
+            flex: 0 0 300px;
+            background: var(--card);
+            padding: 50px 28px 32px; /* Увеличил верхний паддинг для шестиугольников */
+            border-radius: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.58);
+            text-align: center;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            transform: translateY(40px);
+            overflow: visible; /* Важно: разрешаем элементам выходить за границы */
+        }
+        
+        .why-step.visible, .advantage-step.visible, .order-step.visible, .guarantee-step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .why-step:hover, .advantage-step:hover, .order-step:hover, .guarantee-step:hover {
+            transform: translateY(-16px) scale(1.04);
+            box-shadow:
+                0 32px 90px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(212, 175, 55, 0.24),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            border-color: rgba(212, 175, 55, 0.28);
+            z-index: 2;
+        }
+        
+        /* === ИДЕАЛЬНЫЙ РОВНЫЙ ШЕСТИУГОЛЬНИК С ГЛЯНЦЕМ И СВЕЧЕНИЕМ === */
+        .why-step .step-number,
+        .advantage-step .step-number,
+        .order-step .step-number,
+        .guarantee-step .step-number {
+            position: absolute;
+            top: -26px; /* Увеличил отступ для лучшего отображения */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%);
+            color: #000;
+            font-weight: 900;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10; /* Увеличил z-index чтобы был поверх других элементов */
+            letter-spacing: 0.6px;
+           
+            /* ИДЕАЛЬНЫЙ РОВНЫЙ ШЕСТИУГОЛЬНИК */
+            clip-path: polygon(
+                50% 0%, /* верхняя вершина */
+                95% 25%, /* верхний правый угол */
+                95% 75%, /* нижний правый угол */
+                50% 100%, /* нижняя вершина */
+                5% 75%, /* нижний левый угол */
+                5% 25% /* верхний левый угол */
+            );
+           
+            /* ТОНКАЯ ЗОЛОТАЯ ОБВОДКА */
+            box-shadow:
+                0 0 0 2px rgba(212, 175, 55, 0.38),
+                0 0 0 4px rgba(5, 5, 5, 0.32);
+           
+            /* МЯГКОЕ ВНЕШНЕЕ СВЕЧЕНИЕ (EMBER GLOW) */
+            filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.42));
+           
+            /* ГЛЯНЦЕВЫЙ БЛИК СВЕРХУ */
+            background-image:
+                linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%),
+                radial-gradient(at 25% 25%, rgba(255, 255, 255, 0.5), transparent 65%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+           
+            /* ПЛАВНАЯ АНИМАЦИЯ */
+            transition: all 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+        
+        /* HOVER — УСИЛЕНИЕ СВЕЧЕНИЯ И ПОДЪЁМ */
+        .why-step:hover .step-number,
+        .advantage-step:hover .step-number,
+        .order-step:hover .step-number,
+        .guarantee-step:hover .step-number {
+            transform: translateX(-50%) translateY(-8px) scale(1.1); /* Увеличил подъем при ховере */
+            filter:
+                drop-shadow(0 0 20px rgba(212, 175, 55, 0.6))
+                drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
+            box-shadow:
+                0 0 0 2px rgba(212, 175, 55, 0.55),
+                0 0 0 5px rgba(5, 5, 5, 0.38),
+                0 10px 24px rgba(0, 0, 0, 0.45);
+        }
+        
+        /* ИКОНКА */
+        .why-step .step-icon,
+        .advantage-step .step-icon,
+        .order-step .step-icon,
+        .guarantee-step .step-icon {
+            font-size: 38px;
+            color: var(--accent-1);
+            margin: 24px 0 16px;
+            text-shadow: 0 5px 16px rgba(212, 175, 55, 0.28);
+            transition: all 0.45s ease;
+        }
+        
+        .why-step:hover .step-icon,
+        .advantage-step:hover .step-icon,
+        .order-step:hover .step-icon,
+        .guarantee-step:hover .step-icon {
+            transform: scale(1.18) rotate(10deg);
+            filter: drop-shadow(0 8px 20px rgba(212, 175, 55, 0.35));
+        }
+        
+        /* ЗАГОЛОВОК */
+        .why-step h4,
+        .advantage-step h4,
+        .order-step h4,
+        .guarantee-step h4 {
+            color: var(--accent-1);
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin: 0 0 12px;
+            letter-spacing: 0.6px;
+            line-height: 1.3;
+        }
+        
+        /* ТЕКСТ */
+        .why-step p,
+        .advantage-step p,
+        .order-step p,
+        .guarantee-step p {
+            font-size: 15.8px;
+            line-height: 1.78;
+            color: rgba(233, 221, 210, 0.94);
+            margin: 0;
+            padding: 0 4px;
+        }
+        
+        /* === КНОПКИ === */
+        .btn-advantages, .btn-order-now, .btn-view-contract, .btn-faq, .btn-cta-final {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 48px;
+            margin: 32px auto 0;
+            font-weight: 700;
+            font-size: 17px;
+            color: #000;
+            background: linear-gradient(135deg, #f1d48a 0%, #d4af37 50%, #b8972a 100%);
+            border: none;
+            border-radius: 999px;
+            box-shadow:
+                0 10px 40px rgba(212, 175, 55, 0.3),
+                0 0 0 1px rgba(212, 175, 55, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+        
+        .btn-advantages:hover, .btn-order-now:hover, .btn-view-contract:hover, .btn-faq:hover, .btn-cta-final:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow:
+                0 18px 60px rgba(212, 175, 55, 0.4),
+                0 0 0 1px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-advantages:active, .btn-order-now:active, .btn-view-contract:active, .btn-faq:active, .btn-cta-final:active {
+            transform: translateY(-2px) scale(0.99);
+        }
+        
+        .btn-advantages i, .btn-order-now i, .btn-view-contract i, .btn-faq i, .btn-cta-final i {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-advantages:hover i, .btn-order-now:hover i, .btn-view-contract:hover i, .btn-faq:hover i, .btn-cta-final:hover i {
+            transform: translateX(4px);
+        }
+        
+        /* === ОТЗЫВЫ === */
+        .reviews-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 18px;
+            padding: 10px 6px;
+            max-width: 1100px;
+            margin: 20px auto;
+        }
+        
+        .review {
+            flex: 0 0 320px;
+            background: var(--card);
+            padding: 22px;
+            border-radius: 14px;
+            border: 1px solid rgba(212,175,55,0.06);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+            transition: transform .45s cubic-bezier(.2,.9,.3,1), box-shadow .35s;
+        }
+        
+        .review:hover {
+            transform: translateY(-12px) rotateX(6deg);
+            box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+        }
+        
+        .stars {
+            color: var(--accent-1);
+            font-size: 22px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-reviews {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 48px;
+            margin: 32px auto 0;
+            font-weight: 700;
+            font-size: 16px;
+            color: #000;
+            background: linear-gradient(135deg, #f1d48a 0%, #d4af37 50%, #b8972a 100%);
+            border: none;
+            border-radius: 999px;
+            box-shadow:
+                0 8px 32px rgba(212, 175, 55, 0.25),
+                0 0 0 1px rgba(212, 175, 55, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+            backdrop-filter: blur(4px);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-reviews:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow:
+                0 16px 50px rgba(212, 175, 55, 0.35),
+                0 0 0 1px rgba(212, 175, 55, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 50%, #ccad38 100%);
+        }
+        
+        .btn-reviews:active {
+            transform: translateY(-2px) scale(0.99);
+        }
+        
+        .btn-reviews .btn-icon {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-reviews:hover .btn-icon {
+            transform: rotate(12deg) scale(1.1);
+        }
+        
+        /* === FAQ TIMELINE === */
+        .faq-timeline {
+            max-width: 1000px;
+            margin: 40px auto 20px;
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .faq-timeline::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--accent-1), transparent);
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .faq-card {
+            position: relative;
+            background: var(--card);
+            padding: 20px 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+            backdrop-filter: blur(6px);
+            z-index: 1;
+        }
+        
+        .faq-card.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .faq-card:hover {
+            transform: translateX(0) translateY(-6px);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.25);
+        }
+        
+        .faq-card-icon {
+            position: absolute;
+            left: -50px;
+            top: 22px;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent-1), #b8972a);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-card:hover .faq-card-icon {
+            transform: scale(1.15) rotate(12deg);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.45);
+        }
+        
+        .faq-card-content h4 {
+            color: var(--accent-1);
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin: 0 0 8px;
+            letter-spacing: 0.5px;
+        }
+        
+        .faq-card-answer {
+            font-size: 15px;
+            line-height: 1.7;
+            color: rgba(233, 221, 210, 0.92);
+            margin: 0;
+        }
+        
+        .faq-card-line {
+            position: absolute;
+            left: -26px;
+            top: 66px;
+            width: 26px;
+            height: 2px;
+            background: var(--accent-1);
+            opacity: 0.6;
+            z-index: 1;
+        }
+        
+        /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
+        .faq-card.visible .faq-card-icon {
+            animation: pulseGlow 1.5s ease-out forwards;
+        }
+        
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35); transform: scale(1); }
+            50% { box-shadow: 0 12px 40px rgba(212, 175, 55, 0.55); transform: scale(1.25); }
+            100% { box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35); transform: scale(1); }
+        }
+        
+        .cursor-glow { position: fixed; pointer-events: none; z-index: 999; mix-blend-mode: screen; border-radius: 999px; background: radial-gradient(circle, rgba(212,175,55,0.14), transparent); transform: translate(-50%, -50%); transition: width .12s ease, height .12s ease, opacity .12s; }
+        a:focus { outline: 2px dashed rgba(212,175,55,0.22); outline-offset: 4px; }
+        
+        /* === МОБИЛЬНАЯ АДАПТАЦИЯ === */
         @media (max-width: 900px) {
             header { padding: 0 16px; }
             .menu-toggle { display: block; }
-            nav { position: fixed; left: 0; right: 0; top: var(--nav-height); background: linear-gradient(180deg, rgba(0,0,0,0.92), rgba(20,6,6,0.96)); flex-direction: column; padding: 18px; gap: 6px; display: none; }
+            nav { 
+                position: fixed; 
+                left: 0; 
+                right: 0; 
+                top: var(--nav-height); 
+                background: linear-gradient(180deg, rgba(0,0,0,0.92), rgba(20,6,6,0.96)); 
+                flex-direction: column; 
+                padding: 18px; 
+                gap: 6px; 
+                display: none; 
+            }
             nav.show { display: flex; }
-            .guarantee-item, .review, .faq-item, .order-item, .advantage-item { flex: 0 0 85vw; }
             h2, h3 { font-size: 32px; }
-            .section { min-height: 70vh; padding: calc(var(--nav-height) + 15px) 20px 30px; }
-            .pdf-modal-content { height: 85vh; max-width: 100%; border-radius: 14px; }
-            .pdf-close { top: 12px; right: 12px; font-size: 28px; width: 40px; height: 40px; }
-            .btn, .btn-view-contract { width: 100%; max-width: 300px; }
+            .section { 
+                min-height: 70vh; 
+                padding: calc(var(--nav-height) + 15px) 20px 30px; 
+            }
+            .pdf-modal-content { 
+                height: 85vh; 
+                max-width: 100%; 
+                border-radius: 14px; 
+            }
+            .pdf-close { 
+                top: 12px; 
+                right: 12px; 
+                font-size: 28px; 
+                width: 40px; 
+                height: 40px; 
+            }
+            .btn, .btn-view-contract, .btn-advantages, .btn-order-now, .btn-reviews, .btn-faq, .btn-cta-final { 
+                width: 100%; 
+                max-width: 300px; 
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+            
+            /* АДАПТАЦИЯ КАРТОЧЕК С ШЕСТИУГОЛЬНИКАМИ */
+            .why-steps, .advantages-steps, .order-steps, .guarantee-steps {
+                gap: 20px;
+                padding: 40px 10px 28px;
+                margin: 32px auto;
+                justify-content: flex-start;
+            }
+            
+            .why-step, .advantage-step, .order-step, .guarantee-step {
+                flex: 0 0 85vw;
+                max-width: 400px;
+                padding: 50px 22px 28px;
+            }
+            
+            .why-step .step-number,
+            .advantage-step .step-number,
+            .order-step .step-number,
+            .guarantee-step .step-number {
+                width: 44px;
+                height: 44px;
+                font-size: 16px;
+                top: -22px;
+                filter: drop-shadow(0 0 11px rgba(212, 175, 55, 0.38));
+            }
+            
+            .why-step:hover .step-number,
+            .advantage-step:hover .step-number,
+            .order-step:hover .step-number,
+            .guarantee-step:hover .step-number {
+                transform: translateX(-50%) translateY(-6px) scale(1.07);
+            }
+            
+            .why-step .step-icon,
+            .advantage-step .step-icon,
+            .order-step .step-icon,
+            .guarantee-step .step-icon {
+                font-size: 34px;
+                margin: 20px 0 14px;
+            }
+            
+            .why-step h4,
+            .advantage-step h4,
+            .order-step h4,
+            .guarantee-step h4 {
+                font-size: 18.5px;
+            }
+            
+            /* АДАПТАЦИЯ ОТЗЫВОВ */
+            .review {
+                flex: 0 0 85vw;
+            }
+            
+            .stars {
+                font-size: 20px;
+            }
+            
+            /* АДАПТАЦИЯ FAQ */
+            .faq-timeline {
+                padding-left: 40px;
+                margin: 30px auto 16px;
+            }
+            
+            .faq-timeline::before { 
+                left: 19px; 
+            }
+            
+            .faq-card {
+                padding: 18px 20px;
+                margin-bottom: 18px;
+            }
+            .faq-card-icon {
+                left: -40px;
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+            
+            .faq-card-line {
+                left: -21px;
+                top: 58px;
+                width: 20px;
+            }
+            
+            .faq-card-content h4 {
+                font-size: 17px;
+            }
+            
+            .faq-card-answer {
+                font-size: 14.5px;
+            }
         }
-        @media (min-width: 901px) { nav { display: flex; } }
-        .cursor-glow { position: fixed; pointer-events: none; z-index: 999; mix-blend-mode: screen; border-radius: 999px; background: radial-gradient(circle, rgba(212,175,55,0.14), transparent); transform: translate(-50%, -50%); transition: width .12s ease, height .12s ease, opacity .12s; }
-        a:focus { outline: 2px dashed rgba(212,175,55,0.22); outline-offset: 4px; }
-/* ПОШАГОВЫЕ КАРТОЧКИ */
-.order-steps {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 24px;
-    padding: 20px 10px;
-    max-width: 1200px;
-    margin: 32px auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent-1) transparent;
-}
-.order-step {
-    flex: 0 0 260px;
-    background: var(--card);
-    padding: 28px 20px;
-    border-radius: 18px;
-    border: 1px solid rgba(212, 175, 55, 0.08);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
-    backdrop-filter: blur(4px);
-}
-.order-step:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.15);
-    border-color: rgba(212, 175, 55, 0.2);
-}
-        /* === ПОЧЕМУ МЫ — ИДЕАЛЬНЫЙ ДИЗАЙН КАРТОЧЕК === */
-.why-steps {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 28px;
-    padding: 32px 12px;
-    max-width: 1200px;
-    margin: 40px auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent-1) transparent;
-    justify-content: center;
-}
-.why-step {
-    flex: 0 0 300px;
-    background: var(--card);
-    padding: 40px 28px 32px;
-    border-radius: 24px;
-    border: 1px solid rgba(212, 175, 55, 0.08);
-    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.58);
-    text-align: center;
-    position: relative;
-    transition: all 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
-    backdrop-filter: blur(8px);
-    opacity: 0;
-    transform: translateY(40px);
-}
-.why-step.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-.why-step:hover {
-    transform: translateY(-16px) scale(1.04);
-    box-shadow:
-        0 32px 90px rgba(0, 0, 0, 0.7),
-        0 0 0 1px rgba(212, 175, 55, 0.24),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    border-color: rgba(212, 175, 55, 0.28);
-    z-index: 2;
-}
-/* === ИДЕАЛЬНЫЙ ШЕСТИУГОЛЬНИК === */
-.why-step .step-number {
-    position: absolute;
-    top: -24px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 52px;
-    height: 52px;
-    background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%);
-    color: #000;
-    font-weight: 900;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-    letter-spacing: 0.6px;
-   
-    /* ПРАВИЛЬНЫЙ РОВНЫЙ ШЕСТИУГОЛЬНИК */
-    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-   
-    /* ОБВОДКА */
-    box-shadow:
-        0 0 0 2px rgba(212, 175, 55, 0.4),
-        0 0 0 4px rgba(5, 5, 5, 0.32);
-   
-    /* СВЕЧЕНИЕ */
-    filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.42));
-   
-    /* ГЛЯНЕЦ */
-    background-image:
-        linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%),
-        radial-gradient(at 25% 25%, rgba(255, 255, 255, 0.5), transparent 65%);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-   
-    transition: all 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
-}
-.why-step:hover .step-number {
-    transform: translateX(-50%) translateY(-3px) scale(1.1);
-    filter:
-        drop-shadow(0 0 20px rgba(212, 175, 55, 0.6))
-        drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
-    box-shadow:
-        0 0 0 2px rgba(212, 175, 55, 0.55),
-        0 0 0 5px rgba(5, 5, 5, 0.38),
-        0 10px 24px rgba(0, 0, 0, 0.45);
-}
-/* ИКОНКА */
-.why-step .step-icon {
-    font-size: 38px;
-    color: var(--accent-1);
-    margin: 24px 0 16px;
-    text-shadow: 0 5px 16px rgba(212, 175, 55, 0.28);
-    transition: all 0.45s ease;
-}
-.why-step:hover .step-icon {
-    transform: scale(1.18) rotate(10deg);
-    filter: drop-shadow(0 8px 20px rgba(212, 175, 55, 0.35));
-}
-/* ЗАГОЛОВОК */
-.why-step h4 {
-    color: var(--accent-1);
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    margin: 0 0 12px;
-    letter-spacing: 0.6px;
-    line-height: 1.3;
-}
-/* ТЕКСТ */
-.why-step p {
-    font-size: 15.8px;
-    line-height: 1.78;
-    color: rgba(233, 221, 210, 0.94);
-    margin: 0;
-    padding: 0 4px;
-}
-/* МОБИЛЬНАЯ АДАПТАЦИЯ */
-@media (max-width: 900px) {
-    .why-steps {
-        gap: 20px;
-        padding: 28px 10px;
-        margin: 32px auto;
-        justify-content: flex-start;
-    }
-    .why-step {
-        flex: 0 0 78vw;
-        max-width: 320px;
-        padding: 36px 22px 28px;
-    }
-    .why-step .step-number {
-        width: 44px;
-        height: 44px;
-        font-size: 16px;
-        top: -20px;
-    }
-    .why-step .step-icon {
-        font-size: 34px;
-        margin: 20px 0 14px;
-    }
-    .why-step h4 {
-        font-size: 18.5px;
-    }
-}
-       
-.step-number {
-    position: absolute;
-    top: -16px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--accent-1), #b8972a);
-    color: #000;
-    font-weight: 800;
-    font-size: 16px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
-    z-index: 2;
-}
-.step-icon {
-    font-size: 32px;
-    color: var(--accent-1);
-    margin: 16px 0 12px;
-    text-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
-}
-.order-step h4 {
-    color: var(--accent-1);
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    margin-bottom: 8px;
-}
-.order-step p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: rgba(233, 221, 210, 0.9);
-    margin: 0;
-}
-        /* ПРЕИМУЩЕСТВА — СТИЛЬ КАК У "КАК ЗАКАЗАТЬ" */
-.advantages-steps {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 26px;
-    padding: 20px 10px;
-    max-width: 1200px;
-    margin: 36px auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent-1) transparent;
-}
-.advantage-step {
-    flex: 0 0 270px;
-    background: var(--card);
-    padding: 32px 22px;
-    border-radius: 20px;
-    border: 1px solid rgba(212, 175, 55, 0.07);
-    box-shadow: 0 14px 45px rgba(0, 0, 0, 0.55);
-    text-align: center;
-    position: relative;
-    transition: all 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
-    backdrop-filter: blur(6px);
-}
-.advantage-step:hover {
-    transform: translateY(-14px) scale(1.03);
-    box-shadow:
-        0 28px 80px rgba(0, 0, 0, 0.65),
-        0 0 0 1px rgba(212, 175, 55, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    border-color: rgba(212, 175, 55, 0.25);
-}
-.step-number {
-    position: absolute;
-    top: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #f1d48a, #d4af37, #b8972a);
-    color: #000;
-    font-weight: 900;
-    font-size: 17px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow:
-        0 8px 25px rgba(212, 175, 55, 0.35),
-        0 0 0 3px rgba(5, 5, 5, 0.3);
-    z-index: 2;
-    letter-spacing: 0.5px;
-}
-.step-icon {
-    font-size: 34px;
-    color: var(--accent-1);
-    margin: 18px 0 14px;
-    text-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
-    transition: transform 0.4s ease;
-}
-.advantage-step:hover .step-icon {
-    transform: scale(1.15) rotate(8deg);
-}
-.advantage-step h4 {
-    color: var(--accent-1);
-    font-family: 'Playfair Display', serif;
-    font-size: 19px;
-    margin-bottom: 10px;
-    letter-spacing: 0.5px;
-}
-.advantage-step p {
-    font-size: 15.5px;
-    line-height: 1.75;
-    color: rgba(233, 221, 210, 0.92);
-    margin: 0;
-}
-/* КНОПКА "ЗАКАЗАТЬ ЭСКОРТ" */
-.btn-advantages {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    padding: 17px 52px;
-    margin: 24px auto 0;
-    font-weight: 800;
-    font-size: 17px;
-    color: #000;
-    background: linear-gradient(135deg, #fdf4c1 0%, #f1d48a 30%, #d4af37 70%, #b8972a 100%);
-    border: none;
-    border-radius: 999px;
-    box-shadow:
-        0 12px 45px rgba(212, 175, 55, 0.32),
-        0 0 0 1px rgba(212, 175, 55, 0.18),
-        inset 0 2px 0 rgba(255, 255, 255, 0.4);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-.btn-advantages:hover {
-    transform: translateY(-5px) scale(1.03);
-    box-shadow:
-        0 20px 70px rgba(212, 175, 55, 0.45),
-        0 0 0 1px rgba(212, 175, 55, 0.35);
-    background: linear-gradient(135deg, #fef9d7 0%, #f8e6a0 30%, #e6c94a 70%, #ccad38 100%);
-}
-.btn-advantages:active {
-    transform: translateY(-3px) scale(0.99);
-}
-.btn-advantages i {
-    font-size: 21px;
-    transition: transform 0.35s ease;
-}
-.btn-advantages:hover i {
-    transform: translateX(5px) rotate(12deg);
-}
-/* МОБИЛЬНАЯ АДАПТАЦИЯ */
-@media (max-width: 900px) {
-    .advantages-steps {
-        gap: 18px;
-        padding: 18px 8px;
-    }
-    .advantage-step {
-        flex: 0 0 78vw;
-        padding: 28px 18px;
-    }
-    .step-number {
-        width: 36px;
-        height: 36px;
-        font-size: 16px;
-        top: -16px;
-    }
-    .step-icon {
-        font-size: 30px;
-    }
-    .advantage-step h4 {
-        font-size: 18px;
-    }
-    .btn-advantages {
-        padding: 15px 40px;
-        font-size: 16px;
-        max-width: 290px;
-    }
-}
-       
-/* КНОПКА "НАЧАТЬ ЗАКАЗ" */
-.btn-order-now {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 48px;
-    margin: 20px auto 0;
-    font-weight: 700;
-    font-size: 17px;
-    color: #000;
-    background: linear-gradient(135deg, #f1d48a 0%, #d4af37 50%, #b8972a 100%);
-    border: none;
-    border-radius: 999px;
-    box-shadow:
-        0 10px 40px rgba(212, 175, 55, 0.3),
-        0 0 0 1px rgba(212, 175, 55, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.btn-order-now:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow:
-        0 18px 60px rgba(212, 175, 55, 0.4),
-        0 0 0 1px rgba(212, 175, 55, 0.3);
-}
-.btn-order-now:active {
-    transform: translateY(-2px) scale(0.99);
-}
-.btn-order-now i {
-    font-size: 20px;
-    transition: transform 0.3s ease;
-}
-.btn-order-now:hover i {
-    transform: translateX(4px);
-}
-/* МОБИЛЬНАЯ ВЕРСИЯ */
-@media (max-width: 900px) {
-    .order-steps {
-        gap: 16px;
-        padding: 16px 8px;
-    }
-    .order-step {
-        flex: 0 0 78vw;
-        padding: 24px 16px;
-    }
-    .step-number {
-        width: 32px;
-        height: 32px;
-        font-size: 15px;
-        top: -14px;
-    }
-    .step-icon {
-        font-size: 28px;
-    }
-    .btn-order-now {
-        padding: 14px 36px;
-        font-size: 16px;
-        max-width: 280px;
-    }
-}
-       
-/* КРАСИВЫЕ ЗВЁЗДЫ */
-.stars {
-    color: var(--accent-1);
-    font-size: 22px;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-}
-/* ПРЕМИУМ-КНОПКА ОТЗЫВОВ */
-.btn-reviews {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 16px 48px;
-    margin: 32px auto 0;
-    font-weight: 700;
-    font-size: 16px;
-    color: #000;
-    background: linear-gradient(135deg, #f1d48a 0%, #d4af37 50%, #b8972a 100%);
-    border: none;
-    border-radius: 999px;
-    box-shadow:
-        0 8px 32px rgba(212, 175, 55, 0.25),
-        0 0 0 1px rgba(212, 175, 55, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
-    backdrop-filter: blur(4px);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.btn-reviews:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow:
-        0 16px 50px rgba(212, 175, 55, 0.35),
-        0 0 0 1px rgba(212, 175, 55, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 50%, #ccad38 100%);
-}
-.btn-reviews:active {
-    transform: translateY(-2px) scale(0.99);
-}
-.btn-reviews .btn-icon {
-    font-size: 18px;
-    transition: transform 0.3s ease;
-}
-.btn-reviews:hover .btn-icon {
-    transform: rotate(12deg) scale(1.1);
-}
-        /* === ГАРАНТИИ — СТИЛЬ КАК У "КАК ЗАКАЗАТЬ" === */
-.guarantee-steps {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 26px;
-    padding: 24px 10px;
-    max-width: 1200px;
-    margin: 36px auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent-1) transparent;
-}
-.guarantee-step {
-    flex: 0 0 280px;
-    background: var(--card);
-    padding: 32px 24px;
-    border-radius: 20px;
-    border: 1px solid rgba(212, 175, 55, 0.07);
-    box-shadow: 0 14px 45px rgba(0, 0, 0, 0.55);
-    text-align: center;
-    position: relative;
-    transition: all 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
-    backdrop-filter: blur(6px);
-}
-.guarantee-step:hover {
-    transform: translateY(-14px) scale(1.03);
-    box-shadow:
-        0 28px 80px rgba(0, 0, 0, 0.65),
-        0 0 0 1px rgba(212, 175, 55, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    border-color: rgba(212, 175, 55, 0.25);
-}
-.guarantee-step .step-number {
-    position: absolute;
-    top: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #f1d48a, #d4af37, #b8972a);
-    color: #000;
-    font-weight: 900;
-    font-size: 17px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow:
-        0 8px 25px rgba(212, 175, 55, 0.35),
-        0 0 0 3px rgba(5, 5, 5, 0.3);
-    z-index: 2;
-    letter-spacing: 0.5px;
-}
-.guarantee-step .step-icon {
-    font-size: 34px;
-    color: var(--accent-1);
-    margin: 18px 0 14px;
-    text-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
-    transition: transform 0.4s ease;
-}
-.guarantee-step:hover .step-icon {
-    transform: scale(1.15) rotate(8deg);
-}
-.guarantee-step h4 {
-    color: var(--accent-1);
-    font-family: 'Playfair Display', serif;
-    font-size: 19px;
-    margin-bottom: 10px;
-    letter-spacing: 0.5px;
-}
-.guarantee-step p {
-    font-size: 15.5px;
-    line-height: 1.75;
-    color: rgba(233, 221, 210, 0.92);
-    margin: 0;
-}
-/* КНОПКА "ПРОСМОТРЕТЬ ДОГОВОР" */
-.btn-view-contract {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    padding: 17px 52px;
-    margin: 32px auto 0;
-    font-weight: 800;
-    font-size: 17px;
-    color: #000;
-    background: linear-gradient(135deg, #fdf4c1 0%, #f1d48a 30%, #d4af37 70%, #b8972a 100%);
-    border: none;
-    border-radius: 999px;
-    box-shadow:
-        0 12px 45px rgba(212, 175, 55, 0.32),
-        0 0 0 1px rgba(212, 175, 55, 0.18),
-        inset 0 2px 0 rgba(255, 255, 255, 0.4);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    min-width: 320px;
-}
-.btn-view-contract:hover {
-    transform: translateY(-5px) scale(1.03);
-    box-shadow:
-        0 20px 70px rgba(212, 175, 55, 0.45),
-        0 0 0 1px rgba(212, 175, 55, 0.35);
-    background: linear-gradient(135deg, #fef9d7 0%, #f8e6a0 30%, #e6c94a 70%, #ccad38 100%);
-}
-.btn-view-contract:active {
-    transform: translateY(-3px) scale(0.99);
-}
-.btn-view-contract i {
-    font-size: 21px;
-    transition: transform 0.35s ease;
-}
-.btn-view-contract:hover i {
-    transform: translateX(5px) rotate(12deg);
-}
-/* МОБИЛЬНАЯ АДАПТАЦИЯ */
-@media (max-width: 900px) {
-    .guarantee-steps {
-        gap: 18px;
-        padding: 20px 8px;
-    }
-    .guarantee-step {
-        flex: 0 0 78vw;
-        padding: 28px 18px;
-    }
-    .guarantee-step .step-number {
-        width: 36px;
-        height: 36px;
-        font-size: 16px;
-        top: -16px;
-    }
-    .guarantee-step .step-icon {
-        font-size: 30px;
-    }
-    .guarantee-step h4 {
-        font-size: 18px;
-    }
-    .btn-view-contract {
-        padding: 15px 40px;
-        font-size: 16px;
-        min-width: 290px;
-        max-width: 300px;
-        margin: 28px auto 0;
-    }
-}
-/* === ИДЕАЛЬНЫЙ РОВНЫЙ ШЕСТИУГОЛЬНИК С ГЛЯНЦЕМ И СВЕЧЕНИЕМ === */
-.why-step .step-number,
-.advantage-step .step-number,
-.guarantee-step .step-number,
-.order-step .step-number {
-    position: absolute;
-    top: -22px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 52px;
-    height: 52px;
-    background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%);
-    color: #000;
-    font-weight: 900;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-    letter-spacing: 0.6px;
-   
-    /* ИДЕАЛЬНЫЙ РОВНЫЙ ШЕСТИУГОЛЬНИК */
-    clip-path: polygon(
-        50% 0%, /* верхняя вершина */
-        95% 25%, /* верхний правый угол */
-        95% 75%, /* нижний правый угол */
-        50% 100%, /* нижняя вершина */
-        5% 75%, /* нижний левый угол */
-        5% 25% /* верхний левый угол */
-    );
-   
-    /* ТОНКАЯ ЗОЛОТАЯ ОБВОДКА */
-    box-shadow:
-        0 0 0 2px rgba(212, 175, 55, 0.38),
-        0 0 0 4px rgba(5, 5, 5, 0.32);
-   
-    /* МЯГКОЕ ВНЕШНЕЕ СВЕЧЕНИЕ (EMBER GLOW) */
-    filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.42));
-   
-    /* ГЛЯНЦЕВЫЙ БЛИК СВЕРХУ */
-    background-image:
-        linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%),
-        radial-gradient(at 25% 25%, rgba(255, 255, 255, 0.5), transparent 65%);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-   
-    /* ПЛАВНАЯ АНИМАЦИЯ */
-    transition: all 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
-}
-/* HOVER — УСИЛЕНИЕ СВЕЧЕНИЯ И ПОДЪЁМ */
-.why-step:hover .step-number,
-.advantage-step:hover .step-number,
-.guarantee-step:hover .step-number,
-.order-step:hover .step-number {
-    transform: translateX(-50%) translateY(-3px) scale(1.1);
-    filter:
-        drop-shadow(0 0 20px rgba(212, 175, 55, 0.6))
-        drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
-    box-shadow:
-        0 0 0 2px rgba(212, 175, 55, 0.55),
-        0 0 0 5px rgba(5, 5, 5, 0.38),
-        0 10px 24px rgba(0, 0, 0, 0.45);
-}
-/* МОБИЛЬНАЯ АДАПТАЦИЯ */
-@media (max-width: 900px) {
-    .why-step .step-number,
-    .advantage-step .step-number,
-    .guarantee-step .step-number,
-    .order-step .step-number {
-        width: 44px;
-        height: 44px;
-        font-size: 16px;
-        top: -19px;
-        filter: drop-shadow(0 0 11px rgba(212, 175, 55, 0.38));
-    }
-    .why-step:hover .step-number,
-    .advantage-step:hover .step-number,
-    .guarantee-step:hover .step-number,
-    .order-step:hover .step-number {
-        transform: translateX(-50%) translateY(-2px) scale(1.07);
-    }
-}
-       
-/* КНОПКА "ЧИТАТЬ ПОЛНЫЙ FAQ" — ПРЕМИУМ СТИЛЬ */
-.btn-faq {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 16px 40px;
-    margin: 32px auto 0;
-    font-weight: 700;
-    font-size: 16px;
-    color: #000;
-    background: linear-gradient(135deg, #f1d48a 0%, #d4af37 45%, #b8972a 100%);
-    border: none;
-    border-radius: 999px;
-    box-shadow:
-        0 8px 30px rgba(212, 175, 55, 0.28),
-        0 0 0 1px rgba(212, 175, 55, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
-    backdrop-filter: blur(4px);
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    min-width: 240px;
-}
-.btn-faq:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow:
-        0 18px 55px rgba(212, 175, 55, 0.42),
-        0 0 0 1px rgba(212, 175, 55, 0.32),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 45%, #ccad38 100%);
-}
-.btn-faq:active {
-    transform: translateY(-3px) scale(0.99);
-}
-.btn-faq i {
-    font-size: 18px;
-    transition: transform 0.35s ease;
-}
-.btn-faq:hover i {
-    transform: translateX(4px) rotate(8deg);
-}
-/* МОБИЛЬНАЯ АДАПТАЦИЯ */
-@media (max-width: 900px) {
-    .btn-faq {
-        padding: 14px 32px;
-        font-size: 15px;
-        gap: 10px;
-        min-width: 220px;
-        margin: 28px auto 0;
-    }
-    .btn-faq i {
-        font-size: 17px;
-    }
-}
-       
-/* === FAQ TIMELINE — НОВЫЙ ДИЗАЙН === */
-.faq-timeline {
-    max-width: 1000px;
-    margin: 40px auto 20px;
-    position: relative;
-    padding-left: 50px;
-}
-.faq-timeline::before {
-    content: '';
-    position: absolute;
-    left: 24px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, transparent, var(--accent-1), transparent);
-    opacity: 0.3;
-    z-index: 0;
-}
-.faq-card {
-    position: relative;
-    background: var(--card);
-    padding: 20px 24px;
-    border-radius: 16px;
-    border: 1px solid rgba(212, 175, 55, 0.08);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateX(-40px);
-    transition: all 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
-    backdrop-filter: blur(6px);
-    z-index: 1;
-}
-.faq-card.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-.faq-card:hover {
-    transform: translateX(0) translateY(-6px);
-    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.2);
-    border-color: rgba(212, 175, 55, 0.25);
-}
-/* === ФИНАЛЬНАЯ КНОПКА — ПРЕМИУМ СТИЛЬ === */
-.btn-cta-final {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    padding: 18px 56px;
-    margin: 32px auto 0;
-    font-weight: 800;
-    font-size: 18px;
-    color: #000;
-    background: linear-gradient(135deg, #fdf4c1 0%, #f1d48a 30%, #d4af37 70%, #b8972a 100%);
-    border: none;
-    border-radius: 999px;
-    box-shadow:
-        0 14px 50px rgba(212, 175, 55, 0.35),
-        0 0 0 1px rgba(212, 175, 55, 0.2),
-        inset 0 2px 0 rgba(255, 255, 255, 0.4);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    min-width: 280px;
-    backdrop-filter: blur(6px);
-}
-.btn-cta-final:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow:
-        0 24px 80px rgba(212, 175, 55, 0.48),
-        0 0 0 1px rgba(212, 175, 55, 0.38),
-        inset 0 2px 0 rgba(255, 255, 255, 0.5);
-    background: linear-gradient(135deg, #fef9d7 0%, #f8e6a0 30%, #e6c94a 70%, #ccad38 100%);
-}
-.btn-cta-final:active {
-    transform: translateY(-4px) scale(0.99);
-}
-.btn-cta-final i {
-    font-size: 22px;
-    transition: transform 0.4s ease;
-}
-.btn-cta-final:hover i {
-    transform: translateX(6px) rotate(15deg);
-}
-/* МОБИЛЬНАЯ АДАПТАЦИЯ */
-@media (max-width: 900px) {
-    .btn-cta-final {
-        padding: 16px 44px;
-        font-size: 16.5px;
-        gap: 12px;
-        min-width: 260px;
-        margin: 28px auto 0;
-    }
-    .btn-cta-final i {
-        font-size: 20px;
-    }
-}
-       
-.faq-card-icon {
-    position: absolute;
-    left: -50px;
-    top: 22px;
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, var(--accent-1), #b8972a);
-    color: #000;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
-    z-index: 2;
-    transition: all 0.3s ease;
-}
-.faq-card:hover .faq-card-icon {
-    transform: scale(1.15) rotate(12deg);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.45);
-}
-.faq-card-content h4 {
-    color: var(--accent-1);
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    margin: 0 0 8px;
-    letter-spacing: 0.5px;
-}
-.faq-card-answer {
-    font-size: 15px;
-    line-height: 1.7;
-    color: rgba(233, 221, 210, 0.92);
-    margin: 0;
-}
-.faq-card-line {
-    position: absolute;
-    left: -26px;
-    top: 66px;
-    width: 26px;
-    height: 2px;
-    background: var(--accent-1);
-    opacity: 0.6;
-    z-index: 1;
-}
-/* АНИМАЦИЯ ПОЯВЛЕНИЯ */
-.faq-card.visible .faq-card-icon {
-    animation: pulseGlow 1.5s ease-out forwards;
-}
-@keyframes pulseGlow {
-    0% { box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35); transform: scale(1); }
-    50% { box-shadow: 0 12px 40px rgba(212, 175, 55, 0.55); transform: scale(1.25); }
-    100% { box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35); transform: scale(1); }
-}
-/* МОБИЛЬНАЯ АДАПТАЦИЯ */
-@media (max-width: 900px) {
-    .faq-timeline {
-        padding-left: 40px;
-        margin: 30px auto 16px;
-    }
-    .faq-timeline::before { left: 19px; }
-    .faq-card {
-        padding: 18px 20px;
-        margin-bottom: 18px;
-    }
-    .faq-card-icon {
-        left: -40px;
-        width: 38px;
-        height: 38px;
-        font-size: 16px;
-    }
-    .faq-card-line {
-        left: -21px;
-        top: 58px;
-        width: 20px;
-    }
-    .faq-card-content h4 {
-        font-size: 17px;
-    }
-    .faq-card-answer {
-        font-size: 14.5px;
-    }
-}
-       
-/* Мобильная адаптация */
-@media (max-width: 900px) {
-    .btn-reviews {
-        padding: 14px 36px;
-        font-size: 15px;
-        max-width: 280px;
-    }
-    .stars {
-        font-size: 20px;
-    }
-}
+        
+        @media (min-width: 901px) { 
+            nav { display: flex; } 
+        }
     </style>
 </head>
 <body>
@@ -1085,225 +640,240 @@
             <a href="https://t.me/Scarlet_NightBot" class="btn js-ripple">Выбрать Модель</a>
         </section>
         <div class="divider"></div>
-<section class="section why-choose" id="why-choose">
-    <h3>Почему выбирают Scarlet Night?</h3>
-    <p>Мы не просто эскорт — мы создаём искусство идеальных встреч. Вот что делает нас особенными.</p>
-    <div class="why-steps">
-        <div class="why-step">
-            <div class="step-number">1</div>
-            <div class="step-icon"><i class="fas fa-gem"></i></div>
-            <h4>Элитный отбор</h4>
-            <p>Каждая модель — это шедевр: внешность, ум, манеры. Только 1 из 100 проходит наш кастинг.</p>
-        </div>
-        <div class="why-step">
-            <div class="step-number">2</div>
-            <div class="step-icon"><i class="fas fa-user-secret"></i></div>
-            <h4>Абсолютная тайна</h4>
-            <p>Ваши данные, встречи, переписка — исчезают навсегда. Даже мы не знаем, кто вы.</p>
-        </div>
-        <div class="why-step">
-            <div class="step-number">3</div>
-            <div class="step-icon"><i class="fas fa-star"></i></div>
-            <h4>Искры эмоций</h4>
-            <p>Не просто время — а воспоминания. Лёгкость, страсть, внимание. Вечер, который хочется повторить.</p>
-        </div>
-    </div>
-</section>
+        
+        <section class="section why-choose" id="why-choose">
+            <h3>Почему выбирают Scarlet Night?</h3>
+            <p>Мы не просто эскорт — мы создаём искусство идеальных встреч. Вот что делает нас особенными.</p>
+            <div class="why-steps">
+                <div class="why-step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i class="fas fa-gem"></i></div>
+                    <h4>Элитный отбор</h4>
+                    <p>Каждая модель — это шедевр: внешность, ум, манеры. Только 1 из 100 проходит наш кастинг.</p>
+                </div>
+                <div class="why-step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i class="fas fa-user-secret"></i></div>
+                    <h4>Абсолютная тайна</h4>
+                    <p>Ваши данные, встречи, переписка — исчезают навсегда. Даже мы не знаем, кто вы.</p>
+                </div>
+                <div class="why-step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon"><i class="fas fa-star"></i></div>
+                    <h4>Искры эмоций</h4>
+                    <p>Не просто время — а воспоминания. Лёгкость, страсть, внимание. Вечер, который хочется повторить.</p>
+                </div>
+            </div>
+        </section>
+        
         <div class="divider"></div>
-<section class="section advantages" id="advantages">
-    <h3>Преимущества Scarlet Night</h3>
-    <p>Scarlet Night — это не просто эскорт, это искусство создавать идеальные моменты. Мы объединили элегантность, безопасность и индивидуальный подход, чтобы каждая встреча стала для вас настоящим событием. Вот что делает нас особенными.</p>
-    <div class="advantages-steps">
-        <div class="advantage-step">
-            <div class="step-number">1</div>
-            <div class="step-icon"><i class="fas fa-crown"></i></div>
-            <h4>Элитный уровень</h4>
-            <p>Только проверенные модели с безупречной внешностью, манерами и интеллектом. Каждая — достойна вашего статуса.</p>
-        </div>
-        <div class="advantage-step">
-            <div class="step-number">2</div>
-            <div class="step-icon"><i class="fas fa-shield-alt"></i></div>
-            <h4>Полная конфиденциальность</h4>
-            <p>Ваши данные защищены. Никаких упоминаний, фото, переписок. Только вы и мы знаем о встрече.</p>
-        </div>
-        <div class="advantage-step">
-            <div class="step-number">3</div>
-            <div class="step-icon"><i class="fas fa-clock"></i></div>
-            <h4>Гибкость и скорость</h4>
-            <p>Заказ за 15 минут. Выезд по России. Любое время, любой формат — мы подстраиваемся под вас.</p>
-        </div>
-        <div class="advantage-step">
-            <div class="step-number">4</div>
-            <div class="step-icon"><i class="fas fa-star"></i></div>
-            <h4>Идеальное исполнение</h4>
-            <p>От первого сообщения до прощания — всё продумано. Никаких сюрпризов, только удовольствие.</p>
-        </div>
-    </div>
-    <a href="https://t.me/Scarlet_NightBot" class="btn-advantages js-ripple">
-        <i class="fas fa-concierge-bell"></i> Заказать прямо сейчас
-    </a>
-</section>
-<div class="divider"></div>
-<section class="section how-to-order" id="how-to-order">
-    <h3>Как Заказать — Пошаговая Инструкция</h3>
-    <p>Мы сделали процесс заказа максимально простым, быстрым и конфиденциальным. Всё, что нужно — выбрать девушку, связаться с нами и наслаждаться вечером. Никаких сложных форм, очередей или лишних вопросов. Scarlet Night — это сервис, который работает на вас, а не наоборот.</p>
-    <div class="order-steps">
-        <div class="order-step">
-            <div class="step-number">1</div>
-            <div class="step-icon"><i class="fas fa-image"></i></div>
-            <h4>Выберите модель</h4>
-            <p>Перейдите в каталог и выберите девушку, которая соответствует вашему настроению и предпочтениям.</p>
-        </div>
-        <div class="order-step">
-            <div class="step-number">2</div>
-            <div class="step-icon"><i class="fas fa-paper-plane"></i></div>
-            <h4>Напишите менеджеру</h4>
-            <p>Свяжитесь с нами в <strong>Telegram</strong> или <strong>WhatsApp</strong> — ответим мгновенно, 24/7.</p>
-        </div>
-        <div class="order-step">
-            <div class="step-number">3</div>
-            <div class="step-icon"><i class="fas fa-check-circle"></i></div>
-            <h4>Подтвердите детали</h4>
-            <p>Уточните время, место, продолжительность и любые пожелания. Мы всё организуем идеально.</p>
-        </div>
-        <div class="order-step">
-            <div class="step-number">4</div>
-            <div class="step-icon"><i class="fas fa-glass-cheers"></i></div>
-            <h4>Наслаждайтесь вечером</h4>
-            <p>Встречайтесь с моделью в назначенное время. Всё уже готово — просто расслабьтесь и получайте удовольствие.</p>
-        </div>
-    </div>
-    <a href="https://t.me/Scarlet_NightBot" class="btn-order-now js-ripple">
-        <i class="fab fa-telegram-plane"></i> Начать заказ прямо сейчас
-    </a>
-</section>
+        
+        <section class="section advantages" id="advantages">
+            <h3>Преимущества Scarlet Night</h3>
+            <p>Scarlet Night — это не просто эскорт, это искусство создавать идеальные моменты. Мы объединили элегантность, безопасность и индивидуальный подход, чтобы каждая встреча стала для вас настоящим событием. Вот что делает нас особенными.</p>
+            <div class="advantages-steps">
+                <div class="advantage-step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i class="fas fa-crown"></i></div>
+                    <h4>Элитный уровень</h4>
+                    <p>Только проверенные модели с безупречной внешностью, манерами и интеллектом. Каждая — достойна вашего статуса.</p>
+                </div>
+                <div class="advantage-step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Полная конфиденциальность</h4>
+                    <p>Ваши данные защищены. Никаких упоминаний, фото, переписок. Только вы и мы знаем о встрече.</p>
+                </div>
+                <div class="advantage-step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon"><i class="fas fa-clock"></i></div>
+                    <h4>Гибкость и скорость</h4>
+                    <p>Заказ за 15 минут. Выезд по России. Любое время, любой формат — мы подстраиваемся под вас.</p>
+                </div>
+                <div class="advantage-step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon"><i class="fas fa-star"></i></div>
+                    <h4>Идеальное исполнение</h4>
+                    <p>От первого сообщения до прощания — всё продумано. Никаких сюрпризов, только удовольствие.</p>
+                </div>
+            </div>
+            <a href="https://t.me/Scarlet_NightBot" class="btn-advantages js-ripple">
+                <i class="fas fa-concierge-bell"></i> Заказать прямо сейчас
+            </a>
+        </section>
+        
         <div class="divider"></div>
-<section class="section guarantee" id="guarantee">
-    <h3>Наши Гарантии</h3>
-    <p>Мы понимаем, что доверие — основа премиального сервиса. Scarlet Night гарантирует полную анонимность, прозрачные условия и соответствие ожиданий реальности. Каждая модель подтверждает свою личность и фотографии, а каждая встреча проходит в безопасной и уважительной обстановке. Вы получаете уверенность в качестве, надёжности и корректности на каждом этапе взаимодействия.</p>
-    <div class="guarantee-steps">
-        <div class="guarantee-step">
-            <div class="step-number">1</div>
-            <div class="step-icon"><i class="fas fa-shield-alt"></i></div>
-            <h4>Абсолютная защита данных</h4>
-            <p>Ваши личные данные, переписка и детали встречи — под строгой защитой. Никаких следов.</p>
-        </div>
-        <div class="guarantee-step">
-            <div class="step-number">2</div>
-            <div class="step-icon"><i class="fas fa-user-check"></i></div>
-            <h4>Медицинский контроль</h4>
-            <p>Все модели проходят регулярные проверки здоровья и строгий отбор по внешности и манерам.</p>
-        </div>
-        <div class="guarantee-step">
-            <div class="step-number">3</div>
-            <div class="step-icon"><i class="fas fa-headset"></i></div>
-            <h4>Поддержка 24/7</h4>
-            <p>Менеджер на связи в любое время. Быстро решаем любые вопросы — до, во время и после.</p>
-        </div>
-    </div>
-    <!-- ПРЕМИУМ КНОПКА -->
-    <button class="btn-view-contract js-ripple">
-        <i class="fas fa-file-contract"></i>
-        <span>Просмотреть договор об оказании услуг</span>
-    </button>
-</section>
-<section class="section reviews" id="reviews">
-    <h3>Отзывы Клиентов</h3>
-    <p>Наши клиенты — люди, которые привыкли выбирать лучшее. Они ценят искренность, умение слушать и атмосферу, в которой всё происходит естественно. В отзывах отмечают не только красоту наших девушек, но и высокий уровень сервиса, деликатность и вкус. Мы гордимся тем, что значительная часть клиентов возвращается снова — ведь с Scarlet Night каждая встреча оставляет след из эмоций, которые хочется повторить.</p>
-    <div class="reviews-grid">
-        <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>"Scarlet Night — это другой уровень. Всё на высшем уровне."</p>
-            <strong>— Алексей</strong>
-        </div>
-        <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>"Сервис без компромиссов: внимание к деталям и полная конфиденциальность."</p>
-            <strong>— Дмитрий</strong>
-        </div>
-        <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>"Идеальный вечер, всё организовано безупречно."</p>
-            <strong>— Сергей</strong>
-        </div>
-    </div>
-    <!-- КРАСИВАЯ КНОПКА -->
-    <a href="https://t.me/+QsVgHvmm-TxmYWYy" class="btn-reviews js-ripple">
-        <span class="btn-icon"><i class="fas fa-comments"></i></span>
-        Посмотреть все отзывы
-    </a>
-</section>
+        
+        <section class="section how-to-order" id="how-to-order">
+            <h3>Как Заказать — Пошаговая Инструкция</h3>
+            <p>Мы сделали процесс заказа максимально простым, быстрым и конфиденциальным. Всё, что нужно — выбрать девушку, связаться с нами и наслаждаться вечером. Никаких сложных форм, очередей или лишних вопросов. Scarlet Night — это сервис, который работает на вас, а не наоборот.</p>
+            <div class="order-steps">
+                <div class="order-step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i class="fas fa-image"></i></div>
+                    <h4>Выберите модель</h4>
+                    <p>Перейдите в каталог и выберите девушку, которая соответствует вашему настроению и предпочтениям.</p>
+                </div>
+                <div class="order-step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i class="fas fa-paper-plane"></i></div>
+                    <h4>Напишите менеджеру</h4>
+                    <p>Свяжитесь с нами в <strong>Telegram</strong> или <strong>WhatsApp</strong> — ответим мгновенно, 24/7.</p>
+                </div>
+                <div class="order-step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                    <h4>Подтвердите детали</h4>
+                    <p>Уточните время, место, продолжительность и любые пожелания. Мы всё организуем идеально.</p>
+                </div>
+                <div class="order-step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon"><i class="fas fa-glass-cheers"></i></div>
+                    <h4>Наслаждайтесь вечером</h4>
+                    <p>Встречайтесь с моделью в назначенное время. Всё уже готово — просто расслабьтесь и получайте удовольствие.</p>
+                </div>
+            </div>
+            <a href="https://t.me/Scarlet_NightBot" class="btn-order-now js-ripple">
+                <i class="fab fa-telegram-plane"></i> Начать заказ прямо сейчас
+            </a>
+        </section>
+        
         <div class="divider"></div>
-<section class="section faq" id="faq">
-    <h3>Часто Задаваемые Вопросы</h3>
-    <p>Мы отвечаем на самые важные вопросы, чтобы вы могли принять решение с полной уверенностью. Всё прозрачно, честно и по делу.</p>
-    <div class="faq-timeline">
-        <!-- ВОПРОС 1 -->
-        <div class="faq-card" data-delay="0">
-            <div class="faq-card-icon"><i class="fas fa-lock"></i></div>
-            <div class="faq-card-content">
-                <h4>Насколько конфиденциальны услуги?</h4>
-                <p class="faq-card-answer">Абсолютно. Никаких данных, фото, переписок. Мы не храним историю. Ваше имя известно только менеджеру. Полная анонимность — наш главный приоритет.</p>
+        
+        <section class="section guarantee" id="guarantee">
+            <h3>Наши Гарантии</h3>
+            <p>Мы понимаем, что доверие — основа премиального сервиса. Scarlet Night гарантирует полную анонимность, прозрачные условия и соответствие ожиданий реальности. Каждая модель подтверждает свою личность и фотографии, а каждая встреча проходит в безопасной и уважительной обстановке. Вы получаете уверенность в качестве, надёжности и корректности на каждом этапе взаимодействия.</p>
+            <div class="guarantee-steps">
+                <div class="guarantee-step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Абсолютная защита данных</h4>
+                    <p>Ваши личные данные, переписка и детали встречи — под строгой защитой. Никаких следов.</p>
+                </div>
+                <div class="guarantee-step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i class="fas fa-user-check"></i></div>
+                    <h4>Медицинский контроль</h4>
+                    <p>Все модели проходят регулярные проверки здоровья и строгий отбор по внешности и манерам.</p>
+                </div>
+                <div class="guarantee-step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon"><i class="fas fa-headset"></i></div>
+                    <h4>Поддержка 24/7</h4>
+                    <p>Менеджер на связи в любое время. Быстро решаем любые вопросы — до, во время и после.</p>
+                </div>
             </div>
-            <div class="faq-card-line"></div>
-        </div>
-        <!-- ВОПРОС 2 -->
-        <div class="faq-card" data-delay="100">
-            <div class="faq-card-icon"><i class="fas fa-ruble-sign"></i></div>
-            <div class="faq-card-content">
-                <h4>Сколько стоит эскорт?</h4>
-                <p class="faq-card-answer">От 25 000 ₽/час. Цена зависит от модели, времени, формата и города. VIP-модели — от 50 000 ₽. Точная стоимость — только у менеджера после согласования.</p>
+            <!-- ПРЕМИУМ КНОПКА -->
+            <button class="btn-view-contract js-ripple">
+                <i class="fas fa-file-contract"></i>
+                <span>Просмотреть договор об оказании услуг</span>
+            </button>
+        </section>
+        
+        <section class="section reviews" id="reviews">
+            <h3>Отзывы Клиентов</h3>
+            <p>Наши клиенты — люди, которые привыкли выбирать лучшее. Они ценят искренность, умение слушать и атмосферу, в которой всё происходит естественно. В отзывах отмечают не только красоту наших девушек, но и высокий уровень сервиса, деликатность и вкус. Мы гордимся тем, что значительная часть клиентов возвращается снова — ведь с Scarlet Night каждая встреча оставляет след из эмоций, которые хочется повторить.</p>
+            <div class="reviews-grid">
+                <div class="review">
+                    <div class="stars">★★★★★</div>
+                    <p>"Scarlet Night — это другой уровень. Всё на высшем уровне."</p>
+                    <strong>— Алексей</strong>
+                </div>
+                <div class="review">
+                    <div class="stars">★★★★★</div>
+                    <p>"Сервис без компромиссов: внимание к деталям и полная конфиденциальность."</p>
+                    <strong>— Дмитрий</strong>
+                </div>
+                <div class="review">
+                    <div class="stars">★★★★★</div>
+                    <p>"Идеальный вечер, всё организовано безупречно."</p>
+                    <strong>— Сергей</strong>
+                </div>
             </div>
-            <div class="faq-card-line"></div>
-        </div>
-        <!-- ВОПРОС 3 -->
-        <div class="faq-card" data-delay="200">
-            <div class="faq-card-icon"><i class="fas fa-plane"></i></div>
-            <div class="faq-card-content">
-                <h4>Можно ли заказать на выезд?</h4>
-                <p class="faq-card-answer">Да. По всей России и за границу. Выезд в любой город РФ — от 2 часов. Международные поездки — от 24 часов. Виза, перелёт, проживание — за счёт клиента.</p>
+            <!-- КРАСИВАЯ КНОПКА -->
+            <a href="https://t.me/+QsVgHvmm-TxmYWYy" class="btn-reviews js-ripple">
+                <span class="btn-icon"><i class="fas fa-comments"></i></span>
+                Посмотреть все отзывы
+            </a>
+        </section>
+        
+        <div class="divider"></div>
+        
+        <section class="section faq" id="faq">
+            <h3>Часто Задаваемые Вопросы</h3>
+            <p>Мы отвечаем на самые важные вопросы, чтобы вы могли принять решение с полной уверенностью. Всё прозрачно, честно и по делу.</p>
+            <div class="faq-timeline">
+                <!-- ВОПРОС 1 -->
+                <div class="faq-card" data-delay="0">
+                    <div class="faq-card-icon"><i class="fas fa-lock"></i></div>
+                    <div class="faq-card-content">
+                        <h4>Насколько конфиденциальны услуги?</h4>
+                        <p class="faq-card-answer">Абсолютно. Никаких данных, фото, переписок. Мы не храним историю. Ваше имя известно только менеджеру. Полная анонимность — наш главный приоритет.</p>
+                    </div>
+                    <div class="faq-card-line"></div>
+                </div>
+                <!-- ВОПРОС 2 -->
+                <div class="faq-card" data-delay="100">
+                    <div class="faq-card-icon"><i class="fas fa-ruble-sign"></i></div>
+                    <div class="faq-card-content">
+                        <h4>Сколько стоит эскорт?</h4>
+                        <p class="faq-card-answer">От 25 000 ₽/час. Цена зависит от модели, времени, формата и города. VIP-модели — от 50 000 ₽. Точная стоимость — только у менеджера после согласования.</p>
+                    </div>
+                    <div class="faq-card-line"></div>
+                </div>
+                <!-- ВОПРОС 3 -->
+                <div class="faq-card" data-delay="200">
+                    <div class="faq-card-icon"><i class="fas fa-plane"></i></div>
+                    <div class="faq-card-content">
+                        <h4>Можно ли заказать на выезд?</h4>
+                        <p class="faq-card-answer">Да. По всей России и за границу. Выезд в любой город РФ — от 2 часов. Международные поездки — от 24 часов. Виза, перелёт, проживание — за счёт клиента.</p>
+                    </div>
+                    <div class="faq-card-line"></div>
+                </div>
+                <!-- ВОПРОС 4 -->
+                <div class="faq-card" data-delay="300">
+                    <div class="faq-card-icon"><i class="fas fa-credit-card"></i></div>
+                    <div class="faq-card-content">
+                        <h4>Как проходит оплата?</h4>
+                        <p class="faq-card-answer">50% предоплата для подтверждения. Остаток — при встрече наличными или переводом. Принимаем USDT, BTC, банковские карты. Без чеков и следов.</p>
+                    </div>
+                    <div class="faq-card-line"></div>
+                </div>
+                <!-- ВОПРОС 5 -->
+                <div class="faq-card" data-delay="400">
+                    <div class="faq-card-icon"><i class="fas fa-camera"></i></div>
+                    <div class="faq-card-content">
+                        <h4>Можно ли выбрать девушку по фото?</h4>
+                        <p class="faq-card-answer">Да, но фото — 100% реальные. Все модели проходят верификацию. При встрече — именно та девушка, которую вы выбрали. Без подмен.</p>
+                    </div>
+                    <div class="faq-card-line"></div>
+                </div>
             </div>
-            <div class="faq-card-line"></div>
-        </div>
-        <!-- ВОПРОС 4 -->
-        <div class="faq-card" data-delay="300">
-            <div class="faq-card-icon"><i class="fas fa-credit-card"></i></div>
-            <div class="faq-card-content">
-                <h4>Как проходит оплата?</h4>
-                <p class="faq-card-answer">50% предоплата для подтверждения. Остаток — при встрече наличными или переводом. Принимаем USDT, BTC, банковские карты. Без чеков и следов.</p>
-            </div>
-            <div class="faq-card-line"></div>
-        </div>
-        <!-- ВОПРОС 5 -->
-        <div class="faq-card" data-delay="400">
-            <div class="faq-card-icon"><i class="fas fa-camera"></i></div>
-            <div class="faq-card-content">
-                <h4>Можно ли выбрать девушку по фото?</h4>
-                <p class="faq-card-answer">Да, но фото — 100% реальные. Все модели проходят верификацию. При встрече — именно та девушка, которую вы выбрали. Без подмен.</p>
-            </div>
-            <div class="faq-card-line"></div>
-        </div>
-    </div>
-    <!-- КНОПКА ВНИЗУ -->
-    <a href="https://telegra.ph/Escort-Scarlet-Night-06-01" target="_blank" class="btn-faq js-ripple">
-        <i class="fas fa-book-open"></i>
-        <span>Читать полный FAQ</span>
-    </a>
-</section>
-<div class="divider"></div>
-<section class="section call-to-action" id="contact">
-    <h3>Готовы к незабываемому вечеру?</h3>
-    <p>Scarlet Night — это не просто эскорт. Это искусство создавать моменты, которые остаются с вами навсегда. Один клик — и ваш вечер станет особенным. Мы уже ждём вашего сообщения.</p>
-    <a href="https://t.me/ScarletNight_SupportBot" class="btn-cta-final js-ripple">
-        <i class="fab fa-telegram-plane"></i>
-        <span>Связаться с агентством</span>
-    </a>
-</section>
+            <!-- КНОПКА ВНИЗУ -->
+            <a href="https://telegra.ph/Escort-Scarlet-Night-06-01" target="_blank" class="btn-faq js-ripple">
+                <i class="fas fa-book-open"></i>
+                <span>Читать полный FAQ</span>
+            </a>
+        </section>
+        
+        <div class="divider"></div>
+        
+        <section class="section call-to-action" id="contact">
+            <h3>Готовы к незабываемому вечеру?</h3>
+            <p>Scarlet Night — это не просто эскорт. Это искусство создавать моменты, которые остаются с вами навсегда. Один клик — и ваш вечер станет особенным. Мы уже ждём вашего сообщения.</p>
+            <a href="https://t.me/ScarletNight_SupportBot" class="btn-cta-final js-ripple">
+                <i class="fab fa-telegram-plane"></i>
+                <span>Связаться с агентством</span>
+            </a>
+        </section>
+        
         <div style="height:80px"></div>
     </main>
+    
     <footer>
         <p>Официальный сайт агентства • <span>Scarlet Night © 2025</span></p>
     </footer>
+    
     <!-- PDF MODAL -->
     <div class="pdf-modal" id="pdfModal">
         <div class="pdf-modal-content">
@@ -1311,6 +881,7 @@
             <iframe id="pdfViewer" src="" frameborder="0"></iframe>
         </div>
     </div>
+    
     <script>
         // Ripple effect
         document.querySelectorAll('.js-ripple').forEach(btn => {
@@ -1333,35 +904,50 @@
                 setTimeout(() => ripple.remove(), 700);
             });
         });
+        
         // PDF Modal
         const pdfModal = document.getElementById('pdfModal');
         const pdfViewer = document.getElementById('pdfViewer');
         const pdfClose = document.querySelector('.pdf-close');
         const viewContractBtn = document.querySelector('.btn-view-contract');
+        
         viewContractBtn.addEventListener('click', () => {
             pdfViewer.src = 'contract.pdf'; // Убедись, что файл рядом
             pdfModal.classList.add('active');
             document.body.style.overflow = 'hidden';
         });
+        
         pdfClose.addEventListener('click', closePdfModal);
         pdfModal.addEventListener('click', (e) => { if (e.target === pdfModal) closePdfModal(); });
+        
         function closePdfModal() {
             pdfModal.classList.remove('active');
             setTimeout(() => { pdfViewer.src = ''; document.body.style.overflow = ''; }, 400);
         }
+        
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && pdfModal.classList.contains('active')) closePdfModal();
         });
+        
         // Остальные скрипты (анимации, навигация и т.д.)
         const sections = document.querySelectorAll('.section');
-        const io = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.12 });
+        const io = new IntersectionObserver((entries) => { 
+            entries.forEach(entry => { 
+                if (entry.isIntersecting) entry.target.classList.add('visible'); 
+            }); 
+        }, { threshold: 0.12 });
+        
         sections.forEach(s => io.observe(s));
+        
         const menuToggle = document.getElementById('menuToggle');
         const nav = document.getElementById('nav');
+        
         menuToggle.addEventListener('click', () => nav.classList.toggle('show'));
         document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => nav.classList.remove('show')));
+        
         const cursorGlow = document.getElementById('cursorGlow');
         const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        
         if (!isTouch) {
             cursorGlow.style.opacity = '1';
             document.addEventListener('mousemove', (e) => {
@@ -1370,6 +956,7 @@
                 cursorGlow.style.width = cursorGlow.style.height = '48px';
             });
         }
+        
         function addTilt(container) {
             if (!isTouch) {
                 container.addEventListener('mousemove', (ev) => {
@@ -1385,12 +972,16 @@
                 container.addEventListener('mouseleave', () => { container.style.transform = 'none'; });
             }
         }
+        
         document.querySelectorAll('.guarantee-item, .advantage-item, .review, .faq-item, .order-item').forEach(addTilt);
+        
         window.addEventListener('resize', () => { if (window.innerWidth > 900) nav.classList.remove('show'); });
+        
         document.addEventListener('DOMContentLoaded', () => {
             const heroTitle = document.querySelector('.text-animation');
             const text = heroTitle.textContent;
             heroTitle.innerHTML = text.split('').map(char => `<span>${char}</span>`).join('');
+            
             anime({
                 targets: '.text-animation span',
                 opacity: [0, 1],
@@ -1400,8 +991,10 @@
                 delay: anime.stagger(50, { start: 500 }),
             });
         });
+        
         let isScrolling;
         const scrollLine = document.getElementById('scrollLine');
+        
         window.addEventListener('scroll', () => {
             scrollLine.style.width = '100%';
             scrollLine.style.opacity = '1';
@@ -1411,70 +1004,73 @@
                 scrollLine.style.width = '0';
             }, 300);
         });
-// FAQ — КОМПАКТНЫЙ АККОРДЕОН С РАЗДВИЖКОЙ
-document.querySelectorAll('.faq-question').forEach(question => {
-    question.addEventListener('click', () => {
-        const item = question.parentElement;
-        const isActive = item.classList.contains('active');
-        // Закрываем все
-        document.querySelectorAll('.faq-item').forEach(i => {
-            i.classList.remove('active');
+        
+        // АНИМАЦИЯ ПОЯВЛЕНИЯ КАРТОЧЕК С ШЕСТИУГОЛЬНИКАМИ
+        const whySteps = document.querySelectorAll('.why-step');
+        const advantageSteps = document.querySelectorAll('.advantage-step');
+        const orderSteps = document.querySelectorAll('.order-step');
+        const guaranteeSteps = document.querySelectorAll('.guarantee-step');
+        
+        const stepObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 180);
+                    stepObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        // Наблюдаем за всеми типами карточек
+        [...whySteps, ...advantageSteps, ...orderSteps, ...guaranteeSteps].forEach(step => {
+            stepObserver.observe(step);
         });
-        // Открываем текущий
-        if (!isActive) {
-            item.classList.add('active');
-        }
-    });
-});
-// === АНИМАЦИЯ FAQ КАРТОЧЕК ===
-const faqCards = document.querySelectorAll('.faq-card');
-const faqObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const delay = entry.target.getAttribute('data-delay') || 0;
+        
+        // АНИМАЦИЯ FAQ КАРТОЧЕК
+        const faqCards = document.querySelectorAll('.faq-card');
+        const faqObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.getAttribute('data-delay') || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                    faqObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        faqCards.forEach(card => faqObserver.observe(card));
+        
+        // Плавная прокрутка для навигации
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Фикс для мобильного меню
+        window.addEventListener('orientationchange', function() {
             setTimeout(() => {
-                entry.target.classList.add('visible');
-            }, delay);
-            faqObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.3 });
-faqCards.forEach(card => faqObserver.observe(card));
-// АНИМАЦИЯ ПОЯВЛЕНИЯ "ПОЧЕМУ МЫ"
-const whySteps = document.querySelectorAll('.why-step');
-const whyObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.classList.add('visible');
-            }, index * 180);
-            whyObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.3 });
-whySteps.forEach(step => whyObserver.observe(step));
-       
-// АНИМАЦИЯ ПОЯВЛЕНИЯ ГАРАНТИЙ
-const guaranteeSteps = document.querySelectorAll('.guarantee-step');
-const guaranteeObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 150);
-            guaranteeObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.3 });
-guaranteeSteps.forEach(step => {
-    step.style.opacity = '0';
-    step.style.transform = 'translateY(30px)';
-    step.style.transition = 'all 0.6s cubic-bezier(0.2, 0.9, 0.3, 1)';
-    guaranteeObserver.observe(step);
-});
-       
+                if (window.innerWidth > 900) {
+                    nav.classList.remove('show');
+                }
+            }, 300);
+        });
     </script>
 </body>
 </html>
- 
