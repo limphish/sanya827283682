@@ -637,81 +637,88 @@
     }
 }
 
-/* === ШЕСТИУГОЛЬНЫЙ НОМЕР С ГЛЯНЦЕМ И СВЕЧЕНИЕМ === */
+/* === ИДЕАЛЬНЫЙ РОВНЫЙ ШЕСТИУГОЛЬНИК С ГЛЯНЦЕМ И СВЕЧЕНИЕМ === */
 .why-step .step-number,
 .advantage-step .step-number,
 .guarantee-step .step-number,
 .order-step .step-number {
     position: absolute;
-    top: -20px;
+    top: -22px;
     left: 50%;
     transform: translateX(-50%);
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%);
     color: #000;
     font-weight: 900;
     font-size: 18px;
-    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 3;
     letter-spacing: 0.6px;
     
-    /* ШЕСТИУГОЛЬНИК */
-    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+    /* ИДЕАЛЬНЫЙ РОВНЫЙ ШЕСТИУГОЛЬНИК */
+    clip-path: polygon(
+        50% 0%,     /* верхняя вершина */
+        95% 25%,    /* верхний правый угол */
+        95% 75%,    /* нижний правый угол */
+        50% 100%,   /* нижняя вершина */
+        5% 75%,     /* нижний левый угол */
+        5% 25%      /* верхний левый угол */
+    );
     
     /* ТОНКАЯ ЗОЛОТАЯ ОБВОДКА */
     box-shadow: 
-        0 0 0 2px rgba(212, 175, 55, 0.35),
-        0 0 0 4px rgba(5, 5, 5, 0.3);
+        0 0 0 2px rgba(212, 175, 55, 0.38),
+        0 0 0 4px rgba(5, 5, 5, 0.32);
     
     /* МЯГКОЕ ВНЕШНЕЕ СВЕЧЕНИЕ (EMBER GLOW) */
-    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.4));
+    filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.42));
     
     /* ГЛЯНЦЕВЫЙ БЛИК СВЕРХУ */
     background-image: 
         linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%),
-        radial-gradient(at 30% 30%, rgba(255, 255, 255, 0.4), transparent 60%);
+        radial-gradient(at 25% 25%, rgba(255, 255, 255, 0.5), transparent 65%);
     background-origin: border-box;
     background-clip: padding-box, border-box;
     
-    /* АНИМАЦИЯ ПРИ HOVER */
-    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+    /* ПЛАВНАЯ АНИМАЦИЯ */
+    transition: all 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
+/* HOVER — УСИЛЕНИЕ СВЕЧЕНИЯ И ПОДЪЁМ */
 .why-step:hover .step-number,
 .advantage-step:hover .step-number,
 .guarantee-step:hover .step-number,
 .order-step:hover .step-number {
-    transform: translateX(-50%) translateY(-2px) scale(1.08);
+    transform: translateX(-50%) translateY(-3px) scale(1.1);
     filter: 
-        drop-shadow(0 0 18px rgba(212, 175, 55, 0.55))
-        drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+        drop-shadow(0 0 20px rgba(212, 175, 55, 0.6))
+        drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
     box-shadow: 
-        0 0 0 2px rgba(212, 175, 55, 0.5),
-        0 0 0 5px rgba(5, 5, 5, 0.35),
-        0 8px 20px rgba(0, 0, 0, 0.4);
+        0 0 0 2px rgba(212, 175, 55, 0.55),
+        0 0 0 5px rgba(5, 5, 5, 0.38),
+        0 10px 24px rgba(0, 0, 0, 0.45);
 }
 
-/* МОБИЛЬНАЯ ВЕРСИЯ */
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
 @media (max-width: 900px) {
     .why-step .step-number,
     .advantage-step .step-number,
     .guarantee-step .step-number,
     .order-step .step-number {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         font-size: 16px;
-        top: -18px;
-        filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.35));
+        top: -19px;
+        filter: drop-shadow(0 0 11px rgba(212, 175, 55, 0.38));
     }
     .why-step:hover .step-number,
     .advantage-step:hover .step-number,
     .guarantee-step:hover .step-number,
     .order-step:hover .step-number {
-        transform: translateX(-50%) translateY(-1px) scale(1.06);
+        transform: translateX(-50%) translateY(-2px) scale(1.07);
     }
 }
         
