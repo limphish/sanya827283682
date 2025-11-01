@@ -17,11 +17,11 @@
             box-sizing: border-box; 
             margin: 0; 
             padding: 0; 
-            max-width: 100%; /* Фиксим горизонтальный скролл */
+            max-width: 100%;
         }
         html, body { 
             height: 100%; 
-            overflow-x: hidden; /* Убираем горизонтальный скролл */
+            overflow-x: hidden;
             position: relative;
         }
         body {
@@ -139,7 +139,7 @@
             font-size: 12px;
         }
         .section { 
-            min-height: 100vh; /* Всегда полный экран */
+            min-height: 100vh;
             padding: calc(var(--nav-height) + 20px) 20px 20px; 
             display: flex; 
             flex-direction: column; 
@@ -209,16 +209,15 @@
             gap: 20px;
             padding: 40px 20px 30px;
             margin: 20px 0;
-            scrollbar-width: none; /* Скрываем скроллбар Firefox */
-            -ms-overflow-style: none; /* Скрываем скроллбар IE */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
             justify-content: flex-start;
             position: relative;
             width: 100%;
-            scroll-snap-type: x mandatory; /* Принудительный скролл к карточкам */
+            scroll-snap-type: x mandatory;
             scroll-padding: 0 20px;
         }
         
-        /* Скрываем скроллбар для Webkit браузеров */
         .why-steps::-webkit-scrollbar,
         .advantages-steps::-webkit-scrollbar,
         .order-steps::-webkit-scrollbar,
@@ -227,7 +226,7 @@
         }
         
         .why-step, .advantage-step, .order-step, .guarantee-step {
-            flex: 0 0 calc(100vw - 60px); /* Карточка занимает почти всю ширину экрана */
+            flex: 0 0 calc(100vw - 60px);
             background: var(--card);
             padding: 50px 20px 30px;
             border-radius: 20px;
@@ -240,7 +239,7 @@
             opacity: 0;
             transform: translateY(40px);
             overflow: visible;
-            scroll-snap-align: start; /* Важно для привязки скролла */
+            scroll-snap-align: start;
             min-height: 300px;
             display: flex;
             flex-direction: column;
@@ -432,6 +431,139 @@
             transition: transform 0.3s ease;
         }
         
+        /* === МОДАЛЬНОЕ ОКНО ДОГОВОРА === */
+        .contract-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .contract-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .contract-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 85vh;
+            background: var(--bg-1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 25px 80px rgba(183, 28, 28, 0.4),
+                0 0 0 1px rgba(212, 175, 55, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contract-modal.active .contract-modal-content {
+            transform: scale(1);
+        }
+        
+        .contract-header {
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .contract-header h3 {
+            color: #000;
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+        
+        .contract-body {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background: linear-gradient(180deg, rgba(212,175,55,0.03), transparent);
+        }
+        
+        .contract-text {
+            text-align: left;
+            line-height: 1.8;
+            color: rgba(233, 221, 210, 0.95);
+            font-size: 14px;
+        }
+        
+        .contract-text h4 {
+            color: var(--accent-1);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 8px;
+        }
+        
+        .contract-text p {
+            margin-bottom: 15px;
+            text-align: left;
+            padding: 0;
+        }
+        
+        .contract-text ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .contract-text li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .contract-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            color: #000;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .contract-close:hover {
+            background: var(--accent-1);
+            transform: rotate(90deg);
+        }
+        
+        .contract-signature {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            text-align: center;
+        }
+        
+        .signature-line {
+            display: inline-block;
+            width: 200px;
+            border-bottom: 1px solid var(--accent-1);
+            margin: 20px 0 5px;
+        }
+        
         /* === ОТЗЫВЫ === */
         .reviews-grid {
             display: flex;
@@ -592,6 +724,37 @@
             .scroll-indicator i {
                 font-size: 14px;
             }
+            
+            /* Адаптация модального окна */
+            .contract-modal-content {
+                height: 90vh;
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .contract-body {
+                padding: 20px;
+            }
+            
+            .contract-header {
+                padding: 15px;
+            }
+            
+            .contract-header h3 {
+                font-size: 1.3rem;
+            }
+            
+            .contract-text {
+                font-size: 13px;
+            }
+            
+            .contract-close {
+                top: 10px;
+                right: 15px;
+                width: 35px;
+                height: 35px;
+                font-size: 24px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -621,6 +784,14 @@
                 padding: 12px 25px;
                 font-size: 13px;
                 max-width: 260px;
+            }
+            
+            .contract-body {
+                padding: 15px;
+            }
+            
+            .contract-text {
+                font-size: 12px;
             }
         }
         
@@ -820,7 +991,7 @@
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
-            <button class="btn-view-contract js-ripple">
+            <button class="btn-view-contract js-ripple" id="viewContractBtn">
                 <i class="fas fa-file-contract"></i>
                 <span>Договор услуг</span>
             </button>
@@ -873,14 +1044,104 @@
         <p>Официальный сайт агентства • <span>Scarlet Night © 2025</span></p>
     </footer>
 
+    <!-- Модальное окно договора -->
+    <div class="contract-modal" id="contractModal">
+        <div class="contract-modal-content">
+            <div class="contract-header">
+                <h3>ДОГОВОР ОБ ОКАЗАНИИ ЭСКОРТ-УСЛУГ</h3>
+            </div>
+            <span class="contract-close" id="contractClose">×</span>
+            <div class="contract-body">
+                <div class="contract-text">
+                    <h4>1. ПРЕДМЕТ ДОГОВОРА</h4>
+                    <p>1.1. Исполнитель обязуется оказать Заказчику услуги эскорта, а Заказчик обязуется оплатить эти услуги в размере и порядке, установленном настоящим Договором.</p>
+                    
+                    <h4>2. ПРАВА И ОБЯЗАННОСТИ СТОРОН</h4>
+                    <p>2.1. Исполнитель обязуется:</p>
+                    <ul>
+                        <li>Обеспечить присутствие модели в согласованное время и месте</li>
+                        <li>Гарантировать соответствие модели заявленным характеристикам</li>
+                        <li>Соблюдать полную конфиденциальность</li>
+                        <li>Обеспечить профессиональное поведение модели</li>
+                    </ul>
+                    
+                    <p>2.2. Заказчик обязуется:</p>
+                    <ul>
+                        <li>Соблюдать условия договора и правила поведения</li>
+                        <li>Оплатить услуги в установленные сроки</li>
+                        <li>Уважительно относиться к модели</li>
+                        <li>Соблюдать конфиденциальность</li>
+                    </ul>
+                    
+                    <h4>3. СТОИМОСТЬ УСЛУГ И ПОРЯДОК РАСЧЕТОВ</h4>
+                    <p>3.1. Стоимость услуг составляет от 25 000 рублей за час.</p>
+                    <p>3.2. Оплата производится: 50% предоплата, 50% при встрече.</p>
+                    <p>3.3. Принимаются: наличные, банковские карты, USDT, BTC.</p>
+                    
+                    <h4>4. КОНФИДЕНЦИАЛЬНОСТЬ</h4>
+                    <p>4.1. Стороны обязуются сохранять в тайне условия Договора и любую информацию, полученную в ходе его исполнения.</p>
+                    <p>4.2. Все персональные данные Заказчика уничтожаются после оказания услуг.</p>
+                    
+                    <h4>5. ОТВЕТСТВЕННОСТЬ СТОРОН</h4>
+                    <p>5.1. За неисполнение или ненадлежащее исполнение обязательств по Договору Стороны несут ответственность в соответствии с законодательством РФ.</p>
+                    
+                    <h4>6. ФОРС-МАЖОР</h4>
+                    <p>6.1. Стороны освобождаются от ответственности за неисполнение обязательств по Договору, если это неисполнение вызвано обстоятельствами непреодолимой силы.</p>
+                    
+                    <h4>7. СРОК ДЕЙСТВИЯ ДОГОВОРА</h4>
+                    <p>7.1. Настоящий Договор вступает в силу с момента его акцепта Заказчиком и действует до полного исполнения Сторонами своих обязательств.</p>
+                    
+                    <div class="contract-signature">
+                        <p>ИСПОЛНИТЕЛЬ: Агентство "Scarlet Night"</p>
+                        <div class="signature-line"></div>
+                        <p>Подпись</p>
+                        
+                        <p style="margin-top: 30px;">ЗАКАЗЧИК: _________________________</p>
+                        <div class="signature-line"></div>
+                        <p>Подпись</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Управление модальным окном договора
+        const contractModal = document.getElementById('contractModal');
+        const viewContractBtn = document.getElementById('viewContractBtn');
+        const contractClose = document.getElementById('contractClose');
+
+        // Открытие модального окна
+        viewContractBtn.addEventListener('click', () => {
+            contractModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Закрытие модального окна
+        contractClose.addEventListener('click', closeContractModal);
+        contractModal.addEventListener('click', (e) => {
+            if (e.target === contractModal) closeContractModal();
+        });
+
+        function closeContractModal() {
+            contractModal.classList.remove('active');
+            setTimeout(() => {
+                document.body.style.overflow = '';
+            }, 400);
+        }
+
+        // Закрытие по ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && contractModal.classList.contains('active')) {
+                closeContractModal();
+            }
+        });
+
         // Фикс горизонтального скролла
         document.addEventListener('DOMContentLoaded', function() {
-            // Предотвращаем горизонтальный скролл
             document.body.style.overflowX = 'hidden';
             document.documentElement.style.overflowX = 'hidden';
             
-            // Убеждаемся что все элементы в пределах экрана
             const allElements = document.querySelectorAll('*');
             allElements.forEach(el => {
                 el.style.maxWidth = '100%';
@@ -1015,7 +1276,6 @@
                 menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             }
             
-            // Гарантируем что нет горизонтального скролла
             document.body.style.overflowX = 'hidden';
             document.documentElement.style.overflowX = 'hidden';
         });
