@@ -473,44 +473,39 @@
 .btn-reviews:hover .btn-icon {
     transform: rotate(12deg) scale(1.1);
 }
-/* FAQ — МИНИМАЛЬНЫЙ РАЗМЕР, БЕЗ "БОЛЬШИХ БЛОКОВ" */
+
+/* FAQ — КОМПАКТНЫЙ РАЗМЕР */
 .faq-accordion {
     max-width: 1000px;
-    margin: 24px auto 20px;
+    margin: 20px auto 15px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
 }
 
 .faq-item {
     background: transparent;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+    transition: all 0.3s ease;
     border: 1px solid rgba(212, 175, 55, 0.05);
 }
 
-.faq-item:hover {
-    border-color: rgba(212, 175, 55, 0.14);
-}
-
-/* ВОПРОС — МАКСИМАЛЬНО КОМПАКТНЫЙ, ПОД ТЕКСТ */
+/* ВОПРОС — МИНИМАЛЬНАЯ ВЫСОТА */
 .faq-question {
-    padding: 8px 14px;
+    padding: 10px 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     background: var(--card);
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    min-height: auto;
-    line-height: 1.25;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    min-height: 50px;
 }
 
 .faq-question:hover {
-    background: rgba(212, 175, 55, 0.07);
-    transform: translateY(-1px);
+    background: rgba(212, 175, 55, 0.05);
 }
 
 .faq-question h4 {
@@ -519,16 +514,12 @@
     font-size: 16px;
     margin: 0;
     flex: 1;
-    word-wrap: break-word;
-    line-height: 1.25;
 }
 
 .faq-icon {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--accent-1);
-    transition: transform 0.35s ease;
-    width: 15px;
-    text-align: center;
+    transition: transform 0.3s ease;
     flex-shrink: 0;
 }
 
@@ -536,101 +527,53 @@
     transform: rotate(180deg);
 }
 
-/* ОТВЕТ — ВЫДВИГАЕТСЯ, НО БЕЗ ЛИШНЕГО ПРОСТРАНСТВА */
+/* ОТВЕТ — КОМПАКТНЫЙ */
 .faq-answer {
     max-height: 0;
     overflow: hidden;
-    padding: 0 14px;
-    background: rgba(10, 10, 10, 0.7);
-    border-top: 1px solid rgba(212, 175, 55, 0.12);
-    transition: 
-        max-height 0.45s cubic-bezier(0.2, 0.9, 0.3, 1),
-        padding 0.45s ease,
-        opacity 0.3s ease;
-    opacity: 0;
+    padding: 0 16px;
+    background: rgba(10, 10, 10, 0.6);
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
 .faq-item.active .faq-answer {
-    max-height: 180px;
-    padding: 12px 14px;
-    opacity: 1;
+    max-height: 200px;
+    padding: 12px 16px;
 }
 
 .faq-answer p {
     margin: 0;
-    font-size: 14.5px;
-    line-height: 1.6;
-    color: rgba(233, 221, 210, 0.94);
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(233, 221, 210, 0.9);
 }
 
-/* АКТИВНЫЙ БЛОК — МИНИМАЛЬНАЯ ТЕНЬ */
+/* АКТИВНЫЙ БЛОК */
 .faq-item.active {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
-    border-color: rgba(212, 175, 55, 0.24);
-    background: rgba(5, 5, 5, 0.28);
-}
-
-/* КНОПКА "ЧИТАТЬ ПОЛНЫЙ FAQ" */
-.btn-faq {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 36px;
-    margin: 10px auto 0;
-    font-weight: 700;
-    font-size: 15px;
-    color: #000;
-    background: linear-gradient(135deg, #f8e6a0, #e6c94a, #ccad38);
-    border: none;
-    border-radius: 999px;
-    box-shadow: 
-        0 6px 25px rgba(212, 175, 55, 0.24),
-        0 0 0 1px rgba(212, 175, 55, 0.12);
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.btn-faq:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.34);
-}
-
-.btn-faq i {
-    transition: transform 0.3s ease;
-}
-
-.btn-faq:hover i {
-    transform: translateX(2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-color: rgba(212, 175, 55, 0.2);
 }
 
 /* МОБИЛЬНАЯ ВЕРСИЯ */
 @media (max-width: 900px) {
     .faq-accordion {
-        gap: 3px;
-        margin: 18px auto 16px;
+        gap: 5px;
+        margin: 15px auto 10px;
     }
     .faq-question {
-        padding: 7px 12px;
-        gap: 7px;
+        padding: 8px 12px;
+        min-height: 45px;
     }
     .faq-question h4 {
-        font-size: 15.5px;
-    }
-    .faq-icon {
-        font-size: 12px;
-        width: 14px;
+        font-size: 15px;
     }
     .faq-answer {
         padding: 0 12px;
     }
     .faq-item.active .faq-answer {
         padding: 10px 12px;
-        max-height: 220px;
-    }
-    .btn-faq {
-        padding: 11px 30px;
-        font-size: 14.5px;
-        max-width: 230px;
+        max-height: 180px;
     }
 }
         
@@ -1041,6 +984,7 @@ document.querySelectorAll('.faq-question').forEach(question => {
     </script>
 </body>
 </html>
+
 
 
 
