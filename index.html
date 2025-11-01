@@ -545,6 +545,31 @@
     opacity: 1;
 }
 
+        /* ОТВЕТ — ПОЛНОСТЬЮ СКРЫТ В ЗАКРЫТОМ СОСТОЯНИИ */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 14px !important; /* Важно: переопределяем для закрытого */
+    margin: 0;
+    border-top: none !important;
+    background: transparent !important;
+    opacity: 0;
+    transition:
+        max-height 0.45s cubic-bezier(0.2, 0.9, 0.3, 1),
+        padding 0.45s ease,
+        border 0.45s ease,
+        background 0.45s ease,
+        opacity 0.3s ease;
+}
+
+/* ТОЛЬКО ПРИ ОТКРЫТИИ — ВКЛЮЧАЕМ СТИЛИ */
+.faq-item.active .faq-answer {
+    max-height: 180px;
+    padding: 12px 14px;
+    border-top: 1px solid rgba(212, 175, 55, 0.12);
+    background: rgba(10, 10, 10, 0.7);
+    opacity: 1;
+}
 .faq-answer p {
     margin: 0;
     font-size: 14.5px;
@@ -1030,4 +1055,5 @@ document.querySelectorAll('.faq-question').forEach(question => {
     </script>
 </body>
 </html>
+
 
