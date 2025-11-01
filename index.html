@@ -483,6 +483,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
         
         .pdf-header h3 {
@@ -508,11 +509,60 @@
             transition: all 0.3s ease;
             font-weight: bold;
             border: none;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
         }
         
         .pdf-close:hover {
             background: var(--accent-1);
-            transform: rotate(90deg);
+            transform: translateY(-50%) rotate(90deg);
+        }
+        
+        .pdf-viewer-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+        
+        .pdf-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .pdf-nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pdf-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pdf-nav-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+        
+        .pdf-page-info {
+            font-weight: 600;
+            color: #333;
         }
         
         .pdf-viewer {
@@ -520,6 +570,12 @@
             width: 100%;
             border: none;
             background: white;
+        }
+        
+        .pdf-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
         
         .pdf-loading {
@@ -530,6 +586,7 @@
             flex: 1;
             color: var(--accent-1);
             font-size: 18px;
+            background: white;
         }
         
         .pdf-loading .spinner {
@@ -556,6 +613,7 @@
             color: var(--accent-1);
             text-align: center;
             padding: 40px;
+            background: white;
         }
         
         .pdf-error i {
@@ -581,6 +639,25 @@
         .pdf-download-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+        
+        .pdf-external-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .pdf-external-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
         }
         
         /* === ОТЗЫВЫ === */
@@ -763,6 +840,20 @@
                 width: 35px;
                 height: 35px;
                 font-size: 24px;
+                right: 10px;
+            }
+            
+            .pdf-controls {
+                padding: 12px 15px;
+            }
+            
+            .pdf-nav-btn {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            .pdf-page-info {
+                font-size: 14px;
             }
         }
         
@@ -793,6 +884,16 @@
                 padding: 12px 25px;
                 font-size: 13px;
                 max-width: 260px;
+            }
+            
+            .pdf-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .pdf-nav-btn {
+                width: 100%;
+                justify-content: center;
             }
         }
         
@@ -858,7 +959,7 @@
                     <div class="step-number">1</div>
                     <div class="step-icon"><i class="fas fa-gem"></i></div>
                     <h4>Элитный отбор</h4>
-                    <p>Каждая модель — это шедевр: внешность, ум, манеры. Только 1 из 100 проходит наш кастинг.</p>
+                    <p>Каждая модель — это шедевр: внешность, ум, манерами. Только 1 из 100 проходит наш кастинг.</p>
                 </div>
                 <div class="why-step">
                     <div class="step-number">2</div>
@@ -1053,23 +1154,49 @@
                 <button class="pdf-close" id="pdfClose">×</button>
             </div>
             
-            <div id="pdfLoading" class="pdf-loading">
-                <div class="spinner"></div>
-                <p>Загрузка договора...</p>
+            <div class="pdf-viewer-container">
+                <div class="pdf-controls">
+                    <button class="pdf-nav-btn" id="pdfPrev">
+                        <i class="fas fa-chevron-left"></i>
+                        Назад
+                    </button>
+                    
+                    <div class="pdf-page-info">
+                        Страница: <span id="pdfCurrentPage">1</span> из <span id="pdfTotalPages">3</span>
+                    </div>
+                    
+                    <button class="pdf-nav-btn" id="pdfNext">
+                        Вперед
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div id="pdfLoading" class="pdf-loading">
+                    <div class="spinner"></div>
+                    <p>Загрузка договора...</p>
+                </div>
+                
+                <div id="pdfError" class="pdf-error" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h4>Не удалось загрузить договор</h4>
+                    <p>На iPhone PDF может отображаться некорректно.</p>
+                    <p>Рекомендуем открыть договор в отдельном окне:</p>
+                    <a href="contract.pdf" class="pdf-external-btn" target="_blank">
+                        <i class="fas fa-external-link-alt"></i>
+                        Открыть в новом окне
+                    </a>
+                    <a href="contract.pdf" class="pdf-download-btn" download>
+                        <i class="fas fa-download"></i>
+                        Скачать договор
+                    </a>
+                </div>
+                
+                <div id="pdfViewer" class="pdf-viewer" style="display: none;">
+                    <iframe id="pdfIframe" class="pdf-iframe" 
+                            src="about:blank"
+                            frameborder="0"></iframe>
+                </div>
             </div>
-            
-            <div id="pdfError" class="pdf-error" style="display: none;">
-                <i class="fas fa-exclamation-triangle"></i>
-                <h4>Не удалось загрузить договор</h4>
-                <p>Возможно, файл не найден или произошла ошибка при загрузке.</p>
-                <a href="contract.pdf" class="pdf-download-btn" download>
-                    <i class="fas fa-download"></i>
-                    Скачать договор
-                </a>
-            </div>
-            
-            <iframe id="pdfViewer" class="pdf-viewer" style="display: none;" 
-                    frameborder="0"></iframe>
         </div>
     </div>
 
@@ -1079,8 +1206,47 @@
         const viewContractBtn = document.getElementById('viewContractBtn');
         const pdfClose = document.getElementById('pdfClose');
         const pdfViewer = document.getElementById('pdfViewer');
+        const pdfIframe = document.getElementById('pdfIframe');
         const pdfLoading = document.getElementById('pdfLoading');
         const pdfError = document.getElementById('pdfError');
+        const pdfPrev = document.getElementById('pdfPrev');
+        const pdfNext = document.getElementById('pdfNext');
+        const pdfCurrentPage = document.getElementById('pdfCurrentPage');
+        const pdfTotalPages = document.getElementById('pdfTotalPages');
+
+        let currentPage = 1;
+        const totalPages = 3; // Укажите реальное количество страниц в вашем PDF
+
+        // Обновление информации о странице
+        function updatePageInfo() {
+            pdfCurrentPage.textContent = currentPage;
+            pdfTotalPages.textContent = totalPages;
+            pdfPrev.disabled = currentPage === 1;
+            pdfNext.disabled = currentPage === totalPages;
+        }
+
+        // Навигация по страницам
+        pdfPrev.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePageInfo();
+                loadPdfPage();
+            }
+        });
+
+        pdfNext.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updatePageInfo();
+                loadPdfPage();
+            }
+        });
+
+        // Загрузка конкретной страницы PDF
+        function loadPdfPage() {
+            const pdfUrl = `contract.pdf#page=${currentPage}&zoom=page-fit`;
+            pdfIframe.src = pdfUrl;
+        }
 
         // Открытие модального окна с PDF
         viewContractBtn.addEventListener('click', () => {
@@ -1091,33 +1257,46 @@
             pdfModal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Показываем загрузку
-            pdfLoading.style.display = 'flex';
-            pdfViewer.style.display = 'none';
-            pdfError.style.display = 'none';
+            // Сброс состояния
+            currentPage = 1;
+            updatePageInfo();
             
-            // Загружаем PDF
-            const pdfUrl = 'contract.pdf';
-            pdfViewer.src = pdfUrl;
+            // Проверяем устройство
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             
-            // Проверяем загрузку PDF
-            pdfViewer.onload = function() {
+            if (isIOS) {
+                // На iOS показываем ошибку с альтернативными вариантами
                 pdfLoading.style.display = 'none';
-                pdfViewer.style.display = 'block';
-            };
-            
-            pdfViewer.onerror = function() {
-                pdfLoading.style.display = 'none';
+                pdfViewer.style.display = 'none';
                 pdfError.style.display = 'flex';
-            };
-            
-            // Таймаут на случай если PDF не загрузится
-            setTimeout(() => {
-                if (pdfLoading.style.display !== 'none') {
+            } else {
+                // На других устройствах пытаемся загрузить PDF
+                pdfLoading.style.display = 'flex';
+                pdfViewer.style.display = 'none';
+                pdfError.style.display = 'none';
+                
+                // Загружаем PDF
+                loadPdfPage();
+                
+                // Проверяем загрузку PDF
+                pdfIframe.onload = function() {
+                    pdfLoading.style.display = 'none';
+                    pdfViewer.style.display = 'block';
+                };
+                
+                pdfIframe.onerror = function() {
                     pdfLoading.style.display = 'none';
                     pdfError.style.display = 'flex';
-                }
-            }, 5000);
+                };
+                
+                // Таймаут на случай если PDF не загрузится
+                setTimeout(() => {
+                    if (pdfLoading.style.display !== 'none') {
+                        pdfLoading.style.display = 'none';
+                        pdfError.style.display = 'flex';
+                    }
+                }, 5000);
+            }
         }
 
         // Закрытие модального окна
@@ -1131,7 +1310,7 @@
             setTimeout(() => {
                 document.body.style.overflow = '';
                 // Очищаем iframe при закрытии
-                pdfViewer.src = '';
+                pdfIframe.src = 'about:blank';
             }, 400);
         }
 
@@ -1151,6 +1330,9 @@
             allElements.forEach(el => {
                 el.style.maxWidth = '100%';
             });
+            
+            // Инициализация информации о страницах
+            updatePageInfo();
         });
 
         // Ripple effect
