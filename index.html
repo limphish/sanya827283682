@@ -474,182 +474,119 @@
     transform: rotate(12deg) scale(1.1);
 }
 
-        /* АККОРДЕОН FAQ */
+/* FAQ — МИНИМАЛЬНЫЙ РАЗМЕР В ЗАКРЫТОМ ВИДЕ */
 .faq-accordion {
     max-width: 1000px;
-    margin: 36px auto;
+    margin: 32px auto;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 8px; /* Меньше отступов */
 }
 
 .faq-item {
-    background: var(--card);
-    border-radius: 16px;
-    border: 1px solid rgba(212, 175, 55, 0.08);
+    background: transparent;
+    border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+    box-shadow: none;
+    border: 1px solid rgba(212, 175, 55, 0.06);
 }
 
-.faq-item.active {
-    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.15);
-    border-color: rgba(212, 175, 55, 0.2);
+.faq-item:hover {
+    border-color: rgba(212, 175, 55, 0.15);
 }
 
+/* ВОПРОС — КОМПАКТНЫЙ */
 .faq-question {
-    padding: 20px 24px;
+    padding: 16px 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
+    background: var(--card);
+    border-radius: 14px;
     transition: all 0.3s ease;
-    position: relative;
+    backdrop-filter: blur(4px);
 }
 
 .faq-question:hover {
-    background: rgba(212, 175, 55, 0.04);
+    background: rgba(212, 175, 55, 0.06);
+    transform: translateY(-1px);
 }
 
 .faq-question h4 {
     color: var(--accent-1);
     font-family: 'Playfair Display', serif;
-    font-size: 18px;
+    font-size: 17.5px;
     margin: 0;
     flex: 1;
+    line-height: 1.4;
 }
 
 .faq-icon {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--accent-1);
-    transition: transform 0.3s ease;
+    transition: transform 0.35s ease;
+    width: 20px;
+    text-align: center;
 }
 
 .faq-item.active .faq-icon {
     transform: rotate(180deg);
 }
 
+/* ОТВЕТ — ВЫДВИГАЕТСЯ ИЗНИЗУ */
 .faq-answer {
     max-height: 0;
     overflow: hidden;
-    padding: 0 24px;
-    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
-    background: rgba(5, 5, 5, 0.3);
+    padding: 0 20px;
+    background: rgba(5, 5, 5, 0.4);
+    border-radius: 0 0 14px 14px;
+    transition: all 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
+    opacity: 0;
+    transform: translateY(-10px);
 }
 
 .faq-item.active .faq-answer {
-    max-height: 200px;
-    padding: 20px 24px;
+    max-height: 180px; /* Достаточно для любого ответа */
+    padding: 18px 20px;
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.1);
 }
 
 .faq-answer p {
     margin: 0;
     font-size: 15.5px;
-    line-height: 1.8;
-    color: rgba(233, 221, 210, 0.95);
+    line-height: 1.75;
+    color: rgba(233, 221, 210, 0.96);
 }
 
-/* КНОПКА "ЧИТАТЬ ПОЛНЫЙ FAQ" */
-.btn-faq {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 15px 44px;
-    margin: 28px auto 0;
-    font-weight: 700;
-    font-size: 16px;
-    color: #000;
-    background: linear-gradient(135deg, #f8e6a0, #e6c94a, #ccad38);
-    border: none;
-    border-radius: 999px;
-    box-shadow: 
-        0 10px 35px rgba(212, 175, 55, 0.28),
-        0 0 0 1px rgba(212, 175, 55, 0.15);
-    text-decoration: none;
-    transition: all 0.3s ease;
+/* АНИМАЦИЯ ПРИ ОТКРЫТИИ */
+.faq-item.active {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    border-color: rgba(212, 175, 55, 0.22);
 }
 
-.btn-faq:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 50px rgba(212, 175, 55, 0.38);
-}
-
-.btn-faq i {
-    transition: transform 0.3s ease;
-}
-
-.btn-faq:hover i {
-    transform: translateX(3px);
-}
-
-/* CTA ФИНАЛЬНАЯ КНОПКА */
-.btn-cta-final {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    padding: 18px 56px;
-    margin: 32px auto 0;
-    font-weight: 800;
-    font-size: 18px;
-    color: #000;
-    background: linear-gradient(135deg, #fef9d7, #f1d48a, #d4af37, #b8972a);
-    border: none;
-    border-radius: 999px;
-    box-shadow: 
-        0 14px 50px rgba(212, 175, 55, 0.4),
-        0 0 0 2px rgba(212, 175, 55, 0.2),
-        inset 0 2px 0 rgba(255, 255, 255, 0.4);
-    text-decoration: none;
-    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-}
-
-.btn-cta-final:hover {
-    transform: translateY(-6px) scale(1.04);
-    box-shadow: 0 22px 70px rgba(212, 175, 55, 0.5);
-}
-
-.btn-cta-final:active {
-    transform: translateY(-3px) scale(1.01);
-}
-
-.btn-cta-final i {
-    font-size: 22px;
-    transition: transform 0.35s ease;
-}
-
-.btn-cta-final:hover i {
-    transform: translateX(6px) rotate(15deg);
-}
-
-/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+/* МОБИЛЬНАЯ ВЕРСИЯ */
 @media (max-width: 900px) {
     .faq-accordion {
-        gap: 12px;
-        margin: 28px auto;
+        gap: 6px;
+        margin: 24px auto;
     }
     .faq-question {
-        padding: 18px 20px;
-        gap: 12px;
+        padding: 14px 16px;
+        gap: 10px;
     }
     .faq-question h4 {
-        font-size: 17px;
+        font-size: 16.5px;
     }
     .faq-answer {
-        padding: 0 20px;
+        padding: 0 16px;
     }
     .faq-item.active .faq-answer {
-        padding: 18px 20px;
-    }
-    .btn-faq, .btn-cta-final {
-        padding: 14px 36px;
-        font-size: 16px;
-        max-width: 280px;
-    }
-    .btn-cta-final {
-        padding: 16px 44px;
-        font-size: 17px;
+        padding: 16px;
+        max-height: 220px;
     }
 }
         
@@ -834,62 +771,58 @@
 
         <div class="divider"></div>
 
-<section class="section faq" id="faq">
-    <h3>Часто Задаваемые Вопросы</h3>
-    <p>Мы отвечаем на самые важные вопросы, чтобы вы могли принять решение с полной уверенностью. Всё прозрачно, честно и по делу. Если ответ не найден — пишите нам в любой момент.</p>
-
     <div class="faq-accordion">
-        <div class="faq-item">
-            <div class="faq-question">
-                <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-                <h4>Насколько конфиденциальны услуги?</h4>
-            </div>
-            <div class="faq-answer">
-                <p>Абсолютно. Никаких данных, фото, переписок. Мы не храним историю. Ваше имя известно только менеджеру. Полная анонимность — наш главный приоритет.</p>
-            </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+            <h4>Насколько конфиденциальны услуги?</h4>
         </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-                <h4>Сколько стоит эскорт?</h4>
-            </div>
-            <div class="faq-answer">
-                <p>От 25 000 ₽/час. Цена зависит от модели, времени, формата и города. VIP-модели — от 50 000 ₽. Точная стоимость — только у менеджера после согласования.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-                <h4>Можно ли заказать на выезд?</h4>
-            </div>
-            <div class="faq-answer">
-                <p>Да. По всей России и за границу. Выезд в любой город РФ — от 2 часов. Международные поездки — от 24 часов. Виза, перелёт, проживание — за счёт клиента.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-                <h4>Как проходит оплата?</h4>
-            </div>
-            <div class="faq-answer">
-                <p>50% предоплата для подтверждения. Остаток — при встрече наличными или переводом. Принимаем USDT, BTC, банковские карты. Без чеков и следов.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-                <h4>Можно ли выбрать девушку по фото?</h4>
-            </div>
-            <div class="faq-answer">
-                <p>Да, но фото — 100% реальные. Все модели проходят верификацию. При встрече — именно та девушка, которую вы выбрали. Без подмен.</p>
-            </div>
+        <div class="faq-answer">
+            <p>Абсолютно. Никаких данных, фото, переписок. Мы не храним историю. Ваше имя известно только менеджеру. Полная анонимность — наш главный приоритет.</p>
         </div>
     </div>
 
+    <div class="faq-item">
+        <div class="faq-question">
+            <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+            <h4>Сколько стоит эскорт?</h4>
+        </div>
+        <div class="faq-answer">
+            <p>От 25 000 ₽/час. Цена зависит от модели, времени, формата и города. VIP-модели — от 50 000 ₽. Точная стоимость — только у менеджера после согласования.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+            <h4>Можно ли заказать на выезд?</h4>
+        </div>
+        <div class="faq-answer">
+            <p>Да. По всей России и за границу. Выезд в любой город РФ — от 2 часов. Международные поездки — от 24 часов. Виза, перелёт, проживание — за счёт клиента.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+            <h4>Как проходит оплата?</h4>
+        </div>
+        <div class="faq-answer">
+            <p>50% предоплата для подтверждения. Остаток — при встрече наличными или переводом. Принимаем USDT, BTC, банковские карты. Без чеков и следов.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+            <h4>Можно ли выбрать девушку по фото?</h4>
+        </div>
+        <div class="faq-answer">
+            <p>Да, но фото — 100% реальные. Все модели проходят верификацию. При встрече — именно та девушка, которую вы выбрали. Без подмен.</p>
+        </div>
+    </div>
+</div>
+        
     <!-- КНОПКА "ЧИТАТЬ ПОЛНЫЙ FAQ" -->
     <a href="https://scarletnight.ru/faq" target="_blank" class="btn-faq js-ripple">
         <i class="fas fa-book-open"></i> Читать полный FAQ
@@ -1035,24 +968,28 @@
             }, 300);
         });
 
-// FAQ Accordion
+// FAQ — ПЛАВНЫЙ АККОРДЕОН (ОДИН ОТКРЫТЫЙ)
 document.querySelectorAll('.faq-question').forEach(question => {
     question.addEventListener('click', () => {
         const item = question.parentElement;
         const isActive = item.classList.contains('active');
-        
-        // Закрыть все
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-        
-        // Открыть текущий, если не был активен
+
+        // Закрываем все
+        document.querySelectorAll('.faq-item').forEach(i => {
+            i.classList.remove('active');
+        });
+
+        // Открываем текущий, если не был
         if (!isActive) {
             item.classList.add('active');
         }
     });
 });
+        
     </script>
 </body>
 </html>
+
 
 
 
