@@ -1324,10 +1324,32 @@ const faqObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 
 faqCards.forEach(card => faqObserver.observe(card));
+
+// АНИМАЦИЯ ПОЯВЛЕНИЯ ГАРАНТИЙ
+const guaranteeSteps = document.querySelectorAll('.guarantee-step');
+const guaranteeObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, index * 150);
+            guaranteeObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+guaranteeSteps.forEach(step => {
+    step.style.opacity = '0';
+    step.style.transform = 'translateY(30px)';
+    step.style.transition = 'all 0.6s cubic-bezier(0.2, 0.9, 0.3, 1)';
+    guaranteeObserver.observe(step);
+});
         
     </script>
 </body>
 </html>
+
 
 
 
