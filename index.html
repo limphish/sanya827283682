@@ -474,13 +474,13 @@
     transform: rotate(12deg) scale(1.1);
 }
 
-/* FAQ — МИНИМАЛЬНЫЙ РАЗМЕР В ЗАКРЫТОМ ВИДЕ */
+        /* FAQ — КОМПАКТНЫЙ, АДАПТИВНЫЙ, ПОД РАЗМЕР ТЕКСТА */
 .faq-accordion {
     max-width: 1000px;
-    margin: 32px auto;
+    margin: 32px auto 28px;
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Меньше отступов */
+    gap: 6px;
 }
 
 .faq-item {
@@ -488,105 +488,150 @@
     border-radius: 14px;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
-    box-shadow: none;
     border: 1px solid rgba(212, 175, 55, 0.06);
 }
 
 .faq-item:hover {
-    border-color: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.14);
 }
 
-/* ВОПРОС — КОМПАКТНЫЙ */
+/* ВОПРОС — ПОД РАЗМЕР ТЕКСТА */
 .faq-question {
-    padding: 16px 20px;
+    padding: 14px 18px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     background: var(--card);
     border-radius: 14px;
     transition: all 0.3s ease;
-    backdrop-filter: blur(4px);
+    min-height: auto;
+    line-height: 1.4;
 }
 
 .faq-question:hover {
-    background: rgba(212, 175, 55, 0.06);
+    background: rgba(212, 175, 55, 0.07);
     transform: translateY(-1px);
 }
 
 .faq-question h4 {
     color: var(--accent-1);
     font-family: 'Playfair Display', serif;
-    font-size: 17.5px;
+    font-size: 17px;
     margin: 0;
     flex: 1;
-    line-height: 1.4;
+    word-wrap: break-word;
 }
 
 .faq-icon {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--accent-1);
     transition: transform 0.35s ease;
-    width: 20px;
+    width: 18px;
     text-align: center;
+    flex-shrink: 0;
 }
 
 .faq-item.active .faq-icon {
     transform: rotate(180deg);
 }
 
-/* ОТВЕТ — ВЫДВИГАЕТСЯ ИЗНИЗУ */
+/* ОТВЕТ — ВЫДВИГАЕТСЯ, РАЗДВИГАЯ БЛОК */
 .faq-answer {
     max-height: 0;
     overflow: hidden;
-    padding: 0 20px;
-    background: rgba(5, 5, 5, 0.4);
-    border-radius: 0 0 14px 14px;
-    transition: all 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
+    padding: 0 18px;
+    background: rgba(10, 10, 10, 0.6);
+    border-top: 1px solid rgba(212, 175, 55, 0.12);
+    transition: 
+        max-height 0.45s cubic-bezier(0.2, 0.9, 0.3, 1),
+        padding 0.45s ease,
+        opacity 0.3s ease;
     opacity: 0;
-    transform: translateY(-10px);
 }
 
 .faq-item.active .faq-answer {
-    max-height: 180px; /* Достаточно для любого ответа */
-    padding: 18px 20px;
+    max-height: 180px;
+    padding: 16px 18px;
     opacity: 1;
-    transform: translateY(0);
-    box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.1);
 }
 
 .faq-answer p {
     margin: 0;
-    font-size: 15.5px;
-    line-height: 1.75;
-    color: rgba(233, 221, 210, 0.96);
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(233, 221, 210, 0.94);
 }
 
-/* АНИМАЦИЯ ПРИ ОТКРЫТИИ */
+/* АКТИВНЫЙ БЛОК — С ТЕНЬЮ */
 .faq-item.active {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-    border-color: rgba(212, 175, 55, 0.22);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.55);
+    border-color: rgba(212, 175, 55, 0.25);
+    background: rgba(5, 5, 5, 0.3);
+}
+
+/* КНОПКА "ЧИТАТЬ ПОЛНЫЙ FAQ" — ВЕРНУЛАСЬ */
+.btn-faq {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 44px;
+    margin: 16px auto 0;
+    font-weight: 700;
+    font-size: 16px;
+    color: #000;
+    background: linear-gradient(135deg, #f8e6a0, #e6c94a, #ccad38);
+    border: none;
+    border-radius: 999px;
+    box-shadow: 
+        0 10px 35px rgba(212, 175, 55, 0.28),
+        0 0 0 1px rgba(212, 175, 55, 0.15);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.btn-faq:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 50px rgba(212, 175, 55, 0.38);
+}
+
+.btn-faq i {
+    transition: transform 0.3s ease;
+}
+
+.btn-faq:hover i {
+    transform: translateX(3px);
 }
 
 /* МОБИЛЬНАЯ ВЕРСИЯ */
 @media (max-width: 900px) {
     .faq-accordion {
-        gap: 6px;
-        margin: 24px auto;
+        gap: 5px;
+        margin: 24px auto 20px;
     }
     .faq-question {
-        padding: 14px 16px;
+        padding: 12px 14px;
         gap: 10px;
     }
     .faq-question h4 {
-        font-size: 16.5px;
+        font-size: 16px;
+    }
+    .faq-icon {
+        font-size: 14px;
+        width: 16px;
     }
     .faq-answer {
-        padding: 0 16px;
+        padding: 0 14px;
     }
     .faq-item.active .faq-answer {
-        padding: 16px;
+        padding: 14px;
         max-height: 220px;
+    }
+    .btn-faq {
+        padding: 13px 36px;
+        font-size: 15px;
+        max-width: 260px;
     }
 }
         
@@ -771,59 +816,68 @@
 
         <div class="divider"></div>
 
+<section class="section faq" id="faq">
+    <h3>Часто Задаваемые Вопросы</h3>
+    <p>Мы отвечаем на самые важные вопросы, чтобы вы могли принять решение с полной уверенностью. Всё прозрачно, честно и по делу. Если ответ не найден — пишите нам в любой момент.</p>
+
     <div class="faq-accordion">
-    <div class="faq-item">
-        <div class="faq-question">
-            <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-            <h4>Насколько конфиденциальны услуги?</h4>
+        <!-- ВОПРОС 1 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                <h4>Насколько конфиденциальны услуги?</h4>
+            </div>
+            <div class="faq-answer">
+                <p>Абсолютно. Никаких данных, фото, переписок. Мы не храним историю. Ваше имя известно только менеджеру. Полная анонимность — наш главный приоритет.</p>
+            </div>
         </div>
-        <div class="faq-answer">
-            <p>Абсолютно. Никаких данных, фото, переписок. Мы не храним историю. Ваше имя известно только менеджеру. Полная анонимность — наш главный приоритет.</p>
+
+        <!-- ВОПРОС 2 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                <h4>Сколько стоит эскорт?</h4>
+            </div>
+            <div class="faq-answer">
+                <p>От 25 000 ₽/час. Цена зависит от модели, времени, формата и города. VIP-модели — от 50 000 ₽. Точная стоимость — только у менеджера после согласования.</p>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 3 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                <h4>Можно ли заказать на выезд?</h4>
+            </div>
+            <div class="faq-answer">
+                <p>Да. По всей России и за границу. Выезд в любой город РФ — от 2 часов. Международные поездки — от 24 часов. Виза, перелёт, проживание — за счёт клиента.</p>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 4 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                <h4>Как проходит оплата?</h4>
+            </div>
+            <div class="faq-answer">
+                <p>50% предоплата для подтверждения. Остаток — при встрече наличными или переводом. Принимаем USDT, BTC, банковские карты. Без чеков и следов.</p>
+            </div>
+        </div>
+
+        <!-- ВОПРОС 5 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                <h4>Можно ли выбрать девушку по фото?</h4>
+            </div>
+            <div class="faq-answer">
+                <p>Да, но фото — 100% реальные. Все модели проходят верификацию. При встрече — именно та девушка, которую вы выбрали. Без подмен.</p>
+            </div>
         </div>
     </div>
 
-    <div class="faq-item">
-        <div class="faq-question">
-            <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-            <h4>Сколько стоит эскорт?</h4>
-        </div>
-        <div class="faq-answer">
-            <p>От 25 000 ₽/час. Цена зависит от модели, времени, формата и города. VIP-модели — от 50 000 ₽. Точная стоимость — только у менеджера после согласования.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question">
-            <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-            <h4>Можно ли заказать на выезд?</h4>
-        </div>
-        <div class="faq-answer">
-            <p>Да. По всей России и за границу. Выезд в любой город РФ — от 2 часов. Международные поездки — от 24 часов. Виза, перелёт, проживание — за счёт клиента.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question">
-            <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-            <h4>Как проходит оплата?</h4>
-        </div>
-        <div class="faq-answer">
-            <p>50% предоплата для подтверждения. Остаток — при встрече наличными или переводом. Принимаем USDT, BTC, банковские карты. Без чеков и следов.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question">
-            <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-            <h4>Можно ли выбрать девушку по фото?</h4>
-        </div>
-        <div class="faq-answer">
-            <p>Да, но фото — 100% реальные. Все модели проходят верификацию. При встрече — именно та девушка, которую вы выбрали. Без подмен.</p>
-        </div>
-    </div>
-</div>
-        
-    <!-- КНОПКА "ЧИТАТЬ ПОЛНЫЙ FAQ" -->
+    <!-- КНОПКА ВЕРНУЛАСЬ! -->
     <a href="https://scarletnight.ru/faq" target="_blank" class="btn-faq js-ripple">
         <i class="fas fa-book-open"></i> Читать полный FAQ
     </a>
@@ -968,7 +1022,7 @@
             }, 300);
         });
 
-// FAQ — ПЛАВНЫЙ АККОРДЕОН (ОДИН ОТКРЫТЫЙ)
+// FAQ — КОМПАКТНЫЙ АККОРДЕОН С РАЗДВИЖКОЙ
 document.querySelectorAll('.faq-question').forEach(question => {
     question.addEventListener('click', () => {
         const item = question.parentElement;
@@ -979,7 +1033,7 @@ document.querySelectorAll('.faq-question').forEach(question => {
             i.classList.remove('active');
         });
 
-        // Открываем текущий, если не был
+        // Открываем текущий
         if (!isActive) {
             item.classList.add('active');
         }
@@ -989,6 +1043,7 @@ document.querySelectorAll('.faq-question').forEach(question => {
     </script>
 </body>
 </html>
+
 
 
 
