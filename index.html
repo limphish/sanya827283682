@@ -229,17 +229,36 @@
         <div class="divider"></div>
 
         <!-- ГАРАНТИИ С PDF -->
+        <!-- ГАРАНТИИ С КНОПКОЙ ПОД ТЕКСТОМ -->
         <section class="section guarantee" id="guarantee">
             <h3>Наши Гарантии</h3>
-            <p>Мы понимаем, что доверие — основа премиального сервиса. Scarlet Night гарантирует полную анонимность, прозрачные условия и соответствие ожиданий реальности.</p>
+            <p>Мы понимаем, что доверие — основа премиального сервиса. Scarlet Night гарантирует полную анонимность, прозрачные условия и соответствие ожиданий реальности. Каждая модель подтверждает свою личность и фотографии, а каждая встреча проходит в безопасной и уважительной обстановке. Вы получаете уверенность в качества, надёжности и корректности на каждом этапе взаимодействия.</p>
+
+            <!-- Карточки гарантий -->
             <div class="guarantee-grid">
                 <div class="guarantee-item"><p>Абсолютная защита личных данных.</p></div>
                 <div class="guarantee-item"><p>Регулярный медицинский контроль и строгий отбор моделей.</p></div>
                 <div class="guarantee-item"><p>Круглосуточная поддержка 24/7.</p></div>
-                <div class="guarantee-item">
-                    <p><strong>Договор об оказании услуг</strong></p>
-                    <button class="btn-view-contract js-ripple">Просмотреть договор</button>
-                </div>
+            </div>
+
+            <!-- КНОПКА ПОД ТЕКСТОМ -->
+            <div style="margin-top: 32px; text-align: center;">
+                <button class="btn-view-contract js-ripple" style="
+                    display: inline-block;
+                    padding: 14px 44px;
+                    font-size: 16px;
+                    font-weight: 700;
+                    background: linear-gradient(90deg, var(--accent-1), #b8972a);
+                    color: #000;
+                    border: none;
+                    border-radius: 999px;
+                    cursor: pointer;
+                    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.22);
+                    transition: all .25s ease;
+                " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 16px 50px rgba(212,175,55,0.35)'"
+                onmouseout="this.style.transform=''; this.style.boxShadow='0 10px 40px rgba(212,175,55,0.22)'">
+                    Просмотреть договор об оказании услуг
+                </button>
             </div>
         </section>
 
@@ -394,3 +413,4 @@
     </script>
 </body>
 </html>
+
