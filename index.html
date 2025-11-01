@@ -13,120 +13,224 @@
             --muted: #e9ddd2; --card: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
             --glow: 0 8px 40px rgba(212,175,55,0.06); --nav-height: 72px;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { height: 100%; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            max-width: 100%; /* Фиксим горизонтальный скролл */
+        }
+        html, body { 
+            height: 100%; 
+            overflow-x: hidden; /* Убираем горизонтальный скролл */
+            position: relative;
+        }
         body {
-            font-family: 'Roboto', system-ui; background: radial-gradient(circle at 50% 50%, rgba(183,28,28,0.2), transparent 70%), var(--bg-1);
-            color: var(--muted); overflow-x: hidden; scroll-behavior: smooth; position: relative;
+            font-family: 'Roboto', system-ui; 
+            background: radial-gradient(circle at 50% 50%, rgba(183,28,28,0.2), transparent 70%), var(--bg-1);
+            color: var(--muted); 
+            overflow-x: hidden; 
+            scroll-behavior: smooth; 
+            position: relative;
         }
-        .bg-overlay { position: fixed; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(183,28,28,0.3), rgba(22,6,6,0.2) 50%, transparent 80%); opacity: 0.15; pointer-events: none; z-index: -2; animation: glowPulse 8s ease-in-out infinite; }
-        @keyframes glowPulse { 0%, 100% { opacity: 0.15; transform: scale(1); } 50% { opacity: 0.25; transform: scale(1.05); } }
-        .scroll-line { position: fixed; left: 0; top: 0; height: 2px; width: 0; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); z-index: 999; opacity: 0; transition: width 0.3s ease, opacity 0.3s ease; }
-        header { position: fixed; left: 0; top: 0; width: 100%; height: var(--nav-height); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15)); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(212,175,55,0.07); z-index: 1000; transition: all .35s ease; box-shadow: var(--glow); }
-        header.scrolled { height: 60px; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6)); }
-        .logo h1 { font-family: 'Playfair Display', serif; color: var(--accent-1); font-size: 22px; letter-spacing: 1px; }
-        .logo .sub { font-size: 12px; color: rgba(233,221,210,0.6); }
-        .menu-toggle { display: none; font-size: 22px; color: var(--muted); cursor: pointer; }
-        nav { display: flex; gap: 14px; align-items: center; }
-        nav a { text-decoration: none; color: var(--muted); font-weight: 500; padding: 10px 14px; border-radius: 999px; border: 1px solid transparent; position: relative; transition: all .25s ease; }
-        nav a::after { content: ''; position: absolute; inset: 0; border-radius: 999px; background: linear-gradient(90deg, rgba(212,175,55,0.06), rgba(183,28,28,0.03)); transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2,.9,.3,1); z-index: -1; }
-        nav a:hover { color: var(--accent-1); transform: translateY(-3px); box-shadow: 0 6px 30px rgba(183,28,28,0.06); }
-        nav a:hover::after { transform: scaleX(1); }
-        .cta-small { background: linear-gradient(90deg, var(--accent-2), var(--accent-1)); color: #111; padding: 8px 16px; border-radius: 999px; font-weight: 700; box-shadow: 0 6px 30px rgba(183,28,28,0.18); }
-        .section { min-height: 80vh; padding: calc(var(--nav-height) + 20px) 40px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; opacity: 0; transform: translateY(36px); transition: opacity .9s ease, transform .9s ease; }
-        .section.visible { opacity: 1; transform: translateY(0); }
-        .section::before { content: ''; position: absolute; inset: 0; background-size: cover; background-position: center; background-attachment: fixed; filter: brightness(.35) saturate(.95); z-index: -1; transition: transform .8s ease; }
-        .section.visible::before { transform: translateY(-20px); }
-        .hero::before { background-image: url('https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=1920&q=80'); }
-        h2, h3 { font-family: 'Playfair Display', serif; color: var(--accent-1); font-size: 46px; margin-bottom: 12px; text-shadow: 0 6px 30px rgba(183,28,28,0.06); }
-        h2 { font-family: 'Dancing Script', cursive; letter-spacing: 1px; }
-        p { max-width: 900px; margin: 0 auto 12px; font-size: 17px; line-height: 1.9; color: rgba(233,221,210,0.95); }
-        .btn, .btn-view-contract {
-            display: inline-block; padding: 14px 44px; border-radius: 999px; font-weight: 700;
-            background: linear-gradient(90deg, var(--accent-2), #8c1b1b); color: #fff; text-decoration: none;
-            position: relative; overflow: hidden; box-shadow: 0 10px 40px rgba(183,28,28,0.16);
-            transition: transform .18s ease, box-shadow .18s ease; margin: 20px auto 0; cursor: pointer; border: none;
+        .bg-overlay { 
+            position: fixed; 
+            inset: 0; 
+            background: radial-gradient(circle at 30% 30%, rgba(183,28,28,0.3), rgba(22,6,6,0.2) 50%, transparent 80%); 
+            opacity: 0.15; 
+            pointer-events: none; 
+            z-index: -2; 
+            animation: glowPulse 8s ease-in-out infinite; 
         }
-        .btn-view-contract {
-            background: linear-gradient(90deg, var(--accent-1), #b8972a); color: #000;
-            box-shadow: 0 10px 40px rgba(212,175,55,0.22);
+        @keyframes glowPulse { 
+            0%, 100% { opacity: 0.15; transform: scale(1); } 
+            50% { opacity: 0.25; transform: scale(1.05); } 
         }
-        .btn:active, .btn-view-contract:active { transform: scale(.98); }
-        .floating-cta { position: fixed; right: 50%; transform: translateX(50%); bottom: 28px; padding: 12px 22px; border-radius: 999px; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); color: #080808; font-weight: 800; box-shadow: 0 18px 70px rgba(212,175,55,0.08); z-index: 900; transition: transform .18s ease; text-align: center; }
-        .floating-cta:hover { transform: translateX(50%) translateY(-6px) rotate(-1deg); }
-        .guarantee-grid, .reviews-grid, .faq-grid, .order-grid, .advantages-grid {
-            display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 18px; padding: 10px 6px; max-width: 1100px; margin: 20px auto;
+        .scroll-line { 
+            position: fixed; 
+            left: 0; 
+            top: 0; 
+            height: 2px; 
+            width: 0; 
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); 
+            z-index: 999; 
+            opacity: 0; 
+            transition: width 0.3s ease, opacity 0.3s ease; 
         }
-        .guarantee-item, .review, .faq-item, .order-item, .advantage-item {
-            flex: 0 0 320px; background: var(--card); padding: 22px; border-radius: 14px;
-            border: 1px solid rgba(212,175,55,0.06); box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-            transition: transform .45s cubic-bezier(.2,.9,.3,1), box-shadow .35s;
+        header { 
+            position: fixed; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: var(--nav-height); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 0 20px; 
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15)); 
+            backdrop-filter: blur(6px); 
+            border-bottom: 1px solid rgba(212,175,55,0.07); 
+            z-index: 1000; 
+            transition: all .35s ease; 
+            box-shadow: var(--glow); 
         }
-        .guarantee-item:hover, .review:hover, .faq-item:hover, .order-item:hover, .advantage-item:hover {
-            transform: translateY(-12px) rotateX(6deg); box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+        header.scrolled { 
+            height: 60px; 
+            background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6)); 
         }
-        .divider { width: 100%; text-align: center; margin: 30px 0; position: relative; }
-        .divider::after { content: '⚜️'; color: var(--accent-1); font-size: 26px; display: inline-block; padding: 0 12px; }
-        footer { background: linear-gradient(180deg, #080404, #1a0505); padding: 32px 16px; text-align: center; color: rgba(233,221,210,0.85); border-top: 1px solid rgba(212,175,55,0.05); margin-top: 20px; }
-        .lens-flare { position: absolute; top: 12%; left: 12%; width: 220px; height: 220px; border-radius: 999px; background: radial-gradient(circle, rgba(212,175,55,0.14), transparent); filter: blur(14px); animation: flare 5s ease-in-out infinite; }
-        @keyframes flare { 0%, 100% { transform: scale(1); opacity: .7; } 50% { transform: scale(1.25); opacity: 1; } }
-        /* PDF MODAL */
-        .pdf-modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(5, 5, 5, 0.92); backdrop-filter: blur(8px);
-            align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.4s ease;
+        .logo h1 { 
+            font-family: 'Playfair Display', serif; 
+            color: var(--accent-1); 
+            font-size: 20px; 
+            letter-spacing: 1px; 
         }
-        .pdf-modal.active { display: flex; opacity: 1; }
-        .pdf-modal-content { position: relative; width: 100%; max-width: 900px; height: 90vh; background: var(--bg-1); border-radius: 18px; overflow: hidden; box-shadow: 0 20px 80px rgba(183, 28, 28, 0.3), 0 0 0 1px rgba(212, 175, 55, 0.1); transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1); }
-        .pdf-modal.active .pdf-modal-content { transform: scale(1); }
-        #pdfViewer { width: 100%; height: 100%; border: none; }
-        .pdf-close { position: absolute; top: 16px; right: 20px; font-size: 32px; color: var(--accent-1); cursor: pointer; z-index: 10; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(212, 175, 55, 0.1); border-radius: 50%; transition: all 0.3s ease; backdrop-filter: blur(4px); }
-        .pdf-close:hover { background: var(--accent-1); color: #000; transform: rotate(90deg); }
+        .logo .sub { 
+            font-size: 10px; 
+            color: rgba(233,221,210,0.6); 
+        }
+        .menu-toggle { 
+            display: none; 
+            font-size: 22px; 
+            color: var(--muted); 
+            cursor: pointer; 
+            z-index: 1001;
+        }
+        nav { 
+            display: flex; 
+            gap: 12px; 
+            align-items: center; 
+        }
+        nav a { 
+            text-decoration: none; 
+            color: var(--muted); 
+            font-weight: 500; 
+            padding: 8px 12px; 
+            border-radius: 999px; 
+            border: 1px solid transparent; 
+            position: relative; 
+            transition: all .25s ease; 
+            font-size: 14px;
+        }
+        nav a::after { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            border-radius: 999px; 
+            background: linear-gradient(90deg, rgba(212,175,55,0.06), rgba(183,28,28,0.03)); 
+            transform: scaleX(0); 
+            transform-origin: left; 
+            transition: transform .35s cubic-bezier(.2,.9,.3,1); 
+            z-index: -1; 
+        }
+        nav a:hover { 
+            color: var(--accent-1); 
+            transform: translateY(-3px); 
+            box-shadow: 0 6px 30px rgba(183,28,28,0.06); 
+        }
+        nav a:hover::after { 
+            transform: scaleX(1); 
+        }
+        .cta-small { 
+            background: linear-gradient(90deg, var(--accent-2), var(--accent-1)); 
+            color: #111; 
+            padding: 6px 12px; 
+            border-radius: 999px; 
+            font-weight: 700; 
+            box-shadow: 0 6px 30px rgba(183,28,28,0.18); 
+            font-size: 12px;
+        }
+        .section { 
+            min-height: 100vh; /* Всегда полный экран */
+            padding: calc(var(--nav-height) + 20px) 20px 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden; 
+            opacity: 0; 
+            transform: translateY(36px); 
+            transition: opacity .9s ease, transform .9s ease; 
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .section.visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        .section::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed; 
+            filter: brightness(.35) saturate(.95); 
+            z-index: -1; 
+            transition: transform .8s ease; 
+        }
+        .section.visible::before { 
+            transform: translateY(-20px); 
+        }
+        .hero::before { 
+            background-image: url('https://images.unsplash.com/photo-1519741497674-4113f4c2b600?auto=format&fit=crop&w=1920&q=80'); 
+        }
+        h2, h3 { 
+            font-family: 'Playfair Display', serif; 
+            color: var(--accent-1); 
+            margin-bottom: 12px; 
+            text-shadow: 0 6px 30px rgba(183,28,28,0.06); 
+            width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        h2 { 
+            font-family: 'Dancing Script', cursive; 
+            letter-spacing: 1px; 
+            font-size: 2.5rem;
+        }
+        h3 {
+            font-size: 2rem;
+        }
+        p { 
+            max-width: 100%; 
+            margin: 0 auto 12px; 
+            line-height: 1.9; 
+            color: rgba(233,221,210,0.95); 
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
         
         /* === ОБЩИЕ СТИЛИ ДЛЯ КАРТОЧЕК С ШЕСТИУГОЛЬНИКАМИ === */
         .why-steps, .advantages-steps, .order-steps, .guarantee-steps {
             display: flex;
             flex-wrap: nowrap;
             overflow-x: auto;
-            gap: 28px;
-            padding: 40px 12px 30px; /* Увеличил верхний паддинг для шестиугольников */
-            max-width: 1200px;
-            margin: 40px auto;
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent-1) transparent;
-            justify-content: flex-start; /* Изменил на flex-start для правильной прокрутки */
+            gap: 20px;
+            padding: 40px 20px 30px;
+            margin: 20px 0;
+            scrollbar-width: none; /* Скрываем скроллбар Firefox */
+            -ms-overflow-style: none; /* Скрываем скроллбар IE */
+            justify-content: flex-start;
             position: relative;
+            width: 100%;
+            scroll-snap-type: x mandatory; /* Принудительный скролл к карточкам */
+            scroll-padding: 0 20px;
         }
         
-        /* Скрываем стандартный скроллбар для Webkit браузеров */
+        /* Скрываем скроллбар для Webkit браузеров */
         .why-steps::-webkit-scrollbar,
         .advantages-steps::-webkit-scrollbar,
         .order-steps::-webkit-scrollbar,
         .guarantee-steps::-webkit-scrollbar {
-            height: 6px;
-        }
-        
-        .why-steps::-webkit-scrollbar-track,
-        .advantages-steps::-webkit-scrollbar-track,
-        .order-steps::-webkit-scrollbar-track,
-        .guarantee-steps::-webkit-scrollbar-track {
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 10px;
-        }
-        
-        .why-steps::-webkit-scrollbar-thumb,
-        .advantages-steps::-webkit-scrollbar-thumb,
-        .order-steps::-webkit-scrollbar-thumb,
-        .guarantee-steps::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-            border-radius: 10px;
+            display: none;
         }
         
         .why-step, .advantage-step, .order-step, .guarantee-step {
-            flex: 0 0 300px;
+            flex: 0 0 calc(100vw - 60px); /* Карточка занимает почти всю ширину экрана */
             background: var(--card);
-            padding: 50px 28px 32px; /* Увеличил верхний паддинг для шестиугольников */
-            border-radius: 24px;
+            padding: 50px 20px 30px;
+            border-radius: 20px;
             border: 1px solid rgba(212, 175, 55, 0.08);
             box-shadow: 0 16px 50px rgba(0, 0, 0, 0.58);
             text-align: center;
@@ -135,7 +239,12 @@
             backdrop-filter: blur(8px);
             opacity: 0;
             transform: translateY(40px);
-            overflow: visible; /* Важно: разрешаем элементам выходить за границы */
+            overflow: visible;
+            scroll-snap-align: start; /* Важно для привязки скролла */
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .why-step.visible, .advantage-step.visible, .order-step.visible, .guarantee-step.visible {
@@ -143,20 +252,10 @@
             transform: translateY(0);
         }
         
-        .why-step:hover, .advantage-step:hover, .order-step:hover, .guarantee-step:hover {
-            transform: translateY(-16px) scale(1.04);
-            box-shadow:
-                0 32px 90px rgba(0, 0, 0, 0.7),
-                0 0 0 1px rgba(212, 175, 55, 0.24),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
-            border-color: rgba(212, 175, 55, 0.28);
-            z-index: 2;
-        }
-        
         /* === ИНДИКАТОР ПРОКРУТКИ === */
         .scroll-indicator {
             position: absolute;
-            right: 20px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
@@ -166,19 +265,24 @@
             opacity: 0.7;
             animation: bounceIndicator 2s infinite;
             z-index: 5;
+            background: rgba(5, 5, 5, 0.7);
+            padding: 10px 5px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
         
         .scroll-indicator span {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--accent-1);
             writing-mode: vertical-rl;
             text-orientation: mixed;
             white-space: nowrap;
+            font-weight: 600;
         }
         
         .scroll-indicator i {
             color: var(--accent-1);
-            font-size: 20px;
+            font-size: 16px;
             animation: pulseArrow 1.5s infinite;
         }
         
@@ -201,73 +305,53 @@
             }
             50% {
                 opacity: 1;
-                transform: translateX(5px);
+                transform: translateX(3px);
             }
         }
         
-        /* === ИДЕАЛЬНЫЙ РОВНЫЙ ШЕСТИУГОЛЬНИК С ГЛЯНЦЕМ И СВЕЧЕНИЕМ === */
+        /* === ИДЕАЛЬНЫЙ РОВНЫЙ ШЕСТИУГОЛЬНИК === */
         .why-step .step-number,
         .advantage-step .step-number,
         .order-step .step-number,
         .guarantee-step .step-number {
             position: absolute;
-            top: -26px; /* Увеличил отступ для лучшего отображения */
+            top: -22px;
             left: 50%;
             transform: translateX(-50%);
-            width: 52px;
-            height: 52px;
+            width: 44px;
+            height: 44px;
             background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%);
             color: #000;
             font-weight: 900;
-            font-size: 18px;
+            font-size: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10; /* Увеличил z-index чтобы был поверх других элементов */
+            z-index: 10;
             letter-spacing: 0.6px;
            
-            /* ИДЕАЛЬНЫЙ РОВНЫЙ ШЕСТИУГОЛЬНИК */
             clip-path: polygon(
-                50% 0%, /* верхняя вершина */
-                95% 25%, /* верхний правый угол */
-                95% 75%, /* нижний правый угол */
-                50% 100%, /* нижняя вершина */
-                5% 75%, /* нижний левый угол */
-                5% 25% /* верхний левый угол */
+                50% 0%,
+                95% 25%,
+                95% 75%,
+                50% 100%,
+                5% 75%,
+                5% 25%
             );
            
-            /* ТОНКАЯ ЗОЛОТАЯ ОБВОДКА */
             box-shadow:
                 0 0 0 2px rgba(212, 175, 55, 0.38),
                 0 0 0 4px rgba(5, 5, 5, 0.32);
            
-            /* МЯГКОЕ ВНЕШНЕЕ СВЕЧЕНИЕ (EMBER GLOW) */
             filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.42));
            
-            /* ГЛЯНЦЕВЫЙ БЛИК СВЕРХУ */
             background-image:
                 linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%),
                 radial-gradient(at 25% 25%, rgba(255, 255, 255, 0.5), transparent 65%);
             background-origin: border-box;
             background-clip: padding-box, border-box;
            
-            /* ПЛАВНАЯ АНИМАЦИЯ */
             transition: all 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
-        }
-        
-        /* HOVER — УСИЛЕНИЕ СВЕЧЕНИЯ И ПОДЪЁМ */
-        .why-step:hover .step-number,
-        .advantage-step:hover .step-number,
-        .order-step:hover .step-number,
-        .guarantee-step:hover .step-number {
-            transform: translateX(-50%) translateY(-8px) scale(1.1); /* Увеличил подъем при ховере */
-            filter:
-                drop-shadow(0 0 20px rgba(212, 175, 55, 0.6))
-                drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
-            box-shadow:
-                0 0 0 2px rgba(212, 175, 55, 0.55),
-                0 0 0 5px rgba(5, 5, 5, 0.38),
-                0 10px 24px rgba(0, 0, 0, 0.45);
         }
         
         /* ИКОНКА */
@@ -275,19 +359,11 @@
         .advantage-step .step-icon,
         .order-step .step-icon,
         .guarantee-step .step-icon {
-            font-size: 38px;
+            font-size: 32px;
             color: var(--accent-1);
-            margin: 24px 0 16px;
+            margin: 20px 0 12px;
             text-shadow: 0 5px 16px rgba(212, 175, 55, 0.28);
             transition: all 0.45s ease;
-        }
-        
-        .why-step:hover .step-icon,
-        .advantage-step:hover .step-icon,
-        .order-step:hover .step-icon,
-        .guarantee-step:hover .step-icon {
-            transform: scale(1.18) rotate(10deg);
-            filter: drop-shadow(0 8px 20px rgba(212, 175, 55, 0.35));
         }
         
         /* ЗАГОЛОВОК */
@@ -297,8 +373,8 @@
         .guarantee-step h4 {
             color: var(--accent-1);
             font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            margin: 0 0 12px;
+            font-size: 18px;
+            margin: 0 0 10px;
             letter-spacing: 0.6px;
             line-height: 1.3;
         }
@@ -308,29 +384,29 @@
         .advantage-step p,
         .order-step p,
         .guarantee-step p {
-            font-size: 15.8px;
-            line-height: 1.78;
+            font-size: 14px;
+            line-height: 1.6;
             color: rgba(233, 221, 210, 0.94);
             margin: 0;
-            padding: 0 4px;
+            padding: 0 5px;
         }
         
         /* === КНОПКИ === */
-        .btn-advantages, .btn-order-now, .btn-view-contract, .btn-faq, .btn-cta-final {
+        .btn, .btn-view-contract, .btn-advantages, .btn-order-now, .btn-reviews, .btn-faq, .btn-cta-final {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 16px 48px;
-            margin: 32px auto 0;
+            gap: 10px;
+            padding: 14px 30px;
+            margin: 20px auto 0;
             font-weight: 700;
-            font-size: 17px;
+            font-size: 14px;
             color: #000;
             background: linear-gradient(135deg, #f1d48a 0%, #d4af37 50%, #b8972a 100%);
             border: none;
             border-radius: 999px;
             box-shadow:
-                0 10px 40px rgba(212, 175, 55, 0.3),
+                0 8px 25px rgba(212, 175, 55, 0.3),
                 0 0 0 1px rgba(212, 175, 55, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             text-decoration: none;
@@ -340,26 +416,20 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             cursor: pointer;
+            max-width: 280px;
+            width: 100%;
         }
         
         .btn-advantages:hover, .btn-order-now:hover, .btn-view-contract:hover, .btn-faq:hover, .btn-cta-final:hover {
-            transform: translateY(-4px) scale(1.02);
+            transform: translateY(-3px) scale(1.02);
             box-shadow:
-                0 18px 60px rgba(212, 175, 55, 0.4),
+                0 12px 35px rgba(212, 175, 55, 0.4),
                 0 0 0 1px rgba(212, 175, 55, 0.3);
         }
         
-        .btn-advantages:active, .btn-order-now:active, .btn-view-contract:active, .btn-faq:active, .btn-cta-final:active {
-            transform: translateY(-2px) scale(0.99);
-        }
-        
         .btn-advantages i, .btn-order-now i, .btn-view-contract i, .btn-faq i, .btn-cta-final i {
-            font-size: 20px;
+            font-size: 16px;
             transition: transform 0.3s ease;
-        }
-        
-        .btn-advantages:hover i, .btn-order-now:hover i, .btn-view-contract:hover i, .btn-faq:hover i, .btn-cta-final:hover i {
-            transform: translateX(4px);
         }
         
         /* === ОТЗЫВЫ === */
@@ -367,376 +437,213 @@
             display: flex;
             flex-wrap: nowrap;
             overflow-x: auto;
-            gap: 18px;
-            padding: 10px 6px;
-            max-width: 1100px;
-            margin: 20px auto;
+            gap: 20px;
+            padding: 20px 20px;
+            margin: 20px 0;
             position: relative;
+            scroll-snap-type: x mandatory;
+            scroll-padding: 0 20px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .reviews-grid::-webkit-scrollbar {
+            display: none;
         }
         
         .review {
-            flex: 0 0 320px;
+            flex: 0 0 calc(100vw - 60px);
             background: var(--card);
-            padding: 22px;
-            border-radius: 14px;
+            padding: 20px;
+            border-radius: 16px;
             border: 1px solid rgba(212,175,55,0.06);
             box-shadow: 0 8px 40px rgba(0,0,0,0.6);
             transition: transform .45s cubic-bezier(.2,.9,.3,1), box-shadow .35s;
-        }
-        
-        .review:hover {
-            transform: translateY(-12px) rotateX(6deg);
-            box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+            scroll-snap-align: start;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .stars {
             color: var(--accent-1);
-            font-size: 22px;
+            font-size: 18px;
             letter-spacing: 2px;
             margin-bottom: 10px;
             text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
         
-        .btn-reviews {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 16px 48px;
-            margin: 32px auto 0;
-            font-weight: 700;
-            font-size: 16px;
-            color: #000;
-            background: linear-gradient(135deg, #f1d48a 0%, #d4af37 50%, #b8972a 100%);
-            border: none;
-            border-radius: 999px;
-            box-shadow:
-                0 8px 32px rgba(212, 175, 55, 0.25),
-                0 0 0 1px rgba(212, 175, 55, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
-            backdrop-filter: blur(4px);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .review p {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 10px;
         }
         
-        .btn-reviews:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow:
-                0 16px 50px rgba(212, 175, 55, 0.35),
-                0 0 0 1px rgba(212, 175, 55, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 50%, #ccad38 100%);
-        }
-        
-        .btn-reviews:active {
-            transform: translateY(-2px) scale(0.99);
-        }
-        
-        .btn-reviews .btn-icon {
-            font-size: 18px;
-            transition: transform 0.3s ease;
-        }
-        
-        .btn-reviews:hover .btn-icon {
-            transform: rotate(12deg) scale(1.1);
-        }
-        
-        /* === FAQ TIMELINE === */
-        .faq-timeline {
-            max-width: 1000px;
-            margin: 40px auto 20px;
-            position: relative;
-            padding-left: 50px;
-        }
-        
-        .faq-timeline::before {
-            content: '';
-            position: absolute;
-            left: 24px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, transparent, var(--accent-1), transparent);
-            opacity: 0.3;
-            z-index: 0;
-        }
-        
-        .faq-card {
-            position: relative;
-            background: var(--card);
-            padding: 20px 24px;
-            border-radius: 16px;
-            border: 1px solid rgba(212, 175, 55, 0.08);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: all 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
-            backdrop-filter: blur(6px);
-            z-index: 1;
-        }
-        
-        .faq-card.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .faq-card:hover {
-            transform: translateX(0) translateY(-6px);
-            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.2);
-            border-color: rgba(212, 175, 55, 0.25);
-        }
-        
-        .faq-card-icon {
-            position: absolute;
-            left: -50px;
-            top: 22px;
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--accent-1), #b8972a);
-            color: #000;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
-            z-index: 2;
-            transition: all 0.3s ease;
-        }
-        
-        .faq-card:hover .faq-card-icon {
-            transform: scale(1.15) rotate(12deg);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.45);
-        }
-        
-        .faq-card-content h4 {
+        .review strong {
+            font-size: 14px;
             color: var(--accent-1);
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            margin: 0 0 8px;
-            letter-spacing: 0.5px;
         }
         
-        .faq-card-answer {
-            font-size: 15px;
-            line-height: 1.7;
-            color: rgba(233, 221, 210, 0.92);
-            margin: 0;
+        .divider { 
+            width: 100%; 
+            text-align: center; 
+            margin: 30px 0; 
+            position: relative; 
+        }
+        .divider::after { 
+            content: '⚜️'; 
+            color: var(--accent-1); 
+            font-size: 24px; 
+            display: inline-block; 
+            padding: 0 12px; 
         }
         
-        .faq-card-line {
-            position: absolute;
-            left: -26px;
-            top: 66px;
-            width: 26px;
-            height: 2px;
-            background: var(--accent-1);
-            opacity: 0.6;
-            z-index: 1;
+        footer { 
+            background: linear-gradient(180deg, #080404, #1a0505); 
+            padding: 30px 16px; 
+            text-align: center; 
+            color: rgba(233,221,210,0.85); 
+            border-top: 1px solid rgba(212,175,55,0.05); 
+            margin-top: 20px; 
+            width: 100%;
         }
         
-        /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
-        .faq-card.visible .faq-card-icon {
-            animation: pulseGlow 1.5s ease-out forwards;
+        .lens-flare { 
+            position: absolute; 
+            top: 12%; 
+            left: 12%; 
+            width: 150px; 
+            height: 150px; 
+            border-radius: 999px; 
+            background: radial-gradient(circle, rgba(212,175,55,0.14), transparent); 
+            filter: blur(14px); 
+            animation: flare 5s ease-in-out infinite; 
         }
-        
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35); transform: scale(1); }
-            50% { box-shadow: 0 12px 40px rgba(212, 175, 55, 0.55); transform: scale(1.25); }
-            100% { box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35); transform: scale(1); }
-        }
-        
-        .cursor-glow { position: fixed; pointer-events: none; z-index: 999; mix-blend-mode: screen; border-radius: 999px; background: radial-gradient(circle, rgba(212,175,55,0.14), transparent); transform: translate(-50%, -50%); transition: width .12s ease, height .12s ease, opacity .12s; }
-        a:focus { outline: 2px dashed rgba(212,175,55,0.22); outline-offset: 4px; }
         
         /* === МОБИЛЬНАЯ АДАПТАЦИЯ === */
-        @media (max-width: 900px) {
-            header { padding: 0 16px; }
-            .menu-toggle { display: block; }
+        @media (max-width: 768px) {
+            header { 
+                padding: 0 15px; 
+            }
+            
+            .menu-toggle { 
+                display: block; 
+            }
+            
             nav { 
                 position: fixed; 
                 left: 0; 
                 right: 0; 
                 top: var(--nav-height); 
-                background: linear-gradient(180deg, rgba(0,0,0,0.92), rgba(20,6,6,0.96)); 
+                background: linear-gradient(180deg, rgba(0,0,0,0.95), rgba(20,6,6,0.98)); 
                 flex-direction: column; 
-                padding: 18px; 
-                gap: 6px; 
+                padding: 20px; 
+                gap: 8px; 
                 display: none; 
+                backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(212,175,55,0.1);
             }
-            nav.show { display: flex; }
-            h2, h3 { font-size: 32px; }
-            .section { 
-                min-height: 70vh; 
-                padding: calc(var(--nav-height) + 15px) 20px 30px; 
-                overflow: visible; /* Разрешаем контенту выходить за пределы */
+            
+            nav.show { 
+                display: flex; 
             }
-            .pdf-modal-content { 
-                height: 85vh; 
-                max-width: 100%; 
-                border-radius: 14px; 
+            
+            nav a {
+                padding: 12px 16px;
+                font-size: 16px;
+                text-align: center;
             }
-            .pdf-close { 
-                top: 12px; 
-                right: 12px; 
-                font-size: 28px; 
-                width: 40px; 
-                height: 40px; 
+            
+            h2 { 
+                font-size: 2rem;
             }
-            .btn, .btn-view-contract, .btn-advantages, .btn-order-now, .btn-reviews, .btn-faq, .btn-cta-final { 
-                width: 100%; 
-                max-width: 300px; 
-                padding: 14px 24px;
+            
+            h3 {
+                font-size: 1.7rem;
+            }
+            
+            p {
                 font-size: 15px;
+                line-height: 1.6;
             }
             
-            /* АДАПТАЦИЯ КАРТОЧЕК С ШЕСТИУГОЛЬНИКАМИ */
-            .why-steps, .advantages-steps, .order-steps, .guarantee-steps {
-                gap: 20px;
-                padding: 40px 20px 28px; /* Увеличил боковые паддинги */
-                margin: 32px -10px; /* Отрицательные margin для компенсации паддингов */
-                justify-content: flex-start;
-                scroll-padding: 0 20px; /* Добавляем отступ для скролла */
+            .section { 
+                min-height: 100vh;
+                padding: calc(var(--nav-height) + 15px) 15px 15px; 
             }
             
-            .why-step, .advantage-step, .order-step, .guarantee-step {
-                flex: 0 0 85vw;
-                max-width: 400px;
-                padding: 50px 22px 28px;
-                scroll-snap-align: start; /* Важно для правильного скролла */
-            }
-            
-            /* Добавляем отступы для последнего элемента */
-            .why-steps::after,
-            .advantages-steps::after,
-            .order-steps::after,
-            .guarantee-steps::after {
-                content: '';
-                flex: 0 0 20px;
-            }
-            
-            .why-step .step-number,
-            .advantage-step .step-number,
-            .order-step .step-number,
-            .guarantee-step .step-number {
-                width: 44px;
-                height: 44px;
-                font-size: 16px;
-                top: -22px;
-                filter: drop-shadow(0 0 11px rgba(212, 175, 55, 0.38));
-            }
-            
-            .why-step:hover .step-number,
-            .advantage-step:hover .step-number,
-            .order-step:hover .step-number,
-            .guarantee-step:hover .step-number {
-                transform: translateX(-50%) translateY(-6px) scale(1.07);
-            }
-            
-            .why-step .step-icon,
-            .advantage-step .step-icon,
-            .order-step .step-icon,
-            .guarantee-step .step-icon {
-                font-size: 34px;
-                margin: 20px 0 14px;
-            }
-            
-            .why-step h4,
-            .advantage-step h4,
-            .order-step h4,
-            .guarantee-step h4 {
-                font-size: 18.5px;
-            }
-            
-            /* АДАПТАЦИЯ ОТЗЫВОВ */
-            .reviews-grid {
-                margin: 20px -10px;
-                padding: 10px 20px;
-            }
-            
+            /* Улучшенные карточки для мобильных */
+            .why-step, .advantage-step, .order-step, .guarantee-step,
             .review {
-                flex: 0 0 85vw;
-                scroll-snap-align: start;
+                flex: 0 0 calc(100vw - 40px);
+                padding: 45px 15px 25px;
             }
             
-            .reviews-grid::after {
-                content: '';
-                flex: 0 0 20px;
-            }
-            
-            .stars {
-                font-size: 20px;
-            }
-            
-            /* АДАПТАЦИЯ FAQ */
-            .faq-timeline {
-                padding-left: 40px;
-                margin: 30px auto 16px;
-            }
-            
-            .faq-timeline::before { 
-                left: 19px; 
-            }
-            
-            .faq-card {
-                padding: 18px 20px;
-                margin-bottom: 18px;
-            }
-            
-            .faq-card-icon {
-                left: -40px;
-                width: 38px;
-                height: 38px;
-                font-size: 16px;
-            }
-            
-            .faq-card-line {
-                left: -21px;
-                top: 58px;
-                width: 20px;
-            }
-            
-            .faq-card-content h4 {
-                font-size: 17px;
-            }
-            
-            .faq-card-answer {
-                font-size: 14.5px;
-            }
-            
-            /* АДАПТАЦИЯ ИНДИКАТОРА ПРОКРУТКИ */
             .scroll-indicator {
                 right: 10px;
-                display: none; /* Скрываем на мобильных, так как скролл очевиден */
+                padding: 8px 4px;
+            }
+            
+            .scroll-indicator span {
+                font-size: 10px;
+            }
+            
+            .scroll-indicator i {
+                font-size: 14px;
             }
         }
         
         @media (max-width: 480px) {
-            .why-step, .advantage-step, .order-step, .guarantee-step,
-            .review {
-                flex: 0 0 80vw;
+            .logo h1 {
+                font-size: 18px;
             }
             
-            .why-steps, .advantages-steps, .order-steps, .guarantee-steps,
-            .reviews-grid {
-                gap: 15px;
-                padding-left: 15px;
-                padding-right: 15px;
+            .logo .sub {
+                font-size: 9px;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            .why-step, .advantage-step, .order-step, .guarantee-step,
+            .review {
+                flex: 0 0 calc(100vw - 30px);
+                padding: 40px 12px 20px;
+            }
+            
+            .btn, .btn-view-contract, .btn-advantages, .btn-order-now, .btn-reviews, .btn-faq, .btn-cta-final {
+                padding: 12px 25px;
+                font-size: 13px;
+                max-width: 260px;
             }
         }
         
-        @media (min-width: 901px) { 
-            nav { display: flex; } 
-            
-            /* Скрываем индикатор прокрутки на десктопе */
+        @media (min-width: 769px) {
+            /* Для десктопа скрываем индикаторы */
             .scroll-indicator {
                 display: none;
             }
+            
+            nav { 
+                display: flex; 
+            }
+            
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        /* Гарантируем, что ничего не выходит за пределы */
+        .container {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -744,6 +651,7 @@
     <div class="bg-overlay"></div>
     <div class="scroll-line" id="scrollLine"></div>
     <div class="cursor-glow" id="cursorGlow" style="opacity:0"></div>
+    
     <header id="header">
         <div class="logo">
             <h1>Scarlet Night</h1>
@@ -759,13 +667,15 @@
             <a href="#contact" class="cta-small">Связаться</a>
         </nav>
     </header>
-    <main>
+    
+    <main class="container">
         <section class="section hero" id="hero">
             <div class="lens-flare"></div>
             <h2 class="text-animation">Scarlet Night – Элитные Эскорт-Услуги по Всей России</h2>
             <p>Элитное эскорт агентство Scarlet Night — конфиденциально, стильно и на высшем уровне. Наши модели проходят строгий отбор, и мы гарантируем вам исключительный сервис.</p>
             <a href="https://t.me/Scarlet_NightBot" class="btn js-ripple">Выбрать Модель</a>
         </section>
+        
         <div class="divider"></div>
         
         <section class="section why-choose" id="why-choose">
@@ -792,7 +702,7 @@
                 </div>
                 <!-- Индикатор прокрутки -->
                 <div class="scroll-indicator">
-                    <span>Листайте</span>
+                    <span>Листай</span>
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
@@ -802,81 +712,81 @@
         
         <section class="section advantages" id="advantages">
             <h3>Преимущества Scarlet Night</h3>
-            <p>Scarlet Night — это не просто эскорт, это искусство создавать идеальные моменты. Мы объединили элегантность, безопасность и индивидуальный подход, чтобы каждая встреча стала для вас настоящим событием. Вот что делает нас особенными.</p>
+            <p>Scarlet Night — это не просто эскорт, это искусство создавать идеальные моменты.</p>
             <div class="advantages-steps">
                 <div class="advantage-step">
                     <div class="step-number">1</div>
                     <div class="step-icon"><i class="fas fa-crown"></i></div>
                     <h4>Элитный уровень</h4>
-                    <p>Только проверенные модели с безупречной внешностью, манерами и интеллектом. Каждая — достойна вашего статуса.</p>
+                    <p>Только проверенные модели с безупречной внешностью, манерами и интеллектом.</p>
                 </div>
                 <div class="advantage-step">
                     <div class="step-number">2</div>
                     <div class="step-icon"><i class="fas fa-shield-alt"></i></div>
                     <h4>Полная конфиденциальность</h4>
-                    <p>Ваши данные защищены. Никаких упоминаний, фото, переписок. Только вы и мы знаем о встрече.</p>
+                    <p>Ваши данные защищены. Никаких упоминаний, фото, переписок.</p>
                 </div>
                 <div class="advantage-step">
                     <div class="step-number">3</div>
                     <div class="step-icon"><i class="fas fa-clock"></i></div>
                     <h4>Гибкость и скорость</h4>
-                    <p>Заказ за 15 минут. Выезд по России. Любое время, любой формат — мы подстраиваемся под вас.</p>
+                    <p>Заказ за 15 минут. Выезд по России. Любое время, любой формат.</p>
                 </div>
                 <div class="advantage-step">
                     <div class="step-number">4</div>
                     <div class="step-icon"><i class="fas fa-star"></i></div>
                     <h4>Идеальное исполнение</h4>
-                    <p>От первого сообщения до прощания — всё продумано. Никаких сюрпризов, только удовольствие.</p>
+                    <p>От первого сообщения до прощания — всё продумано. Никаких сюрпризов.</p>
                 </div>
                 <!-- Индикатор прокрутки -->
                 <div class="scroll-indicator">
-                    <span>Листайте</span>
+                    <span>Листай</span>
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
             <a href="https://t.me/Scarlet_NightBot" class="btn-advantages js-ripple">
-                <i class="fas fa-concierge-bell"></i> Заказать прямо сейчас
+                <i class="fas fa-concierge-bell"></i> Заказать сейчас
             </a>
         </section>
         
         <div class="divider"></div>
         
         <section class="section how-to-order" id="how-to-order">
-            <h3>Как Заказать — Пошаговая Инструкция</h3>
-            <p>Мы сделали процесс заказа максимально простым, быстрым и конфиденциальным. Всё, что нужно — выбрать девушку, связаться с нами и наслаждаться вечером. Никаких сложных форм, очередей или лишних вопросов. Scarlet Night — это сервис, который работает на вас, а не наоборот.</p>
+            <h3>Как Заказать</h3>
+            <p>Мы сделали процесс заказа максимально простым, быстрым и конфиденциальным.</p>
             <div class="order-steps">
                 <div class="order-step">
                     <div class="step-number">1</div>
                     <div class="step-icon"><i class="fas fa-image"></i></div>
                     <h4>Выберите модель</h4>
-                    <p>Перейдите в каталог и выберите девушку, которая соответствует вашему настроению и предпочтениям.</p>
+                    <p>Перейдите в каталог и выберите девушку по вашему вкусу.</p>
                 </div>
                 <div class="order-step">
                     <div class="step-number">2</div>
                     <div class="step-icon"><i class="fas fa-paper-plane"></i></div>
                     <h4>Напишите менеджеру</h4>
-                    <p>Свяжитесь с нами в <strong>Telegram</strong> или <strong>WhatsApp</strong> — ответим мгновенно, 24/7.</p>
+                    <p>Свяжитесь с нами в <strong>Telegram</strong> — ответим мгновенно.</p>
                 </div>
                 <div class="order-step">
                     <div class="step-number">3</div>
                     <div class="step-icon"><i class="fas fa-check-circle"></i></div>
                     <h4>Подтвердите детали</h4>
-                    <p>Уточните время, место, продолжительность и любые пожелания. Мы всё организуем идеально.</p>
+                    <p>Уточните время, место и продолжительность встречи.</p>
                 </div>
                 <div class="order-step">
                     <div class="step-number">4</div>
                     <div class="step-icon"><i class="fas fa-glass-cheers"></i></div>
-                    <h4>Наслаждайтесь вечером</h4>
-                    <p>Встречайтесь с моделью в назначенное время. Всё уже готово — просто расслабьтесь и получайте удовольствие.</p>
+                    <h4>Наслаждайтесь</h4>
+                    <p>Встречайтесь с моделью и получайте удовольствие.</p>
                 </div>
                 <!-- Индикатор прокрутки -->
                 <div class="scroll-indicator">
-                    <span>Листайте</span>
+                    <span>Листай</span>
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
             <a href="https://t.me/Scarlet_NightBot" class="btn-order-now js-ripple">
-                <i class="fab fa-telegram-plane"></i> Начать заказ прямо сейчас
+                <i class="fab fa-telegram-plane"></i> Начать заказ
             </a>
         </section>
         
@@ -884,42 +794,41 @@
         
         <section class="section guarantee" id="guarantee">
             <h3>Наши Гарантии</h3>
-            <p>Мы понимаем, что доверие — основа премиального сервиса. Scarlet Night гарантирует полную анонимность, прозрачные условия и соответствие ожиданий реальности. Каждая модель подтверждает свою личность и фотографии, а каждая встреча проходит в безопасной и уважительной обстановке. Вы получаете уверенность в качестве, надёжности и корректности на каждом этапе взаимодействия.</p>
+            <p>Scarlet Night гарантирует полную анонимность и качество сервиса.</p>
             <div class="guarantee-steps">
                 <div class="guarantee-step">
                     <div class="step-number">1</div>
                     <div class="step-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h4>Абсолютная защита данных</h4>
-                    <p>Ваши личные данные, переписка и детали встречи — под строгой защитой. Никаких следов.</p>
+                    <h4>Защита данных</h4>
+                    <p>Ваши личные данные и переписка под строгой защитой.</p>
                 </div>
                 <div class="guarantee-step">
                     <div class="step-number">2</div>
                     <div class="step-icon"><i class="fas fa-user-check"></i></div>
-                    <h4>Медицинский контроль</h4>
-                    <p>Все модели проходят регулярные проверки здоровья и строгий отбор по внешности и манерам.</p>
+                    <h4>Контроль качества</h4>
+                    <p>Все модели проходят строгий отбор и проверки.</p>
                 </div>
                 <div class="guarantee-step">
                     <div class="step-number">3</div>
                     <div class="step-icon"><i class="fas fa-headset"></i></div>
                     <h4>Поддержка 24/7</h4>
-                    <p>Менеджер на связи в любое время. Быстро решаем любые вопросы — до, во время и после.</p>
+                    <p>Менеджер на связи в любое время для решения вопросов.</p>
                 </div>
                 <!-- Индикатор прокрутки -->
                 <div class="scroll-indicator">
-                    <span>Листайте</span>
+                    <span>Листай</span>
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
-            <!-- ПРЕМИУМ КНОПКА -->
             <button class="btn-view-contract js-ripple">
                 <i class="fas fa-file-contract"></i>
-                <span>Просмотреть договор об оказании услуг</span>
+                <span>Договор услуг</span>
             </button>
         </section>
         
         <section class="section reviews" id="reviews">
             <h3>Отзывы Клиентов</h3>
-            <p>Наши клиенты — люди, которые привыкли выбирать лучшее. Они ценят искренность, умение слушать и атмосферу, в которой всё происходит естественно. В отзывах отмечают не только красоту наших девушек, но и высокий уровень сервиса, деликатность и вкус. Мы гордимся тем, что значительная часть клиентов возвращается снова — ведь с Scarlet Night каждая встреча оставляет след из эмоций, которые хочется повторить.</p>
+            <p>Наши клиенты ценят искренность и высокий уровень сервиса.</p>
             <div class="reviews-grid">
                 <div class="review">
                     <div class="stars">★★★★★</div>
@@ -928,7 +837,7 @@
                 </div>
                 <div class="review">
                     <div class="stars">★★★★★</div>
-                    <p>"Сервис без компромиссов: внимание к деталям и полная конфиденциальность."</p>
+                    <p>"Сервис без компромиссов: внимание к деталям и конфиденциальность."</p>
                     <strong>— Дмитрий</strong>
                 </div>
                 <div class="review">
@@ -938,73 +847,13 @@
                 </div>
                 <!-- Индикатор прокрутки -->
                 <div class="scroll-indicator">
-                    <span>Листайте</span>
+                    <span>Листай</span>
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
-            <!-- КРАСИВАЯ КНОПКА -->
             <a href="https://t.me/+QsVgHvmm-TxmYWYy" class="btn-reviews js-ripple">
                 <span class="btn-icon"><i class="fas fa-comments"></i></span>
-                Посмотреть все отзывы
-            </a>
-        </section>
-        
-        <div class="divider"></div>
-        
-        <section class="section faq" id="faq">
-            <h3>Часто Задаваемые Вопросы</h3>
-            <p>Мы отвечаем на самые важные вопросы, чтобы вы могли принять решение с полной уверенностью. Всё прозрачно, честно и по делу.</p>
-            <div class="faq-timeline">
-                <!-- ВОПРОС 1 -->
-                <div class="faq-card" data-delay="0">
-                    <div class="faq-card-icon"><i class="fas fa-lock"></i></div>
-                    <div class="faq-card-content">
-                        <h4>Насколько конфиденциальны услуги?</h4>
-                        <p class="faq-card-answer">Абсолютно. Никаких данных, фото, переписок. Мы не храним историю. Ваше имя известно только менеджеру. Полная анонимность — наш главный приоритет.</p>
-                    </div>
-                    <div class="faq-card-line"></div>
-                </div>
-                <!-- ВОПРОС 2 -->
-                <div class="faq-card" data-delay="100">
-                    <div class="faq-card-icon"><i class="fas fa-ruble-sign"></i></div>
-                    <div class="faq-card-content">
-                        <h4>Сколько стоит эскорт?</h4>
-                        <p class="faq-card-answer">От 25 000 ₽/час. Цена зависит от модели, времени, формата и города. VIP-модели — от 50 000 ₽. Точная стоимость — только у менеджера после согласования.</p>
-                    </div>
-                    <div class="faq-card-line"></div>
-                </div>
-                <!-- ВОПРОС 3 -->
-                <div class="faq-card" data-delay="200">
-                    <div class="faq-card-icon"><i class="fas fa-plane"></i></div>
-                    <div class="faq-card-content">
-                        <h4>Можно ли заказать на выезд?</h4>
-                        <p class="faq-card-answer">Да. По всей России и за границу. Выезд в любой город РФ — от 2 часов. Международные поездки — от 24 часов. Виза, перелёт, проживание — за счёт клиента.</p>
-                    </div>
-                    <div class="faq-card-line"></div>
-                </div>
-                <!-- ВОПРОС 4 -->
-                <div class="faq-card" data-delay="300">
-                    <div class="faq-card-icon"><i class="fas fa-credit-card"></i></div>
-                    <div class="faq-card-content">
-                        <h4>Как проходит оплата?</h4>
-                        <p class="faq-card-answer">50% предоплата для подтверждения. Остаток — при встрече наличными или переводом. Принимаем USDT, BTC, банковские карты. Без чеков и следов.</p>
-                    </div>
-                    <div class="faq-card-line"></div>
-                </div>
-                <!-- ВОПРОС 5 -->
-                <div class="faq-card" data-delay="400">
-                    <div class="faq-card-icon"><i class="fas fa-camera"></i></div>
-                    <div class="faq-card-content">
-                        <h4>Можно ли выбрать девушку по фото?</h4>
-                        <p class="faq-card-answer">Да, но фото — 100% реальные. Все модели проходят верификацию. При встрече — именно та девушка, которую вы выбрали. Без подмен.</p>
-                    </div>
-                    <div class="faq-card-line"></div>
-                </div>
-            </div>
-            <!-- КНОПКА ВНИЗУ -->
-            <a href="https://telegra.ph/Escort-Scarlet-Night-06-01" target="_blank" class="btn-faq js-ripple">
-                <i class="fas fa-book-open"></i>
-                <span>Читать полный FAQ</span>
+                Все отзывы
             </a>
         </section>
         
@@ -1012,29 +861,32 @@
         
         <section class="section call-to-action" id="contact">
             <h3>Готовы к незабываемому вечеру?</h3>
-            <p>Scarlet Night — это не просто эскорт. Это искусство создавать моменты, которые остаются с вами навсегда. Один клик — и ваш вечер станет особенным. Мы уже ждём вашего сообщения.</p>
+            <p>Scarlet Night — это искусство создавать моменты, которые остаются с вами навсегда.</p>
             <a href="https://t.me/ScarletNight_SupportBot" class="btn-cta-final js-ripple">
                 <i class="fab fa-telegram-plane"></i>
-                <span>Связаться с агентством</span>
+                <span>Связаться</span>
             </a>
         </section>
-        
-        <div style="height:80px"></div>
     </main>
     
     <footer>
         <p>Официальный сайт агентства • <span>Scarlet Night © 2025</span></p>
     </footer>
-    
-    <!-- PDF MODAL -->
-    <div class="pdf-modal" id="pdfModal">
-        <div class="pdf-modal-content">
-            <span class="pdf-close">×</span>
-            <iframe id="pdfViewer" src="" frameborder="0"></iframe>
-        </div>
-    </div>
-    
+
     <script>
+        // Фикс горизонтального скролла
+        document.addEventListener('DOMContentLoaded', function() {
+            // Предотвращаем горизонтальный скролл
+            document.body.style.overflowX = 'hidden';
+            document.documentElement.style.overflowX = 'hidden';
+            
+            // Убеждаемся что все элементы в пределах экрана
+            const allElements = document.querySelectorAll('*');
+            allElements.forEach(el => {
+                el.style.maxWidth = '100%';
+            });
+        });
+
         // Ripple effect
         document.querySelectorAll('.js-ripple').forEach(btn => {
             btn.addEventListener('click', function(e) {
@@ -1052,151 +904,34 @@
                 ripple.style.pointerEvents = 'none';
                 ripple.style.transition = 'transform .6s cubic-bezier(.2,.9,.3,1), opacity .6s ease';
                 this.appendChild(ripple);
-                requestAnimationFrame(() => { ripple.style.transform = 'scale(2.6)'; ripple.style.opacity = '0'; });
+                requestAnimationFrame(() => { 
+                    ripple.style.transform = 'scale(2.6)'; 
+                    ripple.style.opacity = '0'; 
+                });
                 setTimeout(() => ripple.remove(), 700);
             });
         });
-        
-        // PDF Modal
-        const pdfModal = document.getElementById('pdfModal');
-        const pdfViewer = document.getElementById('pdfViewer');
-        const pdfClose = document.querySelector('.pdf-close');
-        const viewContractBtn = document.querySelector('.btn-view-contract');
-        
-        viewContractBtn.addEventListener('click', () => {
-            pdfViewer.src = 'contract.pdf'; // Убедись, что файл рядом
-            pdfModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-        
-        pdfClose.addEventListener('click', closePdfModal);
-        pdfModal.addEventListener('click', (e) => { if (e.target === pdfModal) closePdfModal(); });
-        
-        function closePdfModal() {
-            pdfModal.classList.remove('active');
-            setTimeout(() => { pdfViewer.src = ''; document.body.style.overflow = ''; }, 400);
-        }
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && pdfModal.classList.contains('active')) closePdfModal();
-        });
-        
-        // Остальные скрипты (анимации, навигация и т.д.)
-        const sections = document.querySelectorAll('.section');
-        const io = new IntersectionObserver((entries) => { 
-            entries.forEach(entry => { 
-                if (entry.isIntersecting) entry.target.classList.add('visible'); 
-            }); 
-        }, { threshold: 0.12 });
-        
-        sections.forEach(s => io.observe(s));
-        
+
+        // Мобильное меню
         const menuToggle = document.getElementById('menuToggle');
         const nav = document.getElementById('nav');
         
-        menuToggle.addEventListener('click', () => nav.classList.toggle('show'));
-        document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => nav.classList.remove('show')));
-        
-        const cursorGlow = document.getElementById('cursorGlow');
-        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        
-        if (!isTouch) {
-            cursorGlow.style.opacity = '1';
-            document.addEventListener('mousemove', (e) => {
-                cursorGlow.style.left = e.clientX + 'px';
-                cursorGlow.style.top = e.clientY + 'px';
-                cursorGlow.style.width = cursorGlow.style.height = '48px';
-            });
-        }
-        
-        function addTilt(container) {
-            if (!isTouch) {
-                container.addEventListener('mousemove', (ev) => {
-                    const rect = container.getBoundingClientRect();
-                    const cx = rect.left + rect.width / 2;
-                    const cy = rect.top + rect.height / 2;
-                    const dx = ev.clientX - cx;
-                    const dy = ev.clientY - cy;
-                    const tiltX = (dy / rect.height) * -10;
-                    const tiltY = (dx / rect.width) * 10;
-                    container.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(0)`;
-                });
-                container.addEventListener('mouseleave', () => { container.style.transform = 'none'; });
-            }
-        }
-        
-        document.querySelectorAll('.guarantee-item, .advantage-item, .review, .faq-item, .order-item').forEach(addTilt);
-        
-        window.addEventListener('resize', () => { if (window.innerWidth > 900) nav.classList.remove('show'); });
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroTitle = document.querySelector('.text-animation');
-            const text = heroTitle.textContent;
-            heroTitle.innerHTML = text.split('').map(char => `<span>${char}</span>`).join('');
-            
-            anime({
-                targets: '.text-animation span',
-                opacity: [0, 1],
-                translateY: [20, 0],
-                easing: 'easeOutQuad',
-                duration: 1500,
-                delay: anime.stagger(50, { start: 500 }),
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('show');
+            menuToggle.innerHTML = nav.classList.contains('show') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('nav a').forEach(a => {
+            a.addEventListener('click', () => {
+                nav.classList.remove('show');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             });
         });
-        
-        let isScrolling;
-        const scrollLine = document.getElementById('scrollLine');
-        
-        window.addEventListener('scroll', () => {
-            scrollLine.style.width = '100%';
-            scrollLine.style.opacity = '1';
-            clearTimeout(isScrolling);
-            isScrolling = setTimeout(() => {
-                scrollLine.style.opacity = '0';
-                scrollLine.style.width = '0';
-            }, 300);
-        });
-        
-        // АНИМАЦИЯ ПОЯВЛЕНИЯ КАРТОЧЕК С ШЕСТИУГОЛЬНИКАМИ
-        const whySteps = document.querySelectorAll('.why-step');
-        const advantageSteps = document.querySelectorAll('.advantage-step');
-        const orderSteps = document.querySelectorAll('.order-step');
-        const guaranteeSteps = document.querySelectorAll('.guarantee-step');
-        
-        const stepObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 180);
-                    stepObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        // Наблюдаем за всеми типами карточек
-        [...whySteps, ...advantageSteps, ...orderSteps, ...guaranteeSteps].forEach(step => {
-            stepObserver.observe(step);
-        });
-        
-        // АНИМАЦИЯ FAQ КАРТОЧЕК
-        const faqCards = document.querySelectorAll('.faq-card');
-        const faqObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const delay = entry.target.getAttribute('data-delay') || 0;
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, delay);
-                    faqObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        faqCards.forEach(card => faqObserver.observe(card));
-        
-        // Плавная прокрутка для навигации
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
@@ -1214,45 +949,92 @@
                 }
             });
         });
-        
-        // Фикс для мобильного меню
-        window.addEventListener('orientationchange', function() {
-            setTimeout(() => {
-                if (window.innerWidth > 900) {
-                    nav.classList.remove('show');
+
+        // Анимация появления секций
+        const sections = document.querySelectorAll('.section');
+        const io = new IntersectionObserver((entries) => { 
+            entries.forEach(entry => { 
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
-            }, 300);
-        });
+            }); 
+        }, { threshold: 0.1 });
         
-        // Улучшенная прокрутка горизонтальных блоков на мобильных
-        function initHorizontalScroll() {
-            const scrollContainers = document.querySelectorAll('.why-steps, .advantages-steps, .order-steps, .guarantee-steps, .reviews-grid');
-            
-            scrollContainers.forEach(container => {
-                // Добавляем индикатор, если контент выходит за пределы
-                const checkOverflow = () => {
-                    const hasOverflow = container.scrollWidth > container.clientWidth;
-                    const indicator = container.querySelector('.scroll-indicator');
-                    
-                    if (indicator) {
-                        indicator.style.display = hasOverflow ? 'flex' : 'none';
-                    }
-                };
-                
-                // Проверяем при загрузке и изменении размера
-                checkOverflow();
-                window.addEventListener('resize', checkOverflow);
-                
-                // Плавная прокрутка с учетом отступов
-                if ('scrollBehavior' in document.documentElement.style) {
-                    container.style.scrollBehavior = 'smooth';
+        sections.forEach(s => io.observe(s));
+
+        // Анимация появления карточек
+        const steps = document.querySelectorAll('.why-step, .advantage-step, .order-step, .guarantee-step');
+        const stepObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 150);
                 }
             });
-        }
+        }, { threshold: 0.3 });
         
-        // Инициализируем улучшенную прокрутку после загрузки
-        document.addEventListener('DOMContentLoaded', initHorizontalScroll);
-        window.addEventListener('load', initHorizontalScroll);
+        steps.forEach(step => stepObserver.observe(step));
+
+        // Индикатор скролла
+        let isScrolling;
+        const scrollLine = document.getElementById('scrollLine');
+        
+        window.addEventListener('scroll', () => {
+            scrollLine.style.width = '100%';
+            scrollLine.style.opacity = '1';
+            clearTimeout(isScrolling);
+            isScrolling = setTimeout(() => {
+                scrollLine.style.opacity = '0';
+                scrollLine.style.width = '0';
+            }, 300);
+        });
+
+        // Анимация текста в герое
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroTitle = document.querySelector('.text-animation');
+            if (heroTitle) {
+                const text = heroTitle.textContent;
+                heroTitle.innerHTML = text.split('').map(char => `<span>${char}</span>`).join('');
+                
+                anime({
+                    targets: '.text-animation span',
+                    opacity: [0, 1],
+                    translateY: [20, 0],
+                    easing: 'easeOutQuad',
+                    duration: 1500,
+                    delay: anime.stagger(50, { start: 500 }),
+                });
+            }
+        });
+
+        // Фикс для ресайза
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                nav.classList.remove('show');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+            
+            // Гарантируем что нет горизонтального скролла
+            document.body.style.overflowX = 'hidden';
+            document.documentElement.style.overflowX = 'hidden';
+        });
+
+        // Предотвращаем zoom на мобильных
+        document.addEventListener('touchstart', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     </script>
 </body>
 </html>
