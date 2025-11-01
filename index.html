@@ -94,7 +94,32 @@
             margin: 40px auto;
             scrollbar-width: thin;
             scrollbar-color: var(--accent-1) transparent;
-            justify-content: center;
+            justify-content: flex-start; /* Изменил на flex-start для правильной прокрутки */
+            position: relative;
+        }
+        
+        /* Скрываем стандартный скроллбар для Webkit браузеров */
+        .why-steps::-webkit-scrollbar,
+        .advantages-steps::-webkit-scrollbar,
+        .order-steps::-webkit-scrollbar,
+        .guarantee-steps::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .why-steps::-webkit-scrollbar-track,
+        .advantages-steps::-webkit-scrollbar-track,
+        .order-steps::-webkit-scrollbar-track,
+        .guarantee-steps::-webkit-scrollbar-track {
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 10px;
+        }
+        
+        .why-steps::-webkit-scrollbar-thumb,
+        .advantages-steps::-webkit-scrollbar-thumb,
+        .order-steps::-webkit-scrollbar-thumb,
+        .guarantee-steps::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            border-radius: 10px;
         }
         
         .why-step, .advantage-step, .order-step, .guarantee-step {
@@ -126,6 +151,58 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.06);
             border-color: rgba(212, 175, 55, 0.28);
             z-index: 2;
+        }
+        
+        /* === ИНДИКАТОР ПРОКРУТКИ === */
+        .scroll-indicator {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.7;
+            animation: bounceIndicator 2s infinite;
+            z-index: 5;
+        }
+        
+        .scroll-indicator span {
+            font-size: 12px;
+            color: var(--accent-1);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            white-space: nowrap;
+        }
+        
+        .scroll-indicator i {
+            color: var(--accent-1);
+            font-size: 20px;
+            animation: pulseArrow 1.5s infinite;
+        }
+        
+        @keyframes bounceIndicator {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(-50%);
+            }
+            40% {
+                transform: translateY(-40%);
+            }
+            60% {
+                transform: translateY(-45%);
+            }
+        }
+        
+        @keyframes pulseArrow {
+            0%, 100% {
+                opacity: 0.5;
+                transform: translateX(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(5px);
+            }
         }
         
         /* === ИДЕАЛЬНЫЙ РОВНЫЙ ШЕСТИУГОЛЬНИК С ГЛЯНЦЕМ И СВЕЧЕНИЕМ === */
@@ -294,6 +371,7 @@
             padding: 10px 6px;
             max-width: 1100px;
             margin: 20px auto;
+            position: relative;
         }
         
         .review {
@@ -496,6 +574,7 @@
             .section { 
                 min-height: 70vh; 
                 padding: calc(var(--nav-height) + 15px) 20px 30px; 
+                overflow: visible; /* Разрешаем контенту выходить за пределы */
             }
             .pdf-modal-content { 
                 height: 85vh; 
@@ -519,15 +598,26 @@
             /* АДАПТАЦИЯ КАРТОЧЕК С ШЕСТИУГОЛЬНИКАМИ */
             .why-steps, .advantages-steps, .order-steps, .guarantee-steps {
                 gap: 20px;
-                padding: 40px 10px 28px;
-                margin: 32px auto;
+                padding: 40px 20px 28px; /* Увеличил боковые паддинги */
+                margin: 32px -10px; /* Отрицательные margin для компенсации паддингов */
                 justify-content: flex-start;
+                scroll-padding: 0 20px; /* Добавляем отступ для скролла */
             }
             
             .why-step, .advantage-step, .order-step, .guarantee-step {
                 flex: 0 0 85vw;
                 max-width: 400px;
                 padding: 50px 22px 28px;
+                scroll-snap-align: start; /* Важно для правильного скролла */
+            }
+            
+            /* Добавляем отступы для последнего элемента */
+            .why-steps::after,
+            .advantages-steps::after,
+            .order-steps::after,
+            .guarantee-steps::after {
+                content: '';
+                flex: 0 0 20px;
             }
             
             .why-step .step-number,
@@ -564,8 +654,19 @@
             }
             
             /* АДАПТАЦИЯ ОТЗЫВОВ */
+            .reviews-grid {
+                margin: 20px -10px;
+                padding: 10px 20px;
+            }
+            
             .review {
                 flex: 0 0 85vw;
+                scroll-snap-align: start;
+            }
+            
+            .reviews-grid::after {
+                content: '';
+                flex: 0 0 20px;
             }
             
             .stars {
@@ -586,6 +687,7 @@
                 padding: 18px 20px;
                 margin-bottom: 18px;
             }
+            
             .faq-card-icon {
                 left: -40px;
                 width: 38px;
@@ -606,10 +708,35 @@
             .faq-card-answer {
                 font-size: 14.5px;
             }
+            
+            /* АДАПТАЦИЯ ИНДИКАТОРА ПРОКРУТКИ */
+            .scroll-indicator {
+                right: 10px;
+                display: none; /* Скрываем на мобильных, так как скролл очевиден */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .why-step, .advantage-step, .order-step, .guarantee-step,
+            .review {
+                flex: 0 0 80vw;
+            }
+            
+            .why-steps, .advantages-steps, .order-steps, .guarantee-steps,
+            .reviews-grid {
+                gap: 15px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
         }
         
         @media (min-width: 901px) { 
             nav { display: flex; } 
+            
+            /* Скрываем индикатор прокрутки на десктопе */
+            .scroll-indicator {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -663,6 +790,11 @@
                     <h4>Искры эмоций</h4>
                     <p>Не просто время — а воспоминания. Лёгкость, страсть, внимание. Вечер, который хочется повторить.</p>
                 </div>
+                <!-- Индикатор прокрутки -->
+                <div class="scroll-indicator">
+                    <span>Листайте</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
             </div>
         </section>
         
@@ -695,6 +827,11 @@
                     <div class="step-icon"><i class="fas fa-star"></i></div>
                     <h4>Идеальное исполнение</h4>
                     <p>От первого сообщения до прощания — всё продумано. Никаких сюрпризов, только удовольствие.</p>
+                </div>
+                <!-- Индикатор прокрутки -->
+                <div class="scroll-indicator">
+                    <span>Листайте</span>
+                    <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
             <a href="https://t.me/Scarlet_NightBot" class="btn-advantages js-ripple">
@@ -732,6 +869,11 @@
                     <h4>Наслаждайтесь вечером</h4>
                     <p>Встречайтесь с моделью в назначенное время. Всё уже готово — просто расслабьтесь и получайте удовольствие.</p>
                 </div>
+                <!-- Индикатор прокрутки -->
+                <div class="scroll-indicator">
+                    <span>Листайте</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
             </div>
             <a href="https://t.me/Scarlet_NightBot" class="btn-order-now js-ripple">
                 <i class="fab fa-telegram-plane"></i> Начать заказ прямо сейчас
@@ -762,6 +904,11 @@
                     <h4>Поддержка 24/7</h4>
                     <p>Менеджер на связи в любое время. Быстро решаем любые вопросы — до, во время и после.</p>
                 </div>
+                <!-- Индикатор прокрутки -->
+                <div class="scroll-indicator">
+                    <span>Листайте</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
             </div>
             <!-- ПРЕМИУМ КНОПКА -->
             <button class="btn-view-contract js-ripple">
@@ -788,6 +935,11 @@
                     <div class="stars">★★★★★</div>
                     <p>"Идеальный вечер, всё организовано безупречно."</p>
                     <strong>— Сергей</strong>
+                </div>
+                <!-- Индикатор прокрутки -->
+                <div class="scroll-indicator">
+                    <span>Листайте</span>
+                    <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
             <!-- КРАСИВАЯ КНОПКА -->
@@ -1071,6 +1223,36 @@
                 }
             }, 300);
         });
+        
+        // Улучшенная прокрутка горизонтальных блоков на мобильных
+        function initHorizontalScroll() {
+            const scrollContainers = document.querySelectorAll('.why-steps, .advantages-steps, .order-steps, .guarantee-steps, .reviews-grid');
+            
+            scrollContainers.forEach(container => {
+                // Добавляем индикатор, если контент выходит за пределы
+                const checkOverflow = () => {
+                    const hasOverflow = container.scrollWidth > container.clientWidth;
+                    const indicator = container.querySelector('.scroll-indicator');
+                    
+                    if (indicator) {
+                        indicator.style.display = hasOverflow ? 'flex' : 'none';
+                    }
+                };
+                
+                // Проверяем при загрузке и изменении размера
+                checkOverflow();
+                window.addEventListener('resize', checkOverflow);
+                
+                // Плавная прокрутка с учетом отступов
+                if ('scrollBehavior' in document.documentElement.style) {
+                    container.style.scrollBehavior = 'smooth';
+                }
+            });
+        }
+        
+        // Инициализируем улучшенную прокрутку после загрузки
+        document.addEventListener('DOMContentLoaded', initHorizontalScroll);
+        window.addEventListener('load', initHorizontalScroll);
     </script>
 </body>
 </html>
