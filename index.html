@@ -474,6 +474,70 @@
     transform: rotate(12deg) scale(1.1);
 }
 
+/* КНОПКА "ЧИТАТЬ ПОЛНЫЙ FAQ" — ПРЕМИУМ СТИЛЬ */
+.btn-faq {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 40px;
+    margin: 32px auto 0;
+    font-weight: 700;
+    font-size: 16px;
+    color: #000;
+    background: linear-gradient(135deg, #f1d48a 0%, #d4af37 45%, #b8972a 100%);
+    border: none;
+    border-radius: 999px;
+    box-shadow:
+        0 8px 30px rgba(212, 175, 55, 0.28),
+        0 0 0 1px rgba(212, 175, 55, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+    backdrop-filter: blur(4px);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    min-width: 240px;
+}
+
+.btn-faq:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow:
+        0 18px 55px rgba(212, 175, 55, 0.42),
+        0 0 0 1px rgba(212, 175, 55, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 45%, #ccad38 100%);
+}
+
+.btn-faq:active {
+    transform: translateY(-3px) scale(0.99);
+}
+
+.btn-faq i {
+    font-size: 18px;
+    transition: transform 0.35s ease;
+}
+
+.btn-faq:hover i {
+    transform: translateX(4px) rotate(8deg);
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+@media (max-width: 900px) {
+    .btn-faq {
+        padding: 14px 32px;
+        font-size: 15px;
+        gap: 10px;
+        min-width: 220px;
+        margin: 28px auto 0;
+    }
+    .btn-faq i {
+        font-size: 17px;
+    }
+}
+        
 /* === FAQ TIMELINE — НОВЫЙ ДИЗАЙН === */
 .faq-timeline {
     max-width: 1000px;
@@ -839,7 +903,8 @@
 
     <!-- КНОПКА ВНИЗУ -->
     <a href="https://scarletnight.ru/faq" target="_blank" class="btn-faq js-ripple">
-        <i class="fas fa-book-open"></i> Читать полный FAQ
+        <i class="fas fa-book-open"></i>
+        <span>Читать полный FAQ</span>
     </a>
 </section>
 
@@ -1019,6 +1084,7 @@ faqCards.forEach(card => faqObserver.observe(card));
     </script>
 </body>
 </html>
+
 
 
 
