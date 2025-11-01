@@ -999,10 +999,27 @@ document.querySelectorAll('.faq-question').forEach(question => {
         }
     });
 });
+
+// === АНИМАЦИЯ FAQ КАРТОЧЕК ===
+const faqCards = document.querySelectorAll('.faq-card');
+const faqObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const delay = entry.target.getAttribute('data-delay') || 0;
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+            }, delay);
+            faqObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+faqCards.forEach(card => faqObserver.observe(card));
         
     </script>
 </body>
 </html>
+
 
 
 
