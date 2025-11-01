@@ -579,6 +579,71 @@
     box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.2);
     border-color: rgba(212, 175, 55, 0.25);
 }
+
+/* === ФИНАЛЬНАЯ КНОПКА — ПРЕМИУМ СТИЛЬ === */
+.btn-cta-final {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 18px 56px;
+    margin: 32px auto 0;
+    font-weight: 800;
+    font-size: 18px;
+    color: #000;
+    background: linear-gradient(135deg, #fdf4c1 0%, #f1d48a 30%, #d4af37 70%, #b8972a 100%);
+    border: none;
+    border-radius: 999px;
+    box-shadow:
+        0 14px 50px rgba(212, 175, 55, 0.35),
+        0 0 0 1px rgba(212, 175, 55, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 280px;
+    backdrop-filter: blur(6px);
+}
+
+.btn-cta-final:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow:
+        0 24px 80px rgba(212, 175, 55, 0.48),
+        0 0 0 1px rgba(212, 175, 55, 0.38),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, #fef9d7 0%, #f8e6a0 30%, #e6c94a 70%, #ccad38 100%);
+}
+
+.btn-cta-final:active {
+    transform: translateY(-4px) scale(0.99);
+}
+
+.btn-cta-final i {
+    font-size: 22px;
+    transition: transform 0.4s ease;
+}
+
+.btn-cta-final:hover i {
+    transform: translateX(6px) rotate(15deg);
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+@media (max-width: 900px) {
+    .btn-cta-final {
+        padding: 16px 44px;
+        font-size: 16.5px;
+        gap: 12px;
+        min-width: 260px;
+        margin: 28px auto 0;
+    }
+    .btn-cta-final i {
+        font-size: 20px;
+    }
+}
+        
 .faq-card-icon {
     position: absolute;
     left: -50px;
@@ -915,7 +980,8 @@
     <p>Scarlet Night — это не просто эскорт. Это искусство создавать моменты, которые остаются с вами навсегда. Один клик — и ваш вечер станет особенным. Мы уже ждём вашего сообщения.</p>
 
     <a href="https://t.me/your_bot" class="btn-cta-final js-ripple">
-        <i class="fab fa-telegram-plane"></i> Связаться с агентством
+        <i class="fab fa-telegram-plane"></i>
+        <span>Связаться с агентством</span>
     </a>
 </section>
 
@@ -1084,6 +1150,7 @@ faqCards.forEach(card => faqObserver.observe(card));
     </script>
 </body>
 </html>
+
 
 
 
