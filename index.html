@@ -474,6 +474,169 @@
     transform: rotate(12deg) scale(1.1);
 }
 
+        /* === ГАРАНТИИ — СТИЛЬ КАК У "КАК ЗАКАЗАТЬ" === */
+.guarantee-steps {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 26px;
+    padding: 24px 10px;
+    max-width: 1200px;
+    margin: 36px auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-1) transparent;
+}
+
+.guarantee-step {
+    flex: 0 0 280px;
+    background: var(--card);
+    padding: 32px 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.07);
+    box-shadow: 0 14px 45px rgba(0, 0, 0, 0.55);
+    text-align: center;
+    position: relative;
+    transition: all 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
+    backdrop-filter: blur(6px);
+}
+
+.guarantee-step:hover {
+    transform: translateY(-14px) scale(1.03);
+    box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(212, 175, 55, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border-color: rgba(212, 175, 55, 0.25);
+}
+
+.guarantee-step .step-number {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #f1d48a, #d4af37, #b8972a);
+    color: #000;
+    font-weight: 900;
+    font-size: 17px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 8px 25px rgba(212, 175, 55, 0.35),
+        0 0 0 3px rgba(5, 5, 5, 0.3);
+    z-index: 2;
+    letter-spacing: 0.5px;
+}
+
+.guarantee-step .step-icon {
+    font-size: 34px;
+    color: var(--accent-1);
+    margin: 18px 0 14px;
+    text-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+    transition: transform 0.4s ease;
+}
+
+.guarantee-step:hover .step-icon {
+    transform: scale(1.15) rotate(8deg);
+}
+
+.guarantee-step h4 {
+    color: var(--accent-1);
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.guarantee-step p {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: rgba(233, 221, 210, 0.92);
+    margin: 0;
+}
+
+/* КНОПКА "ПРОСМОТРЕТЬ ДОГОВОР" */
+.btn-view-contract {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 52px;
+    margin: 32px auto 0;
+    font-weight: 800;
+    font-size: 17px;
+    color: #000;
+    background: linear-gradient(135deg, #fdf4c1 0%, #f1d48a 30%, #d4af37 70%, #b8972a 100%);
+    border: none;
+    border-radius: 999px;
+    box-shadow:
+        0 12px 45px rgba(212, 175, 55, 0.32),
+        0 0 0 1px rgba(212, 175, 55, 0.18),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    min-width: 320px;
+}
+
+.btn-view-contract:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow:
+        0 20px 70px rgba(212, 175, 55, 0.45),
+        0 0 0 1px rgba(212, 175, 55, 0.35);
+    background: linear-gradient(135deg, #fef9d7 0%, #f8e6a0 30%, #e6c94a 70%, #ccad38 100%);
+}
+
+.btn-view-contract:active {
+    transform: translateY(-3px) scale(0.99);
+}
+
+.btn-view-contract i {
+    font-size: 21px;
+    transition: transform 0.35s ease;
+}
+
+.btn-view-contract:hover i {
+    transform: translateX(5px) rotate(12deg);
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+@media (max-width: 900px) {
+    .guarantee-steps {
+        gap: 18px;
+        padding: 20px 8px;
+    }
+    .guarantee-step {
+        flex: 0 0 78vw;
+        padding: 28px 18px;
+    }
+    .guarantee-step .step-number {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+        top: -16px;
+    }
+    .guarantee-step .step-icon {
+        font-size: 30px;
+    }
+    .guarantee-step h4 {
+        font-size: 18px;
+    }
+    .btn-view-contract {
+        padding: 15px 40px;
+        font-size: 16px;
+        min-width: 290px;
+        max-width: 300px;
+        margin: 28px auto 0;
+    }
+}
+        
 /* КНОПКА "ЧИТАТЬ ПОЛНЫЙ FAQ" — ПРЕМИУМ СТИЛЬ */
 .btn-faq {
     display: inline-flex;
@@ -862,22 +1025,37 @@
 
         <div class="divider"></div>
 
-        <!-- ГАРАНТИИ С КНОПКОЙ ПОД ТЕКСТОМ -->
-        <section class="section guarantee" id="guarantee">
-            <h3>Наши Гарантии</h3>
-            <p>Мы понимаем, что доверие — основа премиального сервиса. Scarlet Night гарантирует полную анонимность, прозрачные условия и соответствие ожиданий реальности. Каждая модель подтверждает свою личность и фотографии, а каждая встреча проходит в безопасной и уважительной обстановке. Вы получаете уверенность в качества, надёжности и корректности на каждом этапе взаимодействия.</p>
+<section class="section guarantee" id="guarantee">
+    <h3>Наши Гарантии</h3>
+    <p>Мы понимаем, что доверие — основа премиального сервиса. Scarlet Night гарантирует полную анонимность, прозрачные условия и соответствие ожиданий реальности. Каждая модель подтверждает свою личность и фотографии, а каждая встреча проходит в безопасной и уважительной обстановке. Вы получаете уверенность в качестве, надёжности и корректности на каждом этапе взаимодействия.</p>
 
-            <div class="guarantee-grid">
-                <div class="guarantee-item"><p>Абсолютная защита личных данных.</p></div>
-                <div class="guarantee-item"><p>Регулярный медицинский контроль и строгий отбор моделей.</p></div>
-                <div class="guarantee-item"><p>Круглосуточная поддержка 24/7.</p></div>
-            </div>
+    <div class="guarantee-steps">
+        <div class="guarantee-step">
+            <div class="step-number">1</div>
+            <div class="step-icon"><i class="fas fa-shield-alt"></i></div>
+            <h4>Абсолютная защита данных</h4>
+            <p>Ваши личные данные, переписка и детали встречи — под строгой защитой. Никаких следов.</p>
+        </div>
+        <div class="guarantee-step">
+            <div class="step-number">2</div>
+            <div class="step-icon"><i class="fas fa-user-check"></i></div>
+            <h4>Медицинский контроль</h4>
+            <p>Все модели проходят регулярные проверки здоровья и строгий отбор по внешности и манерам.</p>
+        </div>
+        <div class="guarantee-step">
+            <div class="step-number">3</div>
+            <div class="step-icon"><i class="fas fa-headset"></i></div>
+            <h4>Поддержка 24/7</h4>
+            <p>Менеджер на связи в любое время. Быстро решаем любые вопросы — до, во время и после.</p>
+        </div>
+    </div>
 
-            <!-- КНОПКА ПОД ТЕКСТОМ -->
-            <button class="btn-view-contract js-ripple">Просмотреть договор об оказании услуг</button>
-        </section>
-
-        <div class="divider"></div>
+    <!-- ПРЕМИУМ КНОПКА -->
+    <button class="btn-view-contract js-ripple">
+        <i class="fas fa-file-contract"></i>
+        <span>Просмотреть договор об оказании услуг</span>
+    </button>
+</section>
 
 <section class="section reviews" id="reviews">
     <h3>Отзывы Клиентов</h3>
@@ -1150,6 +1328,7 @@ faqCards.forEach(card => faqObserver.observe(card));
     </script>
 </body>
 </html>
+
 
 
 
