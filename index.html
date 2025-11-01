@@ -186,6 +186,165 @@
     margin: 0;
 }
 
+        /* ПРЕИМУЩЕСТВА — СТИЛЬ КАК У "КАК ЗАКАЗАТЬ" */
+.advantages-steps {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 26px;
+    padding: 20px 10px;
+    max-width: 1200px;
+    margin: 36px auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-1) transparent;
+}
+
+.advantage-step {
+    flex: 0 0 270px;
+    background: var(--card);
+    padding: 32px 22px;
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.07);
+    box-shadow: 0 14px 45px rgba(0, 0, 0, 0.55);
+    text-align: center;
+    position: relative;
+    transition: all 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
+    backdrop-filter: blur(6px);
+}
+
+.advantage-step:hover {
+    transform: translateY(-14px) scale(1.03);
+    box-shadow: 
+        0 28px 80px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(212, 175, 55, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border-color: rgba(212, 175, 55, 0.25);
+}
+
+.step-number {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #f1d48a, #d4af37, #b8972a);
+    color: #000;
+    font-weight: 900;
+    font-size: 17px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 8px 25px rgba(212, 175, 55, 0.35),
+        0 0 0 3px rgba(5, 5, 5, 0.3);
+    z-index: 2;
+    letter-spacing: 0.5px;
+}
+
+.step-icon {
+    font-size: 34px;
+    color: var(--accent-1);
+    margin: 18px 0 14px;
+    text-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+    transition: transform 0.4s ease;
+}
+
+.advantage-step:hover .step-icon {
+    transform: scale(1.15) rotate(8deg);
+}
+
+.advantage-step h4 {
+    color: var(--accent-1);
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.advantage-step p {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: rgba(233, 221, 210, 0.92);
+    margin: 0;
+}
+
+/* КНОПКА "ЗАКАЗАТЬ ЭСКОРТ" */
+.btn-advantages {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 52px;
+    margin: 24px auto 0;
+    font-weight: 800;
+    font-size: 17px;
+    color: #000;
+    background: linear-gradient(135deg, #fdf4c1 0%, #f1d48a 30%, #d4af37 70%, #b8972a 100%);
+    border: none;
+    border-radius: 999px;
+    box-shadow: 
+        0 12px 45px rgba(212, 175, 55, 0.32),
+        0 0 0 1px rgba(212, 175, 55, 0.18),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-advantages:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 
+        0 20px 70px rgba(212, 175, 55, 0.45),
+        0 0 0 1px rgba(212, 175, 55, 0.35);
+    background: linear-gradient(135deg, #fef9d7 0%, #f8e6a0 30%, #e6c94a 70%, #ccad38 100%);
+}
+
+.btn-advantages:active {
+    transform: translateY(-3px) scale(0.99);
+}
+
+.btn-advantages i {
+    font-size: 21px;
+    transition: transform 0.35s ease;
+}
+
+.btn-advantages:hover i {
+    transform: translateX(5px) rotate(12deg);
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+@media (max-width: 900px) {
+    .advantages-steps {
+        gap: 18px;
+        padding: 18px 8px;
+    }
+    .advantage-step {
+        flex: 0 0 78vw;
+        padding: 28px 18px;
+    }
+    .step-number {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+        top: -16px;
+    }
+    .step-icon {
+        font-size: 30px;
+    }
+    .advantage-step h4 {
+        font-size: 18px;
+    }
+    .btn-advantages {
+        padding: 15px 40px;
+        font-size: 16px;
+        max-width: 290px;
+    }
+}
+        
 /* КНОПКА "НАЧАТЬ ЗАКАЗ" */
 .btn-order-now {
     display: inline-flex;
@@ -366,17 +525,46 @@
 
         <div class="divider"></div>
 
-        <section class="section advantages" id="advantages">
-            <h3>Преимущества Эскорта от Scarlet Night</h3>
-            <p>Главное преимущество Scarlet Night — это безупречное сочетание элегантности, дискретности и высокого уровня организации. Мы тщательно следим за тем, чтобы каждая встреча проходила идеально — без неудобств, без недопонимания, без лишних вопросов. У нас нет случайных девушек или импровизаций — всё продумано заранее. Внимание к безопасности, вежливости и эстетике — то, что отличает нас от остальных.</p>
-            <div class="advantages-grid">
-                <div class="advantage-item"><h4>Элитный Эскорт для Светских Мероприятий</h4><p>Наши спутницы знают, как подчеркнуть ваш статус и уверенность в обществе.</p></div>
-                <div class="advantage-item"><h4>Эскорт на Час для Деловых Встреч</h4><p>Профессиональное сопровождение и помощь в создании образа для деловой среды.</p></div>
-                <div class="advantage-item"><h4>Приватный Эскорт для Отдыха</h4><p>Уютная атмосфера и искренняя беседа, чтобы вы могли расслабиться и получить удовольствие.</p></div>
-            </div>
-        </section>
+<section class="section advantages" id="advantages">
+    <h3>Преимущества Scarlet Night</h3>
+    <p>Scarlet Night — это не просто эскорт, это искусство создавать идеальные моменты. Мы объединили элегантность, безопасность и индивидуальный подход, чтобы каждая встреча стала для вас настоящим событием. Вот что делает нас особенными.</p>
 
-        <div class="divider"></div>
+    <div class="advantages-steps">
+        <div class="advantage-step">
+            <div class="step-number">1</div>
+            <div class="step-icon"><i class="fas fa-crown"></i></div>
+            <h4>Элитный уровень</h4>
+            <p>Только проверенные модели с безупречной внешностью, манерами и интеллектом. Каждая — достойна вашего статуса.</p>
+        </div>
+
+        <div class="advantage-step">
+            <div class="step-number">2</div>
+            <div class="step-icon"><i class="fas fa-shield-alt"></i></div>
+            <h4>Полная конфиденциальность</h4>
+            <p>Ваши данные защищены. Никаких упоминаний, фото, переписок. Только вы и мы знаем о встрече.</p>
+        </div>
+
+        <div class="advantage-step">
+            <div class="step-number">3</div>
+            <div class="step-icon"><i class="fas fa-clock"></i></div>
+            <h4>Гибкость и скорость</h4>
+            <p>Заказ за 15 минут. Выезд по России и миру. Любое время, любой формат — мы подстраиваемся под вас.</p>
+        </div>
+
+        <div class="advantage-step">
+            <div class="step-number">4</div>
+            <div class="step-icon"><i class="fas fa-star"></i></div>
+            <h4>Идеальное исполнение</h4>
+            <p>От первого сообщения до прощания — всё продумано. Никаких сюрпризов, только удовольствие.</p>
+        </div>
+    </div>
+
+    <a href="https://t.me/your_bot" class="btn-advantages js-ripple">
+        <i class="fas fa-concierge-bell"></i> Заказать эскорт прямо сейчас
+    </a>
+</section>
+
+<div class="divider"></div>
 
 <section class="section how-to-order" id="how-to-order">
     <h3>Как Заказать — Пошаговая Инструкция</h3>
@@ -615,6 +803,7 @@
     </script>
 </body>
 </html>
+
 
 
 
