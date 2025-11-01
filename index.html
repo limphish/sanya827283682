@@ -636,6 +636,124 @@
         margin: 28px auto 0;
     }
 }
+
+/* === ПОЧЕМУ МЫ — СТИЛЬ КАК У "ПРЕИМУЩЕСТВ" === */
+.why-steps {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 28px;
+    padding: 26px 10px;
+    max-width: 1200px;
+    margin: 38px auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-1) transparent;
+}
+
+.why-step {
+    flex: 0 0 290px;
+    background: var(--card);
+    padding: 34px 26px;
+    border-radius: 22px;
+    border: 1px solid rgba(212, 175, 55, 0.07);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.58);
+    text-align: center;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+    backdrop-filter: blur(7px);
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.why-step.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.why-step:hover {
+    transform: translateY(-16px) scale(1.04);
+    box-shadow:
+        0 32px 90px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(212, 175, 55, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    border-color: rgba(212, 175, 55, 0.28);
+    z-index: 2;
+}
+
+.why-step .step-number {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #f8e6a0, #d4af37, #b8972a);
+    color: #000;
+    font-weight: 900;
+    font-size: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 10px 28px rgba(212, 175, 55, 0.4),
+        0 0 0 4px rgba(5, 5, 5, 0.35);
+    z-index: 2;
+    letter-spacing: 0.6px;
+}
+
+.why-step .step-icon {
+    font-size: 36px;
+    color: var(--accent-1);
+    margin: 20px 0 16px;
+    text-shadow: 0 5px 16px rgba(212, 175, 55, 0.28);
+    transition: all 0.45s ease;
+}
+
+.why-step:hover .step-icon {
+    transform: scale(1.18) rotate(10deg);
+    filter: drop-shadow(0 8px 20px rgba(212, 175, 55, 0.35));
+}
+
+.why-step h4 {
+    color: var(--accent-1);
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 12px;
+    letter-spacing: 0.6px;
+}
+
+.why-step p {
+    font-size: 15.8px;
+    line-height: 1.78;
+    color: rgba(233, 221, 210, 0.94);
+    margin: 0;
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+@media (max-width: 900px) {
+    .why-steps {
+        gap: 20px;
+        padding: 22px 8px;
+        margin: 32px auto;
+    }
+    .why-step {
+        flex: 0 0 78vw;
+        padding: 30px 20px;
+    }
+    .why-step .step-number {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+        top: -18px;
+    }
+    .why-step .step-icon {
+        font-size: 32px;
+    }
+    .why-step h4 {
+        font-size: 18.5px;
+    }
+}
         
 /* КНОПКА "ЧИТАТЬ ПОЛНЫЙ FAQ" — ПРЕМИУМ СТИЛЬ */
 .btn-faq {
@@ -936,10 +1054,33 @@
 
         <div class="divider"></div>
 
-        <section class="section why-choose" id="why-choose">
-            <h3>Почему мы?</h3>
-            <p>Scarlet Night — это не просто агентство, это пространство, где элегантность, стиль и конфиденциальность соединяются в единое целое. Мы тщательно отбираем каждую модель, чтобы гарантировать вам не только безупречную внешность, но и высокий уровень интеллекта, воспитания и такта. Наши девушки умеют создавать атмосферу лёгкости, внимания и настоящего удовольствия от общения. Каждая встреча с представительницей Scarlet Night — это искусство, в котором сочетаются страсть и уважение, комфорт и уверенность. Мы заботимся о каждом клиенте, предлагая индивидуальный подход, максимальную безопасность и полную анонимность. Scarlet Night — это выбор тех, кто ценит вкус, качество и безупречный сервис.</p>
-        </section>
+<section class="section why-choose" id="why-choose">
+    <h3>Почему выбирают Scarlet Night?</h3>
+    <p>Мы не просто эскорт — мы создаём искусство идеальных встреч. Вот что делает нас особенными.</p>
+
+    <div class="why-steps">
+        <div class="why-step">
+            <div class="step-number">1</div>
+            <div class="step-icon"><i class="fas fa-gem"></i></div>
+            <h4>Элитный отбор</h4>
+            <p>Каждая модель — это шедевр: внешность, ум, манеры. Только 1 из 100 проходит наш кастинг.</p>
+        </div>
+
+        <div class="why-step">
+            <div class="step-number">2</div>
+            <div class="step-icon"><i class="fas fa-user-secret"></i></div>
+            <h4>Абсолютная тайна</h4>
+            <p>Ваши данные, встречи, переписка — исчезают навсегда. Даже мы не знаем, кто вы.</p>
+        </div>
+
+        <div class="why-step">
+            <div class="step-number">3</div>
+            <div class="step-icon"><i class="fas fa-star"></i></div>
+            <h4>Искры эмоций</h4>
+            <p>Не просто время — а воспоминания. Лёгкость, страсть, внимание. Вечер, который хочется повторить.</p>
+        </div>
+    </div>
+</section>
 
         <div class="divider"></div>
 
@@ -1325,6 +1466,21 @@ const faqObserver = new IntersectionObserver((entries) => {
 
 faqCards.forEach(card => faqObserver.observe(card));
 
+// АНИМАЦИЯ ПОЯВЛЕНИЯ "ПОЧЕМУ МЫ"
+const whySteps = document.querySelectorAll('.why-step');
+const whyObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+            }, index * 180);
+            whyObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+whySteps.forEach(step => whyObserver.observe(step));
+        
 // АНИМАЦИЯ ПОЯВЛЕНИЯ ГАРАНТИЙ
 const guaranteeSteps = document.querySelectorAll('.guarantee-step');
 const guaranteeObserver = new IntersectionObserver((entries) => {
@@ -1349,6 +1505,7 @@ guaranteeSteps.forEach(step => {
     </script>
 </body>
 </html>
+
 
 
 
