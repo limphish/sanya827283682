@@ -1200,56 +1200,6 @@
         </div>
     </div>
 <script>
-    // === РЕФЕРАЛЬНАЯ СИСТЕМА ===
-    (function() {
-        // Получаем реферальный ID из URL (?r=...)
-        const urlParams = new URLSearchParams(window.location.search);
-        const refId = urlParams.get('r');
-
-        let referralId = null;
-
-        if (refId && refId.trim() !== '') {
-            referralId = refId.trim();
-            localStorage.setItem('scarlet_ref', referralId);
-        } else {
-            referralId = localStorage.getItem('scarlet_ref');
-        }
-
-        // Функция для добавления ?start=ID к ссылке
-        function addReferralParam(url) {
-            if (!referralId) return url;
-            try {
-                const urlObj = new URL(url);
-                urlObj.searchParams.set('start', referralId);
-                return urlObj.toString();
-            } catch (e) {
-                return url + '?start=' + referralId;
-            }
-        }
-
-        // Применяем ко всем ссылкам на @Scarlet_NightBot
-        document.querySelectorAll('a[href*="t.me/Scarlet_NightBot"]').forEach(link => {
-            const originalHref = link.getAttribute('href');
-            if (originalHref && originalHref.includes('Scarlet_NightBot')) {
-                link.href = addReferralParam(originalHref);
-            }
-        });
-
-        // Дополнительно: обновляем при клике (на случай динамических ссылок)
-        document.addEventListener('click', function(e) {
-            if (e.target.closest) {
-                const link = e.target.closest('a[href*="t.me/Scarlet_NightBot"]');
-                if (link) {
-                    const href = link.getAttribute('href');
-                    if (href && !href.includes('start=')) {
-                        link.href = addReferralParam(href);
-                    }
-                }
-            }
-        });
-    })();
-
-<script>
     // ==============================
     // 1. РЕФЕРАЛЬНАЯ СИСТЕМА + ГОРОД
     // ==============================
@@ -1584,8 +1534,11 @@
         last = now;
     }, false);
 </script>
+
+
 </body>
 </html>
+
 
 
 
