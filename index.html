@@ -1199,289 +1199,319 @@
             </div>
         </div>
     </div>
+<script>
+    // === РЕФЕРАЛЬНАЯ СИСТЕМА ===
+    (function() {
+        // Получаем реферальный ID из URL (?r=...)
+        const urlParams = new URLSearchParams(window.location.search);
+        const refId = urlParams.get('r');
 
-    <script>
-        // Управление модальным окном PDF
-        const pdfModal = document.getElementById('pdfModal');
-        const viewContractBtn = document.getElementById('viewContractBtn');
-        const pdfClose = document.getElementById('pdfClose');
-        const pdfViewer = document.getElementById('pdfViewer');
-        const pdfIframe = document.getElementById('pdfIframe');
-        const pdfLoading = document.getElementById('pdfLoading');
-        const pdfError = document.getElementById('pdfError');
-        const pdfPrev = document.getElementById('pdfPrev');
-        const pdfNext = document.getElementById('pdfNext');
-        const pdfCurrentPage = document.getElementById('pdfCurrentPage');
-        const pdfTotalPages = document.getElementById('pdfTotalPages');
+        let referralId = null;
 
-        let currentPage = 1;
-        const totalPages = 3; // Укажите реальное количество страниц в вашем PDF
-
-        // Обновление информации о странице
-        function updatePageInfo() {
-            pdfCurrentPage.textContent = currentPage;
-            pdfTotalPages.textContent = totalPages;
-            pdfPrev.disabled = currentPage === 1;
-            pdfNext.disabled = currentPage === totalPages;
+        if (refId && refId.trim() !== '') {
+            referralId = refId.trim();
+            localStorage.setItem('scarlet_ref', referralId);
+        } else {
+            referralId = localStorage.getItem('scarlet_ref');
         }
 
-        // Навигация по страницам
-        pdfPrev.addEventListener('click', () => {
-            if (currentPage > 1) {
-                currentPage--;
-                updatePageInfo();
-                loadPdfPage();
+        // Функция для добавления ?start=ID к ссылке
+        function addReferralParam(url) {
+            if (!referralId) return url;
+            try {
+                const urlObj = new URL(url);
+                urlObj.searchParams.set('start', referralId);
+                return urlObj.toString();
+            } catch (e) {
+                return url + '?start=' + referralId;
+            }
+        }
+
+        // Применяем ко всем ссылкам на @Scarlet_NightBot
+        document.querySelectorAll('a[href*="t.me/Scarlet_NightBot"]').forEach(link => {
+            const originalHref = link.getAttribute('href');
+            if (originalHref && originalHref.includes('Scarlet_NightBot')) {
+                link.href = addReferralParam(originalHref);
             }
         });
 
-        pdfNext.addEventListener('click', () => {
-            if (currentPage < totalPages) {
-                currentPage++;
-                updatePageInfo();
-                loadPdfPage();
+        // Дополнительно: обновляем при клике (на случай динамических ссылок)
+        document.addEventListener('click', function(e) {
+            if (e.target.closest) {
+                const link = e.target.closest('a[href*="t.me/Scarlet_NightBot"]');
+                if (link) {
+                    const href = link.getAttribute('href');
+                    if (href && !href.includes('start=')) {
+                        link.href = addReferralParam(href);
+                    }
+                }
             }
         });
+    })();
 
-        // Загрузка конкретной страницы PDF
-        function loadPdfPage() {
-            const pdfUrl = `contract.pdf#page=${currentPage}&zoom=page-fit`;
-            pdfIframe.src = pdfUrl;
-        }
+    // === ОСТАЛЬНОЙ КОД (оставляем без изменений) ===
+    // Управление модальным окном PDF
+    const pdfModal = document.getElementById('pdfModal');
+    const viewContractBtn = document.getElementById('viewContractBtn');
+    const pdfClose = document.getElementById('pdfClose');
+    const pdfViewer = document.getElementById('pdfViewer');
+    const pdfIframe = document.getElementById('pdfIframe');
+    const pdfLoading = document.getElementById('pdfLoading');
+    const pdfError = document.getElementById('pdfError');
+    const pdfPrev = document.getElementById('pdfPrev');
+    const pdfNext = document.getElementById('pdfNext');
+    const pdfCurrentPage = document.getElementById('pdfCurrentPage');
+    const pdfTotalPages = document.getElementById('pdfTotalPages');
+    let currentPage = 1;
+    const totalPages = 3;
 
-        // Открытие модального окна с PDF
-        viewContractBtn.addEventListener('click', () => {
-            openPdfModal();
-        });
+    function updatePageInfo() {
+        pdfCurrentPage.textContent = currentPage;
+        pdfTotalPages.textContent = totalPages;
+        pdfPrev.disabled = currentPage === 1;
+        pdfNext.disabled = currentPage === totalPages;
+    }
 
-        function openPdfModal() {
-            pdfModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Сброс состояния
-            currentPage = 1;
+    pdfPrev.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
             updatePageInfo();
-            
-            // Проверяем устройство
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            
-            if (isIOS) {
-                // На iOS показываем ошибку с альтернативными вариантами
+            loadPdfPage();
+        }
+    });
+
+    pdfNext.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            updatePageInfo();
+            loadPdfPage();
+        }
+    });
+
+    function loadPdfPage() {
+        const pdfUrl = `contract.pdf#page=${currentPage}&zoom=page-fit`;
+        pdfIframe.src = pdfUrl;
+    }
+
+    viewContractBtn.addEventListener('click', () => {
+        openPdfModal();
+    });
+
+    function openPdfModal() {
+        pdfModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        currentPage = 1;
+        updatePageInfo();
+
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+        if (isIOS) {
+            pdfLoading.style.display = 'none';
+            pdfViewer.style.display = 'none';
+            pdfError.style.display = 'flex';
+        } else {
+            pdfLoading.style.display = 'flex';
+            pdfViewer.style.display = 'none';
+            pdfError.style.display = 'none';
+            loadPdfPage();
+
+            pdfIframe.onload = function() {
                 pdfLoading.style.display = 'none';
-                pdfViewer.style.display = 'none';
+                pdfViewer.style.display = 'block';
+            };
+
+            pdfIframe.onerror = function() {
+                pdfLoading.style.display = 'none';
                 pdfError.style.display = 'flex';
-            } else {
-                // На других устройствах пытаемся загрузить PDF
-                pdfLoading.style.display = 'flex';
-                pdfViewer.style.display = 'none';
-                pdfError.style.display = 'none';
-                
-                // Загружаем PDF
-                loadPdfPage();
-                
-                // Проверяем загрузку PDF
-                pdfIframe.onload = function() {
-                    pdfLoading.style.display = 'none';
-                    pdfViewer.style.display = 'block';
-                };
-                
-                pdfIframe.onerror = function() {
+            };
+
+            setTimeout(() => {
+                if (pdfLoading.style.display !== 'none') {
                     pdfLoading.style.display = 'none';
                     pdfError.style.display = 'flex';
-                };
-                
-                // Таймаут на случай если PDF не загрузится
+                }
+            }, 5000);
+        }
+    }
+
+    pdfClose.addEventListener('click', closePdfModal);
+    pdfModal.addEventListener('click', (e) => {
+        if (e.target === pdfModal) closePdfModal();
+    });
+
+    function closePdfModal() {
+        pdfModal.classList.remove('active');
+        setTimeout(() => {
+            document.body.style.overflow = '';
+            pdfIframe.src = 'about:blank';
+        }, 400);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && pdfModal.classList.contains('active')) {
+            closePdfModal();
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.style.overflowX = 'hidden';
+        document.documentElement.style.overflowX = 'hidden';
+
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(el => {
+            el.style.maxWidth = '100%';
+        });
+
+        updatePageInfo();
+    });
+
+    // Ripple effect
+    document.querySelectorAll('.js-ripple').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+            ripple.style.left = (e.clientX - rect.left - rect.width / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - rect.height / 2) + 'px';
+            ripple.style.position = 'absolute';
+            ripple.style.background = 'radial-gradient(circle, rgba(255,255,255,0.18), rgba(212,175,55,0.06))';
+            ripple.style.borderRadius = '999px';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.opacity = '0.9';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.transition = 'transform .6s cubic-bezier(.2,.9,.3,1), opacity .6s ease';
+            this.appendChild(ripple);
+            requestAnimationFrame(() => {
+                ripple.style.transform = 'scale(2.6)';
+                ripple.style.opacity = '0';
+            });
+            setTimeout(() => ripple.remove(), 700);
+        });
+    });
+
+    // Мобильное меню
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
+
+    menuToggle.addEventListener('click', () => {
+        nav.classList.toggle('show');
+        menuToggle.innerHTML = nav.classList.contains('show') ?
+            '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+
+    document.querySelectorAll('nav a').forEach(a => {
+        a.addEventListener('click', () => {
+            nav.classList.remove('show');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+    });
+
+    // Плавная прокрутка
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerHeight = document.getElementById('header').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Анимация появления секций
+    const sections = document.querySelectorAll('.section');
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    sections.forEach(s => io.observe(s));
+
+    // Анимация появления карточек
+    const steps = document.querySelectorAll('.why-step, .advantage-step, .order-step, .guarantee-step');
+    const stepObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
                 setTimeout(() => {
-                    if (pdfLoading.style.display !== 'none') {
-                        pdfLoading.style.display = 'none';
-                        pdfError.style.display = 'flex';
-                    }
-                }, 5000);
-            }
-        }
-
-        // Закрытие модального окна
-        pdfClose.addEventListener('click', closePdfModal);
-        pdfModal.addEventListener('click', (e) => {
-            if (e.target === pdfModal) closePdfModal();
-        });
-
-        function closePdfModal() {
-            pdfModal.classList.remove('active');
-            setTimeout(() => {
-                document.body.style.overflow = '';
-                // Очищаем iframe при закрытии
-                pdfIframe.src = 'about:blank';
-            }, 400);
-        }
-
-        // Закрытие по ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && pdfModal.classList.contains('active')) {
-                closePdfModal();
-            }
-        });
-
-        // Фикс горизонтального скролла
-        document.addEventListener('DOMContentLoaded', function() {
-            document.body.style.overflowX = 'hidden';
-            document.documentElement.style.overflowX = 'hidden';
-            
-            const allElements = document.querySelectorAll('*');
-            allElements.forEach(el => {
-                el.style.maxWidth = '100%';
-            });
-            
-            // Инициализация информации о страницах
-            updatePageInfo();
-        });
-
-        // Ripple effect
-        document.querySelectorAll('.js-ripple').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const rect = this.getBoundingClientRect();
-                const ripple = document.createElement('span');
-                ripple.className = 'ripple';
-                ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
-                ripple.style.left = (e.clientX - rect.left - rect.width / 2) + 'px';
-                ripple.style.top = (e.clientY - rect.top - rect.height / 2) + 'px';
-                ripple.style.position = 'absolute';
-                ripple.style.background = 'radial-gradient(circle, rgba(255,255,255,0.18), rgba(212,175,55,0.06))';
-                ripple.style.borderRadius = '999px';
-                ripple.style.transform = 'scale(0)';
-                ripple.style.opacity = '0.9';
-                ripple.style.pointerEvents = 'none';
-                ripple.style.transition = 'transform .6s cubic-bezier(.2,.9,.3,1), opacity .6s ease';
-                this.appendChild(ripple);
-                requestAnimationFrame(() => { 
-                    ripple.style.transform = 'scale(2.6)'; 
-                    ripple.style.opacity = '0'; 
-                });
-                setTimeout(() => ripple.remove(), 700);
-            });
-        });
-
-        // Мобильное меню
-        const menuToggle = document.getElementById('menuToggle');
-        const nav = document.getElementById('nav');
-        
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('show');
-            menuToggle.innerHTML = nav.classList.contains('show') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-
-        // Закрытие меню при клике на ссылку
-        document.querySelectorAll('nav a').forEach(a => {
-            a.addEventListener('click', () => {
-                nav.classList.remove('show');
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
-
-        // Плавная прокрутка
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const headerHeight = document.getElementById('header').offsetHeight;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Анимация появления секций
-        const sections = document.querySelectorAll('.section');
-        const io = new IntersectionObserver((entries) => { 
-            entries.forEach(entry => { 
-                if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                }
-            }); 
-        }, { threshold: 0.1 });
-        
-        sections.forEach(s => io.observe(s));
+                }, index * 150);
+            }
+        });
+    }, { threshold: 0.3 });
 
-        // Анимация появления карточек
-        const steps = document.querySelectorAll('.why-step, .advantage-step, .order-step, .guarantee-step');
-        const stepObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 150);
-                }
+    steps.forEach(step => stepObserver.observe(step));
+
+    // Индикатор скролла
+    let isScrolling;
+    const scrollLine = document.getElementById('scrollLine');
+
+    window.addEventListener('scroll', () => {
+        scrollLine.style.width = '100%';
+        scrollLine.style.opacity = '1';
+        clearTimeout(isScrolling);
+        isScrolling = setTimeout(() => {
+            scrollLine.style.opacity = '0';
+            scrollLine.style.width = '0';
+        }, 300);
+    });
+
+    // Анимация текста в герое
+    document.addEventListener('DOMContentLoaded', () => {
+        const heroTitle = document.querySelector('.text-animation');
+        if (heroTitle) {
+            const text = heroTitle.textContent;
+            heroTitle.innerHTML = text.split('').map(char => `<span>${char}</span>`).join('');
+
+            anime({
+                targets: '.text-animation span',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                easing: 'easeOutQuad',
+                duration: 1500,
+                delay: anime.stagger(50, { start: 500 }),
             });
-        }, { threshold: 0.3 });
-        
-        steps.forEach(step => stepObserver.observe(step));
+        }
+    });
 
-        // Индикатор скролла
-        let isScrolling;
-        const scrollLine = document.getElementById('scrollLine');
-        
-        window.addEventListener('scroll', () => {
-            scrollLine.style.width = '100%';
-            scrollLine.style.opacity = '1';
-            clearTimeout(isScrolling);
-            isScrolling = setTimeout(() => {
-                scrollLine.style.opacity = '0';
-                scrollLine.style.width = '0';
-            }, 300);
-        });
+    // Фикс для ресайза
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            nav.classList.remove('show');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
 
-        // Анимация текста в герое
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroTitle = document.querySelector('.text-animation');
-            if (heroTitle) {
-                const text = heroTitle.textContent;
-                heroTitle.innerHTML = text.split('').map(char => `<span>${char}</span>`).join('');
-                
-                anime({
-                    targets: '.text-animation span',
-                    opacity: [0, 1],
-                    translateY: [20, 0],
-                    easing: 'easeOutQuad',
-                    duration: 1500,
-                    delay: anime.stagger(50, { start: 500 }),
-                });
-            }
-        });
+        document.body.style.overflowX = 'hidden';
+        document.documentElement.style.overflowX = 'hidden';
+    });
 
-        // Фикс для ресайза
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                nav.classList.remove('show');
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-            
-            document.body.style.overflowX = 'hidden';
-            document.documentElement.style.overflowX = 'hidden';
-        });
-
-        // Предотвращаем zoom на мобильных
-        document.addEventListener('touchstart', function(e) {
-            if (e.touches.length > 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function(e) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                e.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
+    // Предотвращаем zoom на мобильных
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(e) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            e.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+</script>
     </script>
 </body>
 </html>
+
