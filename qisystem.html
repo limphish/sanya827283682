@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Scarlet Night · Финансовая архитектура QI</title>
+    <title>Scarlet Night · Глобальная архитектура QI</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Roboto:wght@300;400;500&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -94,8 +94,8 @@
             padding: 40px 20px 80px;
         }
 
-        /* карточка QI — в точности как terms-card */
-        .qi-card {
+        /* карточка соглашения — люкс, полупрозрачная, как секции в оригинале */
+        .terms-card {
             background: var(--card-bg);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(212,175,55,0.1);
@@ -105,11 +105,11 @@
             transition: transform 0.4s ease;
         }
 
-        .qi-card:hover {
+        .terms-card:hover {
             border-color: rgba(212,175,55,0.2);
         }
 
-        .qi-title {
+        .terms-title {
             font-family: 'Dancing Script', cursive;
             font-size: 3.2rem;
             color: var(--accent-1);
@@ -120,30 +120,38 @@
             padding-bottom: 20px;
         }
 
-        /* все секции с плавным появлением */
-        .qi-section {
+        .terms-section {
             margin-bottom: 35px;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 0.6s forwards;
         }
 
-        .qi-section:nth-child(2) { animation-delay: 0.1s; }
-        .qi-section:nth-child(3) { animation-delay: 0.2s; }
-        .qi-section:nth-child(4) { animation-delay: 0.3s; }
-        .qi-section:nth-child(5) { animation-delay: 0.4s; }
-        .qi-section:nth-child(6) { animation-delay: 0.5s; }
-        .qi-section:nth-child(7) { animation-delay: 0.6s; }
-        .qi-section:nth-child(8) { animation-delay: 0.7s; }
-        .qi-section:nth-child(9) { animation-delay: 0.8s; }
-        .qi-section:nth-child(10) { animation-delay: 0.9s; }
-        .qi-section:nth-child(11) { animation-delay: 1s; }
+        .terms-section:nth-child(2) { animation-delay: 0.1s; }
+        .terms-section:nth-child(3) { animation-delay: 0.2s; }
+        .terms-section:nth-child(4) { animation-delay: 0.3s; }
+        .terms-section:nth-child(5) { animation-delay: 0.4s; }
+        .terms-section:nth-child(6) { animation-delay: 0.5s; }
+        .terms-section:nth-child(7) { animation-delay: 0.6s; }
+        .terms-section:nth-child(8) { animation-delay: 0.7s; }
+        .terms-section:nth-child(9) { animation-delay: 0.8s; }
+        .terms-section:nth-child(10) { animation-delay: 0.9s; }
+        .terms-section:nth-child(11) { animation-delay: 1s; }
+        .terms-section:nth-child(12) { animation-delay: 1.1s; }
+        .terms-section:nth-child(13) { animation-delay: 1.2s; }
+        .terms-section:nth-child(14) { animation-delay: 1.3s; }
+        .terms-section:nth-child(15) { animation-delay: 1.4s; }
+        .terms-section:nth-child(16) { animation-delay: 1.5s; }
+        .terms-section:nth-child(17) { animation-delay: 1.6s; }
+        .terms-section:nth-child(18) { animation-delay: 1.7s; }
+        .terms-section:nth-child(19) { animation-delay: 1.8s; }
+        .terms-section:nth-child(20) { animation-delay: 1.9s; }
 
         @keyframes fadeUp {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .qi-section h2 {
+        .terms-section h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.7rem;
             color: var(--accent-1);
@@ -154,281 +162,50 @@
             gap: 10px;
         }
 
-        .qi-section h2 i {
+        .terms-section h2 i {
             font-size: 1.8rem;
             color: var(--accent-2);
             opacity: 0.8;
         }
 
-        .qi-section h3 {
+        .terms-section h3 {
             font-family: 'Playfair Display', serif;
             color: #f5d98f;
             font-size: 1.3rem;
             margin: 20px 0 10px;
         }
 
-        .qi-section p, .qi-section li {
+        .terms-section p, .terms-section li {
             color: rgba(233,221,210,0.9);
             margin-bottom: 12px;
             font-weight: 300;
             font-size: 1rem;
         }
 
-        .qi-section ul, .qi-section ol {
+        .terms-section ul, .terms-section ol {
             padding-left: 30px;
             margin: 15px 0;
         }
 
-        .qi-section li {
+        .terms-section li {
             margin-bottom: 8px;
         }
 
-        .qi-section strong {
+        .terms-section strong {
             color: var(--accent-1);
             font-weight: 500;
         }
 
-        /* особенность: квантовый бейдж — как hex-bullet но шире */
-        .quantum-badge {
-            display: inline-block;
-            background: linear-gradient(145deg, #001c24, #000a0f);
-            border: 1px solid rgba(212,175,55,0.3);
-            color: #aaffff;
-            font-family: 'Roboto', monospace;
-            font-size: 0.9rem;
-            padding: 8px 32px;
-            border-radius: 60px;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            box-shadow: 0 0 20px rgba(212,175,55,0.2);
-            backdrop-filter: blur(5px);
-        }
-
-        /* feature-grid как в референсе (не сетка, а адаптивные блоки) */
-        .feature-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        .feature-item {
-            flex: 1 1 250px;
-            background: rgba(0, 20, 30, 0.3);
-            border: 1px solid rgba(212,175,55,0.1);
-            border-radius: 28px;
-            padding: 28px 20px;
-            backdrop-filter: blur(4px);
-            transition: 0.3s;
-            text-align: center;
-        }
-
-        .feature-item i {
-            font-size: 2.5rem;
-            color: var(--accent-1);
-            margin-bottom: 18px;
-            filter: drop-shadow(0 0 12px #d4af3740);
-        }
-
-        .feature-item h3 {
-            color: #f5d98f;
-            font-family: 'Playfair Display', serif;
-            margin-bottom: 10px;
-        }
-
-        /* шаг активации (онбординг) */
-        .step-box {
-            background: rgba(0, 30, 40, 0.5);
-            border: 1px solid rgba(212,175,55,0.15);
-            border-radius: 28px;
-            padding: 22px 30px;
-            margin: 25px 0;
-            backdrop-filter: blur(4px);
-        }
-
-        .step-num {
-            font-family: 'Roboto', monospace;
-            color: var(--accent-1);
-            font-size: 1.4rem;
-            margin-right: 15px;
-        }
-
-        .code-phrase {
-            background: #0b1a1f;
-            border: 1px dashed var(--accent-1);
-            border-radius: 40px;
-            padding: 15px 30px;
-            display: inline-block;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            letter-spacing: 2px;
-            color: #ffd966;
-            margin: 15px 0;
-            box-shadow: 0 0 20px rgba(212,175,55,0.2);
-        }
-
-        /* протокол безопасности */
-        .security-tag {
-            background: rgba(183,28,28,0.08);
-            border-left: 4px solid var(--accent-2);
-            border-radius: 20px;
-            padding: 18px 25px;
-            margin: 25px 0;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .security-tag i {
-            font-size: 2.8rem;
-            color: #ff4040;
-            filter: drop-shadow(0 0 12px #b71c1c);
-        }
-
-        /* стили для горизонтального скролла карточек (преференции / технологическая основа) */
-        .steps-horizontal {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            gap: 25px;
-            padding: 40px 20px 30px;
-            margin: 20px 0;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            scroll-snap-type: x mandatory;
-            scroll-padding: 0 20px;
-            position: relative;
-        }
-
-        .steps-horizontal::-webkit-scrollbar {
-            display: none;
-        }
-
-        .step-card {
-            flex: 0 0 calc(100vw - 100px);
-            max-width: 320px;
-            background: rgba(0, 20, 30, 0.4);
-            border: 1px solid rgba(212,175,55,0.15);
-            border-radius: 28px;
-            padding: 50px 20px 30px;
-            backdrop-filter: blur(4px);
-            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
-            text-align: center;
-            position: relative;
-            scroll-snap-align: start;
-            min-height: 280px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .step-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .step-number {
-            position: absolute;
-            top: -22px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #f8e6a0 0%, #e6c94a 40%, #d4af37 70%, #b8972a 100%);
-            color: #000;
-            font-weight: 900;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-            box-shadow: 0 0 0 2px rgba(212,175,55,0.3), 0 0 0 4px rgba(5,5,5,0.3);
-            filter: drop-shadow(0 0 14px rgba(212,175,55,0.3));
-            z-index: 10;
-        }
-
-        .step-icon {
-            font-size: 32px;
-            color: var(--accent-1);
-            margin: 15px 0 12px;
-            text-shadow: 0 5px 16px rgba(212,175,55,0.2);
-        }
-
-        .step-card h4 {
-            color: #f5d98f;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin: 0 0 10px;
-        }
-
-        .step-card p {
-            font-size: 0.95rem;
-            color: rgba(233,221,210,0.9);
-            margin: 0;
-        }
-
-        /* индикатор прокрутки как в первом варианте, но более деликатный */
-        .scroll-indicator {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            opacity: 0.6;
-            animation: bounceIndicator 2s infinite;
-            z-index: 5;
-            background: rgba(5,5,5,0.6);
-            padding: 10px 5px;
-            border-radius: 20px;
-            backdrop-filter: blur(8px);
-        }
-
-        .scroll-indicator span {
-            font-size: 11px;
-            color: var(--accent-1);
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            font-weight: 600;
-        }
-
-        .scroll-indicator i {
-            color: var(--accent-1);
-            font-size: 16px;
-            animation: pulseArrow 1.5s infinite;
-        }
-
-        @keyframes bounceIndicator {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(-50%); }
-            40% { transform: translateY(-40%); }
-            60% { transform: translateY(-45%); }
-        }
-
-        @keyframes pulseArrow {
-            0%, 100% { opacity: 0.5; transform: translateX(0); }
-            50% { opacity: 1; transform: translateX(3px); }
-        }
-
-        /* футер */
-        .legal-footer {
+        .legal-note {
             background: rgba(183,28,28,0.08);
             border-left: 4px solid var(--accent-2);
             padding: 18px 25px;
             border-radius: 20px;
             margin: 30px 0 10px;
-            font-style: normal;
-            font-family: 'Roboto', sans-serif;
-            font-size: 0.95rem;
-            text-transform: none;
+            font-style: italic;
         }
 
-        .legal-footer i {
+        .legal-note i {
             color: var(--accent-1);
             margin-right: 10px;
         }
@@ -444,10 +221,9 @@
             opacity: 0.6;
         }
 
-        .btn {
+        .back-link {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
             background: linear-gradient(90deg, var(--accent-2), var(--accent-1));
             color: #000;
@@ -460,12 +236,9 @@
             transition: all 0.3s;
             border: none;
             font-size: 1rem;
-            cursor: pointer;
-            max-width: 300px;
-            width: auto;
         }
 
-        .btn:hover {
+        .back-link:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 40px rgba(212,175,55,0.4);
         }
@@ -479,7 +252,6 @@
             font-size: 0.85rem;
         }
 
-        /* адаптация */
         @media (max-width: 768px) {
             header {
                 padding: 0 16px;
@@ -488,21 +260,14 @@
                 margin-left: 15px;
                 font-size: 0.85rem;
             }
-            .qi-card {
+            .terms-card {
                 padding: 30px 20px;
             }
-            .qi-title {
+            .terms-title {
                 font-size: 2.4rem;
             }
-            .qi-section h2 {
+            .terms-section h2 {
                 font-size: 1.4rem;
-            }
-            .step-card {
-                flex: 0 0 calc(100vw - 60px);
-            }
-            .scroll-indicator {
-                right: 8px;
-                padding: 8px 4px;
             }
         }
 
@@ -514,208 +279,110 @@
                 margin-left: 10px;
                 font-size: 0.75rem;
             }
-            .qi-card {
+            .terms-card {
                 padding: 25px 15px;
                 border-radius: 24px;
             }
-            .qi-title {
-                font-size: 2rem;
-            }
+        }
+
+        /* имитация иконки шестиугольника для заголовков */
+        .hex-bullet {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-1);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin-right: 12px;
         }
     </style>
 </head>
 <body>
     <div class="bg-overlay"></div>
 
-    <!-- шапка как в референсе -->
+    <!-- шапка точно как на главной (минимализм) -->
     <header>
         <div class="logo">
-            <h1>Scarlet Night · QI</h1>
-            <div class="sub">Quantum Interface</div>
+            <h1>Scarlet Night</h1>
+            <div class="sub">Luxury Escort · QI Protocol</div>
         </div>
         <nav>
             <a href="https://t.me/ScarletN_Bot">Заказать</a>
-            <a href="#preferences">Преимущества</a>
-            <a href="#onboarding">Активация</a>
-            <a href="#security">Безопасность</a>
-            <a href="#">Госсектор</a>
+            <a href="https://ScarletN.com">Главная</a>
+            <a href="#">QI</a>
         </nav>
     </header>
 
     <main class="container">
-        <div class="qi-card">
-            <div style="text-align: center;">
-                <span class="quantum-badge"><i class="fas fa-microchip" style="margin-right: 8px;"></i> QI · Единая госсистема</span>
-            </div>
+        <div class="terms-card">
+            <h1 class="terms-title">Глобальная архитектура QI</h1>
 
-            <h1 class="qi-title">❝ Глобальная финансовая архитектура QI ❞</h1>
-
-            <!-- 1. Вступление -->
-            <section class="qi-section">
-                <h2><i class="fas fa-bolt"></i> Скорость = капитал</h2>
-                <p>Осознавая необходимость синхронизации государственных финансовых инструментов и частного сектора, мы представляем <strong>Единую Государственную Систему Быстрых Платежей и Инвестиций — QI</strong>.</p>
+            <section class="terms-section">
+                <h2><i class="fas fa-globe"></i> Глобальная финансовая архитектура QI.</h2>
+                <p>В современном мире скорость равна капиталу. Осознавая необходимость синхронизации государственных финансовых инструментов и частного предпринимательского сектора, мы представляем вашему вниманию Единую Государственную Систему Быстрых Платежей и Инвестиций — QI.</p>
             </section>
 
-            <!-- 2. Ключевые преференции (горизонтальный скролл) -->
-            <section class="qi-section" id="preferences">
-                <h2><i class="fas fa-crown"></i> Ключевые преференции</h2>
-                <div class="steps-horizontal">
-                    <div class="step-card">
-                        <div class="step-number">1</div>
-                        <div class="step-icon"><i class="fas fa-rocket"></i></div>
-                        <h4>Моментальная ликвидность</h4>
-                        <p>Вывод средств со счета агентства в режиме реального времени 24/7.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">2</div>
-                        <div class="step-icon"><i class="fas fa-chart-line"></i></div>
-                        <h4>Инвестиционный потенциал</h4>
-                        <p>Прямой доступ к долевому участию в акциях агентства.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">3</div>
-                        <div class="step-icon"><i class="fas fa-coins"></i></div>
-                        <h4>Пассивная монетизация</h4>
-                        <p>Автоматическое начисление процентов с комиссии за каждый перевод.</p>
-                    </div>
-                    <div class="scroll-indicator">
-                        <span>Листай</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
+            <section class="terms-section">
+                <h2><i class="fas fa-microchip"></i> Что такое QI?</h2>
+                <p>QI — это не просто протокол перевода средств. Это мост между фискальной системой государства и вашим банковским периметром. Представьте себе закрытый API-контур высшего уровня, который интегрируется непосредственно в ваш личный кабинет банка, наделяя счет агентства возможностями автономного искусственного интеллекта.</p>
+                <p>Система QI автоматизирует вывод средств, исключая человеческий фактор и задержки межбанковских переводов. Это цифровой нерв, связывающий ваш капитал с мгновенными действиями.</p>
             </section>
 
-            <!-- 3. Процедура активации (Онбординг) -->
-            <section class="qi-section" id="onboarding">
-                <h2><i class="fas fa-key"></i> Процедура активации</h2>
-                <p>Для сопряжения ваших активов с контуром QI требуется верифицированный запрос.</p>
-                <div class="step-box">
-                    <p><span class="step-num">➊</span> Перейдите в бот технического сопровождения ScarletNight.</p>
-                    <p><span class="step-num">➋</span> Создайте обращение, содержащее кодовую фразу:</p>
-                    <div class="code-phrase">«Подключить QI»</div>
-                </div>
-            </section>
-
-            <!-- 4. Верификация (список) -->
-            <section class="qi-section">
-                <h2><i class="fas fa-id-card"></i> Верификация</h2>
-                <ul style="list-style: none; background: rgba(0,30,40,0.3); padding: 20px; border-radius: 24px;">
-                    <li><i class="fas fa-university" style="color:#d4af37; width: 30px;"></i> Предпочитаемая кредитная организация.</li>
-                    <li><i class="fas fa-calculator" style="color:#d4af37; width: 30px;"></i> Номер расчетного счета для привязки.</li>
+            <section class="terms-section">
+                <h2><i class="fas fa-key"></i> Ключевые преференции подключения:</h2>
+                <ul>
+                    <li><strong>Моментальная ликвидность:</strong> Забудьте о «платежных окнах» и ожидании. QI обеспечивает вывод средств со счета агентства в режиме реального времени 24/7.</li>
+                    <li><strong>Инвестиционный потенциал:</strong> Прямой доступ к долевому участию в акциях агентства. QI позволяет капиталу работать, не простаивая на счетах.</li>
+                    <li><strong>Пассивная монетизация:</strong> Автоматическое начисление процентов с комиссии за каждый перевод, генерируемый через систему.</li>
                 </ul>
             </section>
 
-            <!-- 5. Протокол безопасности (3-й фактор) -->
-            <section class="qi-section" id="security">
-                <h2><i class="fas fa-shield-halved"></i> Протокол безопасности (3-й фактор)</h2>
-                <div class="security-tag">
-                    <i class="fas fa-lock"></i>
-                    <div>
-                        <p><strong>Зачем нужен код?</strong></p>
-                        <p>✔ Верификация владения: исключение фрод-атак.</p>
-                        <p>✔ Активация шлюза: криптографическая подпись для «рукопожатия» между серверами QI и вашим банком.</p>
-                    </div>
-                </div>
+            <section class="terms-section">
+                <h2><i class="fas fa-arrow-right-to-bracket"></i> Процедура активации (Онбординг):</h2>
+                <p>Для сопряжения ваших активов с контуром QI требуется верифицированный запрос через защищенный периметр службы поддержки ScarletNight.</p>
+                <ol>
+                    <li>Перейдите в бот технического сопровождения ScarletNight.</li>
+                    <li>Создайте обращение, содержащее кодовую фразу: «Подключить QI».</li>
+                </ol>
+                <p>Данная фраза служит триггером для запуска процедуры эмиссии цифрового ключа доступа.</p>
             </section>
 
-            <!-- 6. Технологическая основа (горизонтальные карточки) -->
-            <section class="qi-section">
-                <h2><i class="fas fa-infinity"></i> Технологическая основа</h2>
-                <div class="steps-horizontal">
-                    <div class="step-card">
-                        <div class="step-number">⚡</div>
-                        <div class="step-icon"><i class="fas fa-microchip"></i></div>
-                        <h4>Квантовый контур</h4>
-                        <p>Интеграция с государственным API высшего приоритета (Apex).</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">🔒</div>
-                        <div class="step-icon"><i class="fas fa-shield"></i></div>
-                        <h4>Федеральная защита</h4>
-                        <p>Соответствие стандартам ЦБ РФ и ФСБ.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">🌐</div>
-                        <div class="step-icon"><i class="fas fa-globe"></i></div>
-                        <h4>24/7 Доступ</h4>
-                        <p>Непрерывная работа через защищенные каналы.</p>
-                    </div>
-                    <div class="scroll-indicator">
-                        <span>Листай</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
+            <section class="terms-section">
+                <h2><i class="fas fa-fingerprint"></i> Верификация и идентификация:</h2>
+                <p>После активации обращения в работу вступает модуль QI (Quantum Interface), построенный на алгоритмах искусственного интеллекта. Система запросит верификационные данные:</p>
+                <ul>
+                    <li>Предпочитаемая кредитная организация для шлюзования.</li>
+                    <li>Номер расчетного счета для привязки.</li>
+                </ul>
+            </section>
+
+            <section class="terms-section">
+                <h2><i class="fas fa-shield-halved"></i> Протокол безопасности (3-й фактор):</h2>
+                <p>Для подтверждения суверенности ваших намерений и защиты от несанкционированного доступа третьих лиц, AI-бот QI инициирует запрос уникального кода подтверждения.</p>
+                <h3>Зачем нужен код?</h3>
+                <ul>
+                    <li><strong>Верификация владения:</strong> Код подтверждает, что манипуляции со счетом производятся непосредственно вами (или уполномоченным лицом), исключая риск фрод-атак.</li>
+                    <li><strong>Активация шлюза:</strong> Данный код выступает криптографической подписью, необходимой для финального «рукопожатия» между серверами QI и вашим банком. Это финальный этап настройки API-соединения.</li>
+                </ul>
+            </section>
+
+            <section class="terms-section">
+                <h2><i class="fas fa-network-wired"></i> Технологическая основа:</h2>
+                <p>Механизм работы полностью идентичен алгоритмам ведущих мировых финтех-платформ, с той разницей, что в основе лежит суверенная API QI система Государственного образца. Это обеспечивает наивысший приоритет обработки ваших транзакций на инфраструктурном уровне.</p>
+                <div class="legal-note">
+                    <i class="fas fa-balance-scale"></i> <strong>ООО ScarletNight</strong> — эскорт агентство по всей России.
                 </div>
             </section>
 
             <div class="divider"></div>
 
-            <!-- 7. Юридический блок (как legal-note в соглашении) -->
-            <section class="qi-section">
-                <div class="legal-footer">
-                    <i class="fas fa-building"></i> <strong>ООО ScarletNight</strong> — эксклюзивный оператор QI. Все транзакции защищены протоколом и соответствуют стандартам ЦБ РФ.
-                </div>
-            </section>
-
-            <!-- 8. Кнопка активации (как back-link) -->
-            <div style="text-align: center;">
-                <a href="https://t.me/ScarletNight_SupportBot" class="btn" id="mainCta">
-                    <i class="fas fa-arrow-left"></i> Активировать QI-доступ
-                </a>
-            </div>
+            <a href="https://t.me/ScarletN_Bot" class="back-link">
+                <i class="fas fa-arrow-left"></i> Вернуться в защищенный периметр
+            </a>
         </div>
     </main>
 
     <footer>
-        <p>Официальный сайт агентства • <span>Scarlet Night © 2025</span> • Лицензия Банка России (QI)</p>
+        <p>Официальный сайт агентства • <span>Scarlet Night © 2025</span> • QI Protocol</p>
     </footer>
-
-    <script>
-        (function() {
-            // скролл-индикатор (простой, без изменений)
-            const line = document.getElementById('scrollLine');
-            if (!line) {
-                // добавим линию, если её нет в разметке (по желанию можно не использовать)
-            }
-
-            // Наблюдение за карточками (step-card) для плавного появления при скролле
-            const stepCards = document.querySelectorAll('.step-card');
-            const stepObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => entry.target.classList.add('visible'), index * 100);
-                    }
-                });
-            }, { threshold: 0.3 });
-            stepCards.forEach(card => stepObserver.observe(card));
-
-            // ресайз для скрытия индикатора? не требуется
-
-            // маленький эффект на кнопке (ripple, как в первом варианте)
-            const ctaBtn = document.getElementById('mainCta');
-            if (ctaBtn) {
-                ctaBtn.addEventListener('click', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const ripple = document.createElement('span');
-                    ripple.style.position = 'absolute';
-                    ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
-                    ripple.style.left = (e.clientX - rect.left - rect.width/2) + 'px';
-                    ripple.style.top = (e.clientY - rect.top - rect.height/2) + 'px';
-                    ripple.style.background = 'radial-gradient(circle, rgba(255,255,255,0.18), rgba(212,175,55,0.06))';
-                    ripple.style.borderRadius = '999px';
-                    ripple.style.transform = 'scale(0)';
-                    ripple.style.opacity = '0.9';
-                    ripple.style.pointerEvents = 'none';
-                    ripple.style.transition = 'transform .6s cubic-bezier(.2,.9,.3,1), opacity .6s ease';
-                    this.style.position = 'relative';
-                    this.appendChild(ripple);
-                    requestAnimationFrame(() => {
-                        ripple.style.transform = 'scale(2.6)';
-                        ripple.style.opacity = '0';
-                    });
-                    setTimeout(() => ripple.remove(), 700);
-                });
-            }
-        })();
-    </script>
 </body>
 </html>
