@@ -219,9 +219,19 @@
             opacity: 0.6;
         }
 
-        .back-link {
+        /* Контейнер для двух кнопок */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .action-link {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             background: linear-gradient(90deg, var(--accent-2), var(--accent-1));
             color: #000;
@@ -229,14 +239,14 @@
             padding: 14px 36px;
             border-radius: 40px;
             text-decoration: none;
-            margin-top: 40px;
             box-shadow: 0 10px 30px rgba(183,28,28,0.3);
             transition: all 0.3s;
             border: none;
             font-size: 1rem;
+            min-width: 240px;
         }
 
-        .back-link:hover {
+        .action-link:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 40px rgba(212,175,55,0.4);
         }
@@ -266,6 +276,14 @@
             }
             .terms-section h2 {
                 font-size: 1.4rem;
+            }
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            .action-link {
+                width: 100%;
+                max-width: 300px;
             }
         }
 
@@ -424,9 +442,15 @@
 
             <div class="divider"></div>
 
-            <a href="https://t.me/ScarletN_Bot" class="back-link">
-                <i class="fas fa-arrow-left"></i> Вернуться на главный сайт
-            </a>
+            <!-- Группа кнопок: возврат и подача заявки -->
+            <div class="button-group">
+                <a href="https://t.me/ScarletN_Bot" class="action-link">
+                    <i class="fas fa-arrow-left"></i> Вернуться на главный сайт
+                </a>
+                <a href="https://t.me/ScarletNight_SupportBot" class="action-link">
+                    <i class="fas fa-paper-plane"></i> Подать заявку в агентство
+                </a>
+            </div>
         </div>
     </main>
 
