@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Scarlet Night · KYC Верификация</title>
+    <title>Scarlet Night · KYC: Биометрический эталон</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Roboto:wght@300;400;500&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -48,6 +48,7 @@
             100% { opacity: 0.3; transform: scale(1.05); }
         }
 
+        /* шапка (как в референсе) */
         header {
             position: sticky;
             top: 0;
@@ -93,7 +94,8 @@
             padding: 40px 20px 80px;
         }
 
-        .kyc-card {
+        /* карточка соглашения — люкс, полупрозрачная, как секции в оригинале */
+        .terms-card {
             background: var(--card-bg);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(212,175,55,0.1);
@@ -103,11 +105,11 @@
             transition: transform 0.4s ease;
         }
 
-        .kyc-card:hover {
+        .terms-card:hover {
             border-color: rgba(212,175,55,0.2);
         }
 
-        .kyc-title {
+        .terms-title {
             font-family: 'Dancing Script', cursive;
             font-size: 3.2rem;
             color: var(--accent-1);
@@ -118,41 +120,27 @@
             padding-bottom: 20px;
         }
 
-        .protocol-badge {
-            display: inline-block;
-            background: linear-gradient(145deg, #1f2a3a, #0a0f1a);
-            border: 1px solid var(--accent-1);
-            color: var(--accent-1);
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.9rem;
-            padding: 8px 24px;
-            border-radius: 60px;
-            margin-bottom: 30px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            box-shadow: 0 0 15px rgba(212,175,55,0.2);
-        }
-
-        .kyc-section {
+        .terms-section {
             margin-bottom: 35px;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 0.6s forwards;
         }
 
-        .kyc-section:nth-child(2) { animation-delay: 0.1s; }
-        .kyc-section:nth-child(3) { animation-delay: 0.2s; }
-        .kyc-section:nth-child(4) { animation-delay: 0.3s; }
-        .kyc-section:nth-child(5) { animation-delay: 0.4s; }
-        .kyc-section:nth-child(6) { animation-delay: 0.5s; }
-        .kyc-section:nth-child(7) { animation-delay: 0.6s; }
-        .kyc-section:nth-child(8) { animation-delay: 0.7s; }
+        .terms-section:nth-child(2) { animation-delay: 0.1s; }
+        .terms-section:nth-child(3) { animation-delay: 0.2s; }
+        .terms-section:nth-child(4) { animation-delay: 0.3s; }
+        .terms-section:nth-child(5) { animation-delay: 0.4s; }
+        .terms-section:nth-child(6) { animation-delay: 0.5s; }
+        .terms-section:nth-child(7) { animation-delay: 0.6s; }
+        .terms-section:nth-child(8) { animation-delay: 0.7s; }
+        .terms-section:nth-child(9) { animation-delay: 0.8s; }
 
         @keyframes fadeUp {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .kyc-section h2 {
+        .terms-section h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.7rem;
             color: var(--accent-1);
@@ -163,96 +151,50 @@
             gap: 10px;
         }
 
-        .kyc-section h2 i {
+        .terms-section h2 i {
             font-size: 1.8rem;
             color: var(--accent-2);
             opacity: 0.8;
         }
 
-        .kyc-section h3 {
+        .terms-section h3 {
             font-family: 'Playfair Display', serif;
             color: #f5d98f;
             font-size: 1.3rem;
             margin: 20px 0 10px;
         }
 
-        .kyc-section p, .kyc-section li {
+        .terms-section p, .terms-section li {
             color: rgba(233,221,210,0.9);
             margin-bottom: 12px;
             font-weight: 300;
             font-size: 1rem;
         }
 
-        .kyc-section strong {
+        .terms-section ul, .terms-section ol {
+            padding-left: 30px;
+            margin: 15px 0;
+        }
+
+        .terms-section li {
+            margin-bottom: 8px;
+        }
+
+        .terms-section strong {
             color: var(--accent-1);
             font-weight: 500;
         }
 
-        .gov-badge {
-            background: rgba(212,175,55,0.05);
-            border: 1px solid rgba(212,175,55,0.3);
-            border-radius: 16px;
-            padding: 20px 25px;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .gov-badge i {
-            font-size: 2.5rem;
-            color: var(--accent-1);
-        }
-
-        .gov-badge span {
-            font-size: 1.1rem;
-            color: #f0e4d4;
-        }
-
-        .step-box {
-            background: rgba(0,0,0,0.3);
-            border-left: 4px solid var(--accent-2);
-            border-radius: 20px;
-            padding: 18px 25px;
-            margin: 20px 0;
-            backdrop-filter: blur(5px);
-        }
-
-        .step-box p {
-            margin-bottom: 6px;
-        }
-
-        .step-box .step-num {
-            color: var(--accent-1);
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-right: 15px;
-        }
-
-        .sms-code-example {
-            background: #0b0b0b;
-            border: 1px solid #3a2e1e;
-            border-radius: 40px;
-            padding: 12px 25px;
-            display: inline-block;
-            font-family: monospace;
-            font-size: 1.5rem;
-            letter-spacing: 6px;
-            color: var(--accent-1);
-            margin: 10px 0;
-        }
-
-        .legal-footer {
+        .legal-note {
             background: rgba(183,28,28,0.08);
             border-left: 4px solid var(--accent-2);
             padding: 18px 25px;
             border-radius: 20px;
-            margin: 40px 0 20px;
+            margin: 30px 0 10px;
             font-style: italic;
         }
 
-        .legal-footer i {
+        .legal-note i {
             color: var(--accent-1);
             margin-right: 10px;
         }
@@ -307,18 +249,14 @@
                 margin-left: 15px;
                 font-size: 0.85rem;
             }
-            .kyc-card {
+            .terms-card {
                 padding: 30px 20px;
             }
-            .kyc-title {
+            .terms-title {
                 font-size: 2.4rem;
             }
-            .kyc-section h2 {
+            .terms-section h2 {
                 font-size: 1.4rem;
-            }
-            .gov-badge {
-                flex-direction: column;
-                text-align: center;
             }
         }
 
@@ -330,131 +268,105 @@
                 margin-left: 10px;
                 font-size: 0.75rem;
             }
-            .kyc-card {
+            .terms-card {
                 padding: 25px 15px;
+                border-radius: 24px;
             }
-            .sms-code-example {
-                font-size: 1.2rem;
-                letter-spacing: 3px;
-            }
+        }
+
+        /* имитация иконки шестиугольника для заголовков */
+        .hex-bullet {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-1);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin-right: 12px;
         }
     </style>
 </head>
 <body>
     <div class="bg-overlay"></div>
 
+    <!-- шапка точно как на главной (минимализм) -->
     <header>
         <div class="logo">
             <h1>Scarlet Night</h1>
-            <div class="sub">Luxury Escort · KYC Protocol</div>
+            <div class="sub">Luxury Protocol · KYC</div>
         </div>
         <nav>
             <a href="https://t.me/ScarletN_Bot">Заказать</a>
-            <a href="https://scarletn.com">Главная</a>
-            <a href="#">Безопасность</a>
+            <a href="https://ScarletN.com">Главная</a>
+            <a href="#">Правила</a>
         </nav>
     </header>
 
     <main class="container">
-        <div class="kyc-card">
-            <div style="text-align: center;">
-                <span class="protocol-badge"><i class="fas fa-fingerprint" style="margin-right: 10px;"></i> ЕСИА · ЕБС · ГОСТ 2025</span>
-            </div>
-            <h1 class="kyc-title">Протокол верификации личности «KYC: Биометрический эталон»</h1>
+        <div class="terms-card">
+            <h1 class="terms-title">Протокол верификации личности<br>«KYC: Биометрический эталон»</h1>
 
             <!-- 1. Область применения -->
-            <section class="kyc-section">
-                <h2><i class="fas fa-globe"></i> 1. Область применения</h2>
-                <p>Настоящий регламент описывает процедуру сопряжения клиентской базы агентства с <strong>Единой Системой Идентификации и Аутентификации (ЕСИА)</strong> и <strong>Единой Биометрической Системой (ЕБС)</strong> Российской Федерации.</p>
-                <p>Прохождение верификации KYC является обязательным условием для присвоения клиенту статуса <strong>«Цифровой субъект»</strong> и внесения его в реестр добросовестных участников оборота.</p>
+            <section class="terms-section">
+                <h2><i class="fas fa-address-card"></i> 1. Область применения.</h2>
+                <p>Настоящий регламент описывает процедуру сопряжения клиентской базы агентства с Единой Системой Идентификации и Аутентификации (ЕСИА) и Единой Биометрической Системой (ЕБС) Российской Федерации.</p>
+                <p>Прохождение верификации KYC является обязательным условием для присвоения клиенту статуса «Цифровой субъект» и внесения его в реестр добросовестных участников оборота.</p>
             </section>
 
-            <!-- 2. Функциональные возможности после верификации -->
-            <section class="kyc-section">
-                <h2><i class="fas fa-microchip"></i> 2. Функциональные возможности после верификации</h2>
-                <p>После подтверждения личности через Госуслуги и биометрию, агентство получает возможность регистрировать клиента в системе с высоким уровнем доверия (<strong>УЗ 3.0</strong>), что позволяет совершать юридически значимые действия без подписания бумажных документов.</p>
-                
-                <div class="gov-badge">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Уровень доверия УЗ 3.0 — цифровая подпись, равнозначная собственноручной.</span>
-                </div>
+            <!-- 2. Функциональные возможности после верификации. -->
+            <section class="terms-section">
+                <h2><i class="fas fa-user-check"></i> 2. Функциональные возможности после верификации.</h2>
+                <p>После подтверждения личности через Госуслуги и биометрию, агентство получает возможность регистрировать клиента в системе с высоким уровнем доверия (УЗ 3.0), что позволяет совершать юридически значимые действия без подписания бумажных документов.</p>
             </section>
 
-            <!-- 3. Процедура инициации верификации -->
-            <section class="kyc-section">
-                <h2><i class="fas fa-rocket"></i> 3. Процедура инициации верификации</h2>
+            <!-- 3. Процедура инициации верификации. -->
+            <section class="terms-section">
+                <h2><i class="fas fa-play-circle"></i> 3. Процедура инициации верификации.</h2>
                 <p>Для запуска кросс-доменного запроса к серверам ЕСИА и сверки биометрических шаблонов, необходимо направить соответствующий триггер в службу поддержки ScarletNight.</p>
-                <div class="step-box">
-                    <p><span class="step-num">➊</span> Откройте канал связи с ботом.</p>
-                    <p><span class="step-num">➋</span> Отправьте ключевой запрос: <strong style="color:#d4af37;">«Верификация KYC»</strong>.</p>
-                </div>
+                <ul>
+                    <li>Откройте канал связи с ботом.</li>
+                    <li>Отправьте ключевой запрос: «Верификация KYC».</li>
+                </ul>
             </section>
 
-            <!-- 4. Сбор идентификаторов (Ввод данных) -->
-            <section class="kyc-section">
-                <h2><i class="fas fa-database"></i> 4. Сбор идентификаторов (Ввод данных)</h2>
+            <!-- 4. Сбор идентификаторов (Ввод данных). -->
+            <section class="terms-section">
+                <h2><i class="fas fa-database"></i> 4. Сбор идентификаторов (Ввод данных).</h2>
                 <p>После активации сценария, интеллектуальный скрипт «ScarletNight» запросит первичный идентификатор для поиска вашего профиля в реестре ЕСИА:</p>
-                <div style="background: #1e1a14; padding: 18px 22px; border-radius: 30px; margin: 15px 0;">
-                    <i class="fas fa-phone-alt" style="color: var(--accent-1); margin-right: 15px;"></i>
-                    <strong>Номер мобильного телефона</strong>, привязанный к подтвержденной учетной записи на портале Госуслуг.
+                <ul>
+                    <li>Номер мобильного телефона, привязанный к подтвержденной учетной записи на портале Госуслуг.</li>
+                </ul>
+            </section>
+
+            <!-- 5. Двухфакторная аутентификация (Anti-Spoofing). -->
+            <section class="terms-section">
+                <h2><i class="fas fa-shield-alt"></i> 5. Двухфакторная аутентификация (Anti-Spoofing).</h2>
+                <p>Для предотвращения несанкционированного доступа к персональным данным и биометрическим слепкам, система инициирует проверку «живой сессии» (Anti-Spoofing Check).</p>
+                <p>На указанный номер поступит SMS-сообщение, содержащее разовый цифровой код. Ввод данного кода в интерфейс бота подтверждает, что:</p>
+                <ul>
+                    <li>Сессия инициирована лично держателем учетной записи.</li>
+                    <li>Клиент дает явное согласие на передачу своих персональных данных (ФИО, дата рождения, СНИЛС) из ЕСИА в базу агентства.</li>
+                </ul>
+                <div class="legal-note">
+                    <i class="fas fa-balance-scale"></i> <strong>Справка:</strong> Данная процедура является цифровым аналогом нотариального заверения. После успешного ввода кода, статус клиента в системе автоматически повышается до «Верифицирован», а его профиль получает маркер «Биометрия пройдена».
                 </div>
             </section>
 
-            <!-- 5. Двухфакторная аутентификация (Anti-Spoofing) -->
-            <section class="kyc-section">
-                <h2><i class="fas fa-shield-alt"></i> 5. Двухфакторная аутентификация (Anti-Spoofing)</h2>
-                <p>Для предотвращения несанкционированного доступа к персональным данным и биометрическим слепкам, система инициирует проверку <strong>«живой сессии» (Anti-Spoofing Check)</strong>.</p>
-                
-                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 25px 0;">
-                    <div style="flex: 1; min-width: 200px;">
-                        <p>На указанный номер поступит SMS-сообщение, содержащее разовый цифровой код. Ввод данного кода в интерфейс бота подтверждает, что:</p>
-                        <ul style="margin-top: 10px; list-style-type: none;">
-                            <li><i class="fas fa-check" style="color: var(--accent-1); margin-right: 8px;"></i> Сессия инициирована лично держателем учетной записи.</li>
-                            <li><i class="fas fa-check" style="color: var(--accent-1); margin-right: 8px;"></i> Клиент дает явное согласие на передачу своих персональных данных (ФИО, дата рождения, СНИЛС) из ЕСИА в базу агентства.</li>
-                        </ul>
-                    </div>
-                    <div style="background: #100b08; padding: 20px; border-radius: 30px; text-align: center;">
-                        <i class="fas fa-envelope" style="font-size: 2rem; color: var(--accent-1); margin-bottom: 8px; display: block;"></i>
-                        <span style="color: #8a7f72;">SMS-код:</span>
-                        <div class="sms-code-example">4 8 2 1 6</div>
-                    </div>
-                </div>
-
-                <div class="gov-badge" style="background: rgba(0,55,100,0.1); border-color: #2a6f97;">
-                    <i class="fas fa-balance-scale"></i>
-                    <span>Данная процедура является цифровым аналогом нотариального заверения. После успешного ввода кода, статус клиента в системе автоматически повышается до <strong>«Верифицирован»</strong>, а его профиль получает маркер <strong>«Биометрия пройдена»</strong>.</span>
-                </div>
-            </section>
-
-            <!-- 6. Реестр и статус -->
-            <section class="kyc-section">
-                <h2><i class="fas fa-clipboard-list"></i> 6. Заключительный статус</h2>
-                <p>По итогам успешной верификации профиль клиента попадает в закрытый реестр добросовестных участников. Все последующие взаимодействия с агентством происходят в режиме <strong>«высокого доверия»</strong> с использованием усиленной квалифицированной подписи (УКЭП) на базе биометрии.</p>
-                <div style="background: rgba(212,175,55,0.05); padding: 15px; border-radius: 50px; margin-top: 15px; display: inline-block;">
-                    <i class="fas fa-star" style="color: var(--accent-1);"></i>
-                    <span style="margin-left: 10px;">Статус: <strong style="color:#d4af37;">ЦИФРОВОЙ СУБЪЕКТ</strong> (биометрия подтверждена)</span>
-                </div>
-            </section>
+            <!-- Заключительная строка с ООО -->
+            <div class="divider"></div>
+            <p style="text-align: center; color: #b89e7c; font-family: 'Playfair Display'; font-size: 1.2rem;">
+                <i class="fas fa-crown" style="color: var(--accent-1);"></i> ООО ScarletNight — эскорт агентство по всей России.
+            </p>
 
             <div class="divider"></div>
 
-            <!-- Юридическая информация (как в оригинале) -->
-            <section class="kyc-section">
-                <div class="legal-footer">
-                    <i class="fas fa-building"></i> <strong>ООО ScarletNight</strong> — эскорт агентство по всей России. Все операции с персональными данными выполняются в соответствии с ФЗ-152 и требованиями ЕБС.
-                </div>
-            </section>
-
-            <div style="text-align: center;">
-                <a href="https://t.me/ScarletN_Bot" class="back-link">
-                    <i class="fas fa-arrow-left"></i> Вернуться в главное меню
-                </a>
-            </div>
+            <a href="https://t.me/ScarletN_Bot" class="back-link">
+                <i class="fas fa-arrow-left"></i> Вернуться на главный сайт
+            </a>
         </div>
     </main>
 
     <footer>
-        <p>Официальный сайт агентства • <span>Scarlet Night © 2025</span> • Политика конфиденциальности</p>
+        <p>Официальный сайт агентства • <span>Scarlet Night © 2025</span> • KYC Биометрический эталон</p>
     </footer>
 </body>
 </html>
